@@ -2,25 +2,78 @@
 @section("content")
 <?php 
 $setting=getSettingSystem();
-$name_nvkd_1=$setting['name_nvkd_1']['field_value'];
-$name_nvkd_2=$setting['name_nvkd_2']['field_value'];
-$name_nvkd_3=$setting['name_nvkd_3']['field_value'];
-$name_nvkd_4=$setting['name_nvkd_4']['field_value'];
+$data_slideshow=getBanner("slideshow");
+if(count($data_slideshow) > 0){
+	$items=$data_slideshow["items"];
+	if(count($items) > 0){
+		?>
+		<div class="slideshow">
+			<script type="text/javascript" language="javascript">
+				$(document).ready(function(){
+					$(".building-construction").owlCarousel({
+						items: 1,
+	autoplay:true,
+	loop:true,
+	nav:true,
+	navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+					});			
 
-$skype_nvkd_1=$setting['skype_nvkd_1']['field_value'];
-$skype_nvkd_2=$setting['skype_nvkd_2']['field_value'];
-$skype_nvkd_3=$setting['skype_nvkd_3']['field_value'];
-$skype_nvkd_4=$setting['skype_nvkd_4']['field_value'];
+					dotcount = 1;
 
-$email_nvkd_1=$setting['email_nvkd_1']['field_value'];
-$email_nvkd_2=$setting['email_nvkd_2']['field_value'];
-$email_nvkd_3=$setting['email_nvkd_3']['field_value'];
-$email_nvkd_4=$setting['email_nvkd_4']['field_value'];
+					$('.owl-dot').each(function() {
+						$( this ).addClass( 'dotnumber' + dotcount);
+						$( this ).attr('data-info', dotcount);
+						dotcount=dotcount+1;
+					});
 
-$tel_nvkd_1=$setting['tel_nvkd_1']['field_value'];
-$tel_nvkd_2=$setting['tel_nvkd_2']['field_value'];
-$tel_nvkd_3=$setting['tel_nvkd_3']['field_value'];
-$tel_nvkd_4=$setting['tel_nvkd_4']['field_value'];
+			 // 2) ASSIGN EACH 'SLIDE' A NUMBER
+			 slidecount = 1;
+
+			 $('.owl-item').not('.cloned').each(function() {
+			 	$( this ).addClass( 'slidenumber' + slidecount);
+			 	slidecount=slidecount+1;
+			 });
+
+			// SYNC THE SLIDE NUMBER IMG TO ITS DOT COUNTERPART (E.G SLIDE 1 IMG TO DOT 1 BACKGROUND-IMAGE)
+			$('.owl-dot').each(function() {
+
+				grab = $(this).data('info');
+
+				slidegrab = $('.slidenumber'+ grab +' img').attr('src');
+				console.log(slidegrab);
+
+				$(this).css("background-image", "url("+slidegrab+")");  
+
+			});
+			
+			
+			amount = $('.owl-dot').length;
+			gotowidth = 100/amount;
+			
+
+			newwidth = $('.owl-dot').width();
+			$('.owl-dot').css("height", 160+"px");
+			$('.owl-dot').css("background-size", 100+"%" + 100+"%");
+			$('.owl-dot').css("background-repeat", "no-repeat");
+
+		}); 
+
+	</script>
+	<div class="owl-carousel building-construction owl-theme">
+		<?php 
+		foreach ($items as $key => $value) {
+			$alt=$value["alt"];
+			$featuredImg=asset('upload/'.$value["image"]);
+			?>
+			<div><img src="<?php echo $featuredImg; ?>" alt="<?php echo $alt; ?>" /></div>
+			<?php 
+		}
+		?>              
+	</div>
+</div>
+<?php
+}  
+}
 ?>
-  
+<div class="inner-content"></div>
 @endsection()               

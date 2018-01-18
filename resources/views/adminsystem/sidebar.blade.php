@@ -212,7 +212,7 @@ switch ($controller) {
             </li>
         </ul>
     </li>
-    <!--<li class="nav-item <?php echo $li_project_management; ?>">
+    <li class="nav-item <?php echo $li_project_management; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-folder-open-o" ></i>
             <span class="title">Quản lý dự án</span>
@@ -232,8 +232,8 @@ switch ($controller) {
                 </a>                                                                      
             </li>                        
         </ul>
-    </li>-->
-    <!--<li class="nav-item <?php echo $li_album_management; ?>">
+    </li>
+    <li class="nav-item <?php echo $li_album_management; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-folder-open-o" ></i>
             <span class="title">Thư viện hình ảnh</span>
@@ -274,8 +274,8 @@ switch ($controller) {
                 </a>                                                                      
             </li>                        
         </ul>
-    </li>-->
-    <!--<li class="nav-item  <?php echo $li_supporter; ?>">
+    </li>
+    <li class="nav-item  <?php echo $li_supporter; ?>">
         <a href="{!! route('adminsystem.supporter.getList') !!}" class="nav-link nav-toggle">
             <i class="icon-notebook"></i>
             <span class="title">Tiếp lửa</span>                                            
@@ -286,7 +286,7 @@ switch ($controller) {
             <i class="icon-notebook"></i>
             <span class="title">Tổ chức</span>                                            
         </a>                                                                      
-    </li>-->
+    </li>
     <li class="nav-item  <?php echo $li_media; ?>">
         <a href="{!! route('adminsystem.media.getList') !!}" class="nav-link nav-toggle">
             <i class="icon-notebook"></i>

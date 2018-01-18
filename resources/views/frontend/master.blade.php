@@ -130,8 +130,11 @@ if(count($arrCart) > 0){
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/tab.css') }}" />
 	<!-- end tab-->
 	<!-- begin owl_carousel -->
-	<script src="{{ asset('public/frontend/owl-carousel/owl.carousel.js') }}"></script>
-	<link rel="stylesheet" href="{{ asset('public/frontend/owl-carousel/assets/owl.carousel.css') }}" />  
+	<script src="{{ asset('public/frontend/owl-carousel-2/owl.carousel.min.js') }}"></script>
+	<script src="{{ asset('public/frontend/owl-carousel-2/owl.carousel2.thumbs.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('public/frontend/owl-carousel-2/owl.carousel.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('public/frontend/owl-carousel-2/owl.theme.min.css') }}" /> 
+	<link rel="stylesheet" href="{{ asset('public/frontend/owl-carousel-2/themes.css') }}" />  
 	<!-- end owl_carousel -->
 	<!-- begin elevatezoom -->
 	<script src="{{ asset('public/frontend/js/jquery.elevatezoom-3.0.8.min.js') }}"></script>  

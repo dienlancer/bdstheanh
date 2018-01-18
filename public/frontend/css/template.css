@@ -12,10 +12,7 @@
 body{
     font-size:14px;
     color:#585858;
-    background-image: url('../images/bg-body-fixed-v5.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
+    background:transparent;
     font-family: 'OpenSans';
     
 }
@@ -1025,6 +1022,9 @@ div.ducati  h2{
 }
 .menu-plone{
     padding:17px 0px;
+}
+.inner-content{
+    margin-top: 105px
 }
 @media (max-width: 767px){    
     div.mobilemenu{

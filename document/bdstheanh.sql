@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 18, 2018 lúc 06:12 AM
+-- Thời gian đã tạo: Th1 18, 2018 lúc 11:27 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -180,8 +180,8 @@ CREATE TABLE `banner` (
 --
 
 INSERT INTO `banner` (`id`, `category_id`, `caption`, `alt`, `image`, `page_url`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Bé đón giáng sinh', 'bé đón giáng sinh 1', 'be-don-giang-sinh.png', 'https://www.hdwallpapers.in', 1, 1, '2017-12-16 05:03:34', '2017-12-28 08:46:03'),
-(2, 1, 'Khi trẻ cười', 'khi trẻ cười 2', 'khi-tre-cuoi.png', 'cloudbeauty.vn', 2, 1, '2017-12-16 05:04:04', '2017-12-28 08:46:01'),
+(1, 1, 'Bé đón giáng sinh', 'bé đón giáng sinh 1', 's1.jpg', 'https://www.hdwallpapers.in', 1, 1, '2017-12-16 05:03:34', '2018-01-18 07:22:24'),
+(2, 1, 'Khi trẻ cười', 'khi trẻ cười 2', 's2.jpg', 'cloudbeauty.vn', 2, 1, '2017-12-16 05:04:04', '2018-01-18 07:22:30'),
 (3, 2, '', '', 'member-1.png', '', 1, 1, '2017-12-28 02:38:24', '2017-12-28 02:40:03'),
 (4, 2, '', '', 'member-2.png', '', 2, 1, '2017-12-28 02:38:40', '2017-12-28 02:40:03'),
 (5, 2, '', '', 'member-3.png', '', 3, 1, '2017-12-28 02:38:51', '2017-12-28 02:40:07'),
@@ -191,7 +191,8 @@ INSERT INTO `banner` (`id`, `category_id`, `caption`, `alt`, `image`, `page_url`
 (9, 2, '', '', 'member-7.png', '', 7, 1, '2017-12-28 02:39:28', '2017-12-28 02:40:03'),
 (10, 3, 'caption 1', 'alt 1', 'advertising-article-1.png', 'http://greenecolife.vn/', 1, 1, '2018-01-15 04:22:46', '2018-01-15 05:10:19'),
 (11, 3, 'caption 2', 'alt 2', 'advertising-article-2.png', 'http://greenecolife.vn/', 2, 1, '2018-01-15 04:58:40', '2018-01-15 05:10:28'),
-(13, 4, 'caption 5', 'alt 5', 'advertising-product-2.png', 'http://greenecolife.vn/', 1, 1, '2018-01-15 05:22:17', '2018-01-15 05:22:26');
+(13, 4, 'caption 5', 'alt 5', 'advertising-product-2.png', 'http://greenecolife.vn/', 1, 1, '2018-01-15 05:22:17', '2018-01-15 05:22:26'),
+(14, 1, 'test 1', 'test 1', 's3.jpg', 'http://magiwan.vn/', 3, 1, '2018-01-18 07:23:11', '2018-01-18 07:23:11');
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1058,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (368, 1, 'qsZQcTzpevnkZoiyIpQbaR4qu3r4g3GV', '2018-01-17 04:18:35', '2018-01-17 04:18:35'),
 (372, 1, 'WjL3wP64VMbVgVUFVl99MdM5kcIdpQCy', '2018-01-17 08:29:47', '2018-01-17 08:29:47'),
 (373, 1, 'ttUIgNCKBMBEkjLsKH9WuRDAEG4TPjzU', '2018-01-17 20:14:51', '2018-01-17 20:14:51'),
-(374, 1, 'noRUog2Feq5ZNAGHfze9DBaubeDzabca', '2018-01-17 20:57:02', '2018-01-17 20:57:02');
+(374, 1, 'noRUog2Feq5ZNAGHfze9DBaubeDzabca', '2018-01-17 20:57:02', '2018-01-17 20:57:02'),
+(375, 1, 'zkZ51ymxpywKCyuXmR3HqwHymINrQMfz', '2018-01-18 00:10:25', '2018-01-18 00:10:25'),
+(376, 1, 'lzNZOymz8HgNudpRO5sMyTKipm0tpDGF', '2018-01-18 00:16:14', '2018-01-18 00:16:14');
 
 -- --------------------------------------------------------
 
@@ -1944,7 +1947,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `group_member_id`, `password`, `permissions`, `last_login`, `fullname`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', 1, '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-01-17 20:57:02', 'Nguyễn Kim Điền', 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-17 20:57:02');
+(1, 'admin', 'diennk@dienkim.com', 1, '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-01-18 00:16:14', 'Nguyễn Kim Điền', 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-18 00:16:14');
 
 -- --------------------------------------------------------
 
@@ -2242,7 +2245,7 @@ ALTER TABLE `article_category`
 -- AUTO_INCREMENT cho bảng `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `category_article`
@@ -2344,7 +2347,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
