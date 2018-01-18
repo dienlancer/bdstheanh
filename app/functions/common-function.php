@@ -23,11 +23,18 @@ function uploadImage($fileObj,$width,$height){
   }   
 }
 
-function get_featured_image($value){
+function get_product_thumbnail($value){
   $setting= getSettingSystem();
     $product_width=$setting['product_width']['field_value'];
     $product_height=$setting['product_height']['field_value'];
   $image_link=asset('upload/'.$product_width.'x'.$product_height.'-'.$value);
+  return $image_link;
+}
+function get_article_thumbnail($value){
+  $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
+  $image_link=asset('upload/'.$article_width.'x'.$article_height.'-'.$value);
   return $image_link;
 }
 function stripUnicode($str){ 

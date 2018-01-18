@@ -288,15 +288,12 @@ class PageController extends Controller {
             );
             return $info;
       }
-      public function uploadFile(Request $request){                     
-        $fileObj=$_FILES["image"];          
-        $fileName="";
-        if($fileObj['tmp_name'] != null){                
-          $fileName   = $fileObj['name'];
-          $file_path=base_path("upload".DS.$fileName);
-          @copy($fileObj['tmp_name'],$file_path);                   
-        }   
-      }
+      public function uploadFile(Request $request){ 
+      $setting= getSettingSystem();
+      $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
+      uploadImage($_FILES["image"],$article_width,$article_height);
+    }
       public function createAlias(Request $request){
         $id                =  trim($request->id)  ; 
         $fullname                =  trim($request->fullname)  ;        

@@ -24,12 +24,15 @@ $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
+$setting= getSettingSystem();
+$article_width = $setting['article_width']['field_value'];
+$article_height = $setting['article_height']['field_value'];  
 if(count(@$arrRowData)>0){
     if(!empty(@$arrRowData["image"])){
-        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/".@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
+        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/" . $article_width . "x" . $article_height . "-".@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
         $strImage       =   @$arrRowData["image"];
     }        
-}   
+}  
 $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">

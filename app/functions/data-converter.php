@@ -81,7 +81,9 @@ function getCategoryProductName($id=0){
 }
 function articleConverter($data=array(),$controller){        
     $result = array();
-    
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
             $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',@$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
@@ -98,7 +100,7 @@ function articleConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty(@$data[$i]["image"])){
-                $link_image=url("/upload/".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);        
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=$data[$i]["id"];    
@@ -123,7 +125,9 @@ function articleConverter($data=array(),$controller){
 }
 function projectConverter($data=array(),$controller){        
     $result = array();
-    
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
             $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',@$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
@@ -140,7 +144,7 @@ function projectConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty(@$data[$i]["image"])){
-                $link_image=url("/upload/".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);        
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=$data[$i]["id"];                
@@ -163,7 +167,9 @@ function projectConverter($data=array(),$controller){
 }
 function projectArticleConverter($data=array(),$controller){        
     $result = array();
-    
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
             $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',@$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
@@ -180,7 +186,7 @@ function projectArticleConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty(@$data[$i]["image"])){
-                $link_image=url("/upload/".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);    
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=$data[$i]["id"];                
@@ -941,7 +947,9 @@ function productComponentConverter($data=array(),$controller,$menu_type_id){
 }
 function pageConverter($data=array(),$controller){        
     $result = array();
-    
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
             $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
@@ -958,7 +966,7 @@ function pageConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty($data[$i]["image"])){
-                $link_image=url("/upload/".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);        
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=$data[$i]["id"];       
@@ -1103,7 +1111,10 @@ function supporterConverter($data=array(),$controller){
     return $result;
 }
 function organizationConverter($data=array(),$controller){        
-    $result = array();    
+    $result = array();
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){
             $edited='<center><a href="'.route('adminsystem.'.$controller.'.getForm',['edit',@$data[$i]['id']]).'"><img src="'.asset("/public/adminsystem/images/edit-icon.png").'" /></a></center>';
@@ -1120,7 +1131,7 @@ function organizationConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty(@$data[$i]["image"])){
-                $link_image=url("/upload/".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);      
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=@$data[$i]["id"];   

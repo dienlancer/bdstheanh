@@ -504,56 +504,6 @@ class MenuController extends Controller {
       $data=convertToArray($data);    
         $data=pageComponentConverter($data,$this->_controller,$menu_type_id);           
         return $data;
-    }  
-    public function createAlias(Request $request){
-          $id                       =  trim($request->id)  ; 
-          $fullname                =  trim($request->fullname)  ;        
-          $data                    =  array();
-          $info                    =  array();
-          $error                   =  array();
-          $item                    =  null;
-          $checked  = 1;   
-          $alias='';                     
-          if(empty($fullname)){
-           $checked = 0;
-           $error["fullname"]["type_msg"] = "has-error";
-           $error["fullname"]["msg"] = "Thiếu tên menu";
-         }else{
-          $alias=convertToAlias($fullname);
-          $dataMenu=array();          
-          $checked_trung_alias=0;          
-          if (empty($id)) {              
-              $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();             
-            }else{
-              $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ? and id != ?",[trim(mb_strtolower($alias,'UTF-8')),(int)@$id])->get()->toArray();    
-            }              
-          if (count($dataMenu) > 0) {
-            $checked_trung_alias=1;
-          }          
-          if((int)$checked_trung_alias == 1){
-            $code_alias=rand(1,999);
-            $alias=$alias.'-'.$code_alias;
-          }
-        }
-        if ($checked == 1){
-          $info = array(
-            'type_msg'      => "has-success",
-            'msg'         => 'Lưu dữ liệu thành công',
-            "checked"       => 1,
-            "error"       => $error,
-            
-            "alias"       =>$alias
-          );
-        }else {
-          $info = array(
-            'type_msg'      => "has-error",
-            'msg'         => 'Nhập dữ liệu có sự cố',
-            "checked"       => 0,
-            "error"       => $error,
-            "alias"        => $alias
-          );
-        }    
-        return $info;
-      }
+    }      
 }
 ?>

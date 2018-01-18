@@ -14,9 +14,9 @@ $inputOverview             =   '<textarea id="overview" name="overview" rows="5"
 $inputDescription       =   '<textarea id="description" name="description" rows="2" cols="100" class="form-control" >'.@$arrRowData['description'].'</textarea>'; 
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputTotalCost             =   '<textarea id="total_cost" name="total_cost" rows="2" cols="100" class="form-control" >'.@$arrRowData['total_cost'].'</textarea>';  
-$inputPlan             =   '<textarea id="plan" name="plan" rows="2" cols="100" class="form-control" >'.@$arrRowData['plan'].'</textarea>'; 
-$inputSponsor             =   '<textarea id="sponsor" name="sponsor" rows="2" cols="100" class="form-control" >'.@$arrRowData['sponsor'].'</textarea>'; 
+$inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
+$inputPlace             =   '<textarea id="place" name="place" rows="2" cols="100" class="form-control" >'.@$arrRowData['place'].'</textarea>'; 
+
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
@@ -25,12 +25,15 @@ $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
+$setting= getSettingSystem();
+$article_width = $setting['article_width']['field_value'];
+$article_height = $setting['article_height']['field_value'];  
 if(count(@$arrRowData)>0){
     if(!empty(@$arrRowData["image"])){
-        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/".@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
+        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/" . $article_width . "x" . $article_height . "-".@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
         $strImage       =   @$arrRowData["image"];
     }        
-}   
+} 
 $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
@@ -105,13 +108,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Kinh phí dự án</b></label>
                         <div class="col-md-10">                            
-                            <?php echo $inputTotalCost; ?>
-                            <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('total_cost',{
-                                   height:300
-                               });
-                           </script>
+                            <?php echo $inputTotalCost; ?>                           
                            <span class="help-block"></span>
                        </div>
                    </div>                       
@@ -142,34 +139,19 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                 </div>   
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Kế hoạch</b></label>
+                        <label class="col-md-2 control-label"><b>Địa điểm</b></label>
                         <div class="col-md-10">                            
-                            <?php echo $inputPlan; ?>
+                            <?php echo $inputPlace; ?>
                             <span class="help-block"></span>
                             <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('plan',{
+                                CKEDITOR.replace('place',{
                                    height:300
                                });
                            </script>
                            <span class="help-block"></span>
                        </div>
                    </div>                       
-                </div>   
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Tài trợ</b></label>
-                        <div class="col-md-10">                            
-                            <?php echo $inputSponsor; ?>
-                            <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('sponsor',{
-                                   height:300
-                               });
-                           </script>
-                           <span class="help-block"></span>
-                       </div>
-                   </div>                       
-                </div>                    
+                </div>                               
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Sắp xếp</b></label>
@@ -246,11 +228,10 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             image = image.substr(image.lastIndexOf('\\') + 1);       
         }
         var image_hidden=$('input[name="image_hidden"]').val();         
-        var total_cost=CKEDITOR.instances['total_cost'].getData();
+        var total_cost=$('input[name="total_cost"]').val();        
         var intro=$('textarea[name="intro"]').val();        
         var overview=CKEDITOR.instances['overview'].getData();        
-        var plan=CKEDITOR.instances['plan'].getData();        
-        var sponsor=CKEDITOR.instances['sponsor'].getData();
+        var place=CKEDITOR.instances['place'].getData();                
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
@@ -258,8 +239,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var dataItem={
             "id":id,
             "fullname":fullname,
-            "alias":alias,    
-            
+            "alias":alias,                
             "meta_keyword":meta_keyword,
             "meta_description":meta_description,                   
             "image":image,       
@@ -267,8 +247,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "total_cost":total_cost,     
             "intro":intro,
             "overview":overview,
-            "plan":plan,
-            "sponsor":sponsor,                                    
+            "place":place,                                 
             "sort_order":sort_order,
             "status":status,
             "_token": token

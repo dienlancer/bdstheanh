@@ -76,8 +76,7 @@ class ProjectController extends Controller {
           $total_cost           =   trim($request->total_cost);
           $intro                =   trim($request->intro);    
           $overview                =   trim($request->overview);          
-          $plan                 =   trim($request->plan);          
-          $sponsor              =   trim($request->sponsor);          
+          $place                 =   trim($request->place);                    
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          
           $data 		            =   array();
@@ -137,8 +136,7 @@ class ProjectController extends Controller {
                 $item->total_cost       = $total_cost;
                 $item->intro            = $intro;
                 $item->overview            = $overview;
-                $item->plan             = $plan;                
-                $item->sponsor          = $sponsor;                       
+                $item->place             = $place;                                                   
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
@@ -372,14 +370,11 @@ class ProjectController extends Controller {
         }    
         return $info;
       }
-      public function uploadFile(Request $request){                     
-        $fileObj=$_FILES["image"];          
-        $fileName="";
-        if($fileObj['tmp_name'] != null){                
-          $fileName   = $fileObj['name'];
-          $file_path=base_path("upload".DS.$fileName);
-          @copy($fileObj['tmp_name'],$file_path);                   
-        }   
-      }
+      public function uploadFile(Request $request){ 
+      $setting= getSettingSystem();
+      $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
+      uploadImage($_FILES["image"],$article_width,$article_height);
+    }
 }
 ?>
