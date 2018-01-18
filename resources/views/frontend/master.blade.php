@@ -1,8 +1,8 @@
 <?php 
 $setting=getSettingSystem();
 $seo=getSeo();
-
 $telephone=$setting['telephone']['field_value'];
+$email_to=$setting['email_to']['field_value'];
 $facebook_url=$setting['facebook_url']['field_value'];
 $twitter_url=$setting['twitter_url']['field_value'];
 $google_plus=$setting['google_plus']['field_value'];
@@ -176,18 +176,10 @@ if(count($arrCart) > 0){
 		$(document).ready(function(){        
 			$(window).bind("scroll", function() {                        
 				if ($(window).scrollTop() > 90) {					
-					$(".bg-menu").addClass("fixed");
-					$(".bg-menu").addClass("bg-zipman");
-					$(".bg-wapper").hide();
-					$(".red-menu").removeClass('margin-top-15');
-					$(".bg-menu").removeClass('margin-top-15');
+					
 				}
 				else {					
-					$(".bg-menu").removeClass("fixed");
-					$(".bg-menu").removeClass("bg-zipman");
-					$(".bg-wapper").show();
-					$(".red-menu").addClass('margin-top-15');
-					$(".bg-menu").addClass('margin-top-15');
+					
 				}
 			});
 		});    
@@ -204,103 +196,92 @@ if(count($arrCart) > 0){
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- end fanpage -->
-	<header class="header relative">	
-		<div class="container bg-wrapper"> 
-			<div class="col-lg-2">
-				<center>
-					<a href="<?php echo url('/'); ?>">                
-						<img src="<?php echo $seo_logo_frontend;?>" />
-					</a>
-				</center>				
-			</div> 
-			<div class="col-lg-6">
-				<div class="slogan"><?php echo $company; ?></div>
-			</div> 
-			<div class="col-lg-4">
-				<div class="searching  margin-top-30">
-					<div class="hotline">						
-						<span class="telephone"><i class="fa fa-phone" aria-hidden="true"></i></span>
-						<span class="so-phone margin-left-5"><?php echo $telephone; ?></span>
-					</div>
-					<div class="nana">
-						<form action="<?php echo route('frontend.index.searchProduct'); ?>" method="post" name="frm-search" class="relative tuabin">
-						{{ csrf_field() }}
-						<input type="text" name="q" autocomplete="off" placeholder="Nhập từ khoá tìm kiếm" value="">
-						<a href="javascript:void(0);" onclick="document.forms['frm-search'].submit();">Tìm kiếm</a>
-						
-					</form>
-					</div>					
-				</div>	
-				
-			</div> 
-			<div class="clr"></div>  				
-		</div>      
-		<div class="bg-menu margin-top-15">
-			<div class="container bg-tatoo">
-				<div class="col-lg-12">
-					<div class="red-menu margin-top-15">
-						<?php     
-						$args = array(                         
-							'menu_class'            => 'main-menu',                               
-							'before_wrapper'        => '<div id="smoothmainmenu" class="ddsmoothmenu">',
-							'before_title'          => '',
-							'after_title'           => '',
-							'before_wrapper_ul'     =>  '',
-							'after_wrapper_ul'      =>  '',
-							'after_wrapper'         => '</div>'     ,
-							'link_before'           => '', 
-							'link_after'            => '',                                                                    
-							'theme_location'        => 'main-menu' ,
-							'menu_li_actived'       => 'current-menu-item',
-							'menu_item_has_children'=> 'menu-item-has-children',
-							'alias'                 => $seo_alias,
-						);                    
-						wp_nav_menu($args);
-						?>        
-						<div class="clr"></div>    
-					</div>      
-				</div>	
-				<div class="clr"></div>        
-			</div>				 
-		</div>			   				   					
-		<div class="mobilemenu padding-top-15">
+	<header class="header">	
+		<div class="bg-social">
 			<div class="container">
-				<div>
-					<nav class="navbar navbar-default">
-						<div class="container-fluid">
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>                   
-							</div>
-							<div id="navbar" class="navbar-collapse collapse">
+				<div class="col-lg-12">
+					<div class="slogan-left">
+						Sở hữu ngay khu biệt thự nghỉ dưỡng cao cấp
+					</div>
+					<div class="social-right">
+						<ul class="inline-block sinka">
+							<li class="social social-facebook"><a href="<?php echo $facebook_url; ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li class="social social-google-plus"><a href="<?php echo $google_plus; ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+							<li class="social social-youtube"><a href="<?php echo $youtube_url; ?>"><i class="fa fa-youtube" aria-hidden="true"></i></i></a></li>
+							<li class="social social-twitter"><a href="<?php echo $twitter_url; ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+		<div class="bg-menu">
+			<div class="container">
+				<div class="col-lg-4">
+					<div class="logo relative">
+						<div class="nuke">
+							<a href="<?php echo url('/'); ?>">                
+							<img src="<?php echo $seo_logo_frontend;?>" />
+						</a>
+						</div>						
+					</div>					
+				</div>
+				<div class="col-lg-8">
+					<div class="info-top">
+						<div class="col-lg-4">
+							<div class="snippet-top"><center><i class="fa fa-map-marker" aria-hidden="true">&nbsp;</i></center></div>
+							<div class="info-global margin-top-5"><center>Oceanview Hall Miami, FL 33141</center></div>
+						</div>
+						<div class="col-lg-4">
+							<div class="snippet-top"><center><i class="fa fa-phone" aria-hidden="true">&nbsp;</i></center></div>
+							<div class="info-global margin-top-5"><center><?php echo $telephone; ?></center></div>
+						</div>
+						<div class="col-lg-4">
+							<div class="snippet-top"><center><i class="fa fa-envelope" aria-hidden="true">&nbsp;</i></center></div>
+							<div class="info-global margin-top-5"><center><?php echo $email_to; ?></center></div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="menu-plone">
+						<div>
+							<div class="col-lg-9 no-padding">
 								<?php     
 								$args = array(                         
-									'menu_class'            => 'nav navbar-nav',                            
-									'before_wrapper'        => '',
+									'menu_class'            => 'main-menu',                               
+									'before_wrapper'        => '<div id="smoothmainmenu" class="ddsmoothmenu">',
 									'before_title'          => '',
 									'after_title'           => '',
 									'before_wrapper_ul'     =>  '',
 									'after_wrapper_ul'      =>  '',
-									'after_wrapper'         => ''     ,
+									'after_wrapper'         => '</div>'     ,
 									'link_before'           => '', 
 									'link_after'            => '',                                                                    
-									'theme_location'        => 'mobile-menu' ,
+									'theme_location'        => 'main-menu' ,
 									'menu_li_actived'       => 'current-menu-item',
 									'menu_item_has_children'=> 'menu-item-has-children',
-									'alias'                 => ''
-								);                 
-								wp_nav_menu($args);                          
-								?>             
+									'alias'                 => $seo_alias,
+								);                    
+								wp_nav_menu($args);
+								?>        
+								<div class="clr"></div>    
 							</div>
-						</div>
-					</nav>
+							<div class="col-lg-3 no-padding">
+								<div class="searching relative">
+								<form action="<?php echo route('frontend.index.search'); ?>" method="post" name="frm-search">
+									{{ csrf_field() }}
+									<input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm" value="">
+									<a href="javascript:void(0);" onclick="document.forms['frm-search'].submit();"><i class="fa fa-search" aria-hidden="true"></i></a>
+								</form>
+							</div>     
+							</div>
+							<div class="clr"></div>
+						</div>						
+					</div>
 				</div>
+				<div class="clr"></div>
 			</div>
-		</div>    
+		</div>
 	</header>
 @yield("content")
 @include("frontend.footer")

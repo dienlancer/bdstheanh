@@ -235,26 +235,28 @@ ul.list-style-none{
 /* end standard */
 
 .social a{
-    display: block;
-    background: #d80027;
-    color: #ffffff;
+        display: block;
+    background: #ffffff;
+    color: #666666;
+    border: 1px solid #333;
+    border-radius: 50%;
 }
 
 .social-facebook a{
         padding: 7px 13px;
-    border-radius: 17px;
+    
 }
 .social-google-plus a{
         padding: 7px 8px;
-    border-radius: 17px;
+   
 }
 .social-youtube a{
         padding: 7px 11px;
-    border-radius: 17px;
+    
 }
 .social-twitter a{
         padding: 7px 11px;
-    border-radius: 17px;
+    
 }
 .en-gb a{
     border-left: 1px solid #585858;
@@ -266,9 +268,7 @@ ul.list-style-none{
 .sinka li.language:nth-child(6) a {
     padding-left: 7px;
 }
-.logo{
-    float: left;
-}
+
 .info-header{
     float: right;
     width: 800px;
@@ -283,22 +283,18 @@ ul.list-style-none{
 }
 .searching input[type='text'][name='q']{
     border: 1px solid #d7d7d7;
-    padding: 10px 10px;
+    padding: 5px 10px;
     font-style: italic;   
 }
-.searching a{
-       color: #ffffff;
-    padding: 14px 15px;
-    font-size: 10px;
-    background: #df0000;
-    text-transform: uppercase;
-    font-weight: bold;
-    position: absolute;
-    top:0px;
-    right: 0px;
+.searching a {
+        position: absolute;
+    top: 0px;
+    right: 15px;    
+    padding: 6px 0px;
+    font-size: 18px;
 }
 .searching{
-    padding:0px 0px;
+    padding:4px 0px;
 }
 .red-menu{
     padding:0 0px;
@@ -747,9 +743,6 @@ div.liverpool:hover div.youtube{
 div.liverpool:hover div.youtube-img{
     opacity: 1;    
 }
-.sinka li{
-    margin-left: 0;
-}
 .mathe{
     padding-top: 7px;
     padding-bottom: 7px;
@@ -781,7 +774,7 @@ div.liverpool:hover div.youtube-img{
 }
 .box-wrapper{
     background: #ffffff;
-    padding: 50px 15px 15px 15px;
+    padding: 0px 15px 15px 15px;
 }
 div.ducati  h2{
     color: #e80000;
@@ -960,6 +953,79 @@ div.ducati  h2{
 .connected-social li:first-child{
     margin-left: 0
 }
+.bg-social{
+    background: #ebebeb;
+    padding: 20px 0px
+}
+.slogan-left{
+    float: left;
+    color: #ff6600;
+    text-transform: uppercase;
+    font-size: 18px;
+        padding: 5px 0px;
+}
+.social-right{
+    float: right;
+}
+.social-google-plus{
+    margin-left: 10px;
+}
+.social-youtube{
+    margin-left: 10px;   
+}
+.social-twitter{
+    margin-left: 10px;
+}
+.social a:hover{
+    background: #114A82;
+    color: #ffffff;
+}
+.bg-menu{
+    background: linear-gradient(to left, #fff 73%, #114a82 50%)
+}
+.logo{
+        padding: 89px 0px;
+}
+.logo a{
+    z-index: 2;
+}
+.logo::before {
+        content: '';
+    background-image: url(../images/bg-logo.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    background-position: right;
+    width: 100%;
+    height: 100%;
+    right: 0;
+}
+.nuke{
+        position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.info-top{
+    color: #114a82;
+    border-bottom: 1px solid #d7d7d7;
+    padding-bottom: 25px;
+    margin-top: 15px;
+}
+.snippet-top{
+        font-size: 25px;
+}
+.info-global{
+    font-size: 14px;
+}
+.menu-plone{
+    padding:17px 0px;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;
@@ -996,9 +1062,7 @@ div.ducati  h2{
     }
 }
 @media (max-width: 543px){
-    .logo{
-    width: 100%;    
-   }
+
     .searching{
         width: 100%;
     }

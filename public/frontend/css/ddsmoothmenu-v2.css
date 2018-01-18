@@ -1,8 +1,9 @@
 .ddsmoothmenu > ul > li > a:link,.ddsmoothmenu > ul > li > a:visited{
     background: transparent;
-    color: #ffffff;
-        padding: 10px 30px;
-    border-right: 0px
+    color: #333;
+        padding: 10px 14px;
+    border-right: 0px;
+    font-weight: bold;
 }
 .ddsmoothmenu > ul > li > a:hover  {
     background: #0c62ad !important;
