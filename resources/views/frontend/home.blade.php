@@ -120,4 +120,80 @@ if(count($data_slideshow) > 0){
 	</div>	
 	<div class="clr"></div>
 </div>
+<div class="hand-bg">
+	<div class="container">
+		<div class="col-lg-12">
+			<div class="join-with-us-reason">
+				<hr class="gach-ngang-3">
+				<div class="du-an-noi-bat-2 margin-top-20">
+					<div class="du-an">Hãy chọn</div>
+					<div class="noi-bat margin-left-5">Chúng tôi</div>
+				</div>
+				<div class="margin-top-10 include-project">Sau đây là những lý do để khách hàng lựa chọn và tin tưởng vào chúng tôi</div>
+			</div>			
+		</div>
+		<div class="clr"></div>
+		<div class="phuong-cham">
+			<div class="col-lg-6 bottom-right">
+				<?php 
+				$data=getPage("tam-nhin-home-content");							
+				$fullname=$data['fullname'];
+				$intro=$data['intro'];
+				?>
+				<div class="margin-top-15">
+					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
+					<div class="justify phuong-cham-content margin-top-5">
+						<?php echo $intro; ?>
+					</div>
+				</div>				
+			</div>
+			<div class="col-lg-6">
+				<?php 
+				$data=getPage("su-menh-hand-content");							
+				$fullname=$data['fullname'];
+				$intro=$data['intro'];
+				?>
+				<div class="margin-top-15">
+					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
+					<div class="justify phuong-cham-content margin-top-5">
+						<?php echo $intro; ?>
+					</div>
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="col-lg-6">
+				<?php 
+				$data=getPage("gia-tri-cot-loi-hand-content");							
+				$fullname=$data['fullname'];
+				$intro=$data['intro'];
+				?>
+				<div class="margin-top-15">
+					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
+					<div class="justify phuong-cham-content margin-top-5">
+						<?php echo $intro; ?>
+					</div>
+				</div>				
+			</div>
+			<div class="col-lg-6 top-left">
+				<?php 
+				$data=getPage("triet-ly-kinh-doanh-hand-content");							
+				$fullname=$data['fullname'];
+				$intro=$data['intro'];
+				?>
+				<div class="margin-top-15">
+					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
+					<div class="justify phuong-cham-content margin-top-5">
+						<?php echo $intro; ?>
+					</div>
+				</div>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
+	</div>
+</div>
 @endsection()               
