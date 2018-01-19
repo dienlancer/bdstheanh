@@ -196,4 +196,89 @@ if(count($data_slideshow) > 0){
 		<div class="clr"></div>
 	</div>
 </div>
+<div class="bg-3 relative">
+	<div class="container">
+		<div class="col-lg-12">
+			<div class="featured-service margin-top-45"><center>Dịch vụ nổi bật</center></div>
+			<div class="featured-service-intro margin-top-15"><center>Mô hình dịch vụ hoàn hảo với những tiện ích vượt trội của chúng tôi có thể đáp ứng mọi nhu cầu của khách hàng</center></div>
+		</div>
+		<div class="clr"></div>
+		<div>
+			<div class="col-lg-4">
+				<?php 
+				$data=getPage('service-left');
+				$fullname=$data['fullname'];
+				$thumbnail=get_article_thumbnail($data['image']);				
+				$intro=substr($data['intro'], 0,100) ;
+				$permalink=route('frontend.index.index',[$data['alias']]);
+				?>
+				<div class="margin-top-15 service-box margin-bottom-45 padding-bottom-15">
+					<div class="service-img"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center></div>
+					<div class="service-info padding-left-15 padding-right-15">
+						<div class="margin-top-15 service-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
+						<div class="margin-top-15 justify"><?php echo $intro; ?></div>
+						<div class="service-readmore margin-top-15">
+							<a href="<?php echo $permalink; ?>">Xem thêm</a>
+							<div class="clr"></div>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<?php 
+				$data=getPage('service-center');
+				$fullname=$data['fullname'];
+				$thumbnail=get_article_thumbnail($data['image']);				
+				$intro=substr($data['intro'], 0,150) ;
+				$permalink=route('frontend.index.index',[$data['alias']]);
+				?>
+				<div class="margin-top-15 service-box margin-bottom-45 padding-bottom-15">
+					<div class="service-img"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center></div>
+					<div class="service-info padding-left-15 padding-right-15">
+						<div class="margin-top-15 service-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
+						<div class="margin-top-15 justify"><?php echo $intro; ?></div>
+						<div class="service-readmore margin-top-15">
+							<a href="<?php echo $permalink; ?>">Xem thêm</a>
+							<div class="clr"></div>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<?php 
+				$data=getPage('service-right');
+				$fullname=$data['fullname'];
+				$thumbnail=get_article_thumbnail($data['image']);				
+				$intro=substr($data['intro'], 0,150) ;
+				$permalink=route('frontend.index.index',[$data['alias']]);
+				?>
+				<div class="margin-top-15 service-box margin-bottom-45 padding-bottom-15">
+					<div class="service-img"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center></div>
+					<div class="service-info padding-left-15 padding-right-15">
+						<div class="margin-top-15 service-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
+						<div class="margin-top-15 justify"><?php echo $intro; ?></div>
+						<div class="service-readmore margin-top-15">
+							<a href="<?php echo $permalink; ?>">Xem thêm</a>
+							<div class="clr"></div>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="col-lg-12">
+
+			<hr class="gach-ngang-3">
+			<div class="du-an-noi-bat-2 margin-top-20">
+				<div class="du-an">Tin tức</div>
+				<div class="noi-bat margin-left-5">Mới nhất</div>
+			</div>
+			<div class="margin-top-10 include-project">Sau đây là những lý do để khách hàng lựa chọn và tin tưởng vào chúng tôi</div>
+			
+	</div>
+	<div class="clr"></div>
+</div>
 @endsection()               

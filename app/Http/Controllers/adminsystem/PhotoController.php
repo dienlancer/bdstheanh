@@ -88,7 +88,10 @@ class PhotoController extends Controller {
       if ($checked == 1) {  
         $fileName   = $fileObj['name'];
 
-        uploadImage($_FILES["image"],400,250);
+        $setting= getSettingSystem();
+      $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
+      uploadImage($_FILES["image"],$article_width,$article_height);
 
         $item         =   new PhotoModel;        
         $item->image    =   trim($fileName) ;

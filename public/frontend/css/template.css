@@ -1195,6 +1195,52 @@ div.ducati  h2{
 .phuong-cham-content{
     color: #000;
 }
+.bg-3{
+    background-image: url('../images/bg-3.png');
+    background-repeat: no-repeat;
+}
+.bg-3::before{
+    background-color: rgba(44, 95, 149, 0.8);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;   
+    content: '';
+}
+.service-readmore a{
+    float: right;   
+    display: block;
+    color: #ffffff;
+    background: #ff6600;
+    padding: 5px 10px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+}
+.service-readmore a:hover{
+    background-color: #114a82
+}
+.featured-service{
+        color: #ffffff;
+    text-transform: uppercase;
+    font-family: 'Anton';
+    font-size: 25px;
+}
+.featured-service-intro{
+    color: #ffffff;
+}
+.service-img{
+    border-bottom: 2px solid #FF6600;
+}
+.service-box{
+    background-color: #ffffff;
+}
+.service-title a{
+    font-weight: bold;
+    color: #000;
+    font-size:18px;
+}
+
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

@@ -41,7 +41,7 @@ class ArticleController extends Controller {
         $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
       if(!empty(@$request->category_article_id)){
-        $query->whereIn('article_category.category_article_id',(int)@$request->category_article_id);
+        $query->where('article_category.category_article_id',(int)@$request->category_article_id);
       }   
       $data=$query->select('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
                   ->groupBy('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')

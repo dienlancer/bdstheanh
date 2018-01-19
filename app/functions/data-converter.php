@@ -1,4 +1,66 @@
 <?php 
+function article2Converter($data=array(),$controller){        
+    $result = array();
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
+    if( count($data) > 0){
+        for($i = 0 ;$i < count($data);$i++){
+            
+            $link_image="";
+            $image="";
+            if(!empty(@$data[$i]["image"])){
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);        
+                $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
+            }       
+            $id=$data[$i]["id"];    
+            $category_name= getCategoryArticleName($id);  
+            $result[$i] = array(
+                'checked'                  =>   '<input type="checkbox" onclick="checkWithListArticle(this)" name="cid"  />',
+                'is_checked'               =>   0,
+                "id"                       =>   $id,
+                "fullname"                 =>   $data[$i]["fullname"],                
+                "category_name"                    =>   $category_name,                
+                "image"                    =>   $image,
+                
+                
+            );
+        }
+    }
+    return $result;
+}
+function product2Converter($data=array(),$controller){        
+    $result = array();
+    $setting= getSettingSystem();
+    $product_width=$setting['product_width']['field_value'];
+    $product_height=$setting['product_height']['field_value'];
+    if( count($data) > 0){
+        for($i = 0 ;$i < count($data);$i++){            
+            $link_image="";
+            $image="";
+            if(!empty($data[$i]["image"])){
+                $link_image=url("/upload/" . $product_width.'x'.$product_height . "-".$data[$i]["image"]);            
+                $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
+            }          
+            $id=$data[$i]["id"];  
+            $alias=$data[$i]['alias'];
+            $category_name=getCategoryProductName($id);
+            
+            $result[$i] = array(
+                'checked'                  =>   '<input type="checkbox" onclick="checkWithListProduct(this)" name="cid"  />',
+                'is_checked'               =>   0,
+                "id"                       =>   $id,
+                
+                "fullname"                 =>   $data[$i]["fullname"], 
+                
+                "category_name"            =>   $category_name,                
+                "image"                    =>   $image,
+                
+            );
+        }
+    }
+    return $result;
+}
 function categoryArticleConverter($data=array(),$controller){        
     $result = array();    
     if( count($data) > 0){
@@ -1201,6 +1263,9 @@ function albumConverter($data=array(),$controller){
 }
 function photoConverter($data=array(),$controller){        
     $result = array();
+    $setting= getSettingSystem();
+    $article_width=$setting['article_width']['field_value'];
+    $article_height=$setting['article_height']['field_value'];
     
     if( count($data) > 0){
         for($i = 0 ;$i < count($data);$i++){            
@@ -1217,7 +1282,7 @@ function photoConverter($data=array(),$controller){
             $link_image="";
             $image="";
             if(!empty(@$data[$i]["image"])){
-                $link_image=url("/upload/400x250-".$data[$i]["image"]);            
+                $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);  
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
             $id=$data[$i]["id"];          

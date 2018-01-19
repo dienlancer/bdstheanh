@@ -1,8 +1,8 @@
 @extends("adminsystem.master")
 @section("content")
 <?php 
-$linkLoadDataArticle    =   route('adminsystem.article.loadData');
-$linkLoadDataProduct    =   route('adminsystem.product.loadData');
+$linkLoadDataArticle    =   route('adminsystem.'.$controller.'.loadDataArticle');
+$linkLoadDataProduct    =   route('adminsystem.'.$controller.'.loadDataProduct');
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkInsertArticle      =   route('adminsystem.'.$controller.'.insertArticle');
@@ -312,7 +312,6 @@ $inputSortJson          =   '<input type="hidden" name="sort_json" id="sort_json
             type: 'POST', 
             data: dataItem,
             success: function (data, status, jqXHR) {                  
-                
                 vArticleModuleItemTable.clear().draw();
                 vArticleModuleItemTable.rows.add(data).draw();
                 spinner.hide();
