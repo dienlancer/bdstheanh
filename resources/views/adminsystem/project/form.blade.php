@@ -8,7 +8,7 @@ $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    onblur="createAlias()"      value="'.@$arrRowData['alias'].'">';
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">';
 $inputIntro             =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputOverview             =   '<textarea id="overview" name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
 $inputDescription       =   '<textarea id="description" name="description" rows="2" cols="100" class="form-control" >'.@$arrRowData['description'].'</textarea>'; 

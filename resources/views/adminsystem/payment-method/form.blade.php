@@ -4,9 +4,9 @@
 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"        value="'.@$arrRowData['fullname'].'">';  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"        value="'.@$arrRowData['alias'].'">';  
+$linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"    onblur="createAlias()"    value="'.@$arrRowData['fullname'].'">';  
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"   disabled     value="'.@$arrRowData['alias'].'">';  
 $inputContent           =   '<textarea id="content" name="content" rows="5" cols="100" class="form-control" >'.@$arrRowData['content'].'</textarea>'; 
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
@@ -149,6 +149,43 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
                         $('select[name="status"]').closest('.form-group').find('span').show();
 
                     }                    
+                }
+                spinner.hide();
+            },
+            error : function (data){
+                spinner.hide();
+            },
+            beforeSend  : function(jqXHR,setting){
+                spinner.show();
+            },
+        });
+    }
+    function createAlias(){
+        var id=$('input[name="id"]').val();   
+        var fullname    = $('input[name="fullname"]').val();
+        var token       = $('form[name="frm"] > input[name="_token"]').val();     
+        var dataItem={      
+            "id":id,      
+            "fullname":fullname,            
+            "_token": token
+        };   
+        $('input[name="alias"]').val(''); 
+        resetErrorStatus();    
+        $.ajax({
+            url: '<?php echo $linkCreateAlias; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {                
+                if(data.checked==true){
+                    $('input[name="alias"]').val(data.alias); 
+                }else{                    
+                    var data_error=data.error;
+                    if(typeof data_error.fullname               != "undefined"){
+                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
+                    }                            
                 }
                 spinner.hide();
             },

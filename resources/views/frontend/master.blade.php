@@ -153,11 +153,8 @@ if(count($arrCart) > 0){
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/jquery.dataTables.min.css') }}" />
 	<script src="{{ asset('public/frontend/js/table-library.js') }}"></script>    
 	<!-- end datatables -->
-	<!-- begin youtube -->  
-  <!--<script src="{{ asset('public/frontend/js/jquery.youtubepopup.min.js') }}"></script>    -->
-  <script src="{{ asset('public/frontend/js/jquery-modal-video.js') }}"></script>
+	<!-- begin youtube -->    
   <script src="{{ asset('public/frontend/js/jquery-modal-video.min.js') }}"></script>
-  <script src="{{ asset('public/frontend/js/modal-video.js') }}"></script>
   <script src="{{ asset('public/frontend/js/modal-video.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('public/frontend/css/modal-video.min.css') }}" />
   <!-- end youtube -->

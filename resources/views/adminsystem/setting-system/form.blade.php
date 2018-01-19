@@ -5,8 +5,9 @@
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"           value="'.@$arrRowData['fullname'].'">';  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"       id="alias"              value="'.@$arrRowData['alias'].'">';  
+$linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"   onblur="createAlias()"        value="'.@$arrRowData['fullname'].'">';  
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">';
 $inputTitle             =   '<textarea id="title" name="title" rows="2" cols="100" class="form-control" >'.@$arrRowData['title'].'</textarea>'; 
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
@@ -443,6 +444,43 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
         var tr=$(control).closest("tr")[0];
         var index = $(tr).index(); 
         tbody.deleteRow(index);                      
-    }        
+    }   
+    function createAlias(){
+        var id=$('input[name="id"]').val();   
+        var fullname    = $('input[name="fullname"]').val();
+        var token       = $('form[name="frm"] > input[name="_token"]').val();     
+        var dataItem={      
+            "id":id,      
+            "fullname":fullname,            
+            "_token": token
+        };   
+        $('input[name="alias"]').val(''); 
+        resetErrorStatus();    
+        $.ajax({
+            url: '<?php echo $linkCreateAlias; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {                
+                if(data.checked==true){
+                    $('input[name="alias"]').val(data.alias); 
+                }else{                    
+                    var data_error=data.error;
+                    if(typeof data_error.fullname               != "undefined"){
+                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
+                    }                            
+                }
+                spinner.hide();
+            },
+            error : function (data){
+                spinner.hide();
+            },
+            beforeSend  : function(jqXHR,setting){
+                spinner.show();
+            },
+        });
+    }     
 </script>
 @endsection()            

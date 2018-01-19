@@ -272,5 +272,55 @@ class SettingSystemController extends Controller {
           @copy($fileObj['tmp_name'],$file_path);                   
         }   
       }
+      public function createAlias(Request $request){
+        $id                =  trim($request->id)  ; 
+        $fullname                =  trim($request->fullname)  ;        
+        $data                    =  array();
+        $info                    =  array();
+        $error                   =  array();
+        $item                    =  null;
+        $checked  = 1;   
+        $alias='';                     
+        if(empty($fullname)){
+         $checked = 0;
+         $error["fullname"]["type_msg"] = "has-error";
+         $error["fullname"]["msg"] = "Thiếu tên bài viết";
+       }else{
+        $alias=str_slug($fullname,'-');
+        $dataSettingSystem=array();        
+        $checked_trung_alias=0;          
+        if (empty($id)) {
+          $dataSettingSystem=SettingSystemModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();            
+        }else{
+          $dataSettingSystem=SettingSystemModel::whereRaw("trim(lower(alias)) = ? and id != ?",[trim(mb_strtolower($alias,'UTF-8')),(int)@$id])->get()->toArray();    
+        }          
+        if (count($dataSettingSystem) > 0) {
+            $checked_trung_alias=1;
+          }               
+        if((int)$checked_trung_alias == 1){
+          $code_alias=rand(1,999);
+          $alias=$alias.'-'.$code_alias;
+        }
+      }
+      if ($checked == 1){
+        $info = array(
+          'type_msg'      => "has-success",
+          'msg'         => 'Lưu dữ liệu thành công',
+          "checked"       => 1,
+          "error"       => $error,
+
+          "alias"       =>$alias
+        );
+      }else {
+        $info = array(
+          'type_msg'      => "has-error",
+          'msg'         => 'Nhập dữ liệu có sự cố',
+          "checked"       => 0,
+          "error"       => $error,
+          "alias"        => $alias
+        );
+      }    
+      return $info;
+    }
 }
 ?>

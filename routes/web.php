@@ -34,6 +34,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.payment-method.updateStatus","uses"=>"adminsystem\PaymentMethodController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.payment-method.changeStatus","uses"=>"adminsystem\PaymentMethodController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.payment-method.trash","uses"=>"adminsystem\PaymentMethodController@trash"]);		
+		Route::post("create-alias",["as"=>"adminsystem.payment-method.createAlias","uses"=>"adminsystem\PaymentMethodController@createAlias"]);
 	});
 	Route::group(["prefix"=>"setting-system"],function(){		
 		Route::get("list",["as"=>"adminsystem.setting-system.getList","uses"=>"adminsystem\SettingSystemController@getList"]);
@@ -46,6 +47,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("change-status",["as"=>"adminsystem.setting-system.changeStatus","uses"=>"adminsystem\SettingSystemController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.setting-system.trash","uses"=>"adminsystem\SettingSystemController@trash"]);	
 		Route::post("upload-file",["as"=>"adminsystem.setting-system.uploadFile","uses"=>"adminsystem\SettingSystemController@uploadFile"]);	
+		Route::post("create-alias",["as"=>"adminsystem.setting-system.createAlias","uses"=>"adminsystem\SettingSystemController@createAlias"]);
 	});
 	Route::group(["prefix"=>"product"],function(){		
 		Route::get("list",["as"=>"adminsystem.product.getList","uses"=>"adminsystem\ProductController@getList"]);

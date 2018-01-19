@@ -394,7 +394,7 @@ class ProductController extends Controller {
            $error["fullname"]["type_msg"] = "has-error";
            $error["fullname"]["msg"] = "Thiếu tên bài viết";
          }else{
-          $alias=convertToAlias($fullname);
+          $alias=str_slug($fullname,'-');
           $dataCategoryArticle=array();
           $dataCategoryProduct=array();
           $dataArticle=array();
