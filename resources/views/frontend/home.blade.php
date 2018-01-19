@@ -1,6 +1,7 @@
 @extends("frontend.master")
 @section("content")
 <?php 
+use App\ProjectModel;
 $setting=getSettingSystem();
 $data_slideshow=getBanner("slideshow");
 if(count($data_slideshow) > 0){
@@ -82,6 +83,39 @@ if(count($data_slideshow) > 0){
 		<div class="du-an-noi-bat margin-top-15">
 			<div class="du-an">Dự án</div>
 			<div class="noi-bat margin-left-5">Nổi bật</div>
+		</div>
+		<div class="margin-top-10 include-project">Gồm những dự án mới và nổi bật của chúng tôi</div>
+		<div class="margin-top-15">
+			<?php  
+			$data=ProjectModel::select()->get()->toArray();
+			$data=convertToArray($data);
+			$k=1;
+			foreach($data as $key => $value){
+				$fullname=$value['fullname'];
+				$thumbnail=get_article_thumbnail($value['image']);
+				$total_cost=$value['total_cost'];
+				$place=$value['place'];
+				$permalink=route('frontend.index.index',[$value['alias']]);
+				?>
+				<div class="col-sm-3">
+					<div class="box-project margin-top-15 relative padding-bottom-15">
+						<div class="project-price"><span><?php echo $total_cost; ?></span><span class="margin-left-5">triệu</span><span class="margin-left-5">VNĐ</span></div>
+						<div>
+							<center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center>
+						</div>
+						<div class="box-project-info">
+							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
+							<hr class="project-gach-info margin-top-10">
+							<div class="margin-top-10"><center><?php echo $place; ?></center></div>
+						</div>
+					</div>
+				</div>
+				<?php
+				if($k%4 == 0 || $k==count($data)){
+					echo '<div class="clr"></div>';
+				}
+			}
+			?>
 		</div>
 	</div>	
 	<div class="clr"></div>

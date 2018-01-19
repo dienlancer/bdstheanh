@@ -129,6 +129,10 @@ if(count($arrCart) > 0){
 	<!-- begin tab -->
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/tab.css') }}" />
 	<!-- end tab-->
+	<!-- begin bxslider -->
+	<script src="{{ asset('public/frontend/bxslider/jquery.bxslider.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('public/frontend/bxslider/jquery.bxslider.min.css') }}" />  
+	<!-- end bxslider -->
 	<!-- begin owl_carousel -->
 	<script src="{{ asset('public/frontend/owl-carousel-2/owl.carousel.min.js') }}"></script>
 	<script src="{{ asset('public/frontend/owl-carousel-2/owl.carousel2.thumbs.min.js') }}"></script>

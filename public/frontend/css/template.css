@@ -7,6 +7,7 @@
 @font-face{font-family:"Parisienne";src:url("../fonts/Parisienne.ttf") format('truetype');}
 @font-face{font-family:"Ovo";src:url("../fonts/Ovo-Regular.ttf") format('truetype');}
 @font-face{font-family:"RobotoSlab";src:url("../fonts/RobotoSlab.ttf") format('truetype');}
+@font-face{font-family:"Anton";src:url("../fonts/Anton.ttf") format('truetype');}
 @font-face{font-family:"OpenSans";src:url("../fonts/OpenSans.ttf") format('truetype');}
 @font-face{font-family:"OpenSans-Bold";src:url("../fonts/OpenSans-Bold.ttf") format('truetype');}
 body{
@@ -1036,17 +1037,52 @@ div.ducati  h2{
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    font-weight: bold;
+    
+    font-family:"Anton";
+    font-size: 30px;
 }
 .du-an{
     color: #ff6600;
-    font-size: 36px;
+    
     
 }
 .noi-bat{
     color: #114a82;
-    font-size: 36px;
     
+    
+}
+.include-project{
+    text-align: center;
+    font-weight: bold;
+    color: #333
+}
+.box-project{
+    border: 1px solid #d7d7d7;
+        padding: 3px;
+}
+.project-price{
+        background-image: url(../images/label-price.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 123px;
+    left: -4px;
+    z-index: 2;
+    width: 100%;
+    padding: 7px 0px 7px 12px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.box-project-info{
+    padding: 0px 25px;
+}
+.project-gach-info{
+    border-top: 1px dashed #0072bc;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.box-project-title a{
+    color: #000;
+    font-weight: bold;
 }
 @media (max-width: 767px){    
     div.mobilemenu{
