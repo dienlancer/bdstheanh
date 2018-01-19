@@ -75,5 +75,15 @@ if(count($data_slideshow) > 0){
 }  
 }
 ?>
-<div class="inner-content"></div>
+<hr class="gach-ngang">
+<div class="container">
+	<div class="col-lg-12">
+		<hr class="gach-ngang-2">
+		<div class="du-an-noi-bat margin-top-15">
+			<div class="du-an">Dự án</div>
+			<div class="noi-bat margin-left-5">Nổi bật</div>
+		</div>
+	</div>	
+	<div class="clr"></div>
+</div>
 @endsection()               

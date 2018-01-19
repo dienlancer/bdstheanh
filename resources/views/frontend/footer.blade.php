@@ -42,12 +42,21 @@
 			?>			
 		</div>
 		<div class="col-lg-3">
-			<div class="margin-top-40">
-				<h1 class="brabel">Fanpage</h1>
-				<div class="tialia margin-top-15">
-					<div class="fb-page" data-href="https://www.facebook.com/gonguyenlieumy/" data-tabs="timeline" data-width="250" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/gonguyenlieumy/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/gonguyenlieumy/">Công ty tnhh Greenecolife</a></blockquote></div>
-				</div>		
-			</div>							
+			<?php 
+			$module=getPage("fanpage-footer");			
+			if(count($module) > 0){		
+				$fullname=$module['fullname'];		
+				$intro=$module["intro"];					
+				?>		
+				<div class="margin-top-40">
+					<h1 class="brabel"><?php echo $fullname; ?></h1>
+					<div class="tialia margin-top-15">
+						<?php echo $intro; ?>
+					</div>		
+				</div>										
+				<?php				
+			}
+			?>							
 		</div>
 		<div class="col-lg-3">
 			<div class="margin-top-40">

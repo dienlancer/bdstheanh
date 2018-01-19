@@ -1023,8 +1023,30 @@ div.ducati  h2{
 .menu-plone{
     padding:17px 0px;
 }
-.inner-content{
-    margin-top: 105px
+.gach-ngang{
+    border-top: 1px solid #d7d7d7;
+    margin-top: 128px;
+}
+.gach-ngang-2{
+    border-top: 3px solid #114a82;
+    width: 75px;
+    margin:65px auto 0px auto;
+}
+.du-an-noi-bat{
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.du-an{
+    color: #ff6600;
+    font-size: 36px;
+    
+}
+.noi-bat{
+    color: #114a82;
+    font-size: 36px;
+    
 }
 @media (max-width: 767px){    
     div.mobilemenu{
