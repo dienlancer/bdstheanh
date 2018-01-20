@@ -1240,7 +1240,29 @@ div.ducati  h2{
     color: #000;
     font-size:18px;
 }
+.bottom-news .owl-prev, .bottom-news .owl-next{
+           background:#0c62ad;
+    color: #ffffff;
+    padding: 5px 11px;
+}
+.bottom-news .owl-prev{
+      position: absolute;
+    right: 35px;
+    top: -39px;
 
+}
+.bottom-news .owl-next{
+        position: absolute;
+    right: 0;
+    top: -39px;
+}
+.service-box-2{
+    border: 1px solid #dddddd;
+}
+.service-title-2 a{
+    font-size: 15px;
+    font-weight: bold;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

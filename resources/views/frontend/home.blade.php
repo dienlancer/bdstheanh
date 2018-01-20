@@ -270,15 +270,80 @@ if(count($data_slideshow) > 0){
 </div>
 <div class="container">
 	<div class="col-lg-12">
-
 			<hr class="gach-ngang-3">
 			<div class="du-an-noi-bat-2 margin-top-20">
 				<div class="du-an">Tin tức</div>
 				<div class="noi-bat margin-left-5">Mới nhất</div>
 			</div>
 			<div class="margin-top-10 include-project">Sau đây là những lý do để khách hàng lựa chọn và tin tưởng vào chúng tôi</div>
-			
-	</div>
-	<div class="clr"></div>
+			<?php 
+				$data=getModuleItem("news-between");
+				if(count($data) > 0){
+					$fullname=$data["fullname"];
+					$items=$data["items"];
+					if(count($items) > 0){
+						?>						
+						<div class="margin-top-15">
+							<div class="col-lg-12">
+								<script type="text/javascript" language="javascript">
+									$(document).ready(function(){
+										$(".bottom-news").owlCarousel({
+											autoplay:true,                    
+											loop:true,
+											margin:25,                        
+											nav:false,            
+											mouseDrag: false,
+											touchDrag: false,                                
+											responsiveClass:true,
+											responsive:{
+												0:{
+													items:1
+												},
+												600:{
+													items:3
+												},
+												1000:{
+													items:3
+												}
+											}
+										});
+										var chevron_left='<i class="fa fa-chevron-left"></i>';
+										var chevron_right='<i class="fa fa-chevron-right"></i>';
+										$("div.bottom-news div.owl-prev").html(chevron_left);
+										$("div.bottom-news div.owl-next").html(chevron_right);
+									});                
+								</script>
+								<div class="owl-carousel bottom-news owl-theme">
+									<?php 
+									foreach($items as $key => $value){
+										$thumbnail=get_product_thumbnail($value['image']) ;
+										$permalink=route('frontend.index.index',[$value['alias']]);
+										$fullname=$value['fullname'];
+										$intro=substr($value['intro'], 0,100) ;
+										?>
+										<div class="margin-top-15 service-box-2 margin-bottom-45 padding-bottom-15">
+											<div class="service-img-2"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center></div>
+											<div class="service-info padding-left-15 padding-right-15">
+												<div class="margin-top-15 service-title-2"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
+												<div class="margin-top-15 justify"><?php echo $intro; ?></div>
+												<div class="service-readmore margin-top-15">
+													<a href="<?php echo $permalink; ?>">Xem thêm</a>
+													<div class="clr"></div>
+												</div>
+											</div>					
+										</div>
+										<?php
+									}
+									?>
+								</div>
+							</div>	
+							<div class="clr"></div>
+						</div>						
+						<?php
+					}  
+				}
+				?>
+		</div>
+		<div class="clr"></div>
 </div>
 @endsection()               
