@@ -1,4 +1,4 @@
-.owl-nav {
+.building-construction .owl-nav {
     position: absolute;
     bottom:-82px;
     text-align: center;
@@ -8,7 +8,7 @@
     margin: 0 auto;
     color: #fff;
 }
-.owl-carousel .owl-nav .owl-prev {
+.building-construction  .owl-nav .owl-prev {
     position: absolute;
     left: 0;
     border: 1px solid #114a82;
@@ -16,7 +16,7 @@
     padding: 3px;
     text-align: center;
 }
-.owl-carousel .owl-nav .owl-next {
+.building-construction .owl-nav .owl-next {
     position: absolute;
     right: 0;
     border: 1px solid #114a82;
@@ -24,7 +24,7 @@
     padding: 3px;
     text-align: center;
 }
-.owl-carousel .owl-nav .fa {
+.building-construction .owl-nav .fa {
     color: #fff;
     background: #114a82;
     width: 28px;
@@ -33,7 +33,7 @@
     border-radius: 50%;
     text-align: center;
 }
-.owl-dots {
+.building-construction .owl-dots {
     width: 1185px;
     margin: 0 auto;
     position: absolute;
@@ -41,7 +41,7 @@
     left: 0;
     right: 0;
 }
-[class^="dotnumber"], [class*=" dotnumber"] {
+.building-construction [class^="dotnumber"],.building-construction [class*=" dotnumber"] {
     float: left;
     margin: 0 15px;
     width: 30.8%;

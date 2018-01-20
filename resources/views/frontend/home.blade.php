@@ -3,6 +3,15 @@
 <?php 
 use App\ProjectModel;
 $setting=getSettingSystem();
+$telephone=$setting['telephone']['field_value'];
+$email_to=$setting['email_to']['field_value'];
+$facebook_url=$setting['facebook_url']['field_value'];
+$twitter_url=$setting['twitter_url']['field_value'];
+$google_plus=$setting['google_plus']['field_value'];
+$youtube_url=$setting['youtube_url']['field_value'];
+$instagram_url=$setting['instagram_url']['field_value'];
+$pinterest_url=$setting['pinterest_url']['field_value'];   
+$company=$setting['contacted_person']['field_value'];
 $data_slideshow=getBanner("slideshow");
 if(count($data_slideshow) > 0){
 	$items=$data_slideshow["items"];
@@ -345,5 +354,126 @@ if(count($data_slideshow) > 0){
 				?>
 		</div>
 		<div class="clr"></div>
+</div>
+<?php 
+$data=getBanner("doi-tac");
+if(count($data) > 0){
+	$items=$data["items"];
+	if(count($items) > 0){
+		?>
+		<div class="partner-wrapper">
+			<div class="container padding-top-45 padding-bottom-15">
+				<div class="col-lg-12">
+					<script type="text/javascript" language="javascript">
+						$(document).ready(function(){
+							$(".partner").owlCarousel({
+								autoplay:false,                    
+								loop:true,
+								margin:25,                        
+								nav:true,            
+								mouseDrag: false,
+								touchDrag: false,                                
+								responsiveClass:true,
+								responsive:{
+									0:{
+										items:1
+									},
+									600:{
+										items:1
+									},
+									1000:{
+										items:5
+									}
+								}
+							});
+							var chevron_left='<i class="fa fa-chevron-left"></i>';
+							var chevron_right='<i class="fa fa-chevron-right"></i>';
+							$("div.partner div.owl-prev").html(chevron_left);
+							$("div.partner div.owl-next").html(chevron_right);
+						});                
+					</script>
+					<div class="owl-carousel partner owl-theme">
+						<?php 
+						foreach($items as $key => $value){
+							$featuredImg=asset('upload/'.$value['image']) ;
+							$page_url=$value['page_url'];
+							?>
+							<div>
+								<a href="<?php echo $page_url; ?>" target="_blank"><img src="<?php echo $featuredImg; ?>" /></a>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>			
+			</div>  
+		</div>		
+		<?php
+	}  
+}
+?>
+<div class="contact-wrapper padding-bottom-45">
+	<div class="container">
+		<div class="col-lg-6"><div class="margin-top-45"><img src="<?php echo asset('upload/house.jpg'); ?>"></div></div>
+		<div class="col-lg-6">
+			<hr class="gach-ngang-4">
+			<div class="du-an-noi-bat-2 margin-top-20">
+				<div class="du-an">Thông tin</div>
+				<div class="noi-bat margin-left-5">Liên hệ</div>
+			</div>
+			<div class="margin-top-10"><center>Tư vấn pháp luật đất đai là một trong những công cụ hữu hiệu để bạn giải quyết các thắc mắc trong lĩnh vực đất đai một cách nhanh chóng, thuận lợi nhất.</center></div>
+			<form action="<?php echo route('frontend.index.contact'); ?>" method="post" name="frm-home-contact" class="home-contact-hd margin-top-30 padding-top-15 padding-bottom-15">
+				<div>
+					<div class="col-lg-6">
+						<input type="text" name="title" class="form-control" placeholder="Tiêu đề">
+					</div>
+					<div class="col-lg-6">
+						<input type="text" name="fullname" class="form-control" placeholder="Họ và tên">
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="margin-top-15">
+					<div class="col-lg-6">
+						<input type="text" name="email" class="form-control" placeholder="Email">
+					</div>
+					<div class="col-lg-6">
+						<input type="text" name="telephone" class="form-control" placeholder="Số điện thoại">
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="margin-top-15">
+					<div class="col-lg-10">
+						<input type="text" name="content" class="form-control" placeholder="Nội dung">
+					</div>
+					<div class="col-lg-2">
+						<div class="service-readmore-2">
+							<center><a href="javascript:void(0);" onclick="document.forms['frm-home-contact'].submit();">Gửi</a></center>									
+						</div>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="hotline-info">
+					<div class="col-lg-6">
+						<div class="margin-top-15"><i class="fa fa-envelope" aria-hidden="true"></i><span class="margin-left-10"><?php echo $email_to; ?></span></div>
+					</div>
+					<div class="col-lg-6">
+						<div class="margin-top-15 telephone-info">
+							<i class="fa fa-volume-control-phone" aria-hidden="true"></i><span class="margin-left-10"><?php echo $telephone; ?></span>
+						</div>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="social-2 margin-top-15">
+					<center>
+						<span><a href="<?php echo $facebook_url; ?>" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $google_plus; ?>" title="google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $twitter_url; ?>" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $youtube_url; ?>" title="youtube_"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
+					</center>					
+				</div>
+			</form>			
+		</div>
+		<div class="clr"></div>
+	</div>
 </div>
 @endsection()               
