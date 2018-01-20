@@ -458,15 +458,16 @@ ul.list-style-none{
     list-style: square;
 }
 footer{
-       color: #0c62ad;
+       color: #ffffff;
     padding-bottom: 15px;
+    background: #114a82
 }
 
 .brabel{
     font-size: 15px;
     text-transform: uppercase;
     font-weight: bold;
-    border-bottom: 1px solid #0c62ad;
+    border-bottom: 1px solid #ffffff;
     padding-bottom: 10px;
 }
 .tialia{
@@ -929,7 +930,7 @@ div.ducati  h2{
 	padding: 5px 0px;
 }
 .thiet-ke-boi a{
-	color: #0c62ad;
+	color: #ffffff;
     text-transform: uppercase;
 }
 .employee-name{	
@@ -1267,9 +1268,7 @@ div.ducati  h2{
     border-top: 1px solid #d7d7d7;
     border-bottom: 1px solid #d7d7d7;
 }
-.contact-wrapper{    
-    border-bottom: 1px solid #d7d7d7;
-}
+
 .gach-ngang-4 {
     border-top: 3px solid #114a82;
     width: 75px;
