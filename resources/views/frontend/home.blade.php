@@ -465,10 +465,10 @@ if(count($data) > 0){
 				</div>
 				<div class="social-2 margin-top-15">
 					<center>
-						<span><a href="<?php echo $facebook_url; ?>" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $google_plus; ?>" title="google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $twitter_url; ?>" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $youtube_url; ?>" title="youtube_"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
+						<span><a href="<?php echo $facebook_url; ?>" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $google_plus; ?>" target="_blank" title="google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $twitter_url; ?>" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
+					<span class="margin-left-10"><a href="<?php echo $youtube_url; ?>" target="_blank" title="youtube_"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
 					</center>					
 				</div>
 			</form>			
