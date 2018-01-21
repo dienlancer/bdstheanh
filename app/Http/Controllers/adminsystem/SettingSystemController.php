@@ -69,7 +69,7 @@ class SettingSystemController extends Controller {
           $copyright            =   trim($request->copyright);          
           $google_site_verification =   trim($request->google_site_verification);
           $google_analytics     =   trim($request->google_analytics);          
-          $page_url             =   trim($request->page_url);          
+          
           $logo_frontend        =   trim($request->logo_frontend);
           $logo_frontend_hidden =   trim($request->logo_frontend_hidden);
           $favicon              =   trim($request->favicon);          
@@ -108,7 +108,7 @@ class SettingSystemController extends Controller {
                 $item->copyright                =   @$copyright;                
                 $item->google_site_verification =   @$google_site_verification;
                 $item->google_analytics         =   @$google_analytics;                
-                $item->page_url                 =   @$page_url;                    
+                
                 $item->logo_frontend = null;                       
                 if(!empty($logo_frontend_hidden)){
                   $item->logo_frontend = $logo_frontend_hidden;          
