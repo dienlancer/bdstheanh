@@ -15,8 +15,7 @@ $inputDescription       =   '<textarea id="description" name="description" rows=
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
-$inputPlace             =   '<textarea id="place" name="place" rows="2" cols="100" class="form-control" >'.@$arrRowData['place'].'</textarea>'; 
-
+$inputAdress          =   '<input type="text" class="form-control" name="address"   id="address"    value="'.@$arrRowData['address'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
@@ -141,10 +140,10 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Địa điểm</b></label>
                         <div class="col-md-10">                            
-                            <?php echo $inputPlace; ?>
+                            <?php echo $inputAddress; ?>
                             <span class="help-block"></span>
                             <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('place',{
+                                CKEDITOR.replace('address',{
                                    height:300
                                });
                            </script>
@@ -231,7 +230,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var total_cost=$('input[name="total_cost"]').val();        
         var intro=$('textarea[name="intro"]').val();        
         var overview=CKEDITOR.instances['overview'].getData();        
-        var place=CKEDITOR.instances['place'].getData();                
+        var address=CKEDITOR.instances['address'].getData();                
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
@@ -247,7 +246,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "total_cost":total_cost,     
             "intro":intro,
             "overview":overview,
-            "place":place,                                 
+            "address":address,                                 
             "sort_order":sort_order,
             "status":status,
             "_token": token

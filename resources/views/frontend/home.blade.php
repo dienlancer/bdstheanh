@@ -103,7 +103,7 @@ if(count($data_slideshow) > 0){
 				$fullname=$value['fullname'];
 				$thumbnail=get_article_thumbnail($value['image']);
 				$total_cost=$value['total_cost'];
-				$place=$value['place'];
+				$address=substr($value['address'], 0,100) ;
 				$permalink=route('frontend.index.index',[$value['alias']]);
 				?>
 				<div class="col-sm-3">
@@ -115,7 +115,7 @@ if(count($data_slideshow) > 0){
 						<div class="box-project-info">
 							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
 							<hr class="project-gach-info margin-top-10">
-							<div class="margin-top-10"><center><?php echo $place; ?></center></div>
+							<div class="margin-top-10"><center><?php echo $address; ?></center></div>
 						</div>
 					</div>
 				</div>

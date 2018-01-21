@@ -76,7 +76,7 @@ class ProjectController extends Controller {
           $total_cost           =   trim($request->total_cost);
           $intro                =   trim($request->intro);    
           $overview                =   trim($request->overview);          
-          $place                 =   trim($request->place);                    
+          $address                 =   trim($request->address);                    
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          
           $data 		            =   array();
@@ -136,7 +136,7 @@ class ProjectController extends Controller {
                 $item->total_cost       = $total_cost;
                 $item->intro            = $intro;
                 $item->overview            = $overview;
-                $item->place             = $place;                                                   
+                $item->address             = $address;                                                   
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
