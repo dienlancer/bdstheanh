@@ -191,6 +191,17 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("upload-file",["as"=>"adminsystem.organization.uploadFile","uses"=>"adminsystem\OrganizationController@uploadFile"]);
 		Route::post("create-alias",["as"=>"adminsystem.organization.createAlias","uses"=>"adminsystem\OrganizationController@createAlias"]);
 	});	
+	Route::group(["prefix"=>"province"],function(){		
+		Route::get("list",["as"=>"adminsystem.province.getList","uses"=>"adminsystem\ProvinceController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.province.loadData","uses"=>"adminsystem\ProvinceController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.province.getForm","uses"=>"adminsystem\ProvinceController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.province.save","uses"=>"adminsystem\ProvinceController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.province.deleteItem","uses"=>"adminsystem\ProvinceController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.province.sortOrder","uses"=>"adminsystem\ProvinceController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.province.updateStatus","uses"=>"adminsystem\ProvinceController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.province.changeStatus","uses"=>"adminsystem\ProvinceController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.province.trash","uses"=>"adminsystem\ProvinceController@trash"]);
+	});	
 	Route::group(["prefix"=>"project-article"],function(){		
 		Route::get("list",["as"=>"adminsystem.project-article.getList","uses"=>"adminsystem\ProjectArticleController@getList"]);
 		Route::post("load-data",["as"=>"adminsystem.project-article.loadData","uses"=>"adminsystem\ProjectArticleController@loadData"]);		

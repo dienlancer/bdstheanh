@@ -7,6 +7,7 @@ var vPhotoTable           =   null;
 var vVideoTable           =   null;
 var vSupporterTable           =   null;
 var vOrganizationTable           =   null;
+var vProvinceTable           =   null;
 var vProjectArticleTable           =   null;
 var vMediaTable           =   null;
 var vPageTable           =   null;
@@ -261,6 +262,23 @@ var basicTable = function () {
                 { data: "phone"         },
                 { data: "email"         },
                 { data: "website"         },
+                { data: "sort_order"    },
+                { data: "status"        },                                
+                { data: "edited"    },         
+                { data: "deleted"    },                
+            ]
+        });        
+    };
+    var initProvinceTable = function () {
+        vProvinceTable = $('#tbl-province').DataTable({
+            aLengthMenu: [
+                [10, -1],
+                [10, "All"]
+            ],
+            iDisplayLength: -1,
+            columns: [                
+                { data: "checked"            },                
+                { data: "fullname"      },                    
                 { data: "sort_order"    },
                 { data: "status"        },                                
                 { data: "edited"    },         
@@ -721,6 +739,7 @@ var basicTable = function () {
             initPhotoTable();
             initCategoryVideoTable();
             initVideoTable();
+            initProvinceTable();
         }
     };
 }();

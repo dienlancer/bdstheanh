@@ -13,11 +13,11 @@ use App\ProjectArticleModel;
 use App\ArticleCategoryModel;
 use App\PaymentMethodModel;
 use App\SupporterModel;
-use App\OrganizationModel;
+use App\ProvinceModel;
 use DB;
 class ProvinceController extends Controller {
-  	var $_controller="organization";	
-  	var $_title="Tổ chức thiện nguyện";
+  	var $_controller="province";	
+  	var $_title="Tỉnh thành phố";
   	var $_icon="icon-settings font-dark";    
   	public function getList(){		
     		$controller=$this->_controller;	
@@ -38,14 +38,14 @@ class ProvinceController extends Controller {
         if(!empty(@$request->filter_search)){      
           $filter_search=trim(@$request->filter_search) ;    
         }        
-        $data=DB::table('organization')                  
-                ->select('organization.id','organization.fullname','organization.image','organization.phone','organization.email','organization.website','organization.sort_order','organization.status','organization.created_at','organization.updated_at')                
-                ->where('organization.fullname','like','%'.trim(mb_strtolower($filter_search,'UTF-8')).'%')                     
-                ->groupBy('organization.id','organization.fullname','organization.image','organization.phone','organization.email','organization.website','organization.sort_order','organization.status','organization.created_at','organization.updated_at')   
-                ->orderBy('organization.sort_order', 'asc')                
+        $data=DB::table('province')                  
+                ->select('province.id','province.fullname','province.sort_order','province.status','province.created_at','province.updated_at')                
+                ->where('province.fullname','like','%'.trim(mb_strtolower($filter_search,'UTF-8')).'%')                     
+                ->groupBy('province.id','province.fullname','province.sort_order','province.status','province.created_at','province.updated_at')   
+                ->orderBy('province.sort_order', 'asc')                
                 ->get()->toArray();              
         $data=convertToArray($data);    
-        $data=organizationConverter($data,$this->_controller);            
+        $data=provinceConverter($data,$this->_controller);            
         return $data;
     } 
     public function getForm($task,$id=""){     
@@ -59,7 +59,7 @@ class ProvinceController extends Controller {
           switch ($task) {
            case 'edit':
               $title=$this->_title . " : Update";
-              $arrRowData=OrganizationModel::find((int)@$id)->toArray();                     
+              $arrRowData=ProvinceModel::find((int)@$id)->toArray();                     
            break;
            case 'add':
               $title=$this->_title . " : Add new";
@@ -72,18 +72,7 @@ class ProvinceController extends Controller {
     }
      public function save(Request $request){
           $id 					        =		trim($request->id);        
-          $fullname 				    =		trim($request->fullname);
-          $alias                =   trim($request->alias);
-          $meta_keyword         =   trim($request->meta_keyword);
-          $meta_description     =   trim($request->meta_description);
-          $image                =   trim($request->image);
-          $image_hidden         =   trim($request->image_hidden);
-          $address              =   trim($request->address);                        
-          $phone                =   trim($request->phone);                        
-          $email                =   trim($request->email);                        
-          $website              =   trim($request->website);     
-          $intro                =   trim($request->intro);     
-          $content              =   trim($request->content);                        
+          $fullname 				    =		trim($request->fullname);                              
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          
           $data 		            =   array();
@@ -94,13 +83,13 @@ class ProvinceController extends Controller {
           if(empty($fullname)){
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
-                 $error["fullname"]["msg"] = "Thiếu tên người hỗ trợ";
+                 $error["fullname"]["msg"] = "Thiếu tên";
           }else{
               $data=array();
               if (empty($id)) {
-                $data=OrganizationModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
+                $data=ProvinceModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
               }else{
-                $data=OrganizationModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
+                $data=ProvinceModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
               }  
               if (count($data) > 0) {
                   $checked = 0;
@@ -120,31 +109,14 @@ class ProvinceController extends Controller {
           }
           if ($checked == 1) {    
                 if(empty($id)){
-                    $item         =   new OrganizationModel;       
+                    $item         =   new ProvinceModel;       
                     $item->created_at   = date("Y-m-d H:i:s",time());        
-                    if(!empty($image)){
-                      $item->image    =   trim($image) ;  
-                    }       
+                      
                 } else{
-                    $item       = OrganizationModel::find((int)@$id);   
-                    $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                    
+                    $item       = ProvinceModel::find((int)@$id);   
+                                  
                 }  
-                $item->fullname 		    =	$fullname;
-                $item->alias         = $alias;
-                $item->meta_keyword     = $meta_keyword;
-                $item->meta_description = $meta_description;    
-                $item->address         = $address;
-                $item->phone         = $phone;
-                $item->email         = $email;
-                $item->website         = $website;
-                $item->intro         = $intro;
-                $item->content         = $content;                                        
+                $item->fullname 		    =	@$fullname;                                           
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
@@ -173,7 +145,7 @@ class ProvinceController extends Controller {
                   $type_msg               =   "alert-success";
                   $msg                    =   "Cập nhật thành công";              
                   $status         =       (int)@$request->status;
-                  $item           =       OrganizationModel::find((int)@$id);        
+                  $item           =       ProvinceModel::find((int)@$id);        
                   $item->status   =       $status;
                   $item->save();
                   $data                   =   $this->loadData($request);
@@ -192,7 +164,7 @@ class ProvinceController extends Controller {
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";                    
             if($checked == 1){
-              $item = OrganizationModel::find((int)@$id);
+              $item = ProvinceModel::find((int)@$id);
                 $item->delete();                                                
             }        
             $data                   =   $this->loadData($request);
@@ -219,7 +191,7 @@ class ProvinceController extends Controller {
           if($checked==1){
               foreach ($arrID as $key => $value) {
                 if(!empty($value)){
-                    $item=OrganizationModel::find($value);
+                    $item=ProvinceModel::find($value);
                     $item->status=$status;
                     $item->save();      
                 }            
@@ -248,7 +220,7 @@ class ProvinceController extends Controller {
             if($checked == 1){                
                   $strID = implode(',',$arrID);   
                   $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sql = "DELETE FROM `organization` WHERE `id` IN  (".$strID.")";                                                 
+                  $sql = "DELETE FROM `province` WHERE `id` IN  (".$strID.")";                                                 
                   DB::statement($sql);                                    
             }
             $data                   =   $this->loadData($request);
@@ -270,7 +242,7 @@ class ProvinceController extends Controller {
             if(count($data_order) > 0){              
               foreach($data_order as $key => $value){      
                 if(!empty($value)){
-                  $item=OrganizationModel::find((int)@$value->id);                
+                  $item=ProvinceModel::find((int)@$value->id);                
                 $item->sort_order=(int)$value->sort_order;                         
                 $item->save();                      
                 }                                                  
@@ -284,92 +256,6 @@ class ProvinceController extends Controller {
               'data'              => $data
             );
             return $info;
-      }
-       public function createAlias(Request $request){
-          $id                =  trim($request->id)  ; 
-          $fullname                =  trim($request->fullname)  ;        
-          $data                    =  array();
-          $info                    =  array();
-          $error                   =  array();
-          $item                    =  null;
-          $checked  = 1;   
-          $alias='';                     
-          if(empty($fullname)){
-           $checked = 0;
-           $error["fullname"]["type_msg"] = "has-error";
-           $error["fullname"]["msg"] = "Thiếu tên bài viết";
-         }else{
-          $alias=str_slug($fullname,'-');
-          $dataCategoryArticle=array();
-          $dataCategoryProduct=array();
-          $dataArticle=array();
-          $dataProduct=array();
-          $dataPage=array();
-          $dataProject=array();
-          $dataProjectArticle=array();
-          $checked_trung_alias=0;          
-          if (empty($id)) {              
-              $dataArticle=ArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();             
-            }else{
-              $dataArticle=ArticleModel::whereRaw("trim(lower(alias)) = ? and id != ?",[trim(mb_strtolower($alias,'UTF-8')),(int)@$id])->get()->toArray();    
-            }  
-            $dataCategoryArticle=CategoryArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataCategoryProduct=CategoryProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProduct=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataPage=PageModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProject=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProjectArticle=ProjectArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-          if (count($dataCategoryArticle) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataCategoryProduct) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataArticle) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataProduct) > 0) {
-            $checked_trung_alias=1;
-          }    
-          if (count($dataPage) > 0) {
-            $checked_trung_alias=1;
-          }  
-          if (count($dataProject) > 0) {
-            $checked_trung_alias=1;
-          }  
-          if (count($dataProjectArticle) > 0) {
-            $checked_trung_alias=1;
-          }       
-          if((int)$checked_trung_alias == 1){
-            $code_alias=rand(1,999);
-            $alias=$alias.'-'.$code_alias;
-          }
-        }
-        if ($checked == 1){
-          $info = array(
-            'type_msg'      => "has-success",
-            'msg'         => 'Lưu dữ liệu thành công',
-            "checked"       => 1,
-            "error"       => $error,
-            
-            "alias"       =>$alias
-          );
-        }else {
-          $info = array(
-            'type_msg'      => "has-error",
-            'msg'         => 'Nhập dữ liệu có sự cố',
-            "checked"       => 0,
-            "error"       => $error,
-            "alias"        => $alias
-          );
-        }    
-        return $info;
-      }
-      public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $article_width=$setting['article_width']['field_value'];
-    $article_height=$setting['article_height']['field_value'];
-      uploadImage($_FILES["image"],$article_width,$article_height);
-    }
+      }       
 }
 ?>

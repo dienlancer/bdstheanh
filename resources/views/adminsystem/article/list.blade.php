@@ -59,7 +59,7 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-article">
 				<thead>
 					<tr>
-						<th width="1%"><input type="checkbox" onclick="checkAllAgentArticle(this)"  name="checkall-toggle"></th>                						
+						<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>                						
 						<th>Bài viết</th>
 						<th>Chủ đề</th>
 						<th width="1%">Hình</th>
@@ -102,13 +102,13 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			},
 		});
 	}	
-	function checkWithListArticle(this_checkbox){
+	function checkWithList(this_checkbox){
 		var dr = vArticleTable.row( $(this_checkbox).closest('tr') ).data();       		
 		if(parseInt(dr['is_checked']) == 0){
-			dr['checked'] ='<input type="checkbox" checked onclick="checkWithListArticle(this)" name="cid" />';
+			dr['checked'] ='<input type="checkbox" checked onclick="checkWithList(this)" name="cid" />';
 			dr['is_checked'] = 1;
 		}else{
-			dr['checked'] ='<input type="checkbox" onclick="checkWithListArticle(this)" name="cid" />';
+			dr['checked'] ='<input type="checkbox" onclick="checkWithList(this)" name="cid" />';
 			dr['is_checked'] = 0;
 		}
 		vArticleTable.row( $(this_checkbox).closest('tr') ).data(dr);
