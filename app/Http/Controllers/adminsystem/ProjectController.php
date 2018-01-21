@@ -67,8 +67,7 @@ class ProjectController extends Controller {
      public function save(Request $request){
           $id 					        =		trim($request->id);        
           $fullname 				    =		trim($request->fullname);
-          $alias                =   trim($request->alias);
-                    
+          $alias                =   trim($request->alias);                    
           $meta_keyword         =   trim($request->meta_keyword);
           $meta_description     =   trim($request->meta_description);
           $image                =   trim($request->image);
@@ -76,6 +75,7 @@ class ProjectController extends Controller {
           $total_cost           =   trim($request->total_cost);
           $intro                =   trim($request->intro);    
           $overview                =   trim($request->overview);          
+          $equipment                =   trim($request->equipment);          
           $address                 =   trim($request->address);                    
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          

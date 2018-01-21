@@ -102,20 +102,17 @@ if(count($data_slideshow) > 0){
 			foreach($data as $key => $value){
 				$fullname=$value['fullname'];
 				$thumbnail=get_article_thumbnail($value['image']);
-				$total_cost=$value['total_cost'];
-				$address=substr($value['address'], 0,100) ;
+				$total_cost=$value['total_cost'];				
 				$permalink=route('frontend.index.index',[$value['alias']]);
 				?>
 				<div class="col-sm-3">
-					<div class="box-project margin-top-15 relative padding-bottom-15">
+					<div class="box-project margin-top-15 relative">
 						<div class="project-price"><span><?php echo $total_cost; ?></span><span class="margin-left-5">triệu</span><span class="margin-left-5">VNĐ</span></div>
 						<div>
 							<center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center>
 						</div>
 						<div class="box-project-info">
-							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>
-							<hr class="project-gach-info margin-top-10">
-							<div class="margin-top-10"><center><?php echo $address; ?></center></div>
+							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>							
 						</div>
 					</div>
 				</div>
@@ -125,6 +122,7 @@ if(count($data_slideshow) > 0){
 				}
 			}
 			?>
+			<div class="clr"></div>
 		</div>
 	</div>	
 	<div class="clr"></div>

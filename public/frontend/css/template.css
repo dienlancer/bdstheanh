@@ -1059,7 +1059,7 @@ div.ducati  h2{
 }
 .box-project{
     border: 1px solid #d7d7d7;
-        padding: 3px;
+        padding: 3px 3px 10px 3px;
 }
 .project-price{
         background-image: url(../images/label-price.png);
