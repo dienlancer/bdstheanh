@@ -15,6 +15,7 @@ $li_project_management='';
 $li_project='';
 $li_project_article='';
 $li_province='';
+$li_district='';
 
 $li_product_management='';
 $li_category_product='';
@@ -77,6 +78,11 @@ switch ($controller) {
 
     case 'province': 
     $li_province='active open';    
+    $li_project_management='active open';
+    break;
+
+    case 'district': 
+    $li_district='active open';    
     $li_project_management='active open';
     break;
     
@@ -241,6 +247,12 @@ switch ($controller) {
                 <a href="{!! route('adminsystem.province.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
                     <span class="title">Tỉnh - Thành phố</span>                                            
+                </a>                                                                      
+            </li>   
+            <li class="nav-item  <?php echo $li_project_article; ?>">
+                <a href="{!! route('adminsystem.district.getList') !!}" class="nav-link nav-toggle">
+                    <i class="icon-notebook"></i>
+                    <span class="title">Quận huyện</span>                                            
                 </a>                                                                      
             </li>                        
         </ul>

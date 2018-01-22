@@ -17,8 +17,8 @@ class ProjectModel extends Model {
 		,"overview"
 		,"equipment"
 		,"price_list"
-		,'province'
-		,'district'
+		,'province_id'
+		,'district_id'
 		,'street'
 		,"sort_order"
 		,"status"

@@ -15,7 +15,9 @@ $inputDescription       =   '<textarea id="description" name="description" rows=
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
-$inputAddress          =   '<input type="text" class="form-control" name="address"   id="address"    value="'.@$arrRowData['address'].'">'; 
+$ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
+$ddlDistrict      =   cmsSelectboxCategory("district_id","district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
+$inputStreet          =   '<input type="text" class="form-control" name="street"   id="street"    value="'.@$arrRowData['street'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
@@ -93,7 +95,34 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                             <span class="help-block"></span>
                         </div>
                     </div>     
+                </div>   
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Province</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $ddlProvince; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>     
+                </div>   
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>District</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $ddlDistrict; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>     
                 </div>       
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Địa điểm</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputStreet; ?>                            
+                           <span class="help-block"></span>
+                       </div>
+                   </div>                       
+                </div>   
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
@@ -136,15 +165,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                        </div>
                    </div>                       
                 </div>   
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="col-md-2 control-label"><b>Địa điểm</b></label>
-                        <div class="col-md-10">                            
-                            <?php echo $inputAddress; ?>                            
-                           <span class="help-block"></span>
-                       </div>
-                   </div>                       
-                </div>                               
+                                            
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Sắp xếp</b></label>
@@ -223,8 +244,10 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var image_hidden=$('input[name="image_hidden"]').val();         
         var total_cost=$('input[name="total_cost"]').val();        
         var intro=$('textarea[name="intro"]').val();        
-        var overview=CKEDITOR.instances['overview'].getData();        
-        var address=$('input[name="address"]').val();        
+        var overview=CKEDITOR.instances['overview'].getData();    
+        var province_id=$('select[name="province_id"]').val();     
+        var district_id=$('select[name="district_id"]').val();         
+        var street=$('input[name="street"]').val();        
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
@@ -240,7 +263,9 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "total_cost":total_cost,     
             "intro":intro,
             "overview":overview,
-            "address":address,                                 
+            "street":street,     
+            "province_id":province_id,
+            "district_id":district_id,                            
             "sort_order":sort_order,
             "status":status,
             "_token": token

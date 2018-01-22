@@ -202,6 +202,17 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("change-status",["as"=>"adminsystem.province.changeStatus","uses"=>"adminsystem\ProvinceController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.province.trash","uses"=>"adminsystem\ProvinceController@trash"]);
 	});	
+	Route::group(["prefix"=>"district"],function(){		
+		Route::get("list",["as"=>"adminsystem.district.getList","uses"=>"adminsystem\DistrictController@getList"]);
+		Route::post("load-data",["as"=>"adminsystem.district.loadData","uses"=>"adminsystem\DistrictController@loadData"]);		
+		Route::get("form/{task}/{id?}",["as"=>"adminsystem.district.getForm","uses"=>"adminsystem\DistrictController@getForm"]);
+		Route::post("save",["as"=>"adminsystem.district.save","uses"=>"adminsystem\DistrictController@save"]);
+		Route::post("delete-item",["as"=>"adminsystem.district.deleteItem","uses"=>"adminsystem\DistrictController@deleteItem"]);		
+		Route::post("sort-order",["as"=>"adminsystem.district.sortOrder","uses"=>"adminsystem\DistrictController@sortOrder"]);
+		Route::post("update-status",["as"=>"adminsystem.district.updateStatus","uses"=>"adminsystem\DistrictController@updateStatus"]);
+		Route::post("change-status",["as"=>"adminsystem.district.changeStatus","uses"=>"adminsystem\DistrictController@changeStatus"]);
+		Route::post("trash",["as"=>"adminsystem.district.trash","uses"=>"adminsystem\DistrictController@trash"]);
+	});	
 	Route::group(["prefix"=>"project-article"],function(){		
 		Route::get("list",["as"=>"adminsystem.project-article.getList","uses"=>"adminsystem\ProjectArticleController@getList"]);
 		Route::post("load-data",["as"=>"adminsystem.project-article.loadData","uses"=>"adminsystem\ProjectArticleController@loadData"]);		

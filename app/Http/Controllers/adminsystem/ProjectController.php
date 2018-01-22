@@ -9,6 +9,8 @@ use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
 use App\ProjectModel;
+use App\ProvinceModel;
+use App\DistrictModel;
 use App\ProjectArticleModel;
 use App\ArticleCategoryModel;
 use DB;
@@ -58,8 +60,10 @@ class ProjectController extends Controller {
            case 'add':
               $title=$this->_title . " : Add new";
            break;     
-        }            
-        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","controller","task","title","icon"));
+        }     
+        $arrProvince=ProvinceModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();              
+        $arrDistrict=DistrictModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();                     
+        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrProvince","arrDistrict","controller","task","title","icon"));
         }else{
           return view("adminsystem.no-access");
         }        
@@ -77,8 +81,8 @@ class ProjectController extends Controller {
           $overview             =   trim($request->overview);          
           $equipment            =   trim($request->equipment);          
           $price_list           =   trim($request->price_list);   
-          $province             =   trim($request->province);
-          $district             =   trim($request->district);
+          $province_id             =   trim($request->province_id);
+          $district_id             =   trim($request->district_id);
           $street               =   trim($request->street);                    
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          
@@ -140,8 +144,8 @@ class ProjectController extends Controller {
                 $item->overview         = $overview;
                 $item->equipment        = $equipment;
                 $item->price_list       = $price_list;
-                $item->province         = $province;
-                $item->district         = $district;                
+                $item->province_id         = (int)@$province_id;
+                $item->district_id         = (int)@$district_id;                
                 $item->street           = $street;                                                   
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
