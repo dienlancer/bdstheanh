@@ -2,6 +2,8 @@
 use App\ProjectModel;
 use App\ProjectArticleModel;
 use App\ProjectMemberModel;
+use App\ProvinceModel;
+use App\DistrictModel;
 use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 if(count($item) > 0){		
@@ -11,7 +13,8 @@ if(count($item) > 0){
     $large_img=asset('upload/'.$item['image']) ;
 	$alias=$item["alias"];
 	$overview=$item["overview"];
-	$total_cost=$item["total_cost"];
+	$total_cost=number_format($item['total_cost'],0,",",".") ;
+                $unit=$item['unit'];
 	$intro=$item["intro"];				
 	/* begin cập nhật count view */
 	$count_view=(int)@$item['count_view'];
@@ -29,7 +32,13 @@ if(count($item) > 0){
     $office=$setting['office']['field_value'];
     
     /* end setting */    
-	 
+    $province=ProvinceModel::find((int)@$item['province_id'])->toArray();    
+    $district=DistrictModel::find((int)@$item['district_id'])->toArray();  
+    $province_name=$province['fullname'];
+    $district_name=$district['fullname'];
+    $province_permalink=route('frontend.index.index',[$province['alias']]);
+    $district_permalink=route('frontend.index.index',[$district['alias']]);
+    $street=$item['street'];
     if(empty($breadcrumb)){
         ?>
         <h2 class="tieu-de margin-top-15">
@@ -58,9 +67,27 @@ if(count($item) > 0){
                 <div class="margin-top-5">
                     <b>Lượt xem:</b>&nbsp;<?php echo $count_view; ?>
                 </div>
+                <div class="margin-top-10">
+                            <div class="col-sm-3 no-padding-left"><a href="<?php echo $province_permalink; ?>"><?php echo $province_name; ?></a></div>
+                            <div class="col-sm-3 no-padding-left"><a href="<?php echo $district_permalink; ?>"><?php echo $district_name; ?></a></div>
+                            <div class="col-sm-6 no-padding-left"><?php echo $street; ?></div>                                                  
+                            <div class="clr"></div>
+                        </div>
                 <div class="margin-top-5 product-price">
-                    <b>Giá:</b>&nbsp;Liên hệ
+                    <span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span>
                 </div>                                
+                <div class="margin-top-5">
+                    <span class="phone-tel"><i class="fa fa-phone" aria-hidden="true"></i></span>&nbsp;Hotline:&nbsp;<?php echo $telephone; ?>
+                </div>                
+                <div class="margin-top-5">
+                    <img src="<?php echo asset('upload/tru-so.png'); ?>">&nbsp;Vp giao dịch:&nbsp;<?php echo $office; ?>
+                </div>
+                <div class="margin-top-5">
+                    <img src="<?php echo asset('upload/sendmail.png'); ?>">&nbsp;Email: <?php echo $email_to; ?>
+                </div>
+                <div class="margin-top-5">
+                    <img src="<?php echo asset('upload/earth-web.png'); ?>">&nbsp;Website: <?php echo url('/'); ?>
+                </div>
                 <hr class="product-ngang">
             </div>
             <div class="clr"></div>

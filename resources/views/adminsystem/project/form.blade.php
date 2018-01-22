@@ -11,7 +11,8 @@ $inputFullName          =   '<input type="text" class="form-control" name="fulln
 $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">';
 $inputIntro             =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputOverview             =   '<textarea id="overview" name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
-$inputDescription       =   '<textarea id="description" name="description" rows="2" cols="100" class="form-control" >'.@$arrRowData['description'].'</textarea>'; 
+$inputEquipment       =   '<textarea id="equipment" name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
+$inputPriceList       =   '<textarea id="price_list" name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
@@ -159,7 +160,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                             <span class="help-block"></span>
                         </div>
                     </div>    
-                </div> 
+                </div>                
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Tổng quan</b></label>
@@ -170,12 +171,38 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                                 CKEDITOR.replace('overview',{
                                    height:300
                                });
-                           </script>
-                           <span class="help-block"></span>
+                           </script>                           
                        </div>
                    </div>                       
                 </div>   
-                                            
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Tiện ích</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputEquipment; ?>
+                            <span class="help-block"></span>
+                            <script type="text/javascript" language="javascript">
+                                CKEDITOR.replace('equipment',{
+                                   height:300
+                               });
+                           </script>    
+                        </div>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Bảng giá</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputPriceList; ?>
+                            <span class="help-block"></span>
+                            <script type="text/javascript" language="javascript">
+                                CKEDITOR.replace('price_list',{
+                                   height:300
+                               });
+                           </script>    
+                        </div>
+                    </div>    
+                </div>                             
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Sắp xếp</b></label>
@@ -256,6 +283,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var unit=$('input[name="unit"]').val();        
         var intro=$('textarea[name="intro"]').val();        
         var overview=CKEDITOR.instances['overview'].getData();    
+        var equipment=CKEDITOR.instances['equipment'].getData();    
+        var price_list=CKEDITOR.instances['price_list'].getData();    
         var province_id=$('select[name="province_id"]').val();     
         var district_id=$('select[name="district_id"]').val();         
         var street=$('input[name="street"]').val();        
@@ -275,6 +304,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "unit":unit,
             "intro":intro,
             "overview":overview,
+            "equipment":equipment,
+            "price_list":price_list,
             "street":street,     
             "province_id":province_id,
             "district_id":district_id,                            
