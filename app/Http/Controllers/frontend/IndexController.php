@@ -199,6 +199,9 @@ class IndexController extends Controller {
     if(count($lstProject) > 0){
       $component='project';
     } 
+    if(count($lstProject) > 0){
+      $component='project';
+    } 
     if(count($lstOrganization) > 0){
       $component='organization';
     }
@@ -214,7 +217,10 @@ class IndexController extends Controller {
       break;    
       case 'go-nguyen-lieu':
       $component='products';
-      break;                     
+      break;      
+      case 'du-an':
+      $component='projects';
+      break;                
     }        
     switch ($component) {
       case 'category-article':      
@@ -400,7 +406,48 @@ class IndexController extends Controller {
                 ->get()->toArray();            
         $items=convertToArray($data);           
       $layout="two-column";        
-      break;                
+      break;      
+      case 'projects':      
+        $meta_keyword="metakeyword dự án";
+        $meta_description="metadescription dự án";
+      $data=DB::table('project')                                  
+                ->select('project.id')                
+                ->where('project.status',1)    
+                ->groupBy('project.id')                
+                ->get()->toArray();
+        $data=convertToArray($data);
+        $totalItems=count($data);
+        $totalItemsPerPage=(int)@$setting['article_perpage']['field_value']; 
+        $pageRange=$this->_pageRange;
+        if(!empty(@$request->filter_page)){
+          $currentPage=@$request->filter_page;
+        }       
+        $arrPagination=array(
+          "totalItems"=>$totalItems,
+          "totalItemsPerPage"=>$totalItemsPerPage,
+          "pageRange"=>$pageRange,
+          "currentPage"=>$currentPage   
+        );           
+        $pagination=new PaginationModel($arrPagination);
+        $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
+        $data=DB::table('project')                
+                ->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')                
+                ->where('project.status',1)     
+                ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')
+                ->orderBy('project.sort_order', 'asc')
+                ->skip($position)
+                ->take($totalItemsPerPage)
+                ->get()->toArray();                   
+        $items=convertToArray($data);   
+      $layout="two-column";     
+      break;          
+      case 'project':
+      $row=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();              
+      if(count($row) > 0){
+        $item=$row[0];
+      }  
+      $layout="two-column";  
+      break;
     }  
     if(count($menu) > 0){
       $menu=convertToArray($menu);

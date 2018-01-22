@@ -13,6 +13,7 @@ class ProjectModel extends Model {
 		,"image"
 		,"count_view"
 		,"total_cost"
+		,"unit"
 		,"intro"
 		,"overview"
 		,"equipment"

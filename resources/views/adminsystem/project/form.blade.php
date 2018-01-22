@@ -15,6 +15,7 @@ $inputDescription       =   '<textarea id="description" name="description" rows=
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
+$inputUnit          =   '<input type="text" class="form-control" name="unit"   id="unit"     value="'.@$arrRowData['unit'].'">'; 
 $ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
 $ddlDistrict      =   cmsSelectboxCategory("district_id","district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
 $inputStreet          =   '<input type="text" class="form-control" name="street"   id="street"    value="'.@$arrRowData['street'].'">'; 
@@ -143,6 +144,15 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                 </div>   
                 <div class="row">
                     <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Đơn vị</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputUnit; ?>                           
+                           <span class="help-block"></span>
+                       </div>
+                   </div>                       
+                </div>   
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Mô tả ngắn</b></label>
                         <div class="col-md-10">                            
                             <?php echo $inputIntro; ?>
@@ -242,7 +252,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             image = image.substr(image.lastIndexOf('\\') + 1);       
         }
         var image_hidden=$('input[name="image_hidden"]').val();         
-        var total_cost=$('input[name="total_cost"]').val();        
+        var total_cost=$('input[name="total_cost"]').val();     
+        var unit=$('input[name="unit"]').val();        
         var intro=$('textarea[name="intro"]').val();        
         var overview=CKEDITOR.instances['overview'].getData();    
         var province_id=$('select[name="province_id"]').val();     
@@ -261,6 +272,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "image":image,       
             "image_hidden":image_hidden,
             "total_cost":total_cost,     
+            "unit":unit,
             "intro":intro,
             "overview":overview,
             "street":street,     

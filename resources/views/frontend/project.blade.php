@@ -1,21 +1,26 @@
 <?php 
-use App\PageModel;
+use App\ProjectModel;
+use App\ProjectArticleModel;
+use App\ProjectMemberModel;
+use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
-if(count($item) > 0){	
+if(count($item) > 0){		
 	$id=$item["id"];
-	$fullname = $item["fullname"];
-	$intro=$item["intro"];
-	$content=$item['content'];
-    $small_img=get_article_thumbnail($item['image']);
+	$fullname = $item["fullname"];	
+	$small_img=get_article_thumbnail($item['image']);
     $large_img=asset('upload/'.$item['image']) ;
+	$alias=$item["alias"];
+	$overview=$item["overview"];
+	$total_cost=$item["total_cost"];
+	$intro=$item["intro"];				
 	/* begin cập nhật count view */
 	$count_view=(int)@$item['count_view'];
 	$count_view++;
-	$row				=	PageModel::find((int)@$id); 
+	$row				=	ProjectModel::find((int)@$id); 
 	$row->count_view=$count_view;
 	$row->save();
 	$count_view_text=number_format($count_view,0,",",".");
-	/* end cập nhật count view */
+	/* end cập nhật count view */	
 	/* begin setting */
     $address=$setting['address']['field_value'];
     $email_to=$setting['email_to']['field_value'];
@@ -23,10 +28,23 @@ if(count($item) > 0){
     $telephone=$setting['telephone']['field_value'];
     $office=$setting['office']['field_value'];
     
-    /* end setting */  
-	?>    
-	<div class="margin-top-15 box-article">	
-        	
+    /* end setting */    
+	 
+    if(empty($breadcrumb)){
+        ?>
+        <h2 class="tieu-de margin-top-15">
+            <?php echo $title; ?>       
+        </h2>
+        <?php
+    }else{
+        ?>
+        <h2 class="breadcrumb-title margin-top-15">
+            <?php echo $breadcrumb; ?>
+        </h2>
+        <?php
+    }   
+    ?>  
+	<div class="margin-top-10 box-article">		
 		<div>
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
@@ -42,24 +60,18 @@ if(count($item) > 0){
                 </div>
                 <div class="margin-top-5 product-price">
                     <b>Giá:</b>&nbsp;Liên hệ
-                </div>                
-                <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/tru-so.png'); ?>">&nbsp;Vp giao dịch:&nbsp;<?php echo $office; ?>
-                </div>
-                <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/sendmail.png'); ?>">&nbsp;Email: <?php echo $email_to; ?>
-                </div>
-                <div class="margin-top-5">
-                    <img src="<?php echo asset('upload/earth-web.png'); ?>">&nbsp;Website: <?php echo url('/'); ?>
-                </div>
+                </div>                                
                 <hr class="product-ngang">
             </div>
             <div class="clr"></div>
-        </div>			
-		<hr class="duong-ngang" />		
+        </div>		
+		<div class="margin-top-10 article-excerpt justify">
+			<?php echo $intro; ?>
+		</div>		
 		<div class="margin-top-15">
-			<?php echo $content; ?>
+			
 		</div>	
+		
 	</div>
 	<?php
 }
@@ -72,4 +84,3 @@ if(count($item) > 0){
         zoomWindowFadeOut: 750
     });
 </script> 
-

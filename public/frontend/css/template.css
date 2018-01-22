@@ -1312,6 +1312,24 @@ border: 1px solid #fff;
     color: #114a82;
     font-size: 20px;
 }
+.project-price-2 {
+    background-image: url(../images/label-price.png);
+    background-repeat: no-repeat;   
+    width: 100%;
+    padding: 7px 0px 7px 12px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.project-lbl-price{
+    color: #ff6600;
+    font-weight: bold;
+    font-size: 16px;
+}
+.project-lbl-price-number{
+    color: #114a82;
+    font-weight: bold;
+    font-size: 16px;
+}
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

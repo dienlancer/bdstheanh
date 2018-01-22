@@ -77,6 +77,7 @@ class ProjectController extends Controller {
           $image                =   trim($request->image);
           $image_hidden         =   trim($request->image_hidden);            
           $total_cost           =   trim($request->total_cost);
+          $unit                 =   trim($request->unit);
           $intro                =   trim($request->intro);    
           $overview             =   trim($request->overview);          
           $equipment            =   trim($request->equipment);          
@@ -140,6 +141,7 @@ class ProjectController extends Controller {
                 $item->meta_keyword     = $meta_keyword;
                 $item->meta_description = $meta_description;                             
                 $item->total_cost       = $total_cost;
+                $item->unit             = $unit;
                 $item->intro            = $intro;
                 $item->overview         = $overview;
                 $item->equipment        = $equipment;

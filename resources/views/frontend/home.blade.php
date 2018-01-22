@@ -102,17 +102,18 @@ if(count($data_slideshow) > 0){
 			foreach($data as $key => $value){
 				$fullname=$value['fullname'];
 				$thumbnail=get_article_thumbnail($value['image']);
-				$total_cost=$value['total_cost'];				
+				$total_cost=number_format($value['total_cost'],0,",",".") ;
+				$unit=$value['unit'];
 				$permalink=route('frontend.index.index',[$value['alias']]);
 				?>
 				<div class="col-sm-3">
-					<div class="box-project margin-top-15 relative">
-						<div class="project-price"><span><?php echo $total_cost; ?></span><span class="margin-left-5">triệu</span><span class="margin-left-5">VNĐ</span></div>
+					<div class="box-project margin-top-15 relative">						
 						<div>
 							<center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $thumbnail; ?>"></a></figure></center>
 						</div>
 						<div class="box-project-info">
-							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>							
+							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>	
+							<div class="margin-top-10"><center><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span></center></div>						
 						</div>
 					</div>
 				</div>

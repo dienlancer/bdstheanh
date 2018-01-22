@@ -8,7 +8,8 @@ if(count($item) > 0){
 	$fullname = $item["fullname"];
 	$intro=$item["intro"];
 	$content=$item['content'];	
-	$featuredImg=asset('upload/'.$item['image']);
+	$small_img=get_article_thumbnail($item['image']);
+    $large_img=asset('upload/'.$item['image']) ;
 	/* begin cập nhật count view */
 	$count_view=(int)@$item['count_view'];
 	$count_view++;
@@ -52,7 +53,7 @@ if(count($item) > 0){
 		<div>
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
-                    <img  src="<?php echo $featuredImg; ?>" />
+                    <img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
                 </div>
             </div>
             <div class="col-lg-8 no-padding-left">
@@ -126,4 +127,11 @@ if(count($item) > 0){
 	<?php
 }
 ?>	
-
+<script language="javascript" type="text/javascript">
+    jQuery('.zoom_img').elevateZoom({
+        zoomType: "inner",
+        cursor: "crosshair",
+        zoomWindowFadeIn: 500,
+        zoomWindowFadeOut: 750
+    });
+</script> 
