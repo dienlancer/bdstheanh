@@ -176,8 +176,9 @@ class IndexController extends Controller {
     $lstCategoryProduct=CategoryProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
     $lstArticle=ArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
     $lstProduct=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-    $lstPage=PageModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+    $lstPage=PageModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();    
     $lstProject=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+    $lstProjectArticle=ProjectArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
     $lstOrganization=OrganizationModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
     $lstAlbum=AlbumModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
     $lstCategoryVideo=CategoryVideoModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
@@ -202,6 +203,9 @@ class IndexController extends Controller {
     if(count($lstProject) > 0){
       $component='project';
     } 
+    if(count($lstProjectArticle) > 0){
+      $component='project-article';
+    }
     if(count($lstOrganization) > 0){
       $component='organization';
     }
@@ -262,7 +266,7 @@ class IndexController extends Controller {
                 ->whereIn('article_category.category_article_id', $arr_category_id)
                 ->where('article.status',1)     
                 ->groupBy('article.id','article.alias','article.fullname','article.image','article.intro','article.count_view')
-                ->orderBy('article.created_at', 'desc')
+                ->orderBy('article.sort_order', 'asc')
                 ->skip($position)
                 ->take($totalItemsPerPage)
                 ->get()
@@ -306,7 +310,7 @@ class IndexController extends Controller {
                 ->select('article.id','article.alias','article.fullname','article.image','article.intro','article.count_view')                
                 ->where('article.status',1)     
                 ->groupBy('article.id','article.alias','article.fullname','article.image','article.intro','article.count_view')
-                ->orderBy('article.created_at', 'desc')
+                ->orderBy('article.sort_order', 'asc')
                 ->skip($position)
                 ->take($totalItemsPerPage)
                 ->get()->toArray();            
@@ -443,6 +447,13 @@ class IndexController extends Controller {
       break;          
       case 'project':
       $row=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();              
+      if(count($row) > 0){
+        $item=$row[0];
+      }  
+      $layout="two-column";  
+      break;
+      case 'project-article':
+      $row=ProjectArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();              
       if(count($row) > 0){
         $item=$row[0];
       }  

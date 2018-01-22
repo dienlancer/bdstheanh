@@ -23,20 +23,12 @@ if(count($item) > 0){
 		$project_name='<a href="'.$project_alias.'">'.$dataProject[0]['fullname'].'</a>';
 	}		
 	?>
-	<div class="margin-top-15 box-article">
-		<h2 class="tieu-de-bai-viet">
-			<?php echo $title; ?>		
-		</h2>
-		<div class="margin-top-15">
-			<span class="box-article-category">
-				<i class="fa fa-folder" aria-hidden="true"></i>
-				<span class="margin-left-5"><b>Dự án:</b></span><span class="margin-left-5"><?php echo $project_name; ?></span>
-			</span>
-			<span class="post-view margin-left-15">
-				<i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;<?php echo $count_view_text ?>&nbsp;Lượt xem
-			</span>
-		</div>	
-		<hr class="duong-ngang" />	
+	<h2 class="breadcrumb-title margin-top-15">
+		<?php echo $project_name; ?>
+	</h2>
+	<div class="margin-top-5 box-article">		
+		<h2 class="tieu-de-bai-viet"><?php echo $title; ?></h2>
+		<hr class="duong-ngang-2" />	
 		<div class="margin-top-10 article-excerpt justify">
 			<?php echo $intro; ?>
 		</div>		

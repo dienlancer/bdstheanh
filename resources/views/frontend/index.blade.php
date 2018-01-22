@@ -50,6 +50,7 @@ if(isset($alias)){
                 case 'page':       
                 case 'projects':   
                 case 'project':      
+                case 'project-article':      
                 wp_nav_menu($argsTinTucSuKien);  
                 $module=getBanner("advertising-article-widget");                        
                 if(count($module) > 0){                    
@@ -131,6 +132,9 @@ if(isset($alias)){
                 break; 
                 case "product":                                                
                 ?>@include("frontend.product")<?php
+                break;
+                case "project-article":                                                
+                ?>@include("frontend.project-article")<?php
                 break;
                 case "projects":                                                
                 ?>@include("frontend.projects")<?php

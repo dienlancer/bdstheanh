@@ -1330,6 +1330,14 @@ border: 1px solid #fff;
     font-weight: bold;
     font-size: 16px;
 }
+#map {
+    height: 100%;
+  }
+  .duong-ngang-2{
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
 @media (max-width: 767px){    
     div.mobilemenu{
         display: block;

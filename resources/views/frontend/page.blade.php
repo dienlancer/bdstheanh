@@ -24,8 +24,21 @@ if(count($item) > 0){
     $office=$setting['office']['field_value'];
     
     /* end setting */  
-	?>    
-	<div class="margin-top-15 box-article">	
+    if(empty($breadcrumb)){
+        ?>
+        <h2 class="tieu-de margin-top-15">
+            <?php echo $title; ?>       
+        </h2>
+        <?php
+    }else{
+        ?>
+        <h2 class="breadcrumb-title margin-top-15">
+            <?php echo $breadcrumb; ?>
+        </h2>
+        <?php
+    }   
+	?>        
+	<div class="margin-top-5 box-article">	
         	
 		<div>
             <div class="col-lg-4 no-padding-left">
