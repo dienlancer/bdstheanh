@@ -15,7 +15,7 @@ if(count($item) > 0){
     $overview=$item["overview"];
     $equipment=$item["equipment"];
     $price_list=$item["price_list"];
-
+    $googlemap_url=$item['googlemap_url'];
     $total_cost=number_format($item['total_cost'],0,",",".") ;
     $unit=$item['unit'];
     $intro=$item["intro"];				
@@ -159,16 +159,7 @@ if(count($item) > 0){
             ?>
         </div>    
         <div id="position" class="tabcontent">
-            <script language="javascript" type="text/javascript">
-              var map;
-              function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: 10.846719, lng: 106.645085},
-                  zoom: 8
-              });
-            }
-            </script>
-            <div id="map"></div>    
+            <iframe src="<?php echo $googlemap_url; ?>" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe> 
         </div>            
     </div>			
 </div>

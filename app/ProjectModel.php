@@ -18,6 +18,7 @@ class ProjectModel extends Model {
 		,"overview"
 		,"equipment"
 		,"price_list"
+		,"googlemap_url"
 		,'province_id'
 		,'district_id'
 		,'street'

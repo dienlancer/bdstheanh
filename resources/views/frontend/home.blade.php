@@ -421,7 +421,44 @@ if(count($data) > 0){
 				<div class="noi-bat margin-left-5">Liên hệ</div>
 			</div>
 			<div class="margin-top-10"><center>Tư vấn pháp luật đất đai là một trong những công cụ hữu hiệu để bạn giải quyết các thắc mắc trong lĩnh vực đất đai một cách nhanh chóng, thuận lợi nhất.</center></div>
-			<form action="<?php echo route('frontend.index.contact'); ?>" method="post" name="frm-home-contact" class="home-contact-hd margin-top-30 padding-top-15 padding-bottom-15">
+			<?php            				
+				if(count($error) > 0 || count($success) > 0){
+					?>
+					<div class="alert-system margin-top-15">
+						<?php                                           
+						if(count($error) > 0){
+							?>
+							<ul class="alert-error">
+								<?php 
+								foreach ($error as $key => $value) {
+									?>
+									<li><?php echo $value; ?></li>
+									<?php
+								}
+								?>                              
+							</ul>
+							<?php
+						}
+						if(count($success) > 0){
+							?>
+							<ul class="alert-success">
+								<?php 
+								foreach ($success as $key => $value) {
+									?>
+									<li><?php echo $value; ?></li>
+									<?php
+								}
+								?>                              
+							</ul>
+							<?php
+						}
+						?>                                              
+					</div>              
+					<?php
+				}
+				?>
+			<form  method="post" name="frm-home-contact" class="home-contact-hd margin-top-15 padding-top-15 padding-bottom-15">
+				{{ csrf_field() }}      				
 				<div>
 					<div class="col-lg-6">
 						<input type="text" name="title" class="form-control" placeholder="Tiêu đề">
@@ -465,9 +502,9 @@ if(count($data) > 0){
 				<div class="social-2 margin-top-15">
 					<center>
 						<span><a href="<?php echo $facebook_url; ?>" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $google_plus; ?>" target="_blank" title="google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $twitter_url; ?>" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
-					<span class="margin-left-10"><a href="<?php echo $youtube_url; ?>" target="_blank" title="youtube_"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
+						<span class="margin-left-10"><a href="<?php echo $google_plus; ?>" target="_blank" title="google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a></span>
+						<span class="margin-left-10"><a href="<?php echo $twitter_url; ?>" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
+						<span class="margin-left-10"><a href="<?php echo $youtube_url; ?>" target="_blank" title="youtube_"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
 					</center>					
 				</div>
 			</form>			

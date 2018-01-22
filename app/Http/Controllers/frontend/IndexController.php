@@ -39,8 +39,108 @@ class IndexController extends Controller {
   var $_pageRange=4;
   var $_ssNameUser="vmuser";
   var $_ssNameCart="vmart";      
-  public function getHome(){   
-    return view("frontend.home");
+  public function getHome(Request $request){   
+    $flag=1;
+        $error=array();
+        $data=array();
+        $success=array();           
+        $layout="full-width";     
+        $component='contact';
+        $alias="lien-he-voi-chung-toi";   
+        if($request->isMethod('post'))     {  
+          $data=$request->all();                    
+          $fullname   = @$request->fullname;
+          $email      = @$request->email;   
+          $telephone  = @$request->telephone;
+          $title      = @$request->title;
+         
+          $content    = @$request->content;
+          /* begin load config contact */
+          $setting=getSettingSystem();    
+          $smtp_host      = @$setting['smtp_host']['field_value'];
+          $smtp_port      = @$setting['smtp_port']['field_value'];
+          $smtp_auth      = @$setting['authentication']['field_value'];
+          $encription     = @$setting['encription']['field_value'];
+          $smtp_username  = @$setting['smtp_username']['field_value'];
+          $smtp_password  = @$setting['smtp_password']['field_value'];
+          $email_from     = $email;
+          $email_to       = @$setting['email_to']['field_value'];
+          $contacted_person = @$setting['contacted_person']['field_value'];          
+          /* end load config contact */       
+          if(mb_strlen($fullname) < 6){
+            $error["fullname"] = 'Họ tên phải chứa từ 6 ký tự trở lên';
+            $data["fullname"] = "";          
+            $flag=0;
+          }
+          if(!preg_match("#^[a-z][a-z0-9_\.]{4,31}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$#",$email )){
+            $error["email"] = 'Email không hợp lệ';
+            $data["email"] = '';
+            $flag=0;
+          }
+          if(mb_strlen($telephone) < 10){
+            $error["telephone"] = 'Số điện thoại không hợp lệ';
+            $data["telephone"] = "";          
+            $flag=0;
+          }
+          if(mb_strlen($title) < 10){
+            $error["title"] = 'Tiêu đề không hợp lệ';
+            $data["title"] = "";         
+            $flag=0;
+          }   
+          
+          if(mb_strlen($content) < 10){
+            $error["content"] = 'Nội dung không hợp lệ';
+            $data["content"] = "";         
+            $flag=0;
+          }     
+          if((int)@$flag==1){
+            $mail = new PHPMailer(true);
+            try{
+              $mail->SMTPDebug = 2;                           
+              $mail->isSMTP();     
+              $mail->CharSet = "UTF-8";                           
+              $mail->Host = $smtp_host; 
+              $mail->SMTPAuth = $smtp_auth;                         
+              $mail->Username = $smtp_username;             
+              $mail->Password = $smtp_password;             
+              $mail->SMTPSecure = $encription;                       
+              $mail->Port = $smtp_port;                            
+              $mail->setFrom($email_from, $fullname);
+              $mail->addAddress($email_to, $contacted_person);   
+              $mail->Subject = 'Thông tin liên hệ từ khách hàng '.$fullname.' - '.$telephone ;   
+              $html_content='';     
+              $html_content .='<table border="1" cellspacing="5" cellpadding="5">';
+              $html_content .='<thead>';
+              $html_content .='<tr>';
+              $html_content .='<th colspan="2"><h3>Thông tin liên lạc từ khách hàng '.$fullname.'</h3></th>';
+              $html_content .='</tr>';
+              $html_content .='</thead>';
+              $html_content .='<tbody>';
+
+              $html_content .='<tr><td>Họ và tên</td><td>'.$fullname.'</td></tr>';
+              $html_content .='<tr><td>Email</td><td>'.$email.'</td></tr>';
+              $html_content .='<tr><td>Telephone</td><td>'.$telephone.'</td></tr>';
+              $html_content .='<tr><td>Tiêu đề</td><td>'.$title.'</td></tr>';              
+              $html_content .='<tr><td>Nội dung</td><td>'.$content.'</td></tr>';          
+
+              $html_content .='</tbody>';
+              $html_content .='</table>';                            
+              $mail->msgHTML($html_content);
+              if ($mail->Send()) {                
+                $success['success']='Gửi thông tin hoàn tất'; 
+                echo '<script language="javascript" type="text/javascript">alert("Gửi thông tin hoàn tất");</script>'; 
+              }
+              else{
+                $error["exception_error"]='Quá trình gửi dữ liệu gặp sự cố'; 
+                echo '<script language="javascript" type="text/javascript">alert("Có sự cố trong quá trình gửi dữ liệu");</script>'; 
+              }
+            }catch (Exception $e){
+              $error["exception_error"]='Quá trình gửi dữ liệu gặp sự cố'; 
+              echo '<script language="javascript" type="text/javascript">alert("Có sự cố trong quá trình gửi dữ liệu");</script>'; 
+            }            
+          }        
+        }        
+        return view("frontend.home",compact("component","error","data","success","alias","layout"));        
   }  
   public function search(Request $request){
     /* begin standard */    
@@ -599,7 +699,7 @@ class IndexController extends Controller {
             try{
               $mail->SMTPDebug = 2;                           
               $mail->isSMTP();     
-              $mail->charSet = "UTF-8";                           
+              $mail->CharSet = "UTF-8";          
               $mail->Host = $smtp_host; 
               $mail->SMTPAuth = $smtp_auth;                         
               $mail->Username = $smtp_username;             
@@ -644,6 +744,7 @@ class IndexController extends Controller {
         }        
         return view("frontend.index",compact("component","error","data","success","alias","layout"));        
       }
+      
       public function loadDataMember(Request $request){
       	$project_id=0;
       	if(!empty($request->project_id))      	{

@@ -81,7 +81,8 @@ class ProjectController extends Controller {
           $intro                =   trim($request->intro);    
           $overview             =   trim($request->overview);          
           $equipment            =   trim($request->equipment);          
-          $price_list           =   trim($request->price_list);   
+          $price_list           =   trim($request->price_list);
+          $googlemap_url        =   trim($request->googlemap_url);  
           $province_id             =   trim($request->province_id);
           $district_id             =   trim($request->district_id);
           $street               =   trim($request->street);                    
@@ -146,6 +147,7 @@ class ProjectController extends Controller {
                 $item->overview         = $overview;
                 $item->equipment        = $equipment;
                 $item->price_list       = $price_list;
+                $item->googlemap_url    = $googlemap_url;
                 $item->province_id         = (int)@$province_id;
                 $item->district_id         = (int)@$district_id;                
                 $item->street           = $street;                                                   

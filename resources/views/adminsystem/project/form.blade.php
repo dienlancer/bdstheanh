@@ -13,6 +13,7 @@ $inputIntro             =   '<textarea id="intro" name="intro" rows="5" cols="10
 $inputOverview             =   '<textarea id="overview" name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
 $inputEquipment       =   '<textarea id="equipment" name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
 $inputPriceList       =   '<textarea id="price_list" name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
+$inputGoogleMapUrl       =   '<textarea id="googlemap_url" name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
 $inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
@@ -202,6 +203,15 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                            </script>    
                         </div>
                     </div>    
+                </div>    
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Google map</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputGoogleMapUrl; ?>
+                            <span class="help-block"></span>                            
+                        </div>
+                    </div>    
                 </div>                             
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -285,6 +295,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var overview=CKEDITOR.instances['overview'].getData();    
         var equipment=CKEDITOR.instances['equipment'].getData();    
         var price_list=CKEDITOR.instances['price_list'].getData();    
+        var googlemap_url=$('textarea[name="googlemap_url"]').val();   
         var province_id=$('select[name="province_id"]').val();     
         var district_id=$('select[name="district_id"]').val();         
         var street=$('input[name="street"]').val();        
@@ -306,6 +317,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             "overview":overview,
             "equipment":equipment,
             "price_list":price_list,
+            "googlemap_url":googlemap_url,
             "street":street,     
             "province_id":province_id,
             "district_id":district_id,                            

@@ -358,7 +358,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 Route::match(["get","post"],"adminsystem/login",["as"=>"adminsystem.login","uses"=>"adminsystem\LoginController@login"]);
 Route::post("adminsystem/logout",["as"=>"adminsystem.logout","uses"=>"adminsystem\LoginController@logout"]);
 
-Route::get("/",["as"=>"frontend.index.getHome","uses"=>"frontend\IndexController@getHome"]);
+Route::match(["get","post"],"/",["as"=>"frontend.index.getHome","uses"=>"frontend\IndexController@getHome"]);
 Route::match(["get","post"],"{alias}.html",["as"=>"frontend.index.index","uses"=>"frontend\IndexController@index"]);
 Route::match(["get","post"],"gio-hang",["as"=>"frontend.index.viewCart","uses"=>"frontend\IndexController@viewCart"]);
 Route::match(["get","post"],"xoa-gio-hang",["as"=>"frontend.index.deleteAll","uses"=>"frontend\IndexController@deleteAll"]);
@@ -382,4 +382,5 @@ Route::post("join-project",["as"=>"frontend.index.joinProject","uses"=>"frontend
 Route::post("load-data-member",["as"=>"frontend.index.loadDataMember","uses"=>"frontend\IndexController@loadDataMember"]);	
 Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","uses"=>"frontend\IndexController@loadDataSupporter"]);		
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);
+Route::match(["get","post"],"lien-he-voi-chung-toi",["as"=>"frontend.index.contactUs","uses"=>"frontend\IndexController@contactUs"]);
 ?>

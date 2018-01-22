@@ -187,10 +187,7 @@ if(count($arrCart) > 0){
 				}
 			});
 		});    
-	</script>
-	<script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkfFB-LeP4UrI4Oi5EGjyNff8rIVpZ3gI&callback=initMap">
-    </script>
+	</script>	
 </head>
 <body>		
 	<!-- begin fanpage -->
