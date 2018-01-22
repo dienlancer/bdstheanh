@@ -201,6 +201,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.province.updateStatus","uses"=>"adminsystem\ProvinceController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.province.changeStatus","uses"=>"adminsystem\ProvinceController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.province.trash","uses"=>"adminsystem\ProvinceController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.province.createAlias","uses"=>"adminsystem\ProvinceController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"district"],function(){		
 		Route::get("list",["as"=>"adminsystem.district.getList","uses"=>"adminsystem\DistrictController@getList"]);
@@ -212,6 +213,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.district.updateStatus","uses"=>"adminsystem\DistrictController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.district.changeStatus","uses"=>"adminsystem\DistrictController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.district.trash","uses"=>"adminsystem\DistrictController@trash"]);
+		Route::post("create-alias",["as"=>"adminsystem.district.createAlias","uses"=>"adminsystem\DistrictController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"project-article"],function(){		
 		Route::get("list",["as"=>"adminsystem.project-article.getList","uses"=>"adminsystem\ProjectArticleController@getList"]);

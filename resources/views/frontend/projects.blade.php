@@ -23,7 +23,7 @@ use App\DistrictModel;
 		<?php
 	}	
 	?>
-	<div class="row">
+	<div>
 		<?php 	
 		if(count($items) > 0){
 			$k=1;			
@@ -40,6 +40,8 @@ use App\DistrictModel;
 				$district=DistrictModel::find((int)@$value['district_id'])->toArray();	
 				$province_name=$province['fullname'];
 				$district_name=$district['fullname'];
+				$province_permalink=route('frontend.index.index',[$province['alias']]);
+				$district_permalink=route('frontend.index.index',[$district['alias']]);
 				$street=$value['street'];
 				$total_cost=number_format($value['total_cost'],0,",",".") ;
 				$unit=$value['unit'];
@@ -49,15 +51,11 @@ use App\DistrictModel;
 					<div class="col-sm-8 no-padding-left">
 						<h3 class="box-title"><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></h3>
 						<div class="margin-top-10">
-							<div class="view-post-count"><?php echo $province_name; ?></div>
-							<div class="view-post-count margin-left-15"><?php echo $district_name; ?></div>
+							<div class="view-post-count"><a href="<?php echo $province_permalink; ?>"><?php echo $province_name; ?></a></div>
+							<div class="view-post-count margin-left-15"><a href="<?php echo $district_permalink; ?>"><?php echo $district_name; ?></a></div>
 							<div class="view-post-count margin-left-15"><?php echo $street; ?></div>													
 						</div>
-						<div class="margin-top-10">
-							<div class="relative">
-								<div class="project-price-2"><span><?php echo $total_cost; ?></span><span class="margin-left-5">triệu</span><span class="margin-left-5">VNĐ</span></div>
-							</div>							
-						</div>
+						<div class="margin-top-10"><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span></div>	
 						<div class="margin-top-10">
 							<div class="view-post-count">
 								<i class="fa fa-eye" aria-hidden="true"></i><span class="margin-left-5"><?php echo $count_view_text; ?>&nbsp;lượt xem	</span>

@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProvinceModel extends Model {
 
 	protected $table="province";
-	protected $fillable=["fullname","sort_order","status","created_at","updated_at"];		
+	protected $fillable=["fullname","alias","sort_order","status","created_at","updated_at"];		
 }
