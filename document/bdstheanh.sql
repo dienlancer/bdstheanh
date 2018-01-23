@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 22, 2018 lúc 12:02 PM
+-- Thời gian đã tạo: Th1 23, 2018 lúc 03:18 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -642,30 +642,9 @@ INSERT INTO `menu` (`id`, `fullname`, `alias`, `parent_id`, `menu_type_id`, `lev
 (20, 'Tin dự án', 'tin-du-an', 0, 3, 0, 1, 1, '2018-01-03 04:28:30', '2018-01-21 04:25:32'),
 (21, 'Tin bất động sản', 'tin-bat-dong-san', 0, 3, 0, 2, 1, '2018-01-03 04:28:42', '2018-01-21 04:25:42'),
 (57, 'Trang chủ', 'trang-chu', 0, 5, 0, 1, 1, '2018-01-10 07:14:21', '2018-01-10 07:14:21'),
-(58, 'Gỗ nhập khẩu', 'go-nhap-khau', 0, 5, 0, 2, 1, '2018-01-10 07:14:39', '2018-01-10 07:14:39'),
-(59, 'Tin tức', 'tin-tuc', 0, 5, 0, 3, 1, '2018-01-10 07:14:57', '2018-01-10 07:14:57'),
-(60, 'Giới thiệu', 'gioi-thieu', 0, 5, 0, 4, 1, '2018-01-10 07:15:14', '2018-01-10 07:15:14'),
-(61, 'Liên hệ', 'lien-he', 0, 5, 0, 5, 1, '2018-01-10 07:15:34', '2018-01-10 07:15:37'),
-(62, 'Gỗ óc chó', 'go-oc-cho', 58, 5, 1, 1, 1, '2018-01-10 07:16:03', '2018-01-10 07:16:03'),
-(63, 'Gỗ sồi', 'go-soi', 58, 5, 1, 2, 1, '2018-01-10 07:16:37', '2018-01-10 07:16:37'),
-(64, 'Gỗ tần bì', 'go-tan-bi', 58, 5, 1, 3, 1, '2018-01-10 07:17:00', '2018-01-10 07:17:00'),
-(65, 'Sàn gỗ', 'san-go', 58, 5, 1, 4, 1, '2018-01-10 07:17:29', '2018-01-10 07:17:34'),
-(66, 'Gỗ óc chó 4/4″', 'go-oc-cho-4-4', 62, 5, 2, 1, 1, '2018-01-10 07:17:56', '2018-01-10 07:17:56'),
-(67, 'Gỗ óc chó 5/4″', 'go-oc-cho-5-4', 62, 5, 2, 2, 1, '2018-01-10 07:18:14', '2018-01-10 07:18:14'),
-(68, 'Gỗ óc chó 6/4″', 'go-oc-cho-6-4', 62, 5, 2, 3, 1, '2018-01-10 07:18:31', '2018-01-10 07:18:31'),
-(69, 'Gỗ óc chó 8/4″', 'go-oc-cho-8-4', 62, 5, 2, 4, 1, '2018-01-10 07:18:50', '2018-01-10 07:18:50'),
-(70, 'Gỗ sồi trắng 4/4″', 'go-soi-trang-4-4', 63, 5, 2, 1, 1, '2018-01-10 07:19:33', '2018-01-10 07:19:33'),
-(71, 'Gỗ sồi trắng 5/4″', 'go-soi-trang-5-4', 63, 5, 2, 2, 1, '2018-01-10 07:20:06', '2018-01-10 07:20:06'),
-(72, 'Gỗ sồi trắng 6/4″', 'go-soi-trang-6-4', 63, 5, 2, 3, 1, '2018-01-10 07:20:44', '2018-01-10 07:20:44'),
-(73, 'Gỗ sồi trắng 8/4″', 'go-soi-trang-8-4', 63, 5, 2, 4, 1, '2018-01-10 07:21:06', '2018-01-10 07:21:06'),
-(74, 'Gỗ sồi đỏ 4/4″', 'go-soi-do-4-4', 63, 5, 2, 5, 1, '2018-01-10 07:22:01', '2018-01-10 07:22:01'),
-(75, 'Gỗ sồi đỏ 5/4″', 'go-soi-do-5-4', 63, 5, 2, 6, 1, '2018-01-10 07:22:25', '2018-01-10 07:22:25'),
-(76, 'Gỗ sồi đỏ 6/4″', 'go-soi-do-6-4', 63, 5, 2, 7, 1, '2018-01-10 07:22:50', '2018-01-10 07:22:50'),
-(77, 'Gỗ sồi đỏ 8/4″', 'go-soi-do-8-4', 63, 5, 2, 8, 1, '2018-01-10 07:23:16', '2018-01-10 07:23:16'),
-(78, 'Gỗ tần bì 4/4″', 'go-tan-bi-4-4', 64, 5, 2, 1, 1, '2018-01-10 07:23:38', '2018-01-10 07:23:38'),
-(79, 'Gỗ tần bì 5/4″', 'go-tan-bi-5-4', 64, 5, 2, 2, 1, '2018-01-10 07:23:53', '2018-01-10 07:23:53'),
-(80, 'Gỗ tần bì 6/4″', 'go-tan-bi-6-4', 64, 5, 2, 3, 1, '2018-01-10 07:24:10', '2018-01-10 07:24:10'),
-(81, 'Gỗ tần bì 8/4″', 'go-tan-bi-8-4', 64, 5, 2, 4, 1, '2018-01-10 07:24:33', '2018-01-10 07:24:33'),
+(58, 'Giới thiệu', 'gioi-thieu', 0, 5, 0, 2, 1, '2018-01-10 07:14:39', '2018-01-23 02:05:46'),
+(59, 'Tin tức', 'tin-tuc', 0, 5, 0, 5, 1, '2018-01-10 07:14:57', '2018-01-23 02:10:38'),
+(61, 'Liên hệ', 'lien-he', 0, 5, 0, 6, 1, '2018-01-10 07:15:34', '2018-01-23 02:11:11'),
 (88, 'Tin dự án', 'tin-du-an', 59, 5, 1, 1, 1, '2018-01-10 17:26:01', '2018-01-21 04:24:20'),
 (89, 'Tin bất động sản', 'tin-bat-dong-san', 59, 5, 1, 2, 1, '2018-01-10 17:26:18', '2018-01-21 04:24:38'),
 (90, 'Gỗ óc chó', 'go-oc-cho', 0, 6, 0, 1, 1, '2018-01-11 07:19:41', '2018-01-11 07:19:41'),
@@ -692,10 +671,6 @@ INSERT INTO `menu` (`id`, `fullname`, `alias`, `parent_id`, `menu_type_id`, `lev
 (111, 'Sàn gỗ King Floor', 'san-go-king-floor', 93, 6, 1, 2, 1, '2018-01-11 07:26:57', '2018-01-11 07:26:57'),
 (112, 'Sàn gỗ ngoài trời', 'san-go-ngoai-troi', 93, 6, 1, 3, 1, '2018-01-11 07:27:25', '2018-01-11 07:27:25'),
 (113, 'Sàn gỗ nhập khẩu Sensa', 'san-go-nhap-khau-sensa', 93, 6, 1, 4, 1, '2018-01-11 07:27:40', '2018-01-11 07:27:40'),
-(118, 'Sàn gỗ chống nước', 'san-go-chong-nuoc', 65, 5, 2, 1, 1, '2018-01-11 16:57:37', '2018-01-11 16:57:37'),
-(119, 'Sàn gỗ King Floor', 'san-go-king-floor', 65, 5, 2, 2, 1, '2018-01-11 16:57:52', '2018-01-11 16:57:52'),
-(120, 'Sàn gỗ ngoài trời', 'san-go-ngoai-troi', 65, 5, 2, 3, 1, '2018-01-11 16:58:06', '2018-01-11 16:58:06'),
-(121, 'Sàn gỗ nhập khẩu Sensa', 'san-go-nhap-khau-sensa', 65, 5, 2, 4, 1, '2018-01-11 16:58:20', '2018-01-11 16:58:20'),
 (122, 'Dự án', 'du-an', 0, 1, 0, 3, 1, '2018-01-18 04:52:46', '2018-01-18 04:53:34'),
 (123, 'Dịch vụ', 'dich-vu', 0, 1, 0, 4, 1, '2018-01-18 04:53:11', '2018-01-22 08:55:17'),
 (124, 'Tầm nhìn', 'tam-nhin', 6, 1, 1, 1, 1, '2018-01-21 04:11:23', '2018-01-21 04:11:29'),
@@ -710,7 +685,18 @@ INSERT INTO `menu` (`id`, `fullname`, `alias`, `parent_id`, `menu_type_id`, `lev
 (133, 'Tư vấn', 'tu-van', 0, 3, 0, 4, 1, '2018-01-21 04:26:17', '2018-01-21 04:26:17'),
 (134, 'Quản lý bất động sản', 'quan-ly-bat-dong-san', 123, 1, 1, 1, 1, '2018-01-21 04:27:38', '2018-01-21 04:27:38'),
 (135, 'Cho thuê căn hộ', 'cho-thue-can-ho', 123, 1, 1, 2, 1, '2018-01-21 04:27:53', '2018-01-21 04:27:53'),
-(136, 'Bán bất động sản', 'ban-bat-dong-san', 123, 1, 1, 3, 1, '2018-01-21 04:28:09', '2018-01-21 04:28:19');
+(136, 'Bán bất động sản', 'ban-bat-dong-san', 123, 1, 1, 3, 1, '2018-01-21 04:28:09', '2018-01-21 04:28:19'),
+(137, 'Tầm nhìn', 'tam-nhin', 58, 5, 1, 1, 1, '2018-01-23 02:06:04', '2018-01-23 02:06:04'),
+(138, 'Sứ mệnh', 'su-menh', 58, 5, 1, 2, 1, '2018-01-23 02:06:17', '2018-01-23 02:06:17'),
+(139, 'Giá trị cốt lõi', 'gia-tri-cot-loi', 58, 5, 1, 3, 1, '2018-01-23 02:06:30', '2018-01-23 02:06:30'),
+(140, 'Triết lý kinh doanh', 'triet-ly-kinh-doanh', 58, 5, 1, 4, 1, '2018-01-23 02:06:44', '2018-01-23 02:06:44'),
+(141, 'Dự án', 'du-an', 0, 5, 0, 3, 1, '2018-01-23 02:07:24', '2018-01-23 02:07:24'),
+(142, 'Dịch vụ', 'dich-vu', 0, 5, 0, 4, 1, '2018-01-23 02:07:51', '2018-01-23 02:10:38'),
+(143, 'Quản lý bất động sản', 'quan-ly-bat-dong-san', 142, 5, 1, 1, 1, '2018-01-23 02:08:11', '2018-01-23 02:08:11'),
+(144, 'Cho thuê căn hộ', 'cho-thue-can-ho', 142, 5, 1, 2, 1, '2018-01-23 02:08:26', '2018-01-23 02:08:26'),
+(145, 'Bán bất động sản', 'ban-bat-dong-san', 142, 5, 1, 3, 1, '2018-01-23 02:08:40', '2018-01-23 02:08:40'),
+(146, 'Thị trường', 'thi-truong', 59, 5, 1, 3, 1, '2018-01-23 02:09:43', '2018-01-23 02:09:43'),
+(147, 'Tư vấn', 'tu-van', 59, 5, 1, 4, 1, '2018-01-23 02:09:56', '2018-01-23 02:09:56');
 
 -- --------------------------------------------------------
 
@@ -856,7 +842,7 @@ INSERT INTO `page` (`id`, `fullname`, `alias`, `theme_location`, `image`, `intro
 (8, 'Sứ mệnh', 'su-menh', 'su-menh-hand-content', 'conmochieu-2.png', 'Cung cấp sản phẩm và dịch vụ ưu việt, nâng cao giá trị , chất lượng cuộc sống', '<p style=\"text-align:justify\">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>', '', '', '', 10, 1, 1, '2018-01-19 09:04:52', '2018-01-22 08:56:14'),
 (9, 'Giá trị cốt lõi', 'gia-tri-cot-loi', 'gia-tri-cot-loi-hand-content', 'conmochieu-3.png', 'Khát vọng - Chính trực - Chuyên nghiệp - Nhân văn\nVới nhiều năm kinh nghiệm hoạt động trong lĩnh vực bất động sản và đội ngũ nhân viên chuyên nghiệp, nhiệt tình, có trình độ cao, luôn lấy chữ tín làm trọng.', '<p style=\"text-align:justify\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', '', '', '', 6, 1, 1, '2018-01-19 09:05:26', '2018-01-22 08:56:16'),
 (10, 'Triết lý kinh doanh', 'triet-ly-kinh-doanh', 'triet-ly-kinh-doanh-hand-content', 'conmochieu-4.png', 'Đối tác, khách hàng là giá trị cơ bản của bất kỳ doanh nghiệp nào, là lý do duy nhất để doanh nghiệp tồn tại và phát triển. Chính sách “khách hàng là trung tâm” chỉ lối cho mọi hoạt động của công ty.', '<p style=\"text-align:justify\">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', '', '', '', 5, 1, 1, '2018-01-19 09:05:56', '2018-01-22 08:56:18'),
-(11, 'Quản lý bất động sản', 'quan-ly-bat-dong-san', 'service-left', 'conmochieu-6.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p style=\"text-align:justify\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', '', '', '', 24, 1, 1, '2018-01-19 16:08:40', '2018-01-22 09:58:52'),
+(11, 'Quản lý bất động sản', 'quan-ly-bat-dong-san', 'service-left', 'conmochieu-6.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p style=\"text-align:justify\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>', '', '', '', 25, 1, 1, '2018-01-19 16:08:40', '2018-01-23 02:08:00'),
 (12, 'Cho thuê căn hộ', 'cho-thue-can-ho', 'service-center', 'conmochieu-5.png', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', '<p style=\"text-align:justify\">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>', '', '', '', 9, 1, 1, '2018-01-19 16:09:30', '2018-01-22 08:56:23'),
 (13, 'Bán bất động sản', 'ban-bat-dong-san', 'service-right', 'conmochieu-4.png', 'Cras et fringilla neque. Donec vulputate ornare placerat. Proin elit eros, egestas vitae mauris in, mattis tincidunt ipsum. Phasellus sodales, erat sit amet porta pretium, ligula dui convallis leo, semper varius est ipsum semper turpis. Sed id velit tellus. Sed eu metus interdum, fringilla lacus ac, finibus dolor. Maecenas tempus dolor vel tortor accumsan feugiat. Proin in tellus tristique, dignissim nunc vel, gravida mauris. In sed augue viverra, aliquet quam sit amet, fringilla risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla lobortis, ex nec pulvinar cursus, risus turpis ornare tellus, a facilisis augue enim sed tellus. Quisque lacinia vel dolor ac porta. Praesent hendrerit dictum velit, sodales sagittis leo interdum quis.', '<p style=\"text-align:justify\">Aliquam cursus elit ut commodo tristique. Curabitur at elit scelerisque, consequat dolor vel, egestas ipsum. Sed auctor venenatis quam a ultricies. Quisque vehicula gravida tristique. Maecenas interdum, mi vel pellentesque laoreet, nisl diam sollicitudin urna, ac dictum erat purus sit amet purus. In facilisis consectetur rutrum. Curabitur vitae est a libero volutpat tristique eget a erat. Vivamus in eros dignissim erat congue maximus. Etiam euismod nec metus nec volutpat. Morbi et scelerisque orci. Donec nisl justo, varius sit amet pharetra quis, lacinia in lacus. Nulla cursus vulputate urna vitae mattis. Proin ultrices dignissim felis, eu viverra massa viverra ut. Praesent eu euismod mauris. Pellentesque in lobortis felis, vel egestas erat. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>\n\n<p style=\"text-align:justify\">Integer elementum, tortor quis egestas rutrum, libero arcu egestas orci, dapibus ornare enim risus sed ex. Aliquam congue laoreet nunc eu varius. Duis ullamcorper urna ac nunc sagittis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris in nibh non ligula rutrum ultrices at in velit. Nullam tempus dui et eros vestibulum, vitae rhoncus risus facilisis. In eu iaculis mi, id convallis enim. Etiam dignissim lacus elit, eget efficitur dolor auctor ac. Aenean condimentum congue iaculis. Curabitur eget ex tincidunt, scelerisque diam sed, fermentum ligula. Nullam imperdiet, risus elementum malesuada sagittis, massa odio congue eros, vitae interdum nisi dolor ut orci.</p>', '', '', '', 9, 1, 1, '2018-01-19 16:10:20', '2018-01-22 08:56:24');
 
@@ -1136,7 +1122,8 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (391, 1, '4dPKUN7BFQPOuGvA8Xt8Oh8azZQQ9pkx', '2018-01-21 10:51:12', '2018-01-21 10:51:12'),
 (392, 1, 'iOi6rBobAw6B2Khg9CLDbPizVJYKGW94', '2018-01-21 18:51:39', '2018-01-21 18:51:39'),
 (393, 1, 'CY5tmN8UCUMqmSVoRFOipfHKUpoT0j4f', '2018-01-22 00:07:03', '2018-01-22 00:07:03'),
-(394, 1, 'aGzNsWOhDrVlT9HIVVFwCpsue1r7D5YA', '2018-01-22 00:44:48', '2018-01-22 00:44:48');
+(394, 1, 'aGzNsWOhDrVlT9HIVVFwCpsue1r7D5YA', '2018-01-22 00:44:48', '2018-01-22 00:44:48'),
+(395, 1, 'VS5iiETNULvHItpuUmHQUH81sChbbY1l', '2018-01-22 19:02:07', '2018-01-22 19:02:07');
 
 -- --------------------------------------------------------
 
@@ -2079,7 +2066,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `group_member_id`, `password`, `permissions`, `last_login`, `fullname`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', 1, '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-01-22 00:44:48', 'Nguyễn Kim Điền', 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-22 00:44:48');
+(1, 'admin', 'diennk@dienkim.com', 1, '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-01-22 19:02:07', 'Nguyễn Kim Điền', 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-01-22 19:02:07');
 
 -- --------------------------------------------------------
 
@@ -2455,7 +2442,7 @@ ALTER TABLE `invoice_detail`
 -- AUTO_INCREMENT cho bảng `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT cho bảng `menu_type`
@@ -2491,7 +2478,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=395;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=396;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`

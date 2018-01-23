@@ -1372,6 +1372,16 @@ border: 1px solid #fff;
     .tuabin{
     	float: none;
     }
+    .building-construction .owl-dots{
+    	display: none;
+    }
+    .phuong-cham,.join-with-us-reason{
+    	width: 100%;
+    }
+    .slogan-left,.social-right{
+    	float: none;
+    	text-align: center;
+    }
 }
 @media (max-width: 543px){
 
@@ -1385,5 +1395,6 @@ border: 1px solid #fff;
     .hotline{
     	text-align: center;
     }
+   
 }
 

@@ -286,6 +286,44 @@ if(count($arrCart) > 0){
 				<div class="clr"></div>
 			</div>
 		</div>
+		<div class="mobilemenu padding-top-15">
+			<div class="container">
+				<div>
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>                   
+							</div>
+							<div id="navbar" class="navbar-collapse collapse">
+								<?php     
+								$args = array(                         
+									'menu_class'            => 'nav navbar-nav',                            
+									'before_wrapper'        => '',
+									'before_title'          => '',
+									'after_title'           => '',
+									'before_wrapper_ul'     =>  '',
+									'after_wrapper_ul'      =>  '',
+									'after_wrapper'         => ''     ,
+									'link_before'           => '', 
+									'link_after'            => '',                                                                    
+									'theme_location'        => 'mobile-menu' ,
+									'menu_li_actived'       => 'current-menu-item',
+									'menu_item_has_children'=> 'menu-item-has-children',
+									'alias'                 => ''
+								);                 
+								wp_nav_menu($args);                          
+								?>             
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>    
 	</header>
 @yield("content")
 @include("frontend.footer")
