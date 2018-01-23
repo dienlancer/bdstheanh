@@ -163,7 +163,7 @@ if(count($data_slideshow) > 0){
 				$intro=$data['intro'];
 				?>
 				<div class="margin-top-15">
-					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div><center><img src="<?php echo asset('upload/icon-2.png'); ?>"></center></div>
 					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
 					<div class="justify phuong-cham-content margin-top-5">
 						<?php echo $intro; ?>
@@ -178,7 +178,7 @@ if(count($data_slideshow) > 0){
 				$intro=$data['intro'];
 				?>
 				<div class="margin-top-15">
-					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div><center><img src="<?php echo asset('upload/icon-3.png'); ?>"></center></div>
 					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
 					<div class="justify phuong-cham-content margin-top-5">
 						<?php echo $intro; ?>
@@ -192,7 +192,7 @@ if(count($data_slideshow) > 0){
 				$intro=$data['intro'];
 				?>
 				<div class="margin-top-15">
-					<div><center><img src="<?php echo asset('upload/icon-1.png'); ?>"></center></div>
+					<div><center><img src="<?php echo asset('upload/icon-4.png'); ?>"></center></div>
 					<div class="phuong-cham-title margin-top-15"><center><?php echo $fullname; ?></center></div>
 					<div class="justify phuong-cham-content margin-top-5">
 						<?php echo $intro; ?>
