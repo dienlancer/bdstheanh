@@ -12,21 +12,21 @@ $pinterest_url=$setting['pinterest_url']['field_value'];
 $company=$setting['contacted_person']['field_value'];
 
 $seo_title="";
-if(isset($title)){
+if(isset($title) && !empty($title)){
 	$seo_title=$title;
-}else{
+}else{	
 	$seo_title=$seo["title"];
 }
 
 $seo_meta_description="";
-if(isset($meta_description)){
+if(isset($meta_description) && !empty($meta_description)){
 	$seo_meta_description=$meta_description;
 }else{
 	$seo_meta_description=$seo["meta_description"];
 }
 
 $seo_meta_keyword="";
-if(isset($meta_keyword)){
+if(isset($meta_keyword) && ! empty($meta_keyword)){
 	$seo_meta_keyword=$meta_keyword;
 }else{
 	$seo_meta_keyword=$seo["meta_keyword"];

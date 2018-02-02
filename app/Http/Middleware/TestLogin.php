@@ -16,7 +16,13 @@ class TestLogin
     public function handle($request, Closure $next)
     {
         if(Sentinel::check()){
-            return $next($request);
+            $user=Sentinel::getUser();                                
+            $status=$user->status;    
+            if((int)$status==1){
+                return $next($request);
+            }else{
+               return redirect()->route('adminsystem.login');     
+            }            
         }
         else{
             return redirect()->route('adminsystem.login');    

@@ -229,9 +229,27 @@ function getBreadCrumb($alias){
   $arrMenu=array();
   $strBreadcrumb='';
   getRecursiveMenu($alias,$arrMenu);  
-  if(count($arrMenu) > 0){
-    $menuHome=MenuModel::whereRaw('alias = ?',['trang-chu'])->select('menu.id','menu.fullname','menu.alias','menu.parent_id')->get()->toArray()[0];
-    $menuAlias=MenuModel::whereRaw('alias = ?',[$alias])->select('menu.id','menu.fullname','menu.alias','menu.parent_id')->get()->toArray()[0];
+  if(count($arrMenu) > 0){    
+    $menuHome=DB::table('menu')
+                  ->join('menu_type','menu.menu_type_id','=','menu_type.id')
+                  ->where('menu_type.theme_location','main-menu')
+                  ->where('alias','trang-chu')
+                  ->select('menu.id','menu.fullname','menu.alias','menu.parent_id')
+                  ->groupBy('menu.id','menu.fullname','menu.alias','menu.parent_id')
+                  ->get()
+                  ->toArray();              
+    $menuAlias=DB::table('menu')
+                  ->join('menu_type','menu.menu_type_id','=','menu_type.id')
+                  ->where('menu_type.theme_location','main-menu')
+                  ->where('alias',$alias)
+                  ->select('menu.id','menu.fullname','menu.alias','menu.parent_id')
+                  ->groupBy('menu.id','menu.fullname','menu.alias','menu.parent_id')
+                  ->get()
+                  ->toArray();                  
+    $menuHome=convertToArray($menuHome);
+    $menuAlias=convertToArray($menuAlias);
+    $menuHome=$menuHome[0];
+    $menuAlias=$menuAlias[0];
     $rowHome=array(
         'id'        =>  $menuHome['id'],
         'fullname'  =>  $menuHome['fullname'],

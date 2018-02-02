@@ -243,13 +243,13 @@ switch ($controller) {
                     <span class="title">Tin tức</span>                                            
                 </a>                                                                      
             </li>  
-            <li class="nav-item  <?php echo $li_project_article; ?>">
+            <li class="nav-item  <?php echo $li_province; ?>">
                 <a href="{!! route('adminsystem.province.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
                     <span class="title">Tỉnh - Thành phố</span>                                            
                 </a>                                                                      
             </li>   
-            <li class="nav-item  <?php echo $li_project_article; ?>">
+            <li class="nav-item  <?php echo $li_district; ?>">
                 <a href="{!! route('adminsystem.district.getList') !!}" class="nav-link nav-toggle">
                     <i class="icon-notebook"></i>
                     <span class="title">Quận huyện</span>                                            
