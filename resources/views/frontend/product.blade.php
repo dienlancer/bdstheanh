@@ -67,7 +67,7 @@ if(count($item) > 0){
         <div>
             <div class="col-lg-4 no-padding-left">
                 <div class="margin-top-15">
-                    <img id="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
+                    <img class="zoom_img" src="<?php echo $small_img; ?>" data-zoom-image="<?php echo $large_img; ?>" />
                 </div>
             </div>
             <div class="col-lg-8 no-padding-left">
@@ -191,7 +191,7 @@ if(count($item) > 0){
 }
 ?>
 <script language="javascript" type="text/javascript">
-    jQuery('#zoom_img').elevateZoom({
+    jQuery('.zoom_img').elevateZoom({
         zoomType: "inner",
         cursor: "crosshair",
         zoomWindowFadeIn: 500,
