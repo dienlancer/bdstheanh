@@ -176,66 +176,66 @@ class MenuTypeController extends Controller {
       return $info;
     }
     public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
-                    $checked                =   0;
-                    $type_msg               =   "alert-warning";            
-                    $msg                    =   "Please choose at least one item to delete";
-                }
-          if($checked==1){
-              foreach ($arrID as $key => $value) {
-                  if(!empty($value)){
-                    $item=MenuTypeModel::find($value);
-                    $item->status=$status;
-                    $item->save();      
-                  }            
-              }
-          }           
-          $data                   =   $this->loadData($request);
-          $info = array(
-            'checked'           => $checked,
-            'type_msg'          => $type_msg,                
-            'msg'               => $msg,                
-            'data'              => $data
-          );
-          return $info;
+      $strID                 =   $request->str_id;     
+      $status                 =   $request->status;            
+      $checked                =   1;
+      $type_msg               =   "alert-success";
+      $msg                    =   "Cập nhật thành công";                  
+      $strID=substr($strID, 0,strlen($strID) - 1);
+      $arrID=explode(',',$strID);                 
+      if(empty($strID)){
+        $checked                =   0;
+        $type_msg               =   "alert-warning";            
+        $msg                    =   "Please choose at least one item to delete";
+      }
+      if($checked==1){
+        foreach ($arrID as $key => $value) {
+          if(!empty($value)){
+            $item=MenuTypeModel::find($value);
+            $item->status=$status;
+            $item->save();      
+          }            
+        }
+      }           
+      $data                   =   $this->loadData($request);
+      $info = array(
+        'checked'           => $checked,
+        'type_msg'          => $type_msg,                
+        'msg'               => $msg,                
+        'data'              => $data
+      );
+      return $info;
     }
     public function trash(Request $request){
-          $str_id                 =   $request->str_id;   
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Xóa thành công";      
-          $arrID                  =   explode(",", $str_id)  ;    
-          if(empty($str_id)){
-            $checked     =   0;
-            $type_msg           =   "alert-warning";            
-            $msg                =   "Please choose at least one item to delete";
-          }
-          $data=DB::table('menu')->whereIn('menu_type_id',@$arrID)->select('id')->get()->toArray();             
-            if(count($data) > 0){
-              $checked                =   0;
-              $type_msg               =   "alert-warning";            
-              $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
-            }   
-          if($checked == 1){                
-              $strID = implode(',',$arrID);       
-              $strID = substr($strID, 0,strlen($strID) - 1);                                                
-              $sql = "DELETE FROM `menu_type` WHERE `id` IN (".$strID.")";                                  
-              DB::statement($sql);    
-          }
-          $data                   =   $this->loadData($request);
-          $info = array(
-            'checked'           => $checked,
-            'type_msg'          => $type_msg,                
-            'msg'               => $msg,                
-            'data'              => $data
-          );
-          return $info;
+      $strID                 =   $request->str_id;               
+      $checked                =   1;
+      $type_msg               =   "alert-success";
+      $msg                    =   "Xóa thành công";                  
+      $strID=substr($strID, 0,strlen($strID) - 1);
+      $arrID=explode(',',$strID);                 
+      if(empty($strID)){
+        $checked     =   0;
+        $type_msg           =   "alert-warning";            
+        $msg                =   "Please choose at least one item to delete";
+      }
+      $data=DB::table('menu')->whereIn('menu_type_id',@$arrID)->select('id')->get()->toArray();             
+      if(count($data) > 0){
+        $checked                =   0;
+        $type_msg               =   "alert-warning";            
+        $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+      }   
+      if($checked == 1){                                                               
+
+        DB::table('menu_type')->whereIn('id',@$arrID)->delete();   
+      }
+      $data                   =   $this->loadData($request);
+      $info = array(
+        'checked'           => $checked,
+        'type_msg'          => $type_msg,                
+        'msg'               => $msg,                
+        'data'              => $data
+      );
+      return $info;
     }
     public function sortOrder(Request $request){
           $sort_json              =   $request->sort_json;           

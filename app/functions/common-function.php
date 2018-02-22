@@ -90,11 +90,18 @@ function randomString($length = 5){
   $result   = substr($arrCharacter, 0, $length);
   return $result;
 }
+function randomCodeNumber(){
+  $data = range(1,9);
+  $subject=implode($data, '');
+  $subject=str_shuffle($subject);
+  return $subject;
+}
 function getArrPrivilege(){
   /* begin quyền truy cập */
   $user_id=Sentinel::getUser()->id;      
   $stdPrivilegeID=DB::table("users")
-  ->join("group_member","users.group_member_id","=","group_member.id")
+  ->join('user_group_member','users.id','=','user_group_member.user_id')
+  ->join('group_member','group_member.id','=','user_group_member.group_member_id')
   ->join("group_privilege","group_member.id","=","group_privilege.group_member_id")
   ->where("users.id","=",(int)@$user_id)                
   ->select("group_privilege.privilege_id")

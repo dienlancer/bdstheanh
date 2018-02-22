@@ -2,7 +2,7 @@
 function cmsStatus($id,$statusValue,$kicked){
   $strStatus = ($statusValue == 0) ? 'unpublish' : 'publish';
   $xhtml    = '<a class="jgrid" id="status-'.$id.'" href="javascript:void(0)" onclick="changeStatus('.$id.','.$kicked.');">
-  <span class="state '.$strStatus.'"></span>
+  <span class="state '.$strStatus.'">&nbsp;</span>
   </a>';
   return $xhtml;
 }
@@ -41,7 +41,7 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
       $strOption='<option value="'.$id.'">'.$name.'</option>';
       if(!empty($arrValueSelected)){
           foreach($arrValueSelected as $key_1 => $value_1) {
-              if((int)$id == (int)$value_1["category_article_id"]){
+              if((int)$id == (int)$value_1["category_id"]){
                 $strOption = str_replace('<option', '<option selected="selected" ', $strOption);
               }
           }
@@ -51,7 +51,7 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
     $xhtml .= '</select>';
     return $xhtml;
   }
-  function cmsSelectboxCategoryProductMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
+  function cmsSelectboxGroupMemberMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
     $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
     $xhtml .= '<option value = "">--Chọn danh mục--</option>';
     foreach($arrValue as $key => $value){
@@ -60,7 +60,26 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
       $strOption='<option value="'.$id.'">'.$name.'</option>';
       if(!empty($arrValueSelected)){
           foreach($arrValueSelected as $key_1 => $value_1) {
-              if((int)$id == (int)$value_1["category_product_id"]){
+              if((int)$id == (int)$value_1["group_member_id"]){
+                $strOption = str_replace('<option', '<option selected="selected" ', $strOption);
+              }
+          }
+      }      
+      $xhtml .=$strOption;
+    }
+    $xhtml .= '</select>';
+    return $xhtml;
+  }
+  function cmsSelectboxCategoryParamMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
+    $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+    $xhtml .= '<option value = "">--Chọn danh mục--</option>';
+    foreach($arrValue as $key => $value){
+      $id=$value["id"];
+      $name=$value["fullname"];     
+      $strOption='<option value="'.$id.'">'.$name.'</option>';
+      if(!empty($arrValueSelected)){
+          foreach($arrValueSelected as $key_1 => $value_1) {
+              if((int)$id == (int)$value_1["param_id"]){
                 $strOption = str_replace('<option', '<option selected="selected" ', $strOption);
               }
           }

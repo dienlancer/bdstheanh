@@ -9,6 +9,7 @@ var vSupporterTable           =   null;
 var vOrganizationTable           =   null;
 var vProvinceTable           =   null;
 var vDistrictTable           =   null;
+
 var vProjectArticleTable           =   null;
 var vMediaTable           =   null;
 var vPageTable           =   null;
@@ -303,7 +304,7 @@ var basicTable = function () {
                 { data: "deleted"    },                
             ]
         });        
-    };
+    };    
     var initMediaTable = function () {
         vMediaTable = $('#tbl-media').DataTable({
             aLengthMenu: [
@@ -503,8 +504,7 @@ var basicTable = function () {
             iDisplayLength: -1,
             columns: [                
                 { data: "checked"       },                
-                { data: "fullname"      },
-                { data: "alias"         },
+                { data: "fullname"      },                
                 { data: "category_name"         },                            
                 { data: "image"         },
                 { data: "sort_order"    },
@@ -709,7 +709,7 @@ var basicTable = function () {
                 { data: "username"      },   
                 { data: "email"         },     
                 { data: "fullname"      },            
-                { data: "mobilephone"   },            
+                { data: "phone"   },            
                 { data: "sort_order"    },
                 { data: "status"        },                  
                 { data: "edited"        },         
@@ -758,7 +758,7 @@ var basicTable = function () {
             initCategoryVideoTable();
             initVideoTable();
             initProvinceTable();
-            initDistrictTable();            
+            initDistrictTable();  
         }
     };
 }();

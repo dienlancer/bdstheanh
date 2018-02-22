@@ -10,6 +10,7 @@ use App\PageModel;
 use App\CategoryProductModel;
 use App\CategoryArticleModel;
 use App\CategoryBannerModel;
+use Illuminate\Support\Facades\DB;
 function getSettingSystem(){        
   $alias='setting-system';
   $data                   =   SettingSystemModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower(@$alias))])->get()->toArray(); 
@@ -118,7 +119,8 @@ function wp_nav_menu($args){
             break;          
             case 'thu-vien':   
             case 'dich-vu':
-            case 'gioi-thieu':         
+            case 'gioi-thieu':   
+            case 'san-pham':      
             $site_link='javascript:void(0);';
             break;
             case 'trang-chu':
@@ -224,6 +226,42 @@ function getRecursiveMenu($alias,&$arrMenu){
       getRecursiveMenu($data3['alias'],$arrMenu);
     }    
   }      
+}
+function getRecursiveCategoryProduct($parent_id,&$arrCategory){  
+  $data=CategoryProductModel::find((int)@$parent_id);  
+  if(count($data)>0){
+    $data=$data->toArray();
+    $arrCategory[]=$data;  
+    getRecursiveCategoryProduct((int)@$data['parent_id'],$arrCategory);
+  }  
+}
+function getBreadCrumbCategoryProduct($dataCategory){
+  $data=array();
+  $breadcrumb='';
+  getRecursiveCategoryProduct((int)@$dataCategory['parent_id'],$data);
+
+  $data[]=$dataCategory;
+  $data=get_field_data_array($data,'id');
+  ksort($data);
+  if(count($data) > 0){
+    foreach ($data as $key => $value) {
+      $id=$value['id'];
+      $fullname=$value['fullname'];
+      $alias=$value['alias'];
+      $parent_id=$value['parent_id'];
+      $permalink='';
+      switch ($alias) {
+        case 'trang-chu':
+          $permalink=url('/');
+          break;        
+        default:
+          $permalink=route('frontend.index.index',[$alias]);
+          break;
+      }      
+      $breadcrumb .='<a href="'.$permalink.'">'.$fullname.'</a>';
+    }
+  }
+  return $breadcrumb;
 }
 function getBreadCrumb($alias){
   $arrMenu=array();

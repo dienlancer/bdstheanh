@@ -27,7 +27,7 @@ if(count($item) > 0){
     
     /* end setting */    
 	$dataArticleCategory=DB::table('article_category')
-	->join('category_article','article_category.category_article_id','=','category_article.id')		
+	->join('category_article','article_category.category_id','=','category_article.id')		
 	->select('category_article.id','category_article.fullname','category_article.alias')
 	->where('article_category.article_id','=',(int)@$id)					
 	->groupBy('category_article.id','category_article.fullname','category_article.alias')
@@ -91,7 +91,7 @@ if(count($item) > 0){
 			$data=DB::table('article')
 			->join('article_category','article.id','=','article_category.article_id')                			
 			->select('article.id','article.alias','article.fullname')
-			->whereIn('article_category.category_article_id', $arr_category_id)
+			->whereIn('article_category.category_id', $arr_category_id)
 			->where('article.id','<>',(int)@$id)
 			->where('article.status','=',1)
 			->groupBy('article.id','article.alias','article.fullname')

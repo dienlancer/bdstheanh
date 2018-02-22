@@ -166,13 +166,14 @@ class BannerController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Vui lòng chọn ít nhất một phần tử";
@@ -196,21 +197,19 @@ class BannerController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){  
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
             }
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sqlDeleteBanner = "DELETE FROM `banner` WHERE `id` IN  (".$strID.")";                         
-                  DB::statement($sqlDeleteBanner);
+            if($checked == 1){                                  
+                  DB::table('banner')->whereIn('id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

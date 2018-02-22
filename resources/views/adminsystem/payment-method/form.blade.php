@@ -4,10 +4,10 @@
 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"    onblur="createAlias()"    value="'.@$arrRowData['fullname'].'">';  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"   disabled     value="'.@$arrRowData['alias'].'">';  
-$inputContent           =   '<textarea id="content" name="content" rows="5" cols="100" class="form-control" >'.@$arrRowData['content'].'</textarea>'; 
+
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"      value="'.@$arrRowData['fullname'].'">';  
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      value="'.@$arrRowData['alias'].'">';  
+$inputContent           =   '<textarea name="content" rows="5" cols="100" class="form-control" >'.@$arrRowData['content'].'</textarea>'; 
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
@@ -70,12 +70,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
                 </div>      
                 <div class="row">
                     <?php echo $inputContent; ?>
-                            <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('content',{
-                                   height:300
-                               });
-                           </script>                
+                    <span class="help-block"></span>                                  
                 </div>                                                                                
             </div>                          
         </form>
@@ -104,7 +99,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
         var id=$('input[name="id"]').val();        
         var fullname=$('input[name="fullname"]').val();
         var alias=$('input[name="alias"]').val();
-        var content=CKEDITOR.instances['content'].getData();
+        var content=$('textarea[name="content"]').val();
         var status=$('select[name="status"]').val();        
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
@@ -160,42 +155,6 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             },
         });
     }
-    function createAlias(){
-        var id=$('input[name="id"]').val();   
-        var fullname    = $('input[name="fullname"]').val();
-        var token       = $('form[name="frm"] > input[name="_token"]').val();     
-        var dataItem={      
-            "id":id,      
-            "fullname":fullname,            
-            "_token": token
-        };   
-        $('input[name="alias"]').val(''); 
-        resetErrorStatus();    
-        $.ajax({
-            url: '<?php echo $linkCreateAlias; ?>',
-            type: 'POST',
-            data: dataItem,            
-            async: false,
-            success: function (data) {                
-                if(data.checked==true){
-                    $('input[name="alias"]').val(data.alias); 
-                }else{                    
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }                            
-                }
-                spinner.hide();
-            },
-            error : function (data){
-                spinner.hide();
-            },
-            beforeSend  : function(jqXHR,setting){
-                spinner.show();
-            },
-        });
-    }
+    
 </script>
 @endsection()            

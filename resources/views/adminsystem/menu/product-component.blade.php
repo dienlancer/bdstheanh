@@ -2,7 +2,7 @@
 @section("content")
 <?php 
 $linkGetProductList		=	route('adminsystem.'.$controller.'.getProductList');
-$ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
+$ddlCategoryProduct     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryProductRecursive, 0,"");
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
 $inputMenuTypeId 		=	'<input type="hidden" class="form-control" id="menu_type_id" name="menu_type_id"          value="'.@$menu_type_id.'">';
 ?>
@@ -55,13 +55,13 @@ $inputMenuTypeId 		=	'<input type="hidden" class="form-control" id="menu_type_id
    
 	function getList() {    
         var token = $('form[name="frm"] input[name="_token"]').val(); 
-        var category_product_id=$('#category_product_id').val();
+        var category_id=$('#category_id').val();
         var filter_search=$('form[name="frm"] input[name="filter_search"]').val();
         var menu_type_id = $('form[name="frm"] input[name="menu_type_id"]').val(); 
         var dataItem={            
             '_token': token,
             'filter_search':filter_search,
-            'category_product_id':category_product_id,
+            'category_id':category_id,
             'menu_type_id':menu_type_id            
         };
         $.ajax({

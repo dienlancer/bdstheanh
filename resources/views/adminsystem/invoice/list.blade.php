@@ -43,7 +43,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 						<th>Username</th>
 						<th>Email</th>
 						<th>Tên khách hàng</th>
-						<th>Mobilephone</th>
+						<th>Phone</th>
 						<th width="10%">Sắp xếp</th>
 						<th width="10%">Trạng thái</th>							
 						<th width="1%">Sửa</th>  

@@ -177,7 +177,7 @@ class CategoryVideoController extends Controller {
             $checked                =   1;
             $type_msg               =   "alert-success";
             $msg                    =   "Xóa thành công";      
-            $data=VideoModel::whereRaw("category_video_id = ?",[(int)@$id])->select('id')->get()->toArray();        
+            $data=VideoModel::whereRaw("category_id = ?",[(int)@$id])->select('id')->get()->toArray();        
             if(count($data) > 0){
               $checked                =   0;
               $type_msg               =   "alert-warning";            
@@ -197,13 +197,14 @@ class CategoryVideoController extends Controller {
             return $info;
           }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Vui lòng chọn ít nhất một phần tử";
@@ -227,28 +228,25 @@ class CategoryVideoController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){  
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử";
             }
-            $data=DB::table('video')->whereIn('category_video_id',@$arrID)->select('id')->get()->toArray();             
+            $data=DB::table('video')->whereIn('category_id',@$arrID)->select('id')->get()->toArray();             
             if(count($data) > 0){
               $checked                =   0;
               $type_msg               =   "alert-warning";            
               $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             } 
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sql = "DELETE FROM `category_video` WHERE `id` IN  (".$strID.")"; 
-                  DB::statement($sql);                  
-                     
+            if($checked == 1){                                             
+                 DB::table('category_video')->whereIn('id',@$arrID)->delete();       
             }
             $data                   =   $this->loadData($request);
             $info = array(

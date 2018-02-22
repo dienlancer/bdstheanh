@@ -145,23 +145,20 @@ class PrivilegeController extends Controller {
             return $info;
       }      
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
             }
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sqlDeletePrivilege = "DELETE FROM `privilege` WHERE `id` IN (".$strID.")";       
-                  $sqlDeleteGroupPrivilege = "DELETE FROM `group_privilege` WHERE `privilege_id` IN (".$strID.")";        
-                  DB::statement($sqlDeletePrivilege);
-                  DB::statement($sqlDeleteGroupPrivilege);
+            if($checked == 1){                                  
+                  DB::table('privilege')->whereIn('id',@$arrID)->delete();   
+                  DB::table('group_privilege')->whereIn('privilege_id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(

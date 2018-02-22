@@ -15,18 +15,16 @@ $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $parent_id              =   (count($arrRowData) > 0) ? @$arrRowData['parent_id'] : null ; 
-$ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, $parent_id,"");
+$ddlCategoryProduct     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryProductRecursive, $parent_id,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
 $picture                =   "";
 $strImage               =   "";
-$setting= getSettingSystem();
-$product_width = $setting['product_width']['field_value'];
-$product_height = $setting['product_height']['field_value'];  
+  
 if(count(@$arrRowData)>0){
     if(!empty(@$arrRowData["image"])){
-        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/" . $product_width . "x" . $product_height . "-".@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
+        $picture        =   '<div class="col-sm-6"><center>&nbsp;<img src="'.asset("/upload/" .@$arrRowData["image"]).'" style="width:100%" />&nbsp;</center></div><div class="col-sm-6"><a href="javascript:void(0);" onclick="deleteImage();"><img src="'.asset('public/adminsystem/images/delete-icon.png').'"/></a></div>';                        
         $strImage       =   @$arrRowData["image"];
     }        
 }    
@@ -136,19 +134,19 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         var id                   =   $('input[name="id"]');
         var fullname             =   $('input[name="fullname"]');
         var alias                =   $('input[name="alias"]');
-        var category_product_id  =   $('select[name="category_product_id"]');
+        var category_id  =   $('select[name="category_id"]');
         var sort_order           =   $('input[name="sort_order"]');
         var status               =   $('select[name="status"]');
         
         $(fullname).closest('.form-group').removeClass("has-error");
         $(alias).closest('.form-group').removeClass("has-error");
-        $(category_product_id).closest('.form-group').removeClass("has-error");
+        $(category_id).closest('.form-group').removeClass("has-error");
         $(sort_order).closest('.form-group').removeClass("has-error");
         $(status).closest('.form-group').removeClass("has-error");        
 
         $(fullname).closest('.form-group').find('span').empty().hide();
         $(alias).closest('.form-group').find('span').empty().hide();
-        $(category_product_id).closest('.form-group').find('span').empty().hide();
+        $(category_id).closest('.form-group').find('span').empty().hide();
         $(sort_order).closest('.form-group').find('span').empty().hide();
         $(status).closest('.form-group').find('span').empty().hide();        
     }
@@ -184,7 +182,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
         
         var meta_keyword=$('textarea[name="meta_keyword"]').val();
         var meta_description=$('textarea[name="meta_description"]').val();
-        var category_product_id=$('select[name="category_product_id"]').val();
+        var category_id=$('select[name="category_id"]').val();
         var image = $('input[name="image"]').val();
         if (image != ''){
             image = image.substr(image.lastIndexOf('\\') + 1);       
@@ -202,7 +200,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             
             "meta_keyword":meta_keyword,
             "meta_description":meta_description,
-            "category_product_id":category_product_id,
+            "category_id":category_id,
             "image":image,
             "image_hidden":image_hidden,
             "sort_order":sort_order,

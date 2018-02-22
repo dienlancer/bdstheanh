@@ -41,42 +41,46 @@ class ModuleItemController extends Controller {
         return $data;
       }   
       public function loadDataArticle(Request $request){      
-
-      $query=DB::table('article')
-      ->join('article_category','article.id','=','article_category.article_id')
-      ->join('category_article','category_article.id','=','article_category.category_article_id')  ;      
-      if(!empty(@$request->filter_search)){
-        $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
-      }     
-      if(!empty(@$request->category_article_id)){
-        $query->where('article_category.category_article_id',(int)@$request->category_article_id);
-      }   
-      $data=$query->select('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
-                  ->groupBy('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
-                  ->orderBy('article.sort_order', 'asc')
-                  ->get()
-                  ->toArray();      
-      
-      $data=convertToArray($data);          
-      $data=article2Converter($data,$this->_controller);            
-      return $data;
-    } 
-    public function loadDataProduct(Request $request){      
+        $category_id=(int)@$request->category_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_article');     
+        $query=DB::table('article')
+        ->join('article_category','article.id','=','article_category.article_id')
+        ->join('category_article','category_article.id','=','article_category.category_id')  ;      
+        if(!empty(@$request->filter_search)){
+          $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
+        }     
+        if(count($arrCategoryID) > 0){
+          $query->whereIn('article_category.category_id',$arrCategoryID);
+        }   
+        $data=$query->select('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
+        ->groupBy('article.id','article.fullname','article.image','article.sort_order','article.status','article.created_at','article.updated_at')
+        ->orderBy('article.sort_order', 'asc')
+        ->get()
+        ->toArray();      
+        
+        $data=convertToArray($data);          
+        $data=article2Converter($data,$this->_controller);            
+        return $data;
+      } 
+    public function loadDataProduct(Request $request){
+    $category_id=(int)@$request->category_product_id;
+        $arrCategoryID[]=@$category_id;
+        getStringCategoryID($category_id,$arrCategoryID,'category_product');           
       $query=DB::table('product')
-      ->join('product_category','product.id','=','product_category.product_id')
-      ->join('category_product','category_product.id','=','product_category.category_product_id')  ;      
+      ->join('category_product','product.category_id','=','category_product.id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('product.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
-      if(!empty(@$request->category_product_id)){
-        $query->where('product_category.category_product_id',(int)@$request->category_product_id);
+      if(count($arrCategoryID)){
+        $query->whereIn('product.category_id',$arrCategoryID);
       }   
-      $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
-                  ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','product.sort_order','product.status','product.created_at','product.updated_at')
+      $data=$query->select('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname as category_name','product.sort_order','product.status','product.created_at','product.updated_at')
+                  ->groupBy('product.id','product.code','product.fullname','product.alias','product.image','category_product.fullname','product.sort_order','product.status','product.created_at','product.updated_at')
                   ->orderBy('product.sort_order', 'asc')
                   ->get()
                   ->toArray();      
-      $data=convertToArray($data);    
+      $data=convertToArray($data); 
       $data=product2Converter($data,$this->_controller);            
       return $data;
     } 
@@ -236,13 +240,14 @@ class ModuleItemController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;          
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Please choose at least one item to delete";
@@ -266,21 +271,20 @@ class ModuleItemController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Please choose at least one item to delete";
             }
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sql = "DELETE FROM `module_item` WHERE `id` IN  (".$strID.")";                      
-                  DB::statement($sql);        
+            if($checked == 1){                                  
+
+                  DB::table('module_item')->whereIn('id',@$arrID)->delete();        
             }
             $data                   =   $this->loadData($request);
             $info = array(

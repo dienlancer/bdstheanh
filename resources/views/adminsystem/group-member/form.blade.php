@@ -3,7 +3,9 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"       value="'.@$arrRowData['fullname'].'">'; 
+$linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"   onblur="createAlias();"    value="'.@$arrRowData['fullname'].'">'; 
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled     value="'.@$arrRowData['alias'].'">';
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $ddlGroupPrivilege      =   cmsSelectboxGroupPrivilegeMultiple("privilege_id","privilege_id[]", 'form-control', @$arrPrivilege, @$arrGroupPrivilege,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
@@ -48,6 +50,13 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
                     </div>    
                 </div>                      
                 <div class="row">
+                    <div class="form-group col-md-6">  
+                        <label class="col-md-3 control-label"><b>Alias</b></label>
+                        <div class="col-md-9">
+                            <?php echo $inputAlias; ?>
+                            <span class="help-block"></span>
+                        </div>                      
+                    </div> 
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label"><b>Nhóm quyền</b></label>
                         <div class="col-md-9">
@@ -55,8 +64,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
                             <span class="help-block"></span>
                         </div>
                     </div>   
-                    <div class="form-group col-md-6">                        
-                    </div>     
+                        
                 </div>                                                          
             </div>                             
         </form>
@@ -78,13 +86,15 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
     function save(){
         var id=$('input[name="id"]').val();        
         var fullname=$('input[name="fullname"]').val();        
+        var alias=$('input[name="alias"]').val();
         var privilege_id=$('select[name="privilege_id[]"]').val();        
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
         resetErrorStatus();
         var dataItem={
             "id":id,
-            "fullname":fullname,            
+            "fullname":fullname,       
+            "alias":alias,     
             "privilege_id":privilege_id,           
             "sort_order":sort_order,           
             "_token": token
@@ -110,6 +120,43 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
                         $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
                         $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
                     }                    
+                }
+                spinner.hide();
+            },
+            error : function (data){
+                spinner.hide();
+            },
+            beforeSend  : function(jqXHR,setting){
+                spinner.show();
+            },
+        });
+    }
+    function createAlias(){
+        var id=$('input[name="id"]').val();   
+        var fullname    = $('input[name="fullname"]').val();
+        var token       = $('form[name="frm"] > input[name="_token"]').val();     
+        var dataItem={      
+            "id":id,      
+            "fullname":fullname,            
+            "_token": token
+        };   
+        $('input[name="alias"]').val(''); 
+        resetErrorStatus();    
+        $.ajax({
+            url: '<?php echo $linkCreateAlias; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {                
+                if(data.checked==true){
+                    $('input[name="alias"]').val(data.alias); 
+                }else{                    
+                    var data_error=data.error;
+                    if(typeof data_error.fullname               != "undefined"){
+                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
+                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
+                    }                            
                 }
                 spinner.hide();
             },

@@ -10,7 +10,7 @@ $linkInsertProduct      =   route('adminsystem.'.$controller.'.insertProduct');
 $linkSortItems          =   route('adminsystem.'.$controller.'.sortItems');
 $linkGetItems           =   route('adminsystem.'.$controller.'.getItems');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"       value="'.@$arrRowData['fullname'].'">'; 
-$ddlCategoryArticle     =   cmsSelectboxCategory('category_article_id','category_article_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
+$ddlCategoryArticle     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
 $ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
 $inputPosition          =   '<input type="text" class="form-control" name="position"   id="position"       value="'.@$arrRowData['position'].'">'; 
 $inputComponent         =   '<input type="hidden" class="form-control" name="component"   id="component"       value="'.@$arrRowData['component'].'">'; 
@@ -300,12 +300,12 @@ $inputSortJson          =   '<input type="hidden" name="sort_json" id="sort_json
     }       
     function getListArticle() {    
         var token = $('form[name="frm-article"] > input[name="_token"]').val(); 
-        var category_article_id=$('form[name="frm-article"] select[name="category_article_id"]').val();
+        var category_id=$('form[name="frm-article"] select[name="category_id"]').val();
         var filter_search=$('form[name="frm-article"] input[name="filter_search"]').val();
         var dataItem={            
             '_token': token,
             'filter_search':filter_search,
-            'category_article_id':category_article_id            
+            'category_id':category_id            
         };
         $.ajax({
             url: '<?php echo $linkLoadDataArticle; ?>',

@@ -158,7 +158,7 @@ class IndexController extends Controller {
     $title="Tìm kiếm"; 
     $query=DB::table('article')
     ->join('article_category','article.id','=','article_category.article_id')
-    ->join('category_article','category_article.id','=','article_category.category_article_id')
+    ->join('category_article','category_article.id','=','article_category.category_id')
     ->where('article.status',1);
     if(!empty(@$request->q)){
       $query->where('article.fullname','like', '%'.@$request->q.'%');
@@ -183,7 +183,7 @@ class IndexController extends Controller {
     $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
     $query=DB::table('article')
     ->join('article_category','article.id','=','article_category.article_id')
-    ->join('category_article','category_article.id','=','article_category.category_article_id')
+    ->join('category_article','category_article.id','=','article_category.category_id')
     ->where('article.status',1);
     if(!empty(@$request->q)){
       $query->where('article.fullname','like', '%'.@$request->q.'%');
@@ -338,9 +338,9 @@ class IndexController extends Controller {
         getStringCategoryID($category_id,$arr_category_id,'category_article');                 
         $data=DB::table('article')
                 ->join('article_category','article.id','=','article_category.article_id')
-                ->join('category_article','category_article.id','=','article_category.category_article_id')                              
+                ->join('category_article','category_article.id','=','article_category.category_id')                              
                 ->select('article.id')
-                ->whereIn('article_category.category_article_id', $arr_category_id)
+                ->whereIn('article_category.category_id', $arr_category_id)
                 ->where('article.status',1)    
                 ->groupBy('article.id')                
                 ->get()->toArray();
@@ -361,9 +361,9 @@ class IndexController extends Controller {
         $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
         $data=DB::table('article')
                 ->join('article_category','article.id','=','article_category.article_id')
-                ->join('category_article','category_article.id','=','article_category.category_article_id')                     
+                ->join('category_article','category_article.id','=','article_category.category_id')                     
                 ->select('article.id','article.alias','article.fullname','article.image','article.intro','article.count_view')
-                ->whereIn('article_category.category_article_id', $arr_category_id)
+                ->whereIn('article_category.category_id', $arr_category_id)
                 ->where('article.status',1)     
                 ->groupBy('article.id','article.alias','article.fullname','article.image','article.intro','article.count_view')
                 ->orderBy('article.sort_order', 'asc')

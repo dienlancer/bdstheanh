@@ -8,7 +8,6 @@ use App\ArticleModel;
 use App\ProductModel;
 use App\PageModel;
 use App\MenuModel;
-use App\ProductCategoryModel;
 use App\PaginationModel;
 use DB;
 class CategoryProductController extends Controller {
@@ -59,9 +58,9 @@ class CategoryProductController extends Controller {
         ->get()
         ->toArray();        
         $data=convertToArray($data);
-        $data=categoryArticleConverter($data,$this->_controller);   
+        $data=categoryProductConverter($data,$this->_controller);   
         $data_recursive=array();
-        categoryArticleRecursive($data,0,null,$data_recursive);          
+        categoryProductRecursive($data,0,null,$data_recursive);          
         $data=$data_recursive;        
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-list";         
@@ -107,7 +106,7 @@ class CategoryProductController extends Controller {
         
         $meta_keyword         =   trim($request->meta_keyword);
         $meta_description     =   trim($request->meta_description);
-        $category_product_id	  =		trim($request->category_product_id);
+        $category_id	  =		trim($request->category_id);
         $image                  =   trim($request->image);
         $image_hidden           =   trim($request->image_hidden);
         $sort_order 			      =		trim($request->sort_order);
@@ -166,9 +165,9 @@ class CategoryProductController extends Controller {
         
         $item->meta_keyword     = $meta_keyword;
         $item->meta_description = $meta_description;           
-        $item->parent_id 		=	(int)$category_product_id;            
-        $item->sort_order 	=	(int)$sort_order;
-        $item->status 			=	(int)$status;    
+        $item->parent_id 		=	(int)@$category_id;            
+        $item->sort_order 	=	(int)@$sort_order;
+        $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save(); 
         $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
@@ -230,7 +229,7 @@ class CategoryProductController extends Controller {
             $type_msg           =   "alert-warning";            
             $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
           }
-          $data                   =   ProductCategoryModel::whereRaw("category_product_id = ?",[(int)@$id])->get()->toArray();              
+          $data                   =   ProductModel::whereRaw("category_id = ?",[(int)@$id])->get()->toArray();              
           if(count($data) > 0){
             $checked     =   0;
             $type_msg           =   "alert-warning";            
@@ -292,7 +291,7 @@ class CategoryProductController extends Controller {
                   $type_msg           =   "alert-warning";            
                   $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
                 }
-                $data                   =   ProductCategoryModel::whereRaw("category_product_id = ?",[(int)@$value])->get()->toArray();                     
+                $data                   =   ProductModel::whereRaw("category_id = ?",[(int)@$value])->get()->toArray();                     
                 if(count($data) > 0){
                   $checked     =   0;
                   $type_msg           =   "alert-warning";            
@@ -301,10 +300,8 @@ class CategoryProductController extends Controller {
               }                
             }
           }
-          if($checked == 1){                
-            $strID = implode(',',$arrID);                     
-            $sql = "DELETE FROM `category_product` WHERE `id` IN (".$strID.")";                 
-            DB::statement($sql);    
+          if($checked == 1){                            
+            DB::table('category_product')->whereIn('id',@$arrID)->delete();   
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
@@ -337,12 +334,15 @@ class CategoryProductController extends Controller {
           return view("adminsystem.no-access");
         }      
       }
-    public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $product_width=$setting['product_width']['field_value'];
-    $product_height=$setting['product_height']['field_value'];
-      uploadImage($_FILES["image"],$product_width,$product_height);
-    }
+    public function uploadFile(Request $request){                     
+        $fileObj=$_FILES["image"];          
+        $fileName="";
+        if($fileObj['tmp_name'] != null){                
+          $fileName   = $fileObj['name'];
+          $file_path=base_path("upload".DS.$fileName);
+          @copy($fileObj['tmp_name'],$file_path);                   
+        }   
+      }
     public function createAlias(Request $request){
           $id                =  trim($request->id)  ; 
           $fullname                =  trim($request->fullname)  ;        

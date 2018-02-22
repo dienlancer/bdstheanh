@@ -37,9 +37,9 @@ class VideoController extends Controller {
   	}	    
   	public function loadData(Request $request){                 
       $query=DB::table('video')
-                ->join('category_video','video.category_video_id','=','category_video.id');        
-      if(!empty(@$request->category_video_id)){
-        $query->where('video.category_video_id',(int)@$request->category_video_id);
+                ->join('category_video','video.category_id','=','category_video.id');        
+      if(!empty(@$request->category_id)){
+        $query->where('video.category_id',(int)@$request->category_id);
       }
       $data=$query->select('video.id','video.fullname','category_video.fullname as category_name','video.image','video.video_url','video.sort_order','video.status','video.created_at','video.updated_at')
       ->groupBy('video.id','video.fullname','category_video.fullname','video.image','video.video_url','video.sort_order','video.status','video.created_at','video.updated_at')
@@ -74,7 +74,7 @@ class VideoController extends Controller {
     public function save(Request $request){
           $id                   =   trim(@$request->id);   
           $fullname             =   trim($request->fullname);
-          $category_video_id    =   trim(@$request->category_video_id);                                
+          $category_id    =   trim(@$request->category_id);                                
           $image                =   trim(@$request->image);          
           $image_hidden         =   trim(@$request->image_hidden); 
           $video_url            =   trim(@$request->video_url);             
@@ -120,10 +120,10 @@ class VideoController extends Controller {
               }       
           }          
           
-          if((int)@$category_video_id == 0){
+          if((int)@$category_id == 0){
               $checked = 0;
-              $error["category_video_id"]["type_msg"]   = "has-error";
-              $error["category_video_id"]["msg"]      = "Thiếu danh mục";
+              $error["category_id"]["type_msg"]   = "has-error";
+              $error["category_id"]["msg"]      = "Thiếu danh mục";
           }          
           if(empty($sort_order)){
              $checked = 0;
@@ -153,7 +153,7 @@ class VideoController extends Controller {
                     }                    
                 }        
                 $item->fullname         = $fullname;          
-                $item->category_video_id       = (int)@$category_video_id;
+                $item->category_id       = (int)@$category_id;
                 $item->video_url = $video_url;                    
                 $item->sort_order       = (int)$sort_order;
                 $item->status           = (int)$status;    
@@ -215,13 +215,14 @@ class VideoController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                 =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Vui lòng chọn ít nhất một phần tử";
@@ -245,21 +246,19 @@ class VideoController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
             }
-            if($checked == 1){                
-                  $strID = implode(',',$arrID);   
-                  $strID=substr($strID, 0,strlen($strID) - 1);
-                  $sqlDeleteVideo = "DELETE FROM `video` WHERE `id` IN  (".$strID.")";                               
-                  DB::statement($sqlDeleteVideo);                  
+            if($checked == 1){                                      
+                  DB::table('video')->whereIn('id',@$arrID)->delete();            
             }
             $data                   =   $this->loadData($request);
             $info = array(
