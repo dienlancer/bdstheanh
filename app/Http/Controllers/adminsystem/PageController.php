@@ -147,11 +147,13 @@ class PageController extends Controller {
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	                    
                 $item->save();  
                 $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
-                if(count($dataMenu) > 0){
-                  $menu_id=(int)$dataMenu[0]['id'];
-                  $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
-                  DB::statement($sql);    
-                }                 
+          if(count($dataMenu) > 0){
+            foreach ($dataMenu as $key => $value) {                   
+              $menu_id=(int)$value['id'];
+              $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
+                DB::statement($sql);    
+            }          
+          }               
                 $info = array(
                   'type_msg' 			=> "has-success",
                   'msg' 				=> 'Lưu dữ liệu thành công',

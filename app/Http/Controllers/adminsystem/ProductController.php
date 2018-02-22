@@ -208,10 +208,12 @@ class ProductController extends Controller {
           $item->save();  	
           $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
           if(count($dataMenu) > 0){
-            $menu_id=(int)$dataMenu[0]['id'];
-            $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
-            DB::statement($sql);    
-          }  
+            foreach ($dataMenu as $key => $value) {                   
+              $menu_id=(int)$value['id'];
+              $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
+                DB::statement($sql);    
+            }          
+          } 
           if(count(@$category_product_id) > 0){                            
               $arrProductCategory=ProductCategoryModel::whereRaw("product_id = ?",[@$item->id])->select("category_product_id")->get()->toArray();
               $arrCategoryProductID=array();
