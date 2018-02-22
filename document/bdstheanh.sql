@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2018 lúc 03:03 AM
+-- Thời gian đã tạo: Th2 22, 2018 lúc 10:55 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -388,6 +388,7 @@ DROP TABLE IF EXISTS `group_member`;
 CREATE TABLE `group_member` (
   `id` bigint(20) NOT NULL,
   `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -397,9 +398,9 @@ CREATE TABLE `group_member` (
 -- Đang đổ dữ liệu cho bảng `group_member`
 --
 
-INSERT INTO `group_member` (`id`, `fullname`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 1, '2016-12-17 05:05:18', '2018-01-22 02:03:49'),
-(2, 'Bài viết', 2, '2016-12-17 05:05:41', '2018-01-22 02:03:55');
+INSERT INTO `group_member` (`id`, `fullname`, `alias`, `sort_order`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', NULL, 1, '2016-12-17 05:05:18', '2018-01-22 02:03:49'),
+(2, 'Bài viết', NULL, 2, '2016-12-17 05:05:41', '2018-01-22 02:03:55');
 
 -- --------------------------------------------------------
 
