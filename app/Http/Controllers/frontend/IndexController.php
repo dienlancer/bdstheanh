@@ -139,7 +139,8 @@ class IndexController extends Controller {
               echo '<script language="javascript" type="text/javascript">alert("Có sự cố trong quá trình gửi dữ liệu");</script>'; 
             }            
           }        
-        }        
+        }      
+        \Artisan::call('sitemap:auto');  
         return view("frontend.home",compact("component","error","data","success","alias","layout"));        
   }  
   public function search(Request $request){
@@ -584,6 +585,7 @@ class IndexController extends Controller {
     }
     $breadcrumb='';              
     $breadcrumb= getBreadcrumb($alias);  
+    \Artisan::call('sitemap:auto');
     return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","breadcrumb"));                            
   }
       function addCart(){          

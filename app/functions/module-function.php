@@ -7,6 +7,9 @@ use App\ProductModel;
 use App\ArticleModel;
 use App\BannerModel;
 use App\PageModel;
+use App\ProjectModel;
+use App\OrganizationModel;
+use App\ProjectArticleModel;
 use App\CategoryProductModel;
 use App\CategoryArticleModel;
 use App\CategoryBannerModel;
@@ -118,8 +121,8 @@ function wp_nav_menu($args){
             $site_link=url('/'.$data_menu[$i]["alias"]) ;
             break;          
             case 'thu-vien':   
-            case 'dich-vu':
-            case 'gioi-thieu':   
+           
+           
             case 'san-pham':      
             $site_link='javascript:void(0);';
             break;
@@ -323,4 +326,5 @@ function getBreadCrumb($alias){
   }
   return $strBreadcrumb;
 }
+
 ?>

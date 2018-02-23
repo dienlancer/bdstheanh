@@ -167,7 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
-         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,   
+         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,  
+         Roumen\Sitemap\SitemapServiceProvider::class, 
         /*
          * Application Service Providers...
          */
