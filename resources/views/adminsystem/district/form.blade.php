@@ -7,6 +7,7 @@ $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    onblur="createAlias();"   value="'.@$arrRowData['fullname'].'">'; 
 $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled     value="'.@$arrRowData['alias'].'">';
+$ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"      value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
@@ -53,7 +54,16 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
                             <span class="help-block"></span>
                         </div>
                     </div>                         
-                </div>                            
+                </div>  
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>Tỉnh / Thành phố</b></label>
+                        <div class="col-md-10">
+                            <?php echo $ddlProvince; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>                         
+                </div>                          
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Sắp xếp</b></label>
@@ -95,7 +105,8 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
     function save(){
         var id=$('input[name="id"]').val();        
         var fullname=$('input[name="fullname"]').val();             
-        var alias=$('input[name="alias"]').val();             
+        var alias=$('input[name="alias"]').val();   
+        var province_id=$('select[name="province_id"]').val();          
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
@@ -103,7 +114,8 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
         var dataItem={
             "id":id,
             "fullname":fullname,    
-            "alias":alias,               
+            "alias":alias,      
+            "province_id":province_id,         
             "sort_order":sort_order,
             "status":status,
             "_token": token
@@ -147,7 +159,7 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
     function createAlias(){
         var id=$('input[name="id"]').val();   
         var fullname    = $('input[name="fullname"]').val();
-        var token       = $('form[name="frm"] > input[name="_token"]').val();     
+        var token       = $('input[name="_token"]').val();     
         var dataItem={      
             "id":id,      
             "fullname":fullname,            

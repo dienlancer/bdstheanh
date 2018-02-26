@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 24, 2018 lúc 06:50 AM
+-- Thời gian đã tạo: Th2 26, 2018 lúc 04:31 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -350,6 +350,7 @@ CREATE TABLE `district` (
   `id` bigint(20) NOT NULL,
   `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -360,13 +361,15 @@ CREATE TABLE `district` (
 -- Đang đổ dữ liệu cho bảng `district`
 --
 
-INSERT INTO `district` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Quận 1', 'quan-1', 1, 1, '2018-01-22 02:05:14', '2018-01-22 07:18:21'),
-(5, 'Quận 2', 'quan-2', 2, 1, '2018-01-22 02:19:30', '2018-01-22 07:18:30'),
-(6, 'Quận 3', 'quan-3', 3, 1, '2018-01-22 02:19:36', '2018-01-22 07:18:48'),
-(7, 'Quận 4', 'quan-4', 4, 1, '2018-01-22 02:19:43', '2018-01-22 07:18:53'),
-(8, 'Quận 5', 'quan-5', 5, 1, '2018-01-22 02:19:49', '2018-01-22 07:18:57'),
-(9, 'Quận 6', 'quan-6', 6, 1, '2018-01-22 02:19:55', '2018-01-22 07:19:02');
+INSERT INTO `district` (`id`, `fullname`, `alias`, `province_id`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Tân Bình', 'tan-binh', 24, 3, 1, '2018-02-26 03:03:50', '2018-02-26 03:23:39'),
+(2, 'Phú Nhuận', 'phu-nhuan', 24, 4, 1, '2018-02-26 03:19:32', '2018-02-26 03:23:39'),
+(3, 'Quận 1', 'quan-1', 24, 1, 1, '2018-02-26 03:19:56', '2018-02-26 03:21:12'),
+(4, 'Quận 2', 'quan-2', 24, 2, 1, '2018-02-26 03:20:06', '2018-02-26 03:26:09'),
+(5, 'Quận 2', 'quan-2', 36, 6, 1, '2018-02-26 03:23:23', '2018-02-26 03:25:07'),
+(6, 'Quận 1', 'quan-1', 36, 5, 1, '2018-02-26 03:24:19', '2018-02-26 03:25:00'),
+(7, 'Tân Bình', 'tan-binh', 36, 7, 1, '2018-02-26 03:24:47', '2018-02-26 03:25:07'),
+(8, 'Phú Nhuận', 'phu-nhuan', 36, 8, 1, '2018-02-26 03:25:52', '2018-02-26 03:25:52');
 
 -- --------------------------------------------------------
 
@@ -1119,7 +1122,13 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (399, 1, '0vzpmO1DNUL7MwWAaF7kg5rKo9Odz9DG', '2018-02-20 18:59:59', '2018-02-20 18:59:59'),
 (400, 1, 'BUi8C0AV3AHpueiooxStwLVXznFFpdto', '2018-02-20 22:47:51', '2018-02-20 22:47:51'),
 (401, 1, '6Av2lqwxCgu187njp2xD9V7vRPpLoZtM', '2018-02-21 18:45:25', '2018-02-21 18:45:25'),
-(402, 1, 'iHgedLoBnytTjD8RPvhYyWfqksqrKUrd', '2018-02-21 18:45:25', '2018-02-21 18:45:25');
+(402, 1, 'iHgedLoBnytTjD8RPvhYyWfqksqrKUrd', '2018-02-21 18:45:25', '2018-02-21 18:45:25'),
+(403, 1, 'uDpjeIaXZuVf895yRxOyC2e3coXRUjQ2', '2018-02-25 05:36:24', '2018-02-25 05:36:24'),
+(404, 1, 'JZXc3vu25jMJ4QVGWyqZdRqlZsfeKlBl', '2018-02-25 05:36:24', '2018-02-25 05:36:24'),
+(405, 1, 'YZSKkmFkarSHbzAl3JFp2KBLOU2xKagU', '2018-02-25 18:37:06', '2018-02-25 18:37:06'),
+(406, 1, 'csvrk7irkCxmHFlsz8KSfdxbv23kbQCg', '2018-02-25 18:37:06', '2018-02-25 18:37:06'),
+(407, 1, 'tbXe9LRZxaBqWVn7KXpibwagdrIRVje6', '2018-02-25 19:46:31', '2018-02-25 19:46:31'),
+(408, 1, 'n2zo4wLChv4crjTlHEZe2DnB2UfhiVKM', '2018-02-25 19:46:31', '2018-02-25 19:46:31');
 
 -- --------------------------------------------------------
 
@@ -1320,8 +1329,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_description`, `image`, `count_view`, `total_cost`, `unit`, `intro`, `overview`, `equipment`, `price_list`, `googlemap_url`, `province_id`, `district_id`, `street`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(10, 'Opal Skyview 1', 'opal-skyview-1', 'metakeyword Opal Skyview 1', 'metadescription Opal Skyview 1', 'conmochieu-1.png', 409, 100, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 1</p>', '<p>tiện &iacute;ch 1</p>', '<p>bảng gi&aacute; 1</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 1, 1, '2018-01-04 18:34:30', '2018-02-22 01:42:17'),
-(11, 'Opal Skyview 2', 'opal-skyview-2', 'metakeyword Opal Skyview 2', 'metadescription Opal Skyview 2', 'conmochieu-2.png', 1, 200, 'triệu VNĐ', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source', '<p>tổng quan 2</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 2, 1, '2018-01-18 17:17:02', '2018-01-22 06:55:55'),
+(10, 'Opal Skyview 1', 'opal-skyview-1', 'metakeyword Opal Skyview 1', 'metadescription Opal Skyview 1', 'conmochieu-1.png', 410, 100, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 1</p>', '<p>tiện &iacute;ch 1</p>', '<p>bảng gi&aacute; 1</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 1, 1, '2018-01-04 18:34:30', '2018-02-26 01:37:57'),
+(11, 'Opal Skyview 2', 'opal-skyview-2', 'metakeyword Opal Skyview 2', 'metadescription Opal Skyview 2', 'conmochieu-2.png', 3, 200, 'triệu VNĐ', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source', '<p>tổng quan 2</p>', '<p>tiện &iacute;ch 2</p>', '<p>bảng gi&aacute; 2</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 2, 1, '2018-01-18 17:17:02', '2018-02-26 01:38:39'),
 (12, 'Opal Skyview 3', 'opal-skyview-3', 'metakeyword Opal Skyview 3', 'metadescription Opal Skyview 3', 'conmochieu-3.png', NULL, 300, 'triệu VNĐ', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham', '<p>tổng quan 3</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 3, 1, '2018-01-18 17:17:56', '2018-01-22 03:42:44'),
 (13, 'Opal Skyview 4', 'opal-skyview-4', 'metakeyword Opal Skyview 4', 'metadescription Opal Skyview 4', 'conmochieu-4.png', NULL, 400, 'triệu VNĐ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy', '<p>tổng quan 4</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 4, 1, '2018-01-18 17:22:56', '2018-01-22 03:42:52'),
 (14, 'Opal Skyview 5', 'opal-skyview-5', 'metakeyword Opal Skyview 5', 'metadescription Opal Skyview 5', 'conmochieu-5.png', NULL, 500, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 5</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 5, 1, '2018-01-18 17:23:56', '2018-01-22 03:43:01'),
@@ -1418,11 +1427,69 @@ CREATE TABLE `province` (
 --
 
 INSERT INTO `province` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Hồ Chí Minh', 'ho-chi-minh', 1, 1, '2018-01-21 18:15:47', '2018-01-22 07:09:04'),
-(5, 'Kiên Giang', 'kien-giang', 2, 1, '2018-01-21 18:21:04', '2018-01-22 07:09:15'),
-(6, 'Đồng Tháp', 'dong-thap', 3, 1, '2018-01-22 02:19:03', '2018-01-22 07:10:03'),
-(7, 'Tây Ninh', 'tay-ninh', 4, 1, '2018-01-22 02:19:11', '2018-01-22 07:10:07'),
-(8, 'Trà Vinh', 'tra-vinh', 5, 1, '2018-01-22 02:19:21', '2018-01-22 07:10:13');
+(1, 'Việt Nam', 'viet-nam', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:18:21'),
+(2, 'An Giang', 'an-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:34'),
+(3, 'Bà Rịa Vũng Tàu', 'ba-ria-vung-tau', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:28'),
+(4, 'Bình Dương', 'binh-duong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:21'),
+(5, 'Bình Phước', 'binh-phuoc', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:16'),
+(6, 'Bình Thuận', 'binh-thuan', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:09'),
+(7, 'Bình Định', 'binh-dinh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:02'),
+(8, 'Bắc Giang', 'bac-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:55'),
+(9, 'Bắc Kạn', 'bac-kan', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:49'),
+(10, 'Bắc Ninh', 'bac-ninh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:43'),
+(11, 'Bến Tre', 'ben-tre', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:37'),
+(12, 'Cao Bằng', 'cao-bang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:28'),
+(13, 'Cà Mau', 'ca-mau', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:22'),
+(14, 'Cần Thơ', 'can-tho', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:15'),
+(15, 'Gia Lai', 'gia-lai', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:40'),
+(16, 'Hà Giang', 'ha-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:47'),
+(17, 'Hà Nam', 'ha-nam', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:54'),
+(18, 'Hà Nội', 'ha-noi', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:18:14'),
+(19, 'Hà Tĩnh', 'ha-tinh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:18:08'),
+(20, 'Hòa Bình', 'hoa-binh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:18:02'),
+(21, 'Hưng Yên', 'hung-yen', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:55'),
+(22, 'Hải Dương', 'hai-duong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:50'),
+(23, 'Hải Phòng', 'hai-phong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:43'),
+(24, 'Hồ Chí Minh', 'ho-chi-minh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:38'),
+(25, 'Khánh Hòa', 'khanh-hoa', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:32'),
+(26, 'Kiên Giang', 'kien-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:26'),
+(27, 'Kon Tum', 'kon-tum', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:21'),
+(28, 'Lai Châu', 'lai-chau', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:14'),
+(29, 'Long An', 'long-an', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:08'),
+(30, 'Lào Cai', 'lao-cai', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:17:01'),
+(31, 'Lâm Đồng', 'lam-dong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:08'),
+(32, 'Lạng Sơn', 'lang-son', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:15:01'),
+(33, 'Nam Định', 'nam-dinh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:54'),
+(34, 'Nghệ An', 'nghe-an', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:41'),
+(35, 'Ninh Bình', 'ninh-binh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:33'),
+(36, 'Ninh Thuận', 'ninh-thuan', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:27'),
+(37, 'Phú Thọ', 'phu-tho', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:20'),
+(38, 'Phú Yên', 'phu-yen', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:14'),
+(39, 'Quảng Nam', 'quang-nam', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:09'),
+(40, 'Quảng Ngãi', 'quang-ngai', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:03'),
+(41, 'Quảng Ninh', 'quang-ninh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:57'),
+(42, 'Quảng Trị', 'quang-tri', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:52'),
+(43, 'Sơn La', 'son-la', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:45'),
+(44, 'Thanh Hóa', 'thanh-hoa', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:39'),
+(45, 'Thái Bình', 'thai-binh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:33'),
+(46, 'Thái Nguyên', 'thai-nguyen', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:28'),
+(47, 'Thừa Thiên Huế', 'thua-thien-hue', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:47'),
+(48, 'Tiền Giang', 'tien-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:52'),
+(49, 'Trà Vinh', 'tra-vinh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:12:58'),
+(50, 'Tuyên Quang', 'tuyen-quang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:49'),
+(51, 'Tây Ninh', 'tay-ninh', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:34'),
+(52, 'Vĩnh Long', 'vinh-long', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:25'),
+(53, 'Vĩnh Phúc', 'vinh-phuc', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:20'),
+(54, 'Yên Bái', 'yen-bai', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:14:11'),
+(55, 'Đà Nẵng', 'da-nang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:58'),
+(56, 'Đắk Lắk', 'dak-lak', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:52'),
+(57, 'Đồng Nai', 'dong-nai', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:46'),
+(58, 'Đồng Tháp', 'dong-thap', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:40'),
+(59, 'Bạc Liêu', 'bac-lieu', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:33'),
+(60, 'Sóc Trăng', 'soc-trang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:19'),
+(61, 'Hậu Giang', 'hau-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:11'),
+(62, 'Đắk Nông', 'dak-nong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:13:05'),
+(63, 'Điện Biên', 'dien-bien', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:11:19');
 
 -- --------------------------------------------------------
 
@@ -1986,7 +2053,13 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 (429, 1, 'user', NULL, '2018-02-20 22:47:51', '2018-02-20 22:47:51'),
 (430, NULL, 'global', NULL, '2018-02-21 18:45:17', '2018-02-21 18:45:17'),
 (431, NULL, 'ip', '127.0.0.1', '2018-02-21 18:45:17', '2018-02-21 18:45:17'),
-(432, 1, 'user', NULL, '2018-02-21 18:45:17', '2018-02-21 18:45:17');
+(432, 1, 'user', NULL, '2018-02-21 18:45:17', '2018-02-21 18:45:17'),
+(433, NULL, 'global', NULL, '2018-02-25 05:36:15', '2018-02-25 05:36:15'),
+(434, NULL, 'ip', '127.0.0.1', '2018-02-25 05:36:15', '2018-02-25 05:36:15'),
+(435, 1, 'user', NULL, '2018-02-25 05:36:15', '2018-02-25 05:36:15'),
+(436, NULL, 'global', NULL, '2018-02-25 18:36:58', '2018-02-25 18:36:58'),
+(437, NULL, 'ip', '127.0.0.1', '2018-02-25 18:36:58', '2018-02-25 18:36:58'),
+(438, 1, 'user', NULL, '2018-02-25 18:36:58', '2018-02-25 18:36:58');
 
 -- --------------------------------------------------------
 
@@ -2017,7 +2090,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-02-21 18:45:25', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-21 18:45:25');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-02-25 19:46:31', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-02-25 19:46:31');
 
 -- --------------------------------------------------------
 
@@ -2391,7 +2464,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT cho bảng `district`
 --
 ALTER TABLE `district`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `group_member`
@@ -2457,7 +2530,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=403;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=409;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2499,7 +2572,7 @@ ALTER TABLE `project_member`
 -- AUTO_INCREMENT cho bảng `province`
 --
 ALTER TABLE `province`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
@@ -2529,7 +2602,7 @@ ALTER TABLE `supporter`
 -- AUTO_INCREMENT cho bảng `throttle`
 --
 ALTER TABLE `throttle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=439;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

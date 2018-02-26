@@ -14,6 +14,7 @@ use App\ArticleCategoryModel;
 use App\PaymentMethodModel;
 use App\SupporterModel;
 use App\DistrictModel;
+use App\ProvinceModel;
 use DB;
 class DistrictController extends Controller {
   	var $_controller="district";	
@@ -38,10 +39,11 @@ class DistrictController extends Controller {
         if(!empty(@$request->filter_search)){      
           $filter_search=trim(@$request->filter_search) ;    
         }        
-        $data=DB::table('district')                  
-                ->select('district.id','district.fullname','district.sort_order','district.status','district.created_at','district.updated_at')                
+        $data=DB::table('district')
+                ->join('province','district.province_id','=','province.id')                  
+                ->select('district.id','district.fullname','province.fullname as province_name','district.sort_order','district.status','district.created_at','district.updated_at')                
                 ->where('district.fullname','like','%'.trim(mb_strtolower($filter_search,'UTF-8')).'%')                     
-                ->groupBy('district.id','district.fullname','district.sort_order','district.status','district.created_at','district.updated_at')   
+                ->groupBy('district.id','district.fullname','province.fullname','district.sort_order','district.status','district.created_at','district.updated_at')   
                 ->orderBy('district.sort_order', 'asc')                
                 ->get()->toArray();              
         $data=convertToArray($data);    
@@ -55,6 +57,7 @@ class DistrictController extends Controller {
         $arrRowData=array();        
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";  
+        $arrProvince=ProvinceModel::select("id","fullname")->orderBy("fullname","asc")->get()->toArray(); 
         if(in_array($requestControllerAction, $arrPrivilege)){
           switch ($task) {
            case 'edit':
@@ -65,7 +68,7 @@ class DistrictController extends Controller {
               $title=$this->_title . " : Add new";
            break;     
         }                  
-        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","controller","task","title","icon"));
+        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrProvince","controller","task","title","icon"));
         }else{
           return view("adminsystem.no-access");
         }        
@@ -73,7 +76,8 @@ class DistrictController extends Controller {
      public function save(Request $request){
           $id 					        =		trim($request->id);        
           $fullname 				    =		trim($request->fullname);  
-          $alias                =   trim($request->alias);                            
+          $alias                =   trim($request->alias);    
+          $province_id          =   trim($request->province_id);                        
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);          
           $data 		            =   array();
@@ -85,19 +89,7 @@ class DistrictController extends Controller {
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
                  $error["fullname"]["msg"] = "Thiếu tên";
-          }else{
-              $data=array();
-              if (empty($id)) {
-                $data=DistrictModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
-              }else{
-                $data=DistrictModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
-              }  
-              if (count($data) > 0) {
-                  $checked = 0;
-                  $error["fullname"]["type_msg"] = "has-error";
-                  $error["fullname"]["msg"] = "Bài viết đã tồn tại";
-              }      	
-          }                          
+          }                      
           if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";
@@ -118,7 +110,8 @@ class DistrictController extends Controller {
                                   
                 }  
                 $item->fullname 		    =	@$fullname;   
-                $item->alias            = @$alias;                                        
+                $item->alias            = @$alias;   
+                $item->province_id      = (int)@$province_id;                                     
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
@@ -283,11 +276,7 @@ class DistrictController extends Controller {
           $dataProvince=array();
           $dataDistrict=array();
           $checked_trung_alias=0;          
-          if (empty($id)) {              
-              $dataDistrict=DistrictModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();             
-            }else{
-              $dataDistrict=DistrictModel::whereRaw("trim(lower(alias)) = ? and id != ?",[trim(mb_strtolower($alias,'UTF-8')),(int)@$id])->get()->toArray();    
-            }  
+          
             $dataCategoryArticle=CategoryArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
             $dataCategoryProduct=CategoryProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
             $dataProduct=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
