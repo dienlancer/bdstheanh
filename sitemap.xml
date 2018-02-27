@@ -1,284 +1,284 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="http://demo.dienkim/bdstheanh/vendor/sitemap/styles/xml.xsl" type="text/xsl"?>
+<?xml-stylesheet href="http://bdstheanh.dienkim/vendor/sitemap/styles/xml.xsl" type="text/xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/trang-chu.html</loc>
+	<loc>http://bdstheanh.dienkim/trang-chu.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-10T03:36:35+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/tin-tuc.html</loc>
+	<loc>http://bdstheanh.dienkim/tin-tuc.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T04:53:34+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/gioi-thieu.html</loc>
+	<loc>http://bdstheanh.dienkim/gioi-thieu.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T08:55:44+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/lien-he.html</loc>
+	<loc>http://bdstheanh.dienkim/lien-he.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T04:53:34+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/du-an.html</loc>
+	<loc>http://bdstheanh.dienkim/du-an.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T04:53:34+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/dich-vu.html</loc>
+	<loc>http://bdstheanh.dienkim/dich-vu.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T08:55:17+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/tam-nhin.html</loc>
+	<loc>http://bdstheanh.dienkim/tam-nhin.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:11:29+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/su-menh.html</loc>
+	<loc>http://bdstheanh.dienkim/su-menh.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:11:42+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/gia-tri-cot-loi.html</loc>
+	<loc>http://bdstheanh.dienkim/gia-tri-cot-loi.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:12:05+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/triet-ly-kinh-doanh.html</loc>
+	<loc>http://bdstheanh.dienkim/triet-ly-kinh-doanh.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:12:18+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/tin-du-an.html</loc>
+	<loc>http://bdstheanh.dienkim/tin-du-an.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:19:04+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/tin-bat-dong-san.html</loc>
+	<loc>http://bdstheanh.dienkim/tin-bat-dong-san.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:19:17+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/thi-truong.html</loc>
+	<loc>http://bdstheanh.dienkim/thi-truong.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:19:29+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/tu-van.html</loc>
+	<loc>http://bdstheanh.dienkim/tu-van.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:19:42+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/quan-ly-bat-dong-san.html</loc>
+	<loc>http://bdstheanh.dienkim/quan-ly-bat-dong-san.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:27:38+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/cho-thue-can-ho.html</loc>
+	<loc>http://bdstheanh.dienkim/cho-thue-can-ho.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:27:53+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/ban-bat-dong-san.html</loc>
+	<loc>http://bdstheanh.dienkim/ban-bat-dong-san.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-21T04:28:19+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/bo-suu-tap-noi-that-go-soi-cua-uma.html</loc>
+	<loc>http://bdstheanh.dienkim/bo-suu-tap-noi-that-go-soi-cua-uma.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T08:43:56+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/go-soi-chat-luong-cao-duoc-su-dung.html</loc>
+	<loc>http://bdstheanh.dienkim/go-soi-chat-luong-cao-duoc-su-dung.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T04:05:07+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/go-soi-trang-my.html</loc>
+	<loc>http://bdstheanh.dienkim/go-soi-trang-my.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T04:04:56+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/go-oc-cho-84-2c-walnut-84-2c.html</loc>
+	<loc>http://bdstheanh.dienkim/go-oc-cho-84-2c-walnut-84-2c.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T18:58:27+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/go-soi-trang-greenecolife-phan-phoi-nhap-khau.html</loc>
+	<loc>http://bdstheanh.dienkim/go-soi-trang-greenecolife-phan-phoi-nhap-khau.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T10:16:55+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/go-nhap-khau-nguyen-lieu-gia-tot-tai-ho-chi-minh.html</loc>
+	<loc>http://bdstheanh.dienkim/go-nhap-khau-nguyen-lieu-gia-tot-tai-ho-chi-minh.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T04:06:05+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/uu-nhuoc-diem-cua-noi-that-go-soi.html</loc>
+	<loc>http://bdstheanh.dienkim/uu-nhuoc-diem-cua-noi-that-go-soi.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T04:05:43+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/nguyen-lieu-go-nhap-khau-gia-si.html</loc>
+	<loc>http://bdstheanh.dienkim/nguyen-lieu-go-nhap-khau-gia-si.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-20T04:05:36+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-16.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-16.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:34:08+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-15.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-15.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:33:28+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-14.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-14.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:31:47+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-13.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-13.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:31:06+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-12.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-12.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:30:19+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-11.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-11.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-23T03:06:13+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-10.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-10.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:27:47+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-9.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-9.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:26:59+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-8.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-8.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:26:18+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-7.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-7.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T17:25:24+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-6.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-6.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T03:43:09+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-5.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-5.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T03:43:01+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-4.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-4.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T03:42:52+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-3.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-3.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T03:42:44+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-2.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-2.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-02-26T01:38:39+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/opal-skyview-1.html</loc>
+	<loc>http://bdstheanh.dienkim/opal-skyview-1.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-02-26T01:37:57+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/ky-thu-tam-tuoi-gay-bat-ngo-o-cup-chien-thang.html</loc>
+	<loc>http://bdstheanh.dienkim/ky-thu-tam-tuoi-gay-bat-ngo-o-cup-chien-thang.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T10:09:59+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/lebron-james-bat-luc-nhin-doi-nha-tham-bai-truoc-boston-celtics.html</loc>
+	<loc>http://bdstheanh.dienkim/lebron-james-bat-luc-nhin-doi-nha-tham-bai-truoc-boston-celtics.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T08:45:08+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/lich-thi-dau-o-anh-khac-nghiet-nhu-the-nao.html</loc>
+	<loc>http://bdstheanh.dienkim/lich-thi-dau-o-anh-khac-nghiet-nhu-the-nao.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T08:45:39+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/pochettino:-tottenham-se-xem-xet-neu-kane-de-nghi-ra-di.html</loc>
+	<loc>http://bdstheanh.dienkim/pochettino:-tottenham-se-xem-xet-neu-kane-de-nghi-ra-di.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T19:01:42+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/andy-murray-rut-khoi-australia-mo-rong-2018.html</loc>
+	<loc>http://bdstheanh.dienkim/andy-murray-rut-khoi-australia-mo-rong-2018.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-22T09:56:14+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
-	<loc>http://demo.dienkim/bdstheanh/sam-allardyce---ga-hlv-thuc-dung-nhat-ngoai-hang-anh.html</loc>
+	<loc>http://bdstheanh.dienkim/sam-allardyce---ga-hlv-thuc-dung-nhat-ngoai-hang-anh.html</loc>
 		<priority>0.9</priority>
 		<lastmod>2018-01-18T19:01:31+00:00</lastmod>
 		<changefreq>monthly</changefreq>
