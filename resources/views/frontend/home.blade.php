@@ -3,6 +3,7 @@
 <?php 
 use App\ProjectModel;
 $setting=getSettingSystem();
+$seo=getSeo();
 $telephone=$setting['telephone']['field_value'];
 $email_to=$setting['email_to']['field_value'];
 $facebook_url=$setting['facebook_url']['field_value'];
@@ -85,6 +86,7 @@ if(count($data_slideshow) > 0){
 }  
 }
 ?>
+<h1 style="display: none;"><?php echo $seo["title"]; ?></h1>
 <hr class="gach-ngang">
 <div class="container">
 	<div class="col-lg-12">
