@@ -36,7 +36,7 @@ if(count($item) > 0){
             <?php echo $breadcrumb; ?>
         </h2>
         <?php
-    }   
+    }       
 	?>        
 	<div class="margin-top-5 box-article">	
         	

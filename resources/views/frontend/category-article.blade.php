@@ -1,21 +1,12 @@
 <form method="post" class="frm margin-top-15" name="frm">
 	<input type="hidden" name="filter_page" value="1">         
 	{{ csrf_field() }}	
-	<?php 		
-	if(empty($breadcrumb)){
-		?>
-		<h2 class="tieu-de">
-			<?php echo $title; ?>		
-		</h2>
-		<?php
-	}else{
-		?>
-		<h2 class="breadcrumb-title">
-			<?php echo $breadcrumb; ?>
-		</h2>
-		<?php
-	}	
+	<?php 			
+	$breadcrumb= getBreadCrumbCategoryArticle($category);	
 	?>
+	<div class="breadcrumb-title">
+		<?php echo $breadcrumb; ?>
+	</div>
 	<div class="row">
 		<?php 	
 		if(count($items) > 0){

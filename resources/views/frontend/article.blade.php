@@ -23,8 +23,7 @@ if(count($item) > 0){
     $email_to=$setting['email_to']['field_value'];
     $contacted_person=$setting['contacted_person']['field_value'];
     $telephone=$setting['telephone']['field_value'];
-    $office=$setting['office']['field_value'];
-    
+    $office=$setting['office']['field_value'];    
     /* end setting */    
 	$dataArticleCategory=DB::table('article_category')
 	->join('category_article','article_category.category_id','=','category_article.id')		
@@ -44,7 +43,7 @@ if(count($item) > 0){
 			$arr_category_name[]='<a href="'.$permalink.'">'.$value["fullname"].'</a>' ;						
 		}		
 		$category_name=implode(' / ', $arr_category_name);		
-	}		
+	}			
 	?>
 	<h2 class="breadcrumb-title margin-top-15">
 			<?php echo $category_name; ?>
