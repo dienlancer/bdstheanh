@@ -15,7 +15,7 @@ $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrSt
 $parent_id              =   (count($arrRowData) > 0) ? @$arrRowData['parent_id'] : null ; 
 $ddlCategoryArticle     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryRecursive, $parent_id,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -145,7 +145,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
@@ -199,7 +199,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

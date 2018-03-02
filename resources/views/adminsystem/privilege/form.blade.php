@@ -4,12 +4,12 @@
 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"       value="'.@$arrRowData['fullname'].'">'; 
-$inputController        =   '<input type="text" class="form-control" name="controller"   id="controller"       value="'.@$arrRowData['controller'].'">'; 
-$inputAction            =   '<input type="text" class="form-control" name="action"   id="action"       value="'.@$arrRowData['action'].'">'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"        value="'.@$arrRowData['fullname'].'">'; 
+$inputController        =   '<input type="text" class="form-control" name="controller"         value="'.@$arrRowData['controller'].'">'; 
+$inputAction            =   '<input type="text" class="form-control" name="action"         value="'.@$arrRowData['action'].'">'; 
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"      value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -102,7 +102,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

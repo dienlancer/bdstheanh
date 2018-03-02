@@ -22,7 +22,7 @@ $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 =
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 $setting= getSettingSystem();
 $product_width = $setting['product_width']['field_value'];
 $product_height = $setting['product_height']['field_value'];
@@ -231,7 +231,7 @@ $product_height = $setting['product_height']['field_value'];
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;   

@@ -5,17 +5,17 @@ $setting= getSettingSystem();
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    value="'.@$arrRowData['fullname'].'">'; 
-$inputVideoUrl          =   '<input type="text" class="form-control" name="video_url"   id="video_url"    value="'.@$arrRowData['video_url'].'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"      value="'.@$arrRowData['fullname'].'">'; 
+$inputVideoUrl          =   '<input type="text" class="form-control" name="video_url"     value="'.@$arrRowData['video_url'].'">'; 
  
 $ddlCategoryVideo      =   cmsSelectboxCategory("category_video_id","category_video_id","form-control",$arrCategoryVideo,@$arrRowData['category_video_id'],"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
 if(count(@$arrRowData)>0){
@@ -24,7 +24,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 }   
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden"   value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -183,7 +183,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{

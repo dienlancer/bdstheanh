@@ -5,8 +5,8 @@ $setting= getSettingSystem();
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    onblur="createAlias();"   value="'.@$arrRowData['fullname'].'">'; 
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled     value="'.@$arrRowData['alias'].'">';
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"       onblur="createAlias();"   value="'.@$arrRowData['fullname'].'">'; 
+$inputAlias             =   '<input type="text" class="form-control" name="alias"        disabled     value="'.@$arrRowData['alias'].'">';
 $ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"      value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
@@ -126,7 +126,7 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){                            
+                if(data.checked==1){                            
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
@@ -173,7 +173,7 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

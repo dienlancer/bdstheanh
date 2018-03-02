@@ -8,18 +8,18 @@ $str_disabled           =   "";
 if($task == "edit"){
     $str_disabled       =   "disabled";
 }
-$inputUsername          =   '<input type="text" class="form-control" name="username"  '.$str_disabled.'  id="username"       value="'.@$arrRowData['username'].'">'; 
-$inputEmail             =   '<input type="text" class="form-control" name="email"       id="email"          value="'.@$arrRowData['email'].'">'; 
-$inputPassword          =   '<input type="password" id="password" name="password" class="form-control" />';
-$inputConfirmPassword   =   '<input type="password" id="confirm_password" name="confirm_password" class="form-control"  />';
+$inputUsername          =   '<input type="text" class="form-control" name="username"  '.$str_disabled.'      value="'.@$arrRowData['username'].'">'; 
+$inputEmail             =   '<input type="text" class="form-control" name="email"             value="'.@$arrRowData['email'].'">'; 
+$inputPassword          =   '<input type="password"   name="password" class="form-control" />';
+$inputConfirmPassword   =   '<input type="password"  name="confirm_password" class="form-control"  />';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"        value="'.@$arrRowData['fullname'].'">'; 
-$ddlGroupMember         =   cmsSelectboxCategory('group_member_id','group_member_id', 'form-control',@$arrGroupMember,@$arrRowData['group_member_id'],"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"       value="'.@$arrRowData['fullname'].'">'; 
+$ddlGroupMember         =   cmsSelectboxGroupMemberMultiple("group_member_id","group_member_id[]", 'form-control', @$arrGroupMember, @$arrUserGroupMember,"");
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
 if(count(@$arrRowData)>0){
@@ -28,7 +28,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 }   
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -110,7 +110,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
                         <div class="col-md-10">
-                            <input type="file" id="image" name="image"  />   
+                            <input type="file"  name="image"  />   
                             <div class="picture-area"><?php echo $picture; ?>                      </div>
                         </div>
                     </div>     
@@ -199,7 +199,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             image = image.substr(image.lastIndexOf('\\') + 1);       
         }
         var image_hidden=$('input[name="image_hidden"]').val(); 
-        var group_member_id=$('select[name="group_member_id"]').val();        
+        var group_member_id=$('select[name="group_member_id[]"]').val();        
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
         resetErrorStatus();
@@ -223,7 +223,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{

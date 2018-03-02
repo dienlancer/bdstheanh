@@ -6,27 +6,27 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"      onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">';
-$inputIntro             =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
-$inputOverview             =   '<textarea id="overview" name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
-$inputEquipment       =   '<textarea id="equipment" name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
-$inputPriceList       =   '<textarea id="price_list" name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
-$inputGoogleMapUrl       =   '<textarea id="googlemap_url" name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
-$inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
-$inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"      id="total_cost"         value="'.@$arrRowData['total_cost'].'">';
-$inputUnit          =   '<input type="text" class="form-control" name="unit"   id="unit"     value="'.@$arrRowData['unit'].'">'; 
+$inputAlias             =   '<input type="text" class="form-control" name="alias"      disabled      value="'.@$arrRowData['alias'].'">';
+$inputIntro             =   '<textarea  name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
+$inputOverview             =   '<textarea  name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
+$inputEquipment       =   '<textarea name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
+$inputPriceList       =   '<textarea name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
+$inputGoogleMapUrl       =   '<textarea   name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
+$inputMetakeyword             =   '<textarea   name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
+$inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
+$inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
+$inputUnit          =   '<input type="text" class="form-control" name="unit"  value="'.@$arrRowData['unit'].'">'; 
 $ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
 $ddlDistrict      =   cmsSelectboxCategory("district_id","district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
-$inputStreet          =   '<input type="text" class="form-control" name="street"   id="street"    value="'.@$arrRowData['street'].'">'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputStreet          =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
 $setting= getSettingSystem();
@@ -38,7 +38,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 } 
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -331,7 +331,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
@@ -385,7 +385,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

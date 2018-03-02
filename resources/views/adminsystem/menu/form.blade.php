@@ -3,25 +3,25 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList',[@$menu_type_id]);
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"       value="'.@$fullname.'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"       value="'.@$fullname.'">'; 
 $inputAlias             =   '';
 if(strcmp(@$alias, 'no-alias')==0){
     switch ($task) {
         case 'add':
-        $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"       value="">';
+        $inputAlias             =   '<input type="text" class="form-control" name="alias"          value="">';
 
         break;
         
         case 'edit':
-        $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"       value="'.@$arrRowData['alias'].'">';        
+        $inputAlias             =   '<input type="text" class="form-control" name="alias"       value="'.@$arrRowData['alias'].'">';        
         break;
     }    
 }else{
-    $inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"        value="'.@$alias.'">';
+    $inputAlias             =   '<input type="text" class="form-control" name="alias"          value="'.@$alias.'">';
     
 }
 $inputMenuClass         =   '<input type="text" class="form-control" name="menu_class"      value="'.@$arrRowData['menu_class'].'">';
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
@@ -29,7 +29,7 @@ $parent_id              =   (count($arrRowData) > 0) ? @$arrRowData['parent_id']
 $ddlMenu                =   cmsSelectboxCategory('parent_id','parent_id', 'form-control',$arrMenuRecursive,@$arrRowData['parent_id'],"");
 $ddlMenuType            =   cmsSelectboxCategory('menu_type_id','menu_type_id', 'form-control',$arrMenuType,@$menu_type_id,"disabled");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -171,7 +171,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

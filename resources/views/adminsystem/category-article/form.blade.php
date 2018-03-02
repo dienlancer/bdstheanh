@@ -5,20 +5,20 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"  onblur="createAlias()"     value="'.@$arrRowData['fullname'].'">'; 
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled     value="'.@$arrRowData['alias'].'">';
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    onblur="createAlias()"     value="'.@$arrRowData['fullname'].'">'; 
+$inputAlias             =   '<input type="text" class="form-control" name="alias"        disabled     value="'.@$arrRowData['alias'].'">';
  
-$inputMetakeyword       =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
-$inputMetadescription   =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputMetakeyword       =   '<textarea name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
+$inputMetadescription   =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $parent_id              =   (count($arrRowData) > 0) ? @$arrRowData['parent_id'] : null ; 
 $ddlCategoryArticle     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryArticleRecursive, $parent_id,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
-$inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
+$inputAliasMenu       =   '<input type="hidden" name="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
 $picture                =   "";
 $strImage               =   "";
 $setting= getSettingSystem();
@@ -28,7 +28,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 }    
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -85,7 +85,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
                         <div class="col-md-10">
-                            <input type="file" id="image" name="image"  />   
+                            <input type="file"  name="image"  />   
                             <div class="picture-area"><?php echo $picture; ?>                      </div>                            
                         </div>
                     </div>   
@@ -215,7 +215,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
@@ -270,7 +270,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

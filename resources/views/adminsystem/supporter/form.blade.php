@@ -4,15 +4,15 @@
 $setting= getSettingSystem();
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    value="'.@$arrRowData['fullname'].'">'; 
-$inputNumberMoney          =   '<input type="text" class="form-control" name="number_money" onkeyup="PhanCachSoTien(this);"  id="number_money"    value="'.convertToTextPrice(@$arrRowData['number_money']).'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    value="'.@$arrRowData['fullname'].'">'; 
+$inputNumberMoney          =   '<input type="text" class="form-control" name="number_money" onkeyup="PhanCachSoTien(this);"     value="'.convertToTextPrice(@$arrRowData['number_money']).'">'; 
 $ddlPaymentMethod      =   cmsSelectboxCategory("payment_method_id","payment_method_id","form-control",@$arrPaymentMethod,@$arrRowData['payment_method_id'],"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
 if(count(@$arrRowData)>0){
@@ -21,7 +21,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 }   
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden" value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -137,7 +137,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

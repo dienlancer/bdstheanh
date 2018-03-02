@@ -6,16 +6,16 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList',[@$categ
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 
-$inputCaption           =   '<textarea id="caption" name="caption" rows="2" cols="100" class="form-control" >'.@$arrRowData['caption'].'</textarea>'; 
-$inputAlt               =   '<textarea id="alt" name="alt" rows="2" cols="100" class="form-control" >'.@$arrRowData['alt'].'</textarea>'; 
-$inputPageurl           =   '<input type="text" class="form-control" name="page_url"   id="page_url"       value="'.@$arrRowData['page_url'].'">'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputCaption           =   '<textarea name="caption" rows="2" cols="100" class="form-control" >'.@$arrRowData['caption'].'</textarea>'; 
+$inputAlt               =   '<textarea name="alt" rows="2" cols="100" class="form-control" >'.@$arrRowData['alt'].'</textarea>'; 
+$inputPageurl           =   '<input type="text" class="form-control" name="page_url"     value="'.@$arrRowData['page_url'].'">'; 
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 $ddlCategory            =   cmsSelectboxCategory('category_id','category_id', 'form-control',$arrCategoryBanner,@$category_id,"disabled");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $picture                =   "";
 $strImage               =   "";
 if(count(@$arrRowData)>0){
@@ -24,7 +24,7 @@ if(count(@$arrRowData)>0){
         $strImage       =   @$arrRowData["image"];
     }        
 }   
-$inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_hidden" value="'.@$strImage.'" />';
+$inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -89,7 +89,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
                         <div class="col-md-10">
-                            <input type="file" id="image" name="image"  />   
+                            <input type="file"  name="image"  />   
                             <div class="picture-area"><?php echo $picture; ?>                      </div>
                         </div>
                     </div>     
@@ -188,7 +188,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{

@@ -6,15 +6,15 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"    id="fullname"   onblur="createAlias()"        value="'.@$arrRowData['fullname'].'">';  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"    disabled      value="'.@$arrRowData['alias'].'">';
-$inputTitle             =   '<textarea id="title" name="title" rows="2" cols="100" class="form-control" >'.@$arrRowData['title'].'</textarea>'; 
-$inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
-$inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputAuthor             =   '<input type="text" class="form-control" name="author"       id="author"              value="'.@$arrRowData['author'].'">'; 
-$inputCopyright             =   '<input type="text" class="form-control" name="copyright"       id="copyright"              value="'.@$arrRowData['copyright'].'">';   
-$inputGoogleSiteVerification             =   '<input type="text" class="form-control" name="google_site_verification"       id="google_site_verification"              value="'.@$arrRowData['google_site_verification'].'">';  
-$inputGoogleAnalytics             =   '<input type="text" class="form-control" name="google_analytics"       id="google_analytics"              value="'.@$arrRowData['google_analytics'].'">';  
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    onblur="createAlias()"        value="'.@$arrRowData['fullname'].'">';  
+$inputAlias             =   '<input type="text" class="form-control" name="alias"       disabled      value="'.@$arrRowData['alias'].'">';
+$inputTitle             =   '<textarea   name="title" rows="2" cols="100" class="form-control" >'.@$arrRowData['title'].'</textarea>'; 
+$inputMetakeyword             =   '<textarea   name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
+$inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
+$inputAuthor             =   '<input type="text" class="form-control" name="author"                  value="'.@$arrRowData['author'].'">'; 
+$inputCopyright             =   '<input type="text" class="form-control" name="copyright"             value="'.@$arrRowData['copyright'].'">';   
+$inputGoogleSiteVerification             =   '<input type="text" class="form-control" name="google_site_verification"                 value="'.@$arrRowData['google_site_verification'].'">';  
+$inputGoogleAnalytics             =   '<input type="text" class="form-control" name="google_analytics"                 value="'.@$arrRowData['google_analytics'].'">';  
 
 $pictureLogoFrontend                =   "";
 $strLogoFrontend               =   "";
@@ -24,7 +24,7 @@ if(count(@$arrRowData)>0){
         $strLogoFrontend       =   @$arrRowData["logo_frontend"];
     }        
 }   
-$inputPictureLogoFrontendHidden     =   '<input type="hidden" name="logo_frontend_hidden" id="logo_frontend_hidden" value="'.@$strLogoFrontend.'" />';
+$inputPictureLogoFrontendHidden     =   '<input type="hidden" name="logo_frontend_hidden"  value="'.@$strLogoFrontend.'" />';
 $pictureFavicon                =   "";
 $strFavicon               =   "";
 if(count(@$arrRowData)>0){
@@ -33,7 +33,7 @@ if(count(@$arrRowData)>0){
         $strFavicon       =   @$arrRowData["favicon"];
     }        
 }   
-$inputPictureFaviconHidden    =   '<input type="hidden" name="favicon_hidden" id="favicon_hidden" value="'.@$strFavicon.'" />';
+$inputPictureFaviconHidden    =   '<input type="hidden" name="favicon_hidden"  value="'.@$strFavicon.'" />';
 $data                   =   array();
 if(count(@$arrRowData) > 0){
     if(!empty(@$arrRowData)){
@@ -44,9 +44,9 @@ if(count(@$arrRowData) > 0){
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
+$inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -332,7 +332,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){                    
+                if(data.checked==1){                    
                     var ctrl_logo_frontend = $("input[type='file'][name='logo_frontend']");
                     var ctrl_favicon = $("input[type='file'][name='favicon']");                    
                     uploadFileImport($(ctrl_logo_frontend));    
@@ -453,7 +453,7 @@ $inputID                =   '<input type="hidden" name="id" id="id" value="'.@$i
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

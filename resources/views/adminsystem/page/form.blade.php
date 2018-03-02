@@ -6,24 +6,24 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"    onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"    onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"      id="alias"     disabled     value="'.@$arrRowData['alias'].'">';
-$inputThemeLocation             =   '<input type="text" class="form-control" name="theme_location"      id="theme_location"      value="'.@$arrRowData['theme_location'].'">';
-$inputIntro             =   '<textarea id="intro" name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
-$inputContent           =   '<textarea id="content" name="content" rows="2" cols="100" class="form-control" >'.@$arrRowData['content'].'</textarea>'; 
+$inputAlias             =   '<input type="text" class="form-control" name="alias"     disabled     value="'.@$arrRowData['alias'].'">';
+$inputThemeLocation             =   '<input type="text" class="form-control" name="theme_location"      value="'.@$arrRowData['theme_location'].'">';
+$inputIntro             =   '<textarea name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
+$inputContent           =   '<textarea name="content" rows="2" cols="100" class="form-control" >'.@$arrRowData['content'].'</textarea>'; 
 
-$inputDescription       =   '<textarea id="description" name="description" rows="2" cols="100" class="form-control" >'.@$arrRowData['description'].'</textarea>'; 
-$inputMetakeyword             =   '<textarea id="meta_keyword" name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
-$inputMetadescription             =   '<textarea id="meta_description" name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputDescription       =   '<textarea name="description" rows="2" cols="100" class="form-control" >'.@$arrRowData['description'].'</textarea>'; 
+$inputMetakeyword             =   '<textarea   name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
+$inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
+$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"       value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
 
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
-$inputAliasMenu       =   '<input type="hidden" name="alias_menu" id="alias_menu" value="'.@$arrRowData['alias'].'" />'; 
+$inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
+$inputAliasMenu       =   '<input type="hidden" name="alias_menu"   value="'.@$arrRowData['alias'].'" />'; 
 $picture                =   "";
 $strImage               =   "";
 $setting= getSettingSystem();
@@ -92,7 +92,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Hình</b></label>
                         <div class="col-md-10">
-                            <input type="file" id="image" name="image"  />   
+                            <input type="file"  name="image"  />   
                             <div class="picture-area"><?php echo $picture; ?>                      </div>
                         </div>
                     </div>     
@@ -264,7 +264,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     uploadFileImport();
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
@@ -323,7 +323,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden" id="image_
             data: dataItem,            
             async: false,
             success: function (data) {                
-                if(data.checked==true){
+                if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
                     var data_error=data.error;

@@ -9,11 +9,11 @@ $linkInsertArticle      =   route('adminsystem.'.$controller.'.insertArticle');
 $linkInsertProduct      =   route('adminsystem.'.$controller.'.insertProduct');
 $linkSortItems          =   route('adminsystem.'.$controller.'.sortItems');
 $linkGetItems           =   route('adminsystem.'.$controller.'.getItems');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"   id="fullname"       value="'.@$arrRowData['fullname'].'">'; 
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"     value="'.@$arrRowData['fullname'].'">'; 
 $ddlCategoryArticle     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
 $ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
-$inputPosition          =   '<input type="text" class="form-control" name="position"   id="position"       value="'.@$arrRowData['position'].'">'; 
-$inputComponent         =   '<input type="hidden" class="form-control" name="component"   id="component"       value="'.@$arrRowData['component'].'">'; 
+$inputPosition          =   '<input type="text" class="form-control" name="position"      value="'.@$arrRowData['position'].'">'; 
+$inputComponent         =   '<input type="hidden" class="form-control" name="component"      value="'.@$arrRowData['component'].'">'; 
 $data                   =   array();
 if(count(@$arrRowData) > 0){
     if(!empty(@$arrRowData)){
@@ -24,10 +24,10 @@ if(count(@$arrRowData) > 0){
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="main_sort_order" id="main_sort_order"     value="'.@$arrRowData['sort_order'].'">';
+$inputSortOrder         =   '<input type="text" class="form-control" name="main_sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
-$inputID                =   '<input type="hidden" name="id" id="id" value="'.@$id.'" />'; 
-$inputSortJson          =   '<input type="hidden" name="sort_json" id="sort_json" value=\''.@$arrRowData['item_id'].'\' />';
+$inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
+$inputSortJson          =   '<input type="hidden" name="sort_json" id=value=\''.@$arrRowData['item_id'].'\' />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -526,7 +526,7 @@ $inputSortJson          =   '<input type="hidden" name="sort_json" id="sort_json
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==true){
+                if(data.checked==1){
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
