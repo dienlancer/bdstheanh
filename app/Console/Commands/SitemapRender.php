@@ -38,21 +38,23 @@ class SitemapRender extends Command
     public function handle()
     {
         $sitemap = \App::make("sitemap");        
-        $query=\DB::table('menu')
-        ->join('menu_type','menu.menu_type_id', '=' ,'menu_type.id');
-        $query->where('menu_type.theme_location','main-menu');  
-        $query->select('menu.alias','menu.updated_at');
-        $menus=$query->get();
+        $categories_article=\DB::table('category_article')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
+        $categories_product=\DB::table('category_product')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
         $articles = \DB::table('article')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
         $products = \DB::table('product')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
         $projects = \DB::table('project')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
         $organizations = \DB::table('organization')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
         $project_articles = \DB::table('project_article')->orderBy('created_at', 'desc')->select('alias','updated_at')->get();
-        if(count($menus) > 0){
-            foreach ($menus as $menu){
-                $sitemap->add(url($menu->alias . '.html') , $menu->updated_at, 0.9, 'monthly'); //daily
+        if(count($categories_article) > 0){
+            foreach ($categories_article as $category_article){
+                $sitemap->add(url($category_article->alias . '.html') , $category_article->updated_at, 0.9, 'monthly'); //daily
             }
         }       
+        if(count($categories_product) > 0){
+            foreach ($categories_product as $category_product){
+                $sitemap->add(url($category_product->alias . '.html') , $category_product->updated_at, 0.9, 'monthly'); //daily
+            }
+        }
         if(count($articles) > 0){
             foreach ($articles as $article){
                 $sitemap->add(url($article->alias . '.html') , $article->updated_at, 0.9, 'monthly'); //daily
