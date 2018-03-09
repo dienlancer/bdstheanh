@@ -127,6 +127,11 @@ function wp_nav_menu($args){
             case 'trang-chu':
             $site_link=url('/');
             break;
+            case 'gioi-thieu':
+            case 'dich-vu':
+            case 'tin-tuc':
+            $site_link='javascript:void(0)';
+            break;
             default:     
             $site_link=url('/'.$data_menu[$i]["alias"].".html") ;       
             break;
