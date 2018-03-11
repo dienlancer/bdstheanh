@@ -1338,7 +1338,7 @@ border: 1px solid #fff;
     margin-top: 15px;
     margin-bottom: 0;
   }
-@media (max-width: 767px){    
+@media (max-width: 768px){    
     div.mobilemenu{
         display: block;
         background: #ffffff;
@@ -1382,9 +1382,6 @@ border: 1px solid #fff;
     	float: none;
     	text-align: center;
     }
-}
-@media (max-width: 543px){
-
     .searching{
         width: 100%;
     }
@@ -1395,6 +1392,4 @@ border: 1px solid #fff;
     .hotline{
     	text-align: center;
     }
-   
 }
-

@@ -145,10 +145,7 @@ if(count($arrCart) > 0){
 	<!-- end elevatezoom -->
 	<!-- begin accounting -->
 	<script src="{{ asset('public/frontend/js/accounting.min.js') }}"></script>  
-	<!-- end accounting -->
-	<!-- begin pagination -->
-	<link rel="stylesheet" href="{{ asset('public/frontend/css/pagination.css') }}" />
-	<!-- end pagination-->
+	<!-- end accounting -->	
 	<!-- begin product -->
 	<link rel="stylesheet" href="{{ asset('public/frontend/css/product.css') }}" />
 	<!-- end product-->
