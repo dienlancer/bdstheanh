@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\GroupMemberModel;
-use App\UserGroupModel;
+use App\UserGroupMemberModel;
 use DB;
 use Hash;
 use Sentinel;
@@ -30,12 +30,13 @@ class UserController extends Controller {
     
   	public function loadData(Request $request){           
         $query=DB::table('users')
-                  ->join('group_member','users.group_member_id','=','group_member.id');        
+                  ->leftJoin('user_group_member','users.id','=','user_group_member.user_id')
+                  ->leftJoin('group_member','group_member.id','=','user_group_member.group_member_id');        
         if(!empty(@$request->filter_search)){
           $query->where('users.fullname','like','%'.trim(@$request->filter_search).'%');
         }
-        $data=$query->select('users.id','users.username','users.email','users.fullname','users.group_member_id','group_member.fullname as group_member_name','users.status','users.sort_order','users.created_at','users.updated_at')
-        ->groupBy('users.id','users.username','users.email','users.fullname','users.group_member_id','group_member.fullname','users.status','users.sort_order','users.created_at','users.updated_at')
+        $data=$query->select('users.id','users.username','users.email','users.fullname','users.status','users.sort_order','users.created_at','users.updated_at')
+        ->groupBy('users.id','users.username','users.email','users.fullname','users.status','users.sort_order','users.created_at','users.updated_at')
         ->orderBy('users.sort_order', 'asc')->get()->toArray()     ;              
         $data=convertToArray($data);    
         $data=userConverter($data,$this->_controller);            
@@ -46,7 +47,7 @@ class UserController extends Controller {
         $title="";
         $icon=$this->_icon; 
         $arrRowData=array();
-        $arrUserGroup=array();
+        $arrUserGroupMember=array();
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";  
         if(in_array($requestControllerAction, $arrPrivilege)){
@@ -54,13 +55,14 @@ class UserController extends Controller {
            case 'edit':
               $title=$this->_title . " : Update";
               $arrRowData=User::find((int)@$id)->toArray();  
+              $arrUserGroupMember=UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$id])->get()->toArray();              
            break;
            case 'add':
               $title=$this->_title . " : Add new";
            break;     
         }    
-        $arrGroupMember=GroupMemberModel::select("id","fullname","created_at","updated_at")->get()->toArray();      
-        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrGroupMember","controller","task","title","icon"));
+        $arrGroupMember=GroupMemberModel::select("id","fullname")->get()->toArray();           
+        return view("adminsystem.".$this->_controller.".form",compact("arrGroupMember","arrRowData","arrUserGroupMember","controller","task","title","icon"));
         }else{
           return view("adminsystem.no-access");
         }      
@@ -75,13 +77,14 @@ class UserController extends Controller {
           $fullname 					  = 	trim(@$request->fullname);    
           $image                =   trim(@$request->image);
           $image_hidden         =   trim(@$request->image_hidden);
-          $group_member_id      =   trim(@$request->group_member_id);                      
+          $group_member_id      =   @$request->group_member_id;                      
           $sort_order           =   trim(@$request->sort_order);                          
           $data 		            =   array();
           $info 		            =   array();
           $error 		            =   array();
           $item		              =   null;
-          $checked 	            =   1;                   
+          $checked 	            =   1;    
+          
           if(empty($fullname)){
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
@@ -165,9 +168,9 @@ class UserController extends Controller {
              $error["status"]["msg"] 			= "Thiếu trạng thái";
           }
           if ($checked == 1) {   
-
+                $item=array();
                 if(empty($id)){
-                  $user=Sentinel::registerAndActivate($request->all());
+                  $item=Sentinel::registerAndActivate($request->all());                  
                 } else{
                     $item				=	User::find((int)@$id);        
                     $item->username         = $username;
@@ -184,15 +187,35 @@ class UserController extends Controller {
                     }
                     if(!empty($image))  {
                       $item->image=$image;                                                
-                    }     
-                                
-                    if(!empty($group_member_id)){
-                        $item->group_member_id            = (int)@$group_member_id;
-                    }              
+                    }                       
                     $item->sort_order       = (int)@$sort_order;                
                     $item->updated_at       = date("Y-m-d H:i:s",time());               
-                    $item->save();                           		  		 	
-                }                  
+                    $item->save();                                                       		  		 
+                }  
+                if(count(@$group_member_id)>0){                            
+                      $arrUserGroupMember=UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->select("group_member_id")->get()->toArray();                      
+                      $arrGroupMemberID=array();
+                      foreach ($arrUserGroupMember as $key => $value) {
+                        $arrGroupMemberID[]=$value["group_member_id"];
+                      }
+                      $selected=@$group_member_id;
+                      sort($selected);
+                      sort($arrGroupMemberID);         
+                      $resultCompare=0;
+                      if($selected == $arrGroupMemberID){
+                        $resultCompare=1;       
+                      }
+                      if($resultCompare==0){
+                        UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->delete();  
+                        foreach ($selected as $key => $value) {
+                          $group_member_id=$value;
+                          $userGroupMember=new UserGroupMemberModel;
+                          $userGroupMember->user_id=(int)@$item->id;
+                          $userGroupMember->group_member_id=(int)@$group_member_id;            
+                          $userGroupMember->save();
+                        }
+                      }       
+                    }                            
                 $info = array(
                   'type_msg' 			=> "has-success",
                   'msg' 				=> 'Lưu dữ liệu thành công',
@@ -216,7 +239,7 @@ class UserController extends Controller {
                   $checked                =   1;
                   $type_msg               =   "alert-success";
                   $msg                    =   "Cập nhật thành công";              
-                  $status         =       (int)$request->status;
+                  $status         =       (int)@$request->status;
                   $item           =       User::find((int)@$id);        
                   $item->status   =       (int)@$status;
                   $item->save();
@@ -238,8 +261,8 @@ class UserController extends Controller {
             if($checked == 1){
                 $item = User::find((int)@$id);
                 $item->delete();            
-                $sql = "DELETE FROM `activations` WHERE `user_id` IN  (".$id.")";
-                DB::statement($sql);    
+                DB::table('activations')->where('user_id',@$id)->delete();   
+                DB::table('user_group_member')->where('user_id',@$id)->delete();   
             }        
             $data                   =   $this->loadData($request);
             $info = array(
@@ -251,13 +274,14 @@ class UserController extends Controller {
             return $info;
       }
       public function updateStatus(Request $request){
-          $str_id                 =   $request->str_id;   
-          $status                 =   $request->status;  
-          $arrID                  =   explode(",", $str_id)  ;
-          $checked                =   1;
-          $type_msg               =   "alert-success";
-          $msg                    =   "Cập nhật thành công";     
-          if(empty($str_id)){
+          $strID                 =   $request->str_id;     
+        $status                 =   $request->status;            
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Cập nhật thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
                     $checked                =   0;
                     $type_msg               =   "alert-warning";            
                     $msg                    =   "Please choose at least one item to delete";
@@ -281,23 +305,21 @@ class UserController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $str_id                 =   $request->str_id;   
+            $strID                 =   $request->str_id;               
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";      
-            $arrID                  =   explode(",", $str_id)  ;        
-            if(empty($str_id)){
-              $checked              =   0;
-              $type_msg             =   "alert-warning";            
-              $msg                  =   "Please choose at least one item to delete";
+            $msg                    =   "Xóa thành công";                  
+            $strID=substr($strID, 0,strlen($strID) - 1);
+            $arrID=explode(',',$strID);                 
+            if(empty($strID)){
+              $checked                =   0;
+              $type_msg               =   "alert-warning";            
+              $msg                    =   "Please choose at least one item to delete";
             }
-            if($checked == 1){                
-                  $strID            = implode(',',$arrID);   
-                  $strID            = substr($strID, 0,strlen($strID) - 1);
-                  $sqlUser          = "DELETE FROM `users` WHERE `id` IN (".$strID.")";        
-                  $sqlActivation    = "DELETE FROM `activations` WHERE `user_id` IN  (".$strID.")";
-                  DB::statement($sqlUser);                      
-                  DB::statement($sqlActivation);       
+            if($checked == 1){             
+                  DB::table('users')->whereIn('id',@$arrID)->delete(); 
+                  DB::table('activations')->whereIn('user_id',@$arrID)->delete(); 
+                  DB::table('user_group_member')->whereIn('user_id',@$arrID)->delete();                        
             }
             $data                   =   $this->loadData($request);
             $info = array(
