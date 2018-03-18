@@ -108,18 +108,20 @@ function getArrPrivilege(){
   ->get();
   ;     
   $arrID=array();    
+  $arrPrivilege=array();
   foreach ($stdPrivilegeID as $key => $value) {
     $arrID[]=$value->privilege_id;
   }
-  $strID=implode(",",$arrID);
-  $sql="select concat(`controller`,'-',`action`) as controller_action
-  from `privilege`
-  where `id` in(".$strID.")";
-  $stdPrivilege=DB::select(@$sql);
-  $arrPrivilege=array();
-  foreach ($stdPrivilege as $key => $value) {
-    $arrPrivilege[]=$value->controller_action;
-  }     
+  if(count($arrID) > 0){
+    $strID=implode(",",$arrID);
+    $sql="select concat(`controller`,'-',`action`) as controller_action
+    from `privilege`
+    where `id` in(".$strID.")";
+    $stdPrivilege=DB::select(@$sql);  
+    foreach ($stdPrivilege as $key => $value) {
+      $arrPrivilege[]=$value->controller_action;
+    }     
+  }
   /* end quyền truy cập */  
   return $arrPrivilege;
 }

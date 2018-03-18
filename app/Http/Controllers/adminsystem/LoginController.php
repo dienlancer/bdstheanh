@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\adminsystem;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,13 +13,13 @@ class LoginController extends Controller
             Sentinel::authenticate($request->all());
             if(Sentinel::check()){                
                 $user=Sentinel::getUser();                                
-                $status=$user->status;            
-                if((int)$status==1){
+                $arrPrivilege=getArrPrivilege();
+                if(count($arrPrivilege) > 0){                    
                     Sentinel::loginAndRemember($user);
                     return redirect()->route('adminsystem.category-article.getList');  
-                }else{                
+                }else{
                     return view('adminsystem.login');
-                }            
+                }                    
             }else{
                 return view('adminsystem.login');
             }      
