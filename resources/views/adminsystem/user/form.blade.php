@@ -14,9 +14,9 @@ $inputPassword          =   '<input type="password"   name="password" class="for
 $inputConfirmPassword   =   '<input type="password"  name="confirm_password" class="form-control"  />';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"       value="'.@$arrRowData['fullname'].'">'; 
-$ddlGroupMember         =   cmsSelectboxGroupMemberMultiple("group_member_id","group_member_id[]", 'form-control', @$arrGroupMember, @$arrUserGroupMember,"");
+$ddlGroupMember         =   cmsSelectboxGroupMemberMultiple("group_member_id[]", 'form-control', @$arrGroupMember, @$arrUserGroupMember,"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 

@@ -8,11 +8,11 @@ $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"      value="'.@$arrRowData['fullname'].'">'; 
 $inputVideoUrl          =   '<input type="text" class="form-control" name="video_url"     value="'.@$arrRowData['video_url'].'">'; 
  
-$ddlCategoryVideo      =   cmsSelectboxCategory("category_video_id","category_video_id","form-control",$arrCategoryVideo,@$arrRowData['category_video_id'],"");
+$ddlCategoryVideo      =   cmsSelectboxCategory("category_video_id","form-control",$arrCategoryVideo,@$arrRowData['category_video_id'],"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 

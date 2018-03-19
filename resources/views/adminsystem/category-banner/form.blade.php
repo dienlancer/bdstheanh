@@ -7,7 +7,7 @@ $inputFullName          =   '<input type="text" class="form-control" name="fulln
 $inputThemeLocation          =   '<input type="text" class="form-control" name="theme_location"        value="'.@$arrRowData['theme_location'].'">'; 
 $status                 =   (count($arrRowData) > 0) ? (int)@$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 

@@ -18,13 +18,13 @@ $inputMetakeyword             =   '<textarea   name="meta_keyword" rows="2" cols
 $inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
 $inputUnit          =   '<input type="text" class="form-control" name="unit"  value="'.@$arrRowData['unit'].'">'; 
-$ddlProvince      =   cmsSelectboxCategory("province_id","province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
-$ddlDistrict      =   cmsSelectboxCategory("district_id","district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
+$ddlProvince      =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
+$ddlDistrict      =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
 $inputStreet          =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $picture                =   "";

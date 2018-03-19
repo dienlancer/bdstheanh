@@ -7,8 +7,8 @@ function cmsStatus($id,$statusValue,$kicked){
   return $xhtml;
 }
 
-function cmsSelectbox($id="",$name = "",$class="",$arrValue=array(), $keySelect = "",$disabled){
-  $xhtml = '<select id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' >';
+function cmsSelectbox($name = "",$class="",$arrValue=array(), $keySelect = "",$disabled){
+  $xhtml = '<select  name="'.$name.'" class="'.$class.'" '.$disabled.' >';
   foreach($arrValue as $key => $value){
     if($key == $keySelect ){
       $xhtml .= '<option selected="selected" value = "'.$key.'">'.$value.'</option>';
@@ -19,8 +19,8 @@ function cmsSelectbox($id="",$name = "",$class="",$arrValue=array(), $keySelect 
   $xhtml .= '</select>';
   return $xhtml;
 }
-function cmsSelectboxCategory($id,$name, $class, $arrValue, $val = 0,$disabled){   
-  $xhtml = '<select id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.'  >';
+function cmsSelectboxCategory($name, $class, $arrValue, $val = 0,$disabled){   
+  $xhtml = '<select  name="'.$name.'" class="'.$class.'" '.$disabled.'  >';
   $xhtml .= '<option value = "">--Select a category--</option>';
   foreach($arrValue as $key => $value){
     if((int)$value["id"] == (int)$val){
@@ -32,8 +32,8 @@ function cmsSelectboxCategory($id,$name, $class, $arrValue, $val = 0,$disabled){
   $xhtml .= '</select>';
   return $xhtml;
 }
-function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-    $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+function cmsSelectboxCategoryArticleMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+    $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
     $xhtml .= '<option value = "">--Chọn danh mục--</option>';
     foreach($arrValue as $key => $value){
       $id=$value["id"];
@@ -51,8 +51,8 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
     $xhtml .= '</select>';
     return $xhtml;
   }
-  function cmsSelectboxGroupMemberMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-    $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+  function cmsSelectboxGroupMemberMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+    $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
     $xhtml .= '<option value = "">--Chọn danh mục--</option>';
     foreach($arrValue as $key => $value){
       $id=$value["id"];
@@ -70,8 +70,8 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
     $xhtml .= '</select>';
     return $xhtml;
   }
-  function cmsSelectboxCategoryParamMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-    $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+  function cmsSelectboxCategoryParamMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+    $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
     $xhtml .= '<option value = "">--Chọn danh mục--</option>';
     foreach($arrValue as $key => $value){
       $id=$value["id"];
@@ -89,8 +89,8 @@ function cmsSelectboxCategoryArticleMultiple($id,$name, $class, $arrValue, $arrV
     $xhtml .= '</select>';
     return $xhtml;
   }
-function cmsSelectboxMenuMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-  $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+function cmsSelectboxMenuMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+  $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
   $xhtml .= '<option value = "">--Chọn danh mục--</option>';
   foreach($arrValue as $key => $value){
     $id=$value["id"];
@@ -108,8 +108,8 @@ function cmsSelectboxMenuMultiple($id,$name, $class, $arrValue, $arrValueSelecte
   $xhtml .= '</select>';
   return $xhtml;
 }  
-function cmsSelectboxGroupMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-  $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+function cmsSelectboxGroupMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+  $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
   $xhtml .= '<option value = "">--Chọn danh mục--</option>';
   foreach($arrValue as $key => $value){
     $id=$value["id"];
@@ -127,8 +127,8 @@ function cmsSelectboxGroupMultiple($id,$name, $class, $arrValue, $arrValueSelect
   $xhtml .= '</select>';
   return $xhtml;
 }
-function cmsSelectboxGroupPrivilegeMultiple($id,$name, $class, $arrValue, $arrValueSelected,$disabled){
-  $xhtml = '<select size="20" id="'.$id.'" name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
+function cmsSelectboxGroupPrivilegeMultiple($name, $class, $arrValue, $arrValueSelected,$disabled){
+  $xhtml = '<select size="20"  name="'.$name.'" class="'.$class.'" '.$disabled.' multiple="multiple" >';
   $xhtml .= '<option value = "">--Chọn danh mục--</option>';
   foreach($arrValue as $key => $value){
     $id=$value["id"];

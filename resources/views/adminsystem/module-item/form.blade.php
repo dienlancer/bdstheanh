@@ -10,8 +10,8 @@ $linkInsertProduct      =   route('adminsystem.'.$controller.'.insertProduct');
 $linkSortItems          =   route('adminsystem.'.$controller.'.sortItems');
 $linkGetItems           =   route('adminsystem.'.$controller.'.getItems');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"     value="'.@$arrRowData['fullname'].'">'; 
-$ddlCategoryArticle     =   cmsSelectboxCategory('category_id','category_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
-$ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id','category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
+$ddlCategoryArticle     =   cmsSelectboxCategory('category_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
+$ddlCategoryProduct     =   cmsSelectboxCategory('category_product_id', 'form-control', $arrCategoryProductRecursive, 0,"");
 $inputPosition          =   '<input type="text" class="form-control" name="position"      value="'.@$arrRowData['position'].'">'; 
 $inputComponent         =   '<input type="hidden" class="form-control" name="component"      value="'.@$arrRowData['component'].'">'; 
 $data                   =   array();
@@ -23,7 +23,7 @@ if(count(@$arrRowData) > 0){
 }
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="main_sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 

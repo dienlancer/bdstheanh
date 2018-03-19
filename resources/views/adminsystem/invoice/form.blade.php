@@ -16,10 +16,10 @@ $inputPhone             =   '<input type="text" class="form-control" name="phone
 $lblQuantity            =   number_format((int)@$arrRowData['quantity'],0,".",",");
 $lblTotalPrice          =   number_format((int)@$arrRowData['total_price'],0,".",",");
 
-$ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id","payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled');
+$ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled');
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 

@@ -12,8 +12,8 @@ $inputPageurl           =   '<input type="text" class="form-control" name="page_
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$ddlCategory            =   cmsSelectboxCategory('category_id','category_id', 'form-control',$arrCategoryBanner,@$category_id,"disabled");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
+$ddlCategory            =   cmsSelectboxCategory('category_id', 'form-control',$arrCategoryBanner,@$category_id,"disabled");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $picture                =   "";

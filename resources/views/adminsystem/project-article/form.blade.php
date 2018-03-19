@@ -18,8 +18,8 @@ $inputMetadescription   =   '<textarea   name="meta_description" rows="2" cols="
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","status","form-control",$arrStatus,$status,"");
-$ddlProjectArticle      =   cmsSelectboxCategory("project_id","project_id","form-control",$arrProject,@$arrRowData['project_id'],"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
+$ddlProjectArticle      =   cmsSelectboxCategory("project_id","form-control",$arrProject,@$arrRowData['project_id'],"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 
 $picture                =   "";
