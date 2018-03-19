@@ -23,15 +23,15 @@ if(count($item) > 0){
 		$project_name='<a href="'.$project_alias.'">'.$dataProject[0]['fullname'].'</a>';
 	}		
 	?>
-	<h2 class="breadcrumb-title margin-top-15">
+	<div class="breadcrumb-title margin-top-15">
 		<?php echo $project_name; ?>
-	</h2>
+	</div>
 	<div class="margin-top-5 box-article">		
-		<h2 class="tieu-de-bai-viet"><?php echo $title; ?></h2>
+		<h1 class="tieu-de-bai-viet"><?php echo $title; ?></h1>
 		<hr class="duong-ngang-2" />	
-		<div class="margin-top-10 article-excerpt justify">
+		<h2 class="margin-top-10 article-excerpt justify">
 			<?php echo $intro; ?>
-		</div>		
+		</h2>		
 		<div class="margin-top-15">
 			<?php echo $content; ?>
 		</div>	

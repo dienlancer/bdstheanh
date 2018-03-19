@@ -45,9 +45,9 @@ if(count($item) > 0){
 		$category_name=implode(' / ', $arr_category_name);		
 	}			
 	?>
-	<h2 class="breadcrumb-title margin-top-15">
+	<div class="breadcrumb-title margin-top-15">
 			<?php echo $category_name; ?>
-		</h2>
+		</div>
 	<div class="margin-top-10 box-article">		
 		<div>
             <div class="col-lg-4 no-padding-left">
@@ -56,9 +56,9 @@ if(count($item) > 0){
                 </div>
             </div>
             <div class="col-lg-8 no-padding-left">
-                <div class="margin-top-15 product-detail-title">
+                <h1 class="margin-top-15 product-detail-title">
                     <?php echo $title; ?>
-                </div>
+                </h1>
                 <div class="margin-top-5">
                     <b>Lượt xem:</b>&nbsp;<?php echo $count_view; ?>
                 </div>
@@ -78,9 +78,9 @@ if(count($item) > 0){
             </div>
             <div class="clr"></div>
         </div>		
-		<div class="margin-top-10 article-excerpt justify">
+		<h2 class="margin-top-10 article-excerpt justify">
 			<?php echo $intro; ?>
-		</div>		
+		</h2>		
 		<div class="margin-top-15">
 			<?php echo $content; ?>
 		</div>	

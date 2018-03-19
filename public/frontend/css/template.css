@@ -560,6 +560,7 @@ font-family: 'FontAwesome';
 .article-excerpt{
         color: #000000;
     font-weight: bold;
+    font-size: 13px;
 }
 
 .box-title a{

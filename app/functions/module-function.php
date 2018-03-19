@@ -107,7 +107,7 @@ function wp_nav_menu($args){
         $menu=array();
         $menu=$data_menu[$i];
         $site_link='';
-        if(!empty( $data_menu[$i]["alias"] )){
+        if(!empty( trim($data_menu[$i]["alias"]) )){
           switch ($data_menu[$i]["alias"]) {
             case 'gio-hang':
             case 'dang-ky':
@@ -119,24 +119,17 @@ function wp_nav_menu($args){
             case 'dang-nhap-thanh-toan':
             case 'hoa-don':                       
             $site_link=url('/'.$data_menu[$i]["alias"]) ;
-            break;          
-            case 'thu-vien':   
-           
-           
-            
+            break;                               
             case 'trang-chu':
             $site_link=url('/');
-            break;
-            case 'gioi-thieu':
-            case 'dich-vu':
-            case 'tin-tuc':
-            $site_link='javascript:void(0)';
             break;
             default:     
             $site_link=url('/'.$data_menu[$i]["alias"].".html") ;       
             break;
           }        
-        }
+        }else{
+          $site_link='javascript:void(0);';
+        }        
         $menu["site_link"] =$site_link;            
         $data_child=MenuModel::whereRaw('parent_id = ?',[(int)$data_menu[$i]["id"]])->select('id')->get()->toArray();
         if(count($data_child) > 0){

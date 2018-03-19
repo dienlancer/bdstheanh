@@ -11,18 +11,20 @@ use App\DistrictModel;
 	<?php 		
 	if(empty($breadcrumb)){
 		?>
-		<h2 class="tieu-de">
+		<div class="tieu-de">
 			<?php echo $title; ?>		
-		</h2>
+		</div>
 		<?php
 	}else{
 		?>
-		<h2 class="breadcrumb-title">
+		<div class="breadcrumb-title">
 			<?php echo $breadcrumb; ?>
-		</h2>
+		</div>
 		<?php
 	}	
 	?>
+	<h1 style="display: none;"><?php echo @$title; ?></h1>
+	<h2 style="display: none;"><?php echo @$meta_description; ?></h2>
 	<div>
 		<?php 	
 		if(count($items) > 0){

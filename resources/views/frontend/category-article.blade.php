@@ -4,6 +4,8 @@
 	<?php 			
 	$breadcrumb= getBreadCrumbCategoryArticle($category);	
 	?>
+	<h1 style="display: none;"><?php echo @$category['fullname']; ?></h1>
+	<h2 style="display: none;"><?php echo @$meta_description; ?></h2>
 	<div class="breadcrumb-title">
 		<?php echo $breadcrumb; ?>
 	</div>

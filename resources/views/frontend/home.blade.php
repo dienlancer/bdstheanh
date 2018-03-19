@@ -23,10 +23,10 @@ if(count($data_slideshow) > 0){
 				$(document).ready(function(){
 					$(".building-construction").owlCarousel({
 						items: 1,
-	autoplay:true,
-	loop:true,
-	nav:true,
-	navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+						autoplay:true,
+						loop:true,
+						nav:true,
+						navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
 					});			
 
 					dotcount = 1;
@@ -92,8 +92,8 @@ if(count($data_slideshow) > 0){
 	<div class="col-lg-12">
 		<hr class="gach-ngang-2">
 		<div class="du-an-noi-bat margin-top-15">
-			<div class="du-an">Dự án</div>
-			<div class="noi-bat margin-left-5">Nổi bật</div>
+			<h2 class="du-an">Dự án</h2>
+			<h2 class="noi-bat margin-left-5">Nổi bật</h2>
 		</div>
 		<div class="margin-top-10 include-project">Gồm những dự án mới và nổi bật của chúng tôi</div>
 		<div class="margin-top-15">
@@ -136,8 +136,8 @@ if(count($data_slideshow) > 0){
 			<div class="join-with-us-reason">
 				<hr class="gach-ngang-3">
 				<div class="du-an-noi-bat-2 margin-top-20">
-					<div class="du-an">Hãy chọn</div>
-					<div class="noi-bat margin-left-5">Chúng tôi</div>
+					<h2 class="du-an">Hãy chọn</h2>
+					<h2 class="noi-bat margin-left-5">Chúng tôi</h2>
 				</div>
 				<div class="margin-top-10 include-project">Sau đây là những lý do để khách hàng lựa chọn và tin tưởng vào chúng tôi</div>
 			</div>			
@@ -209,7 +209,7 @@ if(count($data_slideshow) > 0){
 <div class="bg-3 relative">
 	<div class="container">
 		<div class="col-lg-12">
-			<div class="featured-service margin-top-45"><center>Dịch vụ nổi bật</center></div>
+			<h2 class="featured-service margin-top-45"><center>Dịch vụ nổi bật</center></h2>
 			<div class="featured-service-intro margin-top-15"><center>Mô hình dịch vụ hoàn hảo với những tiện ích vượt trội của chúng tôi có thể đáp ứng mọi nhu cầu của khách hàng</center></div>
 		</div>
 		<div class="clr"></div>
@@ -282,8 +282,8 @@ if(count($data_slideshow) > 0){
 	<div class="col-lg-12">
 			<hr class="gach-ngang-3">
 			<div class="du-an-noi-bat-2 margin-top-20">
-				<div class="du-an">Tin tức</div>
-				<div class="noi-bat margin-left-5">Mới nhất</div>
+				<h2 class="du-an">Tin tức</h2>
+				<h2 class="noi-bat margin-left-5">Mới nhất</h2>
 			</div>
 			<div class="margin-top-10 include-project">Sau đây là những lý do để khách hàng lựa chọn và tin tưởng vào chúng tôi</div>
 			<?php 
@@ -419,8 +419,8 @@ if(count($data) > 0){
 		<div class="col-lg-6">
 			<hr class="gach-ngang-4">
 			<div class="du-an-noi-bat-2 margin-top-20">
-				<div class="du-an">Thông tin</div>
-				<div class="noi-bat margin-left-5">Liên hệ</div>
+				<h2 class="du-an">Thông tin</h2>
+				<h2 class="noi-bat margin-left-5">Liên hệ</h2>
 			</div>
 			<div class="margin-top-10"><center>Tư vấn pháp luật đất đai là một trong những công cụ hữu hiệu để bạn giải quyết các thắc mắc trong lĩnh vực đất đai một cách nhanh chóng, thuận lợi nhất.</center></div>
 			<?php            				

@@ -14,8 +14,7 @@ class LoginController extends Controller
             if(Sentinel::check()){                
                 $user=Sentinel::getUser();                                
                 $arrPrivilege=getArrPrivilege();
-                if(count($arrPrivilege) > 0){                    
-                    Sentinel::loginAndRemember($user);
+                if(count($arrPrivilege) > 0){                                        
                     return redirect()->route('adminsystem.category-article.getList');  
                 }else{
                     return view('adminsystem.login');
