@@ -1340,57 +1340,34 @@ border: 1px solid #fff;
     margin-bottom: 0;
   }
 @media (max-width: 768px){    
-    div.mobilemenu{
+    .mobilemenu{
         display: block;
         background: #ffffff;
     }    
     .bg-menu{
     	display: none;
     }
-    .menu-cerex{
-        display: none;
-    }
-    .info-header{
-        width: 100%;
-    }
-    
-   .soratv{
-        padding: 5px 0px;
-        width: 100%;
-        margin-top: 5px;
-    }
-    .immotal{
-            padding-top: 15px;
-    }
-    .hotline{
-    	text-align: center;
-    }
-    .nana{
-    	display: flex;
-    	
-    	justify-content: center;
-    }
-    .tuabin{
-    	float: none;
+  .slogan-left,.social-right{
+        float: none;
+        text-align: center;
     }
     .building-construction .owl-dots{
-    	display: none;
+        display: none;
     }
-    .phuong-cham,.join-with-us-reason{
-    	width: 100%;
+    .building-construction .owl-nav{
+        bottom: -10px
     }
-    .slogan-left,.social-right{
-    	float: none;
-    	text-align: center;
+    .gach-ngang{
+        margin-top: 58px;
     }
-    .searching{
+    .gach-ngang-2{
+        margin-top: 0;
+    }
+    .join-with-us-reason,.phuong-cham{
+        float: none;
         width: 100%;
-    }
-    .slogan{
-        margin-right: 0;
-        margin-top: 15px;
-    }
-    .hotline{
-    	text-align: center;
-    }
+    }    
+}
+@media (max-width: 576px){
+
 }

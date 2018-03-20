@@ -11,7 +11,8 @@ use App\MenuModel;
 use App\ProjectModel;
 use App\ProjectArticleModel;
 use App\ArticleCategoryModel;
-
+use App\ProvinceModel;
+use App\DistrictModel;
 use DB;
 class ProjectArticleController extends Controller {
   	var $_controller="project-article";	
@@ -66,8 +67,7 @@ class ProjectArticleController extends Controller {
          $title=$this->_title . " : Add new";
          break;     
        }    
-       $arrProject=ProjectModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();              
-       $arrDistrict=DistrictModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();                        
+       $arrProject=ProjectModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();                                     
        return view("adminsystem.".$this->_controller.".form",compact("arrProject","arrRowData","controller","task","title","icon"));
      }else{
       return view("adminsystem.no-access");

@@ -1,7 +1,6 @@
 @extends("frontend.master")
 @section("content")
 <?php 
-use App\ProjectModel;
 $setting=getSettingSystem();
 $seo=getSeo();
 $telephone=$setting['telephone']['field_value'];
@@ -98,7 +97,7 @@ if(count($data_slideshow) > 0){
 		<div class="margin-top-10 include-project">Gồm những dự án mới và nổi bật của chúng tôi</div>
 		<div class="margin-top-15">
 			<?php  
-			$data=ProjectModel::select('id','fullname','image','total_cost','alias')->get()->toArray();
+			$data=App\ProjectModel::select('id','fullname','image','total_cost','alias')->get()->toArray();
 			$data=convertToArray($data);
 			$k=1;
 			foreach($data as $key => $value){

@@ -197,10 +197,9 @@ class ProjectController extends Controller {
 
                 /* begin category param */
                 if(count(@$category_param_id)>0){  
-
-                  $arrProductParam=PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
+                  $arrPostParam=PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
                   $arrCategoryParamID=array();
-                  foreach ($arrProductParam as $key => $value) {
+                  foreach ($arrPostParam as $key => $value) {
                     $arrCategoryParamID[]=$value["param_id"];
                   }                  
                   $selected=@$category_param_id;
@@ -214,15 +213,15 @@ class ProjectController extends Controller {
                     PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->delete();  
                     foreach ($selected as $key => $value) {
                       $param_id=$value;
-                      $productParam=new PostParamModel;
-                      $productParam->post_id=(int)@$item->id;
-                      $productParam->param_id=(int)@$param_id;            
-                      $productParam->save();
+                      $postParam=new PostParamModel;
+                      $postParam->post_id=(int)@$item->id;
+                      $postParam->param_id=(int)@$param_id;            
+                      $postParam->save();
                     }
                   }       
                 }  
                 PostParamModel::whereRaw("param_id = ?",[0])->delete();
-                /* end category param */                                             
+                /* end category param */                                                          
                 $info = array(
                   'type_msg' 			=> "has-success",
                   'msg' 				=> 'Lưu dữ liệu thành công',
@@ -274,7 +273,8 @@ class ProjectController extends Controller {
             }                     
             if($checked == 1){
               $item = ProjectModel::find((int)@$id);
-                $item->delete();                                
+                $item->delete();     
+                PostParamModel::whereRaw("post_id = ?",[(int)@$id])->delete();                            
                 
             }        
             $data                   =   $this->loadData($request);
@@ -337,7 +337,8 @@ class ProjectController extends Controller {
             }   
             if($checked == 1){                                 
      
-                  DB::table('project')->whereIn('id',@$arrID)->delete();                             
+                  DB::table('project')->whereIn('id',@$arrID)->delete();   
+                  DB::table('post_param')->whereIn('post_id',@$arrID)->delete();                            
             }
             $data                   =   $this->loadData($request);
             $info = array(
