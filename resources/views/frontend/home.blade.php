@@ -98,15 +98,23 @@ if(count($data_slideshow) > 0){
 		<div class="margin-top-10 include-project">Gồm những dự án mới và nổi bật của chúng tôi</div>
 		<div class="margin-top-15">
 			<?php  
-			$data=ProjectModel::select()->get()->toArray();
+			$data=ProjectModel::select('id','fullname','image','total_cost','alias')->get()->toArray();
 			$data=convertToArray($data);
 			$k=1;
 			foreach($data as $key => $value){
+				$id=$value['id'];
 				$fullname=$value['fullname'];
 				$thumbnail=get_article_thumbnail($value['image']);
-				$total_cost=number_format($value['total_cost'],0,",",".") ;
-				$unit=$value['unit'];
+				$total_cost=number_format($value['total_cost'],0,",",".") ;				
 				$permalink=route('frontend.index.index',[$value['alias']]);
+				$data_post_param=DB::table('category_param')
+									->join('post_param','category_param.id','=','post_param.param_id')
+									->where('post_param.post_id',(int)@$id)
+									->select('category_param.id','category_param.fullname')->get()->toArray();
+				$param_name='';
+				if(count($data_post_param) > 0){
+					$param_name=$data_post_param[0]->fullname;
+				}				
 				?>
 				<div class="col-sm-3">
 					<div class="box-project margin-top-15 relative">						
@@ -115,7 +123,7 @@ if(count($data_slideshow) > 0){
 						</div>
 						<div class="box-project-info">
 							<div class="margin-top-10 box-project-title"><center><a href="<?php echo $permalink; ?>"><?php echo $fullname; ?></a></center></div>	
-							<div class="margin-top-10"><center><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span></center></div>						
+							<div class="margin-top-10"><center><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $param_name; ?></span></center></div>						
 						</div>
 					</div>
 				</div>

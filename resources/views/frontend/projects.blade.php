@@ -46,7 +46,14 @@ use App\DistrictModel;
 				$district_permalink=route('frontend.index.filterProjectByProvince',[$province['alias'],$district['alias']]);
 				$street=$value['street'];
 				$total_cost=number_format($value['total_cost'],0,",",".") ;
-				$unit=$value['unit'];				
+				$data_post_param=DB::table('category_param')
+									->join('post_param','category_param.id','=','post_param.param_id')
+									->where('post_param.post_id',(int)@$id)
+									->select('category_param.id','category_param.fullname')->get()->toArray();
+				$param_name='';
+				if(count($data_post_param) > 0){
+					$param_name=$data_post_param[0]->fullname;
+				}			
 				?>
 				<div class="box-row margin-top-10">
 					<div class="col-sm-4 no-padding-left"><div class="box-img"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $image; ?>" /></a></figure></center></div></div>
@@ -58,7 +65,7 @@ use App\DistrictModel;
 							<div class="col-sm-6 no-padding-left"><?php echo $street; ?></div>													
 							<div class="clr"></div>
 						</div>
-						<div class="margin-top-10"><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span></div>	
+						<div class="margin-top-10"><span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $param_name; ?></span></div>	
 						<div class="margin-top-10">
 							<div class="view-post-count">
 								<i class="fa fa-eye" aria-hidden="true"></i><span class="margin-left-5"><?php echo $count_view_text; ?>&nbsp;lượt xem	</span>

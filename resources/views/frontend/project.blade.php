@@ -1,9 +1,4 @@
 <?php 
-use App\ProjectModel;
-use App\ProjectArticleModel;
-use App\ProjectMemberModel;
-use App\ProvinceModel;
-use App\DistrictModel;
 use Illuminate\Support\Facades\DB;
 $setting=getSettingSystem();
 if(count($item) > 0){		
@@ -17,12 +12,19 @@ if(count($item) > 0){
     $price_list=$item["price_list"];
     $googlemap_url=$item['googlemap_url'];
     $total_cost=number_format($item['total_cost'],0,",",".") ;
-    $unit=$item['unit'];
+    $data_post_param=DB::table('category_param')
+                                    ->join('post_param','category_param.id','=','post_param.param_id')
+                                    ->where('post_param.post_id',(int)@$id)
+                                    ->select('category_param.id','category_param.fullname')->get()->toArray();
+                $param_name='';
+                if(count($data_post_param) > 0){
+                    $param_name=$data_post_param[0]->fullname;
+                }       
     $intro=$item["intro"];				
     /* begin cập nhật count view */
     $count_view=(int)@$item['count_view'];
     $count_view++;
-    $row				=	ProjectModel::find((int)@$id); 
+    $row				=	App\ProjectModel::find((int)@$id); 
     $row->count_view=$count_view;
     $row->save();
     $count_view_text=number_format($count_view,0,",",".");
@@ -34,8 +36,8 @@ if(count($item) > 0){
     $telephone=$setting['telephone']['field_value'];
     $office=$setting['office']['field_value'];    
     /* end setting */    
-    $province=ProvinceModel::find((int)@$item['province_id'])->toArray();    
-    $district=DistrictModel::find((int)@$item['district_id'])->toArray();  
+    $province=App\ProvinceModel::find((int)@$item['province_id'])->toArray();    
+    $district=App\DistrictModel::find((int)@$item['district_id'])->toArray();  
     $province_name=$province['fullname'];
     $district_name=$district['fullname'];
     $province_permalink=route('frontend.index.index',[$province['alias']]);
@@ -67,7 +69,7 @@ if(count($item) > 0){
                 <div class="clr"></div>
             </div>
             <div class="margin-top-5 product-price">
-                <span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $unit; ?></span>
+                <span class="project-lbl-price">Giá:</span><span class="project-lbl-price-number margin-left-5"><?php echo $total_cost; ?></span><span class="margin-left-5 project-lbl-price-number"><?php echo $param_name; ?></span>
             </div>                                
             <div class="margin-top-5">
                 <span class="phone-tel"><i class="fa fa-phone" aria-hidden="true"></i></span>&nbsp;Hotline:&nbsp;<?php echo $telephone; ?>
@@ -127,7 +129,7 @@ if(count($item) > 0){
         </div>    
         <div id="tien-do" class="tabcontent">
             <?php  
-            $dataNews=ProjectArticleModel::whereRaw("project_id = ? and status = ?",[@$id,1])
+            $dataNews=App\ProjectArticleModel::whereRaw("project_id = ? and status = ?",[@$id,1])
             ->select('project_article.id','project_article.alias','project_article.fullname','project_article.image','project_article.intro','project_article.count_view')
             ->orderBy('project_article.created_at', 'desc')                
             ->take(10)

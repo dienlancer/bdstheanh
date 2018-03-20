@@ -137,7 +137,19 @@ class ProjectController extends Controller {
             $checked = 0;
              $error["district_id"]["type_msg"]   = "has-error";
              $error["district_id"]["msg"]    = "Vui lòng chọn quận huyện";
-          }              
+          }            
+          if(count($category_param_id) == 0){
+              $checked = 0;
+              $error["category_param_id"]["type_msg"]   = "has-error";
+              $error["category_param_id"]["msg"]      = "Thiếu đơn vị tính";
+          }
+          else{
+            if(empty($category_param_id[0])){
+              $checked = 0;
+              $error["category_param_id"]["type_msg"]   = "has-error";
+              $error["category_param_id"]["msg"]      = "Thiếu đơn vị tính";
+            }
+          }           
           if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";

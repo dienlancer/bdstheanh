@@ -379,8 +379,8 @@ class IndexController extends Controller {
         );           
         $pagination=new PaginationModel($arrPagination);
         $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
-        $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')                                
-                ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')
+        $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost')                                
+                ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost')
                 ->orderBy('project.created_at', 'desc')
                 ->skip($position)
                 ->take($totalItemsPerPage)
@@ -484,8 +484,8 @@ class IndexController extends Controller {
     );           
     $pagination=new PaginationModel($arrPagination);
     $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
-    $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')                                
-    ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')
+    $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost')                                
+    ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost')
     ->orderBy('project.created_at', 'desc')
     ->skip($position)
     ->take($totalItemsPerPage)
