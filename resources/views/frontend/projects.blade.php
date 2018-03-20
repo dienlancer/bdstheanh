@@ -26,7 +26,7 @@ use App\DistrictModel;
 	<h1 style="display: none;"><?php echo @$title; ?></h1>
 	<h2 style="display: none;"><?php echo @$meta_description; ?></h2>
 	<div>
-		<?php 	
+		<?php 			
 		if(count($items) > 0){
 			$k=1;			
 			foreach ($items as $key => $value) {
@@ -42,11 +42,11 @@ use App\DistrictModel;
 				$district=DistrictModel::find((int)@$value['district_id'])->toArray();	
 				$province_name=$province['fullname'];
 				$district_name=$district['fullname'];
-				$province_permalink=route('frontend.index.index',[$province['alias']]);
-				$district_permalink=route('frontend.index.index',[$district['alias']]);
+				$province_permalink=route('frontend.index.filterProjectByProvince',[$province['alias']]);
+				$district_permalink=route('frontend.index.filterProjectByProvince',[$province['alias'],$district['alias']]);
 				$street=$value['street'];
 				$total_cost=number_format($value['total_cost'],0,",",".") ;
-				$unit=$value['unit'];
+				$unit=$value['unit'];				
 				?>
 				<div class="box-row margin-top-10">
 					<div class="col-sm-4 no-padding-left"><div class="box-img"><center><figure><a href="<?php echo $permalink; ?>"><img src="<?php echo $image; ?>" /></a></figure></center></div></div>

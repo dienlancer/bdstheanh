@@ -186,7 +186,9 @@ var basicTable = function () {
             iDisplayLength: -1,
             columns: [                
                 { data: "checked"            },                
-                { data: "fullname"      },               
+                { data: "fullname"      },  
+                { data: "province_name"      },  
+                { data: "district_name"      },  
                 { data: "image"         },
                 { data: "sort_order"    },
                 { data: "status"        },                                

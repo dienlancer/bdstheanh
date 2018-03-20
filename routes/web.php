@@ -395,4 +395,5 @@ Route::post("load-data-member",["as"=>"frontend.index.loadDataMember","uses"=>"f
 Route::post("load-data-supporter",["as"=>"frontend.index.loadDataSupporter","uses"=>"frontend\IndexController@loadDataSupporter"]);		
 Route::post("tim-kiem-san-pham",["as"=>"frontend.index.searchProduct","uses"=>"frontend\IndexController@searchProduct"]);
 Route::match(["get","post"],"lien-he-voi-chung-toi",["as"=>"frontend.index.contactUs","uses"=>"frontend\IndexController@contactUs"]);
+Route::match(["get","post"],"tinh-thanh/{province_alias?}/{district_alias?}",["as"=>"frontend.index.filterProjectByProvince","uses"=>"frontend\IndexController@filterProjectByProvince"]);
 ?>

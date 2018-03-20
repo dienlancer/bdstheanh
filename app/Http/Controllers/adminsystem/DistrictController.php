@@ -157,7 +157,13 @@ class DistrictController extends Controller {
             $id                     =   (int)$request->id;              
             $checked                =   1;
             $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                    
+            $msg                    =   "Xóa thành công";  
+            $data                   =   ProjectModel::whereRaw("district_id = ?",[(int)@$id])->get()->toArray();  
+            if(count($data) > 0){
+              $checked     =   0;
+              $type_msg           =   "alert-warning";            
+              $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+            }                       
             if($checked == 1){
               $item = DistrictModel::find((int)@$id);
                 $item->delete();                                                
@@ -203,28 +209,36 @@ class DistrictController extends Controller {
           return $info;
       }
       public function trash(Request $request){
-            $strID                 =   $request->str_id;               
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                  
-            $strID=substr($strID, 0,strlen($strID) - 1);
-            $arrID=explode(',',$strID);                 
-            if(empty($strID)){  
-              $checked     =   0;
-              $type_msg           =   "alert-warning";            
-              $msg                =   "Vui lòng chọn ít nhất một phần tử";
-            }
-            if($checked == 1){                                                    
-                  DB::table('district')->whereIn('id',@$arrID)->delete();                               
-            }
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
+        $strID                 =   $request->str_id;               
+        $checked                =   1;
+        $type_msg               =   "alert-success";
+        $msg                    =   "Xóa thành công";                  
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID); 
+        if(empty($strID)){
+          $checked     =   0;
+          $type_msg           =   "alert-warning";            
+          $msg                =   "Vui lòng chọn ít nhất một phần tử";
+        }
+        foreach ($arrID as $key => $value){
+          $data                   =   ProjectModel::whereRaw("district_id = ?",[(int)@$value])->get()->toArray();  
+          if(count($data) > 0){
+            $checked     =   0;
+            $type_msg           =   "alert-warning";            
+            $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+          }
+        }     
+        if($checked == 1){                                                    
+          DB::table('district')->whereIn('id',@$arrID)->delete();                               
+        }
+        $data                   =   $this->loadData($request);
+        $info = array(
+          'checked'           => $checked,
+          'type_msg'          => $type_msg,                
+          'msg'               => $msg,                
+          'data'              => $data
+        );
+        return $info;
       }
       public function sortOrder(Request $request){
             $sort_json              =   $request->sort_json;           

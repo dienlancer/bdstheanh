@@ -33,12 +33,14 @@ class ProjectController extends Controller {
         }
   	}	    
   	public function loadData(Request $request){    		   
-      $query=DB::table('project');        
+      $query=DB::table('project')
+      ->join('province','project.province_id','=','province.id')
+      ->join('district','project.district_id','=','district.id');        
       if(!empty(@$request->filter_search)){
         $query->where('project.fullname','like','%'.trim(@$request->filter_search).'%');
       }
-      $data=$query->select('project.id','project.fullname','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
-      ->groupBy('project.id','project.fullname','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
+      $data=$query->select('project.id','project.fullname','province.fullname as province_name','district.fullname as district_name','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
+      ->groupBy('project.id','project.fullname','province.fullname','district.fullname','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
       ->orderBy('project.sort_order', 'asc')->get()->toArray()     ;    		      
       $data=convertToArray($data);		
       $data=projectConverter($data,$this->_controller);		         

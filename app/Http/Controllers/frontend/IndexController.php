@@ -31,6 +31,8 @@ use App\AlbumModel;
 use App\PhotoModel;
 use App\CategoryVideoModel;
 use App\VideoModel;
+use App\ProvinceModel;
+use App\DistrictModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Session;
@@ -145,6 +147,9 @@ class IndexController extends Controller {
   }  
   public function search(Request $request){
     /* begin standard */    
+    $title="";
+    $meta_keyword="";
+    $meta_description="";         
     $layout="two-column";                                                           
     $totalItems=0;
     $totalItemsPerPage=0;
@@ -189,7 +194,7 @@ class IndexController extends Controller {
     ->take($totalItemsPerPage)
     ->get()->toArray();   
     $items=convertToArray($data);      
-    return view("frontend.index",compact("component","title","items","pagination","layout"));
+    return view("frontend.index",compact("component","title","items","pagination","layout","title","meta_keyword","meta_description"));
   }
   
   public function index(Request $request,$alias)
@@ -376,7 +381,7 @@ class IndexController extends Controller {
         $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
         $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')                                
                 ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')
-                ->orderBy('project.sort_order', 'asc')
+                ->orderBy('project.created_at', 'desc')
                 ->skip($position)
                 ->take($totalItemsPerPage)
                 ->get()->toArray();                   
@@ -424,6 +429,71 @@ class IndexController extends Controller {
     \Artisan::call('sitemap:auto');
     return view("frontend.index",compact("component","alias","title","meta_keyword","meta_description","item","items","pagination","layout","category"));                            
   }
+  function filterProjectByProvince(Request $request,$province_alias="",$district_alias=""){
+    /* begin standard */
+    $title="";
+    $meta_keyword="";
+    $meta_description="";                                                                
+    $totalItems=0;
+    $totalItemsPerPage=0;
+    $pageRange=0;      
+    $currentPage=1;  
+    $pagination ;                                              
+    $setting= getSettingSystem();    
+    $layout="";       
+    /* end standard */              
+    $items=array();     
+    $province_id=0;
+    $district_id=0;
+    $data_province=array();
+    $data_district=array();    
+    $data_province=ProvinceModel::whereRaw('alias = ?',[@$province_alias])->select('id')->get()->toArray();
+    $data_district=DistrictModel::whereRaw('alias = ?',[@$district_alias])->select('id')->get()->toArray();
+    if(count($data_province) > 0){
+      $province_id=$data_province[0]['id'];
+    }
+    if(count($data_district) > 0){
+      $district_id=$data_district[0]['id'];
+    }
+    $seo=getSeo();
+    $title='Dự án';
+    $meta_keyword=$seo["meta_keyword"];
+    $meta_description=$seo["meta_description"];   
+    $component='projects'; 
+    $query=DB::table('project')          
+          ->where('project.status',1)    ;
+    if((int)@$province_id > 0){
+      $query->where('project.province_id',(int)@$province_id);
+    }
+    if((int)@$district_id > 0){
+      $query->where('project.district_id',(int)@$district_id); 
+    }
+    $data=$query->select('project.id')->groupBy('project.id')->get()->toArray();
+    $data=convertToArray($data);
+    $totalItems=count($data);
+    $totalItemsPerPage=(int)@$setting['article_perpage']['field_value']; 
+    $pageRange=$this->_pageRange;
+    if(!empty(@$request->filter_page)){
+      $currentPage=@$request->filter_page;
+    }       
+    $arrPagination=array(
+      "totalItems"=>$totalItems,
+      "totalItemsPerPage"=>$totalItemsPerPage,
+      "pageRange"=>$pageRange,
+      "currentPage"=>$currentPage   
+    );           
+    $pagination=new PaginationModel($arrPagination);
+    $position   = ((int)@$arrPagination['currentPage']-1)*$totalItemsPerPage;        
+    $data=$query->select('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')                                
+    ->groupBy('project.id','project.alias','project.fullname','project.image','project.intro','project.count_view','project.province_id','project.district_id','project.street','project.total_cost','project.unit')
+    ->orderBy('project.created_at', 'desc')
+    ->skip($position)
+    ->take($totalItemsPerPage)
+    ->get()->toArray();                   
+    $items=convertToArray($data);   
+    $layout="two-column";   
+    return view("frontend.index",compact("component","title","meta_keyword","meta_description","items","pagination","layout"));    
+  } 
       function addCart(){          
           $product_id=(int)($_POST["product_id"]);
           $product_code=$_POST["product_code"];

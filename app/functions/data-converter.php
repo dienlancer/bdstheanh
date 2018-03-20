@@ -245,12 +245,16 @@ function projectConverter($data=array(),$controller){
                 $link_image=url("/upload/" . $article_width.'x'.$article_height . "-".$data[$i]["image"]);        
                 $image = '<center><img src="'.$link_image.'" style="width:100%" /></center>';
             }       
-            $id=$data[$i]["id"];                
+            $id=$data[$i]["id"];  
+            $province_name=$data[$i]['province_name'];              
+            $district_name=$data[$i]['district_name'];              
             $result[$i] = array(
                 'checked'                  =>   '<input type="checkbox" onclick="checkWithList(this)" name="cid"  />',
                 'is_checked'               =>   0,
                 "id"                       =>   $id,
                 "fullname"                 =>   $data[$i]["fullname"],                               
+                "province_name"            =>   $province_name,
+                "district_name"            =>   $district_name,
                 "image"                    =>   $image,
                 "sort_order"               =>   $sort_order,
                 "status"                   =>   $status,

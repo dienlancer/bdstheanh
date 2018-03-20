@@ -438,7 +438,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             async: false,
             success: function (data) {   
                 $('select[name="district_id"]').empty();      
-                $('select[name="district_id"]').append('<option >Vui lòng chọn quận huyện</option>');          
+                $('select[name="district_id"]').append('<option >--Select a category--</option>');          
                 $.each(data,function(i,value){
                     $('select[name="district_id"]').append('<option value="'+value.id+'">'+value.fullname+'</option>');
                 });
@@ -453,8 +453,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
     });
     function filterDistrictByProvince(){
         var province_id = $('select[name="province_id"]').val();
-        var district_id = $('input[name="district_hidden_id"]').val();
-        console.log(district_id);
+        var district_id = $('input[name="district_hidden_id"]').val();        
         var token       = $('input[name="_token"]').val();
         var dataItem={      
             "province_id":province_id,                  
@@ -467,9 +466,9 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             async: false,
             success: function (data) {   
                 $('select[name="district_id"]').empty();      
-                $('select[name="district_id"]').append('<option >Vui lòng chọn quận huyện</option>');          
+                $('select[name="district_id"]').append('<option >--Select a category--</option>');          
                 $.each(data,function(i,value){
-                    if(parseInt(value.id) == parseInt(district_hidden_id)){
+                    if(parseInt(value.id) == parseInt(district_id)){
                         $('select[name="district_id"]').append('<option value="'+value.id+'" selected>'+value.fullname+'</option>');
                     }else{
                         $('select[name="district_id"]').append('<option value="'+value.id+'">'+value.fullname+'</option>');
