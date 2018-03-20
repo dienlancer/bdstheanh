@@ -446,7 +446,7 @@ class IndexController extends Controller {
     $province_id=0;
     $district_id=0;
     $data_province=array();
-    $data_district=array();    
+    $data_district=array();
     $data_province=ProvinceModel::whereRaw('alias = ?',[@$province_alias])->select('id')->get()->toArray();
     $data_district=DistrictModel::whereRaw('alias = ?',[@$district_alias])->select('id')->get()->toArray();
     if(count($data_province) > 0){

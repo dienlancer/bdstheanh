@@ -9,7 +9,10 @@ $linkDelete			=	route('adminsystem.'.$controller.'.deleteItem');
 $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
+$linkFilterDistrictByProvince        =   route('adminsystem.district.filterDistrictByProvince');
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
+$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,0,"");
+$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,0,"");
 ?>
 <form class="form-horizontal" role="form" name="frm">	
 	{{ csrf_field() }}
@@ -39,11 +42,19 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 			</div>                                 
 		</div>
 		<div class="row">                     
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div><b>Dự án</b>  </div>
                     <div><?php echo $inputFilterSearch; ?></div>
-                </div>            
-                <div class="col-md-6">
+                </div>    
+                <div class="col-md-3">
+                    <div><b>Tỉnh / Thành phố</b>  </div>
+                    <div><?php echo $ddlProvince; ?></div>
+                </div> 
+                <div class="col-md-3">
+                    <div><b>Quận huyện</b>  </div>
+                    <div><?php echo $ddlDistrict; ?></div>
+                </div>         
+                <div class="col-md-2">
                     <div>&nbsp;</div>
                     <div>
                         <button type="button" class="btn dark btn-outline sbold uppercase btn-product" onclick="getList();">Tìm kiếm</button>                                         
@@ -74,12 +85,17 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 <script type="text/javascript" language="javascript">	
 
 	function getList() {  	
-		var token = $('form[name="frm"] input[name="_token"]').val();         
-        var filter_search=$('form[name="frm"] input[name="filter_search"]').val();
+		var province_id = $('select[name="province_id"]').val();
+        var district_id = $('select[name="district_id"]').val();  
+		var token = $('input[name="_token"]').val();         
+        var filter_search=$('input[name="filter_search"]').val();
 		var dataItem={            
             '_token': token,
-            'filter_search':filter_search,            
+            'filter_search':filter_search,        
+            'province_id':province_id,
+            'district_id':district_id    
         };
+        console.log(dataItem);
 		$.ajax({
 			url: '<?php echo $linkLoadData; ?>',
 			type: 'POST', 
@@ -301,6 +317,33 @@ $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_sea
 		}				
 		$('input[name="sort_json"]').val(JSON.stringify(data));
 	}
+	$('select[name="province_id"]').on('click',function(){
+        var province_id = $('select[name="province_id"]').val();
+        var token       = $('input[name="_token"]').val();
+        var dataItem={      
+            "province_id":province_id,                  
+            "_token": token,
+        }; 
+        $.ajax({
+            url: '<?php echo $linkFilterDistrictByProvince; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {   
+                $('select[name="district_id"]').empty();      
+                $('select[name="district_id"]').append('<option >--Select a category--</option>');          
+                $.each(data,function(i,value){
+                    $('select[name="district_id"]').append('<option value="'+value.id+'">'+value.fullname+'</option>');
+                });
+            },
+            error : function (data){
+
+            },
+            beforeSend  : function(jqXHR,setting){
+
+            },
+        });
+    });
 	$(document).ready(function(){
 		
 		getList();

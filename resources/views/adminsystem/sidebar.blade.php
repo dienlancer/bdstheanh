@@ -29,7 +29,7 @@ $li_category_banner='';
 $li_module_item='';
 
 $li_setting_system='';
-
+$li_category_param='';
 $li_phan_quyen='';
 $li_group_member='';
 $li_user='';
@@ -93,7 +93,9 @@ switch ($controller) {
     $li_product='active open';
     $li_product_management='active open';
     break;
-    
+    case 'category-param':  
+    $li_category_param='active open';
+    break;   
     case 'payment-method':     
     $li_payment_method='active open';
     $li_product_management='active open';
@@ -181,7 +183,12 @@ switch ($controller) {
             <span class="title">Trang tĩnh</span>                                            
         </a>                                                                      
     </li> 
-    
+    <li class="nav-item  <?php echo $li_category_param; ?>">
+        <a href="{!! route('adminsystem.category-param.getList') !!}" class="nav-link nav-toggle">
+            <i class="icon-notebook"></i>
+            <span class="title">Quản lý tham số</span>                                            
+        </a>                                                                      
+    </li> 
     <li class="nav-item <?php echo $li_project_management; ?>">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="fa fa-folder-open-o" ></i>

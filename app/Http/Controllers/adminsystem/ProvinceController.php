@@ -85,19 +85,7 @@ class ProvinceController extends Controller {
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
                  $error["fullname"]["msg"] = "Thiếu tên";
-          }else{
-              $data=array();
-              if (empty($id)) {
-                $data=ProvinceModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
-              }else{
-                $data=ProvinceModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
-              }  
-              if (count($data) > 0) {
-                  $checked = 0;
-                  $error["fullname"]["type_msg"] = "has-error";
-                  $error["fullname"]["msg"] = "Bài viết đã tồn tại";
-              }      	
-          }                          
+          }                   
           if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";

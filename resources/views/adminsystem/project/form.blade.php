@@ -17,9 +17,9 @@ $inputGoogleMapUrl      =   '<textarea      name="googlemap_url" rows="2" cols="
 $inputMetakeyword       =   '<textarea      name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription   =   '<textarea      name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost         =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
-$inputUnit              =   '<input type="text" class="form-control" name="unit"  value="'.@$arrRowData['unit'].'">'; 
 $ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
 $ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
+$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrPostParam,"");
 $inputStreet            =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
@@ -118,7 +118,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                             <span class="help-block"></span>
                         </div>
                     </div>     
-                </div>       
+                </div>    
+
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Địa điểm</b></label>
@@ -149,12 +150,12 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Đơn vị</b></label>
-                        <div class="col-md-10">                            
-                            <?php echo $inputUnit; ?>                           
-                           <span class="help-block"></span>
-                       </div>
-                   </div>                       
-                </div>   
+                        <div class="col-md-10">
+                            <?php echo $ddlCategoryParam; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div> 
+                </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Mô tả ngắn</b></label>
@@ -298,7 +299,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         }
         var image_hidden=$('input[name="image_hidden"]').val();         
         var total_cost=$('input[name="total_cost"]').val();     
-        var unit=$('input[name="unit"]').val();        
+        var category_param_id=$('select[name="category_param_id[]"]').val();      
         var intro=$('textarea[name="intro"]').val();        
         var overview=CKEDITOR.instances['overview'].getData();    
         var equipment=CKEDITOR.instances['equipment'].getData();    
@@ -320,7 +321,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             "image":image,       
             "image_hidden":image_hidden,
             "total_cost":total_cost,     
-            "unit":unit,
+            "category_param_id":category_param_id,                
             "intro":intro,
             "overview":overview,
             "equipment":equipment,

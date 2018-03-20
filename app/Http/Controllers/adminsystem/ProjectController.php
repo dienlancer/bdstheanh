@@ -11,8 +11,10 @@ use App\MenuModel;
 use App\ProjectModel;
 use App\ProvinceModel;
 use App\DistrictModel;
+use App\PostParamModel;
 use App\ProjectArticleModel;
 use App\ArticleCategoryModel;
+use App\CategoryParamModel;
 use DB;
 class ProjectController extends Controller {
   	var $_controller="project";	
@@ -24,9 +26,11 @@ class ProjectController extends Controller {
     		$title=$this->_title;
     		$icon=$this->_icon;		        
         $arrPrivilege=getArrPrivilege();
-        $requestControllerAction=$this->_controller."-list";         
+        $requestControllerAction=$this->_controller."-list";   
+        $arrProvince=ProvinceModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();              
+        $arrDistrict=DistrictModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();                  
         if(in_array($requestControllerAction,$arrPrivilege)){
-          return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon")); 
+          return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon","arrProvince","arrDistrict")); 
         }
         else{
           return view("adminsystem.no-access");
@@ -39,6 +43,12 @@ class ProjectController extends Controller {
       if(!empty(@$request->filter_search)){
         $query->where('project.fullname','like','%'.trim(@$request->filter_search).'%');
       }
+      if((int)@$request->province_id > 0){
+        $query->where('project.province_id',(int)@$request->province_id);
+      }
+      if((int)@$request->district_id > 0){
+        $query->where('project.district_id',(int)@$request->district_id); 
+      }
       $data=$query->select('project.id','project.fullname','province.fullname as province_name','district.fullname as district_name','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
       ->groupBy('project.id','project.fullname','province.fullname','district.fullname','project.image','project.sort_order','project.status','project.created_at','project.updated_at')
       ->orderBy('project.sort_order', 'asc')->get()->toArray()     ;    		      
@@ -50,22 +60,27 @@ class ProjectController extends Controller {
         $controller=$this->_controller;     
         $title="";
         $icon=$this->_icon; 
-        $arrRowData=array();        
+        $arrRowData=array();     
+        $arrPostParam=array();   
         $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";  
         if(in_array($requestControllerAction, $arrPrivilege)){
           switch ($task) {
            case 'edit':
               $title=$this->_title . " : Update";
-              $arrRowData=ProjectModel::find((int)@$id)->toArray();                     
+              $arrRowData=ProjectModel::find((int)@$id)->toArray();  
+              $arrPostParam=PostParamModel::whereRaw("post_id = ?",[(int)@$id])->get()->toArray();                          
            break;
            case 'add':
               $title=$this->_title . " : Add new";
            break;     
         }     
         $arrProvince=ProvinceModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();              
-        $arrDistrict=DistrictModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();                     
-        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrProvince","arrDistrict","controller","task","title","icon"));
+        $arrDistrict=DistrictModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();   
+        $arrCategoryParam=CategoryParamModel::select("id","fullname","alias","parent_id")->orderBy("sort_order","asc")->get()->toArray();
+        $arrCategoryParamRecursive=array();
+        categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ;                   
+        return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrProvince","arrDistrict","controller","task","title","icon","arrCategoryParamRecursive","arrPostParam"));
         }else{
           return view("adminsystem.no-access");
         }        
@@ -79,7 +94,6 @@ class ProjectController extends Controller {
           $image                =   trim(@$request->image);
           $image_hidden         =   trim(@$request->image_hidden);            
           $total_cost           =   trim(@$request->total_cost);
-          $unit                 =   trim(@$request->unit);
           $intro                =   trim(@$request->intro);    
           $overview             =   trim(@$request->overview);          
           $equipment            =   trim(@$request->equipment);          
@@ -87,6 +101,8 @@ class ProjectController extends Controller {
           $googlemap_url        =   trim(@$request->googlemap_url);  
           $province_id             =   trim(@$request->province_id);
           $district_id             =   trim(@$request->district_id);
+          $category_param_id    =   ($request->category_param_id);  
+
           $street               =   trim(@$request->street);                    
           $sort_order           =   trim(@$request->sort_order);
           $status               =   trim(@$request->status);          
@@ -154,7 +170,6 @@ class ProjectController extends Controller {
                 $item->meta_keyword     = $meta_keyword;
                 $item->meta_description = $meta_description;                             
                 $item->total_cost       = $total_cost;
-                $item->unit             = $unit;
                 $item->intro            = $intro;
                 $item->overview         = $overview;
                 $item->equipment        = $equipment;
@@ -166,7 +181,36 @@ class ProjectController extends Controller {
                 $item->sort_order 		  =	(int)@$sort_order;
                 $item->status 			    =	(int)@$status;    
                 $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
-                $item->save();                                  
+                $item->save();   
+
+                /* begin category param */
+                if(count(@$category_param_id)>0){  
+
+                  $arrProductParam=PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
+                  $arrCategoryParamID=array();
+                  foreach ($arrProductParam as $key => $value) {
+                    $arrCategoryParamID[]=$value["param_id"];
+                  }                  
+                  $selected=@$category_param_id;
+                  sort($selected);
+                  sort($arrCategoryParamID);                           
+                  $resultCompare=0;
+                  if($selected == $arrCategoryParamID){
+                    $resultCompare=1;       
+                  }
+                  if($resultCompare==0){
+                    PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->delete();  
+                    foreach ($selected as $key => $value) {
+                      $param_id=$value;
+                      $productParam=new PostParamModel;
+                      $productParam->post_id=(int)@$item->id;
+                      $productParam->param_id=(int)@$param_id;            
+                      $productParam->save();
+                    }
+                  }       
+                }  
+                PostParamModel::whereRaw("param_id = ?",[0])->delete();
+                /* end category param */                                             
                 $info = array(
                   'type_msg' 			=> "has-success",
                   'msg' 				=> 'Lưu dữ liệu thành công',
