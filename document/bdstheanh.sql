@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 19, 2018 lúc 10:21 AM
+-- Thời gian đã tạo: Th3 20, 2018 lúc 12:30 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -260,6 +260,34 @@ INSERT INTO `category_banner` (`id`, `fullname`, `theme_location`, `status`, `so
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `category_param`
+--
+
+DROP TABLE IF EXISTS `category_param`;
+CREATE TABLE `category_param` (
+  `id` bigint(20) NOT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `param_value` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `category_param`
+--
+
+INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_value`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Triệu VNĐ', 'trieu-vnd', 0, '', 1, 1, '2018-03-20 08:52:03', '2018-03-20 08:52:03'),
+(2, 'Tỷ VNĐ', 'ty-vnd', 0, '', 2, 1, '2018-03-20 09:23:20', '2018-03-20 09:23:20'),
+(3, 'Nghìn VNĐ', 'nghin-vnd', 0, '', 3, 1, '2018-03-20 09:30:04', '2018-03-20 09:30:04');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `category_product`
 --
 
@@ -329,14 +357,15 @@ CREATE TABLE `district` (
 --
 
 INSERT INTO `district` (`id`, `fullname`, `alias`, `province_id`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Tân Bình', 'tan-binh', 24, 3, 1, '2018-02-26 03:03:50', '2018-03-03 13:05:06'),
-(2, 'Phú Nhuận', 'phu-nhuan', 24, 4, 1, '2018-02-26 03:19:32', '2018-02-26 03:23:39'),
+(1, 'Quận Tân Bình', 'quan-tan-binh', 24, 3, 1, '2018-02-26 03:03:50', '2018-03-20 08:31:19'),
+(2, 'Quận Phú Nhuận', 'quan-phu-nhuan', 24, 4, 1, '2018-02-26 03:19:32', '2018-03-20 08:31:27'),
 (3, 'Quận 1', 'quan-1', 24, 1, 1, '2018-02-26 03:19:56', '2018-02-26 03:21:12'),
 (4, 'Quận 2', 'quan-2', 24, 2, 1, '2018-02-26 03:20:06', '2018-03-03 13:05:25'),
-(5, 'Quận 2', 'quan-2', 36, 6, 1, '2018-02-26 03:23:23', '2018-02-26 03:25:07'),
-(6, 'Quận 1', 'quan-1', 36, 5, 1, '2018-02-26 03:24:19', '2018-02-26 03:25:00'),
-(7, 'Tân Bình', 'tan-binh', 36, 7, 1, '2018-02-26 03:24:47', '2018-02-26 03:25:07'),
-(8, 'Phú Nhuận', 'phu-nhuan', 36, 8, 1, '2018-02-26 03:25:52', '2018-02-26 03:25:52');
+(5, 'Huyện Tứ Xuyên', 'huyen-tu-xuyen', 36, 6, 1, '2018-02-26 03:23:23', '2018-03-20 04:10:57'),
+(6, 'Huyện Bà Chà', 'huyen-ba-cha', 36, 5, 1, '2018-02-26 03:24:19', '2018-03-20 04:10:46'),
+(7, 'Quận Lã Vọng', 'quan-la-vong', 36, 7, 1, '2018-02-26 03:24:47', '2018-03-20 04:11:08'),
+(8, 'Quận Phú Xuân', 'quan-phu-xuan', 36, 8, 1, '2018-02-26 03:25:52', '2018-03-20 04:11:16'),
+(10, 'Quận Tân Bình', 'quan-tan-binh-623', 36, 9, 1, '2018-03-20 08:19:58', '2018-03-20 08:31:37');
 
 -- --------------------------------------------------------
 
@@ -359,7 +388,7 @@ CREATE TABLE `group_member` (
 --
 
 INSERT INTO `group_member` (`id`, `fullname`, `alias`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', NULL, 1, '2016-12-17 05:05:18', '2018-01-22 02:03:49'),
+(1, 'Administrator', '', 1, '2016-12-17 05:05:18', '2018-03-20 08:51:41'),
 (2, 'Bài viết', NULL, 2, '2016-12-17 05:05:41', '2018-01-22 02:03:55');
 
 -- --------------------------------------------------------
@@ -382,79 +411,6 @@ CREATE TABLE `group_privilege` (
 --
 
 INSERT INTO `group_privilege` (`id`, `group_member_id`, `privilege_id`, `created_at`, `updated_at`) VALUES
-(2967, 1, 1, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2968, 1, 2, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2969, 1, 3, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2970, 1, 4, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2971, 1, 5, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2972, 1, 16, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2973, 1, 17, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2974, 1, 18, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2975, 1, 19, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2976, 1, 24, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2977, 1, 25, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2978, 1, 33, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2979, 1, 43, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2980, 1, 44, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2981, 1, 49, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2982, 1, 50, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2983, 1, 55, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2984, 1, 56, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2985, 1, 57, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2986, 1, 58, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2987, 1, 59, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2988, 1, 60, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2989, 1, 61, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2990, 1, 62, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2991, 1, 63, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2992, 1, 67, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2993, 1, 68, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2994, 1, 79, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2995, 1, 80, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2996, 1, 85, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2997, 1, 86, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2998, 1, 103, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(2999, 1, 104, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3000, 1, 105, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3001, 1, 106, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3002, 1, 107, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3003, 1, 108, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3004, 1, 109, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3005, 1, 110, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3006, 1, 111, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3007, 1, 112, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3008, 1, 113, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3009, 1, 114, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3010, 1, 115, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3011, 1, 116, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3012, 1, 117, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3013, 1, 118, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3014, 1, 119, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3015, 1, 120, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3016, 1, 121, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3017, 1, 122, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3018, 1, 123, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3019, 1, 124, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3020, 1, 125, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3021, 1, 126, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3022, 1, 127, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3023, 1, 128, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3024, 1, 129, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3025, 1, 130, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3026, 1, 131, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3027, 1, 132, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3028, 1, 133, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3029, 1, 134, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3030, 1, 135, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3031, 1, 136, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3032, 1, 137, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3033, 1, 138, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3034, 1, 139, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3035, 1, 140, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3036, 1, 141, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3037, 1, 142, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3038, 1, 143, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
-(3039, 1, 144, '2018-01-22 02:03:49', '2018-01-22 02:03:49'),
 (3040, 2, 1, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3041, 2, 2, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3042, 2, 3, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
@@ -521,7 +477,82 @@ INSERT INTO `group_privilege` (`id`, `group_member_id`, `privilege_id`, `created
 (3103, 2, 141, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3104, 2, 142, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
 (3105, 2, 143, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
-(3106, 2, 144, '2018-01-22 02:03:55', '2018-01-22 02:03:55');
+(3106, 2, 144, '2018-01-22 02:03:55', '2018-01-22 02:03:55'),
+(3107, 1, 1, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3108, 1, 2, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3109, 1, 3, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3110, 1, 4, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3111, 1, 5, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3112, 1, 16, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3113, 1, 17, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3114, 1, 18, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3115, 1, 19, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3116, 1, 24, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3117, 1, 25, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3118, 1, 33, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3119, 1, 43, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3120, 1, 44, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3121, 1, 49, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3122, 1, 50, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3123, 1, 55, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3124, 1, 56, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3125, 1, 57, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3126, 1, 58, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3127, 1, 59, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3128, 1, 60, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3129, 1, 61, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3130, 1, 62, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3131, 1, 63, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3132, 1, 67, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3133, 1, 68, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3134, 1, 79, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3135, 1, 80, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3136, 1, 85, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3137, 1, 86, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3138, 1, 103, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3139, 1, 104, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3140, 1, 105, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3141, 1, 106, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3142, 1, 107, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3143, 1, 108, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3144, 1, 109, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3145, 1, 110, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3146, 1, 111, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3147, 1, 112, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3148, 1, 113, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3149, 1, 114, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3150, 1, 115, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3151, 1, 116, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3152, 1, 117, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3153, 1, 118, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3154, 1, 119, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3155, 1, 120, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3156, 1, 121, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3157, 1, 122, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3158, 1, 123, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3159, 1, 124, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3160, 1, 125, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3161, 1, 126, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3162, 1, 127, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3163, 1, 128, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3164, 1, 129, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3165, 1, 130, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3166, 1, 131, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3167, 1, 132, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3168, 1, 133, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3169, 1, 134, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3170, 1, 135, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3171, 1, 136, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3172, 1, 137, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3173, 1, 138, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3174, 1, 139, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3175, 1, 140, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3176, 1, 141, '2018-03-20 08:51:41', '2018-03-20 08:51:41'),
+(3177, 1, 142, '2018-03-20 08:51:42', '2018-03-20 08:51:42'),
+(3178, 1, 143, '2018-03-20 08:51:42', '2018-03-20 08:51:42'),
+(3179, 1, 144, '2018-03-20 08:51:42', '2018-03-20 08:51:42'),
+(3180, 1, 145, '2018-03-20 08:51:42', '2018-03-20 08:51:42'),
+(3181, 1, 146, '2018-03-20 08:51:42', '2018-03-20 08:51:42');
 
 -- --------------------------------------------------------
 
@@ -1103,7 +1134,10 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (413, 1, 'AFHPjfqdRHTSGM81aU0KnrGRX6SgJMmN', '2018-02-27 10:24:22', '2018-02-27 10:24:22'),
 (414, 1, 'XoiVnHvAjl6wUUYRM6KdAzyATiF6MAxa', '2018-03-03 06:04:14', '2018-03-03 06:04:14'),
 (415, 1, '2YHmO790wqUdZfm51GIWewi2vn7IBW01', '2018-03-03 06:04:14', '2018-03-03 06:04:14'),
-(416, 1, '8yafeA9t405VOhgjhZjRBsyoc0dUydZv', '2018-03-19 02:18:10', '2018-03-19 02:18:10');
+(416, 1, '8yafeA9t405VOhgjhZjRBsyoc0dUydZv', '2018-03-19 02:18:10', '2018-03-19 02:18:10'),
+(417, 1, 'e92ZanJMEEjSaPtg4mqreqf25wXCreLQ', '2018-03-19 03:03:22', '2018-03-19 03:03:22'),
+(418, 1, '2vzXNE8C6wvEmc9B2gdMiSqmuwYiYyzE', '2018-03-19 18:53:27', '2018-03-19 18:53:27'),
+(419, 1, 'l2feOS3osyNYT9e8p8e80heoV1XmwFZk', '2018-03-20 00:21:31', '2018-03-20 00:21:31');
 
 -- --------------------------------------------------------
 
@@ -1143,6 +1177,28 @@ INSERT INTO `photo` (`id`, `album_id`, `image`, `sort_order`, `status`, `created
 (17, 1, 'conmochieu-14.png', 13, 1, '2018-01-09 07:07:45', '2018-01-09 07:08:16'),
 (18, 1, 'conmochieu-15.png', 15, 1, '2018-01-09 07:07:46', '2018-01-09 07:08:16'),
 (19, 1, 'conmochieu-16.png', 1, 1, '2018-01-09 07:07:46', '2018-01-09 07:07:46');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `post_param`
+--
+
+DROP TABLE IF EXISTS `post_param`;
+CREATE TABLE `post_param` (
+  `id` bigint(20) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `param_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `post_param`
+--
+
+INSERT INTO `post_param` (`id`, `post_id`, `param_id`, `created_at`, `updated_at`) VALUES
+(21, 10, 2, '2018-03-20 09:31:44', '2018-03-20 09:31:44');
 
 -- --------------------------------------------------------
 
@@ -1238,7 +1294,9 @@ INSERT INTO `privilege` (`id`, `fullname`, `controller`, `action`, `sort_order`,
 (141, 'province-list', 'province', 'list', 1, '2018-01-21 17:53:20', '2018-01-21 17:53:20'),
 (142, 'province-form', 'province', 'form', 2, '2018-01-21 17:53:29', '2018-01-21 17:53:29'),
 (143, 'district-list', 'district', 'list', 1, '2018-01-22 02:03:24', '2018-01-22 02:03:24'),
-(144, 'district-form', 'district', 'form', 2, '2018-01-22 02:03:34', '2018-01-22 02:03:34');
+(144, 'district-form', 'district', 'form', 2, '2018-01-22 02:03:34', '2018-01-22 02:03:34'),
+(145, 'category-param-list', 'category-param', 'list', 1, '2018-03-20 08:50:49', '2018-03-20 08:50:49'),
+(146, 'category-param-form', 'category-param', 'form', 1, '2018-03-20 08:51:06', '2018-03-20 08:51:06');
 
 -- --------------------------------------------------------
 
@@ -1284,7 +1342,6 @@ CREATE TABLE `project` (
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `count_view` int(11) DEFAULT NULL,
   `total_cost` int(11) DEFAULT NULL,
-  `unit` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intro` text COLLATE utf8_unicode_ci,
   `overview` text COLLATE utf8_unicode_ci,
   `equipment` text COLLATE utf8_unicode_ci,
@@ -1303,23 +1360,23 @@ CREATE TABLE `project` (
 -- Đang đổ dữ liệu cho bảng `project`
 --
 
-INSERT INTO `project` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_description`, `image`, `count_view`, `total_cost`, `unit`, `intro`, `overview`, `equipment`, `price_list`, `googlemap_url`, `province_id`, `district_id`, `street`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(10, 'Opal Skyview 1', 'opal-skyview-1', 'metakeyword Opal Skyview 1', 'metadescription Opal Skyview 1', 'conmochieu-1.png', 426, 100, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 1</p>', '<p>tiện &iacute;ch 1</p>', '<p>bảng gi&aacute; 1</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 1, 1, '2018-01-04 18:34:30', '2018-03-19 07:43:11'),
-(11, 'Opal Skyview 2', 'opal-skyview-2', 'metakeyword Opal Skyview 2', 'metadescription Opal Skyview 2', 'conmochieu-2.png', 3, 200, 'triệu VNĐ', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source', '<p>tổng quan 2</p>', '<p>tiện &iacute;ch 2</p>', '<p>bảng gi&aacute; 2</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 2, 1, '2018-01-18 17:17:02', '2018-02-27 17:25:05'),
-(12, 'Opal Skyview 3', 'opal-skyview-3', 'metakeyword Opal Skyview 3', 'metadescription Opal Skyview 3', 'conmochieu-3.png', NULL, 300, 'triệu VNĐ', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham', '<p>tổng quan 3</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 3, 1, '2018-01-18 17:17:56', '2018-01-22 03:42:44'),
-(13, 'Opal Skyview 4', 'opal-skyview-4', 'metakeyword Opal Skyview 4', 'metadescription Opal Skyview 4', 'conmochieu-4.png', NULL, 400, 'triệu VNĐ', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy', '<p>tổng quan 4</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 4, 1, '2018-01-18 17:22:56', '2018-01-22 03:42:52'),
-(14, 'Opal Skyview 5', 'opal-skyview-5', 'metakeyword Opal Skyview 5', 'metadescription Opal Skyview 5', 'conmochieu-5.png', NULL, 500, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 5</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 5, 1, '2018-01-18 17:23:56', '2018-01-22 03:43:01'),
-(15, 'Opal Skyview 6', 'opal-skyview-6', 'metakeyword Opal Skyview 6', 'metadescription Opal Skyview 6', 'conmochieu-6.png', NULL, 600, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 6</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 6, 1, '2018-01-18 17:24:37', '2018-01-22 03:43:09'),
-(16, 'Opal Skyview 7', 'opal-skyview-7', 'metakeyword Opal Skyview 7', 'metadescription Opal Skyview 7', 'conmochieu-7.png', NULL, 700, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 7</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 7, 1, '2018-01-18 17:25:24', '2018-01-18 17:25:24'),
-(17, 'Opal Skyview 8', 'opal-skyview-8', 'metakeyword Opal Skyview 8', 'metadescription Opal Skyview 8', 'conmochieu-8.png', NULL, 800, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 8</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 8, 1, '2018-01-18 17:26:18', '2018-01-18 17:26:18'),
-(18, 'Opal Skyview 9', 'opal-skyview-9', 'metakeyword Opal Skyview 9', 'metadescription Opal Skyview 9', 'conmochieu-9.png', NULL, 900, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 9</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 9, 1, '2018-01-18 17:26:59', '2018-01-18 17:26:59'),
-(19, 'Opal Skyview 10', 'opal-skyview-10', 'metakeyword Opal Skyview 10', 'metadescription Opal Skyview 10', 'conmochieu-10.png', 1, 1000, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 10</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 10, 1, '2018-01-18 17:27:47', '2018-02-27 16:44:28'),
-(20, 'Opal Skyview 11', 'opal-skyview-11', 'metakeyword Opal Skyview 11', 'metadescription Opal Skyview 11', 'conmochieu-11.png', 1, 1100, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 11</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 11, 1, '2018-01-18 17:29:10', '2018-01-23 03:06:13'),
-(21, 'Opal Skyview 12', 'opal-skyview-12', 'metakeyword Opal Skyview 12', 'metadescription Opal Skyview 12', 'conmochieu-12.png', NULL, 1200, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 12</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 12, 1, '2018-01-18 17:30:19', '2018-01-18 17:30:19'),
-(22, 'Opal Skyview 13', 'opal-skyview-13', 'metakeyword Opal Skyview 13', 'metadescription Opal Skyview 13', 'conmochieu-13.png', NULL, 1300, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 13</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 13, 1, '2018-01-18 17:31:06', '2018-01-18 17:31:06'),
-(23, 'Opal Skyview 14', 'opal-skyview-14', 'metakeyword Opal Skyview 14', 'metadescription Opal Skyview 14', 'conmochieu-14.png', NULL, 1400, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan&nbsp;Opal Skyview 14</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 14, 1, '2018-01-18 17:31:47', '2018-01-18 17:31:47'),
-(24, 'Opal Skyview 15', 'opal-skyview-15', 'metakeyword Opal Skyview 15', 'metadescription Opal Skyview 15', 'conmochieu-15.png', NULL, 1500, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 15</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 15, 1, '2018-01-18 17:33:28', '2018-01-18 17:33:28'),
-(25, 'Opal Skyview 16', 'opal-skyview-16', 'metakeyword Opal Skyview 16', 'metadescription Opal Skyview 16', 'conmochieu-16.png', NULL, 1600, 'triệu VNĐ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 16</p>', NULL, NULL, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 1, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 16, 1, '2018-01-18 17:34:08', '2018-01-18 17:34:08');
+INSERT INTO `project` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_description`, `image`, `count_view`, `total_cost`, `intro`, `overview`, `equipment`, `price_list`, `googlemap_url`, `province_id`, `district_id`, `street`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
+(10, 'Opal Skyview 1', 'opal-skyview-1', 'metakeyword Opal Skyview 1', 'metadescription Opal Skyview 1', 'conmochieu-1.png', 441, 100, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 1</p>', '<p>tiện &iacute;ch 1</p>', '<p>bảng gi&aacute; 1</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 2, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 1, 1, '2018-01-04 18:34:30', '2018-03-20 10:14:57'),
+(11, 'Opal Skyview 2', 'opal-skyview-2', 'metakeyword Opal Skyview 2', 'metadescription Opal Skyview 2', 'conmochieu-2.png', 3, 200, 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source', '<p>tổng quan 2</p>', '<p>tiện &iacute;ch 2</p>', '<p>bảng gi&aacute; 2</p>', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 2, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 2, 1, '2018-01-18 17:17:02', '2018-02-27 17:25:05'),
+(12, 'Opal Skyview 3', 'opal-skyview-3', 'metakeyword Opal Skyview 3', 'metadescription Opal Skyview 3', 'conmochieu-3.png', NULL, 300, 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham', '<p>tổng quan 3</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 1, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 3, 1, '2018-01-18 17:17:56', '2018-03-20 08:22:02'),
+(13, 'Opal Skyview 4', 'opal-skyview-4', 'metakeyword Opal Skyview 4', 'metadescription Opal Skyview 4', 'conmochieu-4.png', NULL, 400, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy', '<p>tổng quan 4</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 2, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 4, 1, '2018-01-18 17:22:56', '2018-01-22 03:42:52'),
+(14, 'Opal Skyview 5', 'opal-skyview-5', 'metakeyword Opal Skyview 5', 'metadescription Opal Skyview 5', 'conmochieu-5.png', NULL, 500, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 5</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 3, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 5, 1, '2018-01-18 17:23:56', '2018-03-20 07:46:37'),
+(15, 'Opal Skyview 6', 'opal-skyview-6', 'metakeyword Opal Skyview 6', 'metadescription Opal Skyview 6', 'conmochieu-6.png', 1, 600, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 6</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 3, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 6, 1, '2018-01-18 17:24:37', '2018-03-20 09:37:31'),
+(16, 'Opal Skyview 7', 'opal-skyview-7', 'metakeyword Opal Skyview 7', 'metadescription Opal Skyview 7', 'conmochieu-7.png', 1, 700, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 7</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 24, 3, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 7, 1, '2018-01-18 17:25:24', '2018-03-20 07:46:54'),
+(17, 'Opal Skyview 8', 'opal-skyview-8', 'metakeyword Opal Skyview 8', 'metadescription Opal Skyview 8', 'conmochieu-8.png', NULL, 800, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 8</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 5, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 8, 1, '2018-01-18 17:26:18', '2018-03-20 07:22:12'),
+(18, 'Opal Skyview 9', 'opal-skyview-9', 'metakeyword Opal Skyview 9', 'metadescription Opal Skyview 9', 'conmochieu-9.png', NULL, 900, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 9</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 6, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 9, 1, '2018-01-18 17:26:59', '2018-03-20 07:22:27'),
+(19, 'Opal Skyview 10', 'opal-skyview-10', 'metakeyword Opal Skyview 10', 'metadescription Opal Skyview 10', 'conmochieu-10.png', 1, 1000, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 10</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 7, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 10, 1, '2018-01-18 17:27:47', '2018-03-20 07:22:39'),
+(20, 'Opal Skyview 11', 'opal-skyview-11', 'metakeyword Opal Skyview 11', 'metadescription Opal Skyview 11', 'conmochieu-11.png', 1, 1100, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 11</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 8, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 11, 1, '2018-01-18 17:29:10', '2018-03-20 07:22:51'),
+(21, 'Opal Skyview 12', 'opal-skyview-12', 'metakeyword Opal Skyview 12', 'metadescription Opal Skyview 12', 'conmochieu-12.png', NULL, 1200, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 12</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 5, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 12, 1, '2018-01-18 17:30:19', '2018-03-20 07:23:05'),
+(22, 'Opal Skyview 13', 'opal-skyview-13', 'metakeyword Opal Skyview 13', 'metadescription Opal Skyview 13', 'conmochieu-13.png', NULL, 1300, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 13</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 7, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 13, 1, '2018-01-18 17:31:06', '2018-03-20 07:23:19'),
+(23, 'Opal Skyview 14', 'opal-skyview-14', 'metakeyword Opal Skyview 14', 'metadescription Opal Skyview 14', 'conmochieu-14.png', NULL, 1400, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan&nbsp;Opal Skyview 14</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 8, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 14, 1, '2018-01-18 17:31:47', '2018-03-20 07:23:28'),
+(24, 'Opal Skyview 15', 'opal-skyview-15', 'metakeyword Opal Skyview 15', 'metadescription Opal Skyview 15', 'conmochieu-15.png', NULL, 1500, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 15</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 7, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 15, 1, '2018-01-18 17:33:28', '2018-03-20 07:23:39'),
+(25, 'Opal Skyview 16', 'opal-skyview-16', 'metakeyword Opal Skyview 16', 'metadescription Opal Skyview 16', 'conmochieu-16.png', 1, 1600, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '<p>tổng quan 16</p>', '', '', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.524046987366!2d106.64216631435112!3d10.84768899227317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDUwJzUxLjciTiAxMDbCsDM4JzM5LjciRQ!5e0!3m2!1svi!2s!4v1516617184567', 36, 10, 'Khu căn hộ cao cấp Q.7 Tp. HCM', 16, 1, '2018-01-18 17:34:08', '2018-03-20 09:37:20');
 
 -- --------------------------------------------------------
 
@@ -1402,7 +1459,6 @@ CREATE TABLE `province` (
 --
 
 INSERT INTO `province` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Việt Nam', 'viet-nam', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:18:21'),
 (2, 'An Giang', 'an-giang', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:34'),
 (3, 'Bà Rịa Vũng Tàu', 'ba-ria-vung-tau', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:28'),
 (4, 'Bình Dương', 'binh-duong', 1, 1, '2018-02-26 00:00:00', '2018-02-26 03:16:21'),
@@ -2068,7 +2124,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-03-19 02:18:10', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-03-19 02:18:10');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-03-20 00:21:31', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-03-20 00:21:31');
 
 -- --------------------------------------------------------
 
@@ -2178,6 +2234,12 @@ ALTER TABLE `category_banner`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `category_param`
+--
+ALTER TABLE `category_param`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `category_product`
 --
 ALTER TABLE `category_product`
@@ -2272,6 +2334,12 @@ ALTER TABLE `persistences`
 -- Chỉ mục cho bảng `photo`
 --
 ALTER TABLE `photo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `post_param`
+--
+ALTER TABLE `post_param`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2415,6 +2483,12 @@ ALTER TABLE `category_banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `category_param`
+--
+ALTER TABLE `category_param`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `category_product`
 --
 ALTER TABLE `category_product`
@@ -2430,7 +2504,7 @@ ALTER TABLE `category_video`
 -- AUTO_INCREMENT cho bảng `district`
 --
 ALTER TABLE `district`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `group_member`
@@ -2442,7 +2516,7 @@ ALTER TABLE `group_member`
 -- AUTO_INCREMENT cho bảng `group_privilege`
 --
 ALTER TABLE `group_privilege`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3182;
 
 --
 -- AUTO_INCREMENT cho bảng `invoice`
@@ -2496,7 +2570,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=417;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2505,10 +2579,16 @@ ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT cho bảng `post_param`
+--
+ALTER TABLE `post_param`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT cho bảng `privilege`
 --
 ALTER TABLE `privilege`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
@@ -2538,7 +2618,7 @@ ALTER TABLE `project_member`
 -- AUTO_INCREMENT cho bảng `province`
 --
 ALTER TABLE `province`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
