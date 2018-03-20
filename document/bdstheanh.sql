@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 20, 2018 lúc 12:30 PM
+-- Thời gian đã tạo: Th3 20, 2018 lúc 08:22 PM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -1137,7 +1137,10 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (416, 1, '8yafeA9t405VOhgjhZjRBsyoc0dUydZv', '2018-03-19 02:18:10', '2018-03-19 02:18:10'),
 (417, 1, 'e92ZanJMEEjSaPtg4mqreqf25wXCreLQ', '2018-03-19 03:03:22', '2018-03-19 03:03:22'),
 (418, 1, '2vzXNE8C6wvEmc9B2gdMiSqmuwYiYyzE', '2018-03-19 18:53:27', '2018-03-19 18:53:27'),
-(419, 1, 'l2feOS3osyNYT9e8p8e80heoV1XmwFZk', '2018-03-20 00:21:31', '2018-03-20 00:21:31');
+(419, 1, 'l2feOS3osyNYT9e8p8e80heoV1XmwFZk', '2018-03-20 00:21:31', '2018-03-20 00:21:31'),
+(420, 1, 'Suw25YYS1mfUpYtWUtHVkhqduAR57sEw', '2018-03-20 11:35:49', '2018-03-20 11:35:49'),
+(421, 1, 'lwPZyGTAPlsrCa6QazAwfQ8ctX0x6ikh', '2018-03-20 11:53:30', '2018-03-20 11:53:30'),
+(422, 1, 'S3S7M1hDF0KwmC8BtxS2TY81xetV59ar', '2018-03-20 12:01:44', '2018-03-20 12:01:44');
 
 -- --------------------------------------------------------
 
@@ -2124,7 +2127,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-03-20 00:21:31', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-03-20 00:21:31');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$qO/82Vqgmsa1TxcsuBiYAOL2IO3IqXQm51tiTBuX72396Lm1Ts2zm', NULL, '2018-03-20 12:01:44', 'Nguyễn Kim Điền', NULL, NULL, 'nguyen-kim-dien.png', 5, 1, '2017-11-12 07:23:56', '2018-03-20 12:01:44');
 
 -- --------------------------------------------------------
 
@@ -2570,7 +2573,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=423;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
@@ -2618,7 +2621,7 @@ ALTER TABLE `project_member`
 -- AUTO_INCREMENT cho bảng `province`
 --
 ALTER TABLE `province`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT cho bảng `reminders`
