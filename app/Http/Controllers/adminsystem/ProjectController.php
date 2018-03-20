@@ -69,25 +69,25 @@ class ProjectController extends Controller {
         }        
     }
      public function save(Request $request){
-          $id 					        =		trim($request->id);        
-          $fullname 				    =		trim($request->fullname);
-          $alias                =   trim($request->alias);                    
-          $meta_keyword         =   trim($request->meta_keyword);
-          $meta_description     =   trim($request->meta_description);
-          $image                =   trim($request->image);
-          $image_hidden         =   trim($request->image_hidden);            
-          $total_cost           =   trim($request->total_cost);
-          $unit                 =   trim($request->unit);
-          $intro                =   trim($request->intro);    
-          $overview             =   trim($request->overview);          
-          $equipment            =   trim($request->equipment);          
-          $price_list           =   trim($request->price_list);
-          $googlemap_url        =   trim($request->googlemap_url);  
-          $province_id             =   trim($request->province_id);
-          $district_id             =   trim($request->district_id);
-          $street               =   trim($request->street);                    
-          $sort_order           =   trim($request->sort_order);
-          $status               =   trim($request->status);          
+          $id 					        =		trim(@$request->id);        
+          $fullname 				    =		trim(@$request->fullname);
+          $alias                =   trim(@$request->alias);                    
+          $meta_keyword         =   trim(@$request->meta_keyword);
+          $meta_description     =   trim(@$request->meta_description);
+          $image                =   trim(@$request->image);
+          $image_hidden         =   trim(@$request->image_hidden);            
+          $total_cost           =   trim(@$request->total_cost);
+          $unit                 =   trim(@$request->unit);
+          $intro                =   trim(@$request->intro);    
+          $overview             =   trim(@$request->overview);          
+          $equipment            =   trim(@$request->equipment);          
+          $price_list           =   trim(@$request->price_list);
+          $googlemap_url        =   trim(@$request->googlemap_url);  
+          $province_id             =   trim(@$request->province_id);
+          $district_id             =   trim(@$request->district_id);
+          $street               =   trim(@$request->street);                    
+          $sort_order           =   trim(@$request->sort_order);
+          $status               =   trim(@$request->status);          
           $data 		            =   array();
           $info 		            =   array();
           $error 		            =   array();
@@ -109,7 +109,17 @@ class ProjectController extends Controller {
                   $error["fullname"]["type_msg"] = "has-error";
                   $error["fullname"]["msg"] = "Bài viết đã tồn tại";
               }      	
-          }                    
+          }      
+          if((int)@$province_id == 0){
+            $checked = 0;
+             $error["province_id"]["type_msg"]   = "has-error";
+             $error["province_id"]["msg"]    = "Vui lòng chọn tỉnh thành phố";
+          }
+          if((int)@$district_id == 0){
+            $checked = 0;
+             $error["district_id"]["type_msg"]   = "has-error";
+             $error["district_id"]["msg"]    = "Vui lòng chọn quận huyện";
+          }              
           if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";

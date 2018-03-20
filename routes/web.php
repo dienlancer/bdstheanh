@@ -224,6 +224,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("change-status",["as"=>"adminsystem.district.changeStatus","uses"=>"adminsystem\DistrictController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.district.trash","uses"=>"adminsystem\DistrictController@trash"]);
 		Route::post("create-alias",["as"=>"adminsystem.district.createAlias","uses"=>"adminsystem\DistrictController@createAlias"]);
+		Route::post("district-filter",["as"=>"adminsystem.district.filterDistrictByProvince","uses"=>"adminsystem\DistrictController@filterDistrictByProvince"]);
 	});		
 	Route::group(["prefix"=>"project-article"],function(){		
 		Route::get("list",["as"=>"adminsystem.project-article.getList","uses"=>"adminsystem\ProjectArticleController@getList"]);

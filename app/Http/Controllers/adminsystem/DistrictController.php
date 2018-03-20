@@ -252,88 +252,92 @@ class DistrictController extends Controller {
             return $info;
       }       
       public function createAlias(Request $request){
-          $id                =  trim($request->id)  ; 
-          $fullname                =  trim($request->fullname)  ;        
-          $data                    =  array();
-          $info                    =  array();
-          $error                   =  array();
-          $item                    =  null;
-          $checked  = 1;   
-          $alias='';                     
-          if(empty($fullname)){
-           $checked = 0;
-           $error["fullname"]["type_msg"] = "has-error";
-           $error["fullname"]["msg"] = "Thiếu tên bài viết";
-         }else{          
-          $alias=str_slug($fullname,'-');
-          $dataCategoryArticle=array();
-          $dataCategoryProduct=array();
-          $dataArticle=array();
-          $dataProduct=array();
-          $dataPage=array();
-          $dataProject=array();
-          $dataProjectArticle=array();
-          $dataProvince=array();
-          $dataDistrict=array();
-          $checked_trung_alias=0;          
-          
-            $dataCategoryArticle=CategoryArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataCategoryProduct=CategoryProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProduct=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataPage=PageModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProject=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-            $dataProjectArticle=ProjectArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
-          if (count($dataCategoryArticle) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataCategoryProduct) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataArticle) > 0) {
-            $checked_trung_alias=1;
-          }
-          if (count($dataProduct) > 0) {
-            $checked_trung_alias=1;
-          }    
-          if (count($dataPage) > 0) {
-            $checked_trung_alias=1;
-          }  
-          if (count($dataProject) > 0) {
-            $checked_trung_alias=1;
-          }  
-          if (count($dataProjectArticle) > 0) {
-            $checked_trung_alias=1;
-          }      
-           if (count($dataProvince) > 0) {
-            $checked_trung_alias=1;
-          } 
-          if (count($dataDistrict) > 0) {
-            $checked_trung_alias=1;
-          }
-          if((int)$checked_trung_alias == 1){
-            $code_alias=rand(1,999);
-            $alias=$alias.'-'.$code_alias;
-          }
+        $id                =  trim($request->id)  ; 
+        $fullname                =  trim($request->fullname)  ;        
+        $data                    =  array();
+        $info                    =  array();
+        $error                   =  array();
+        $item                    =  null;
+        $checked  = 1;   
+        $alias='';                     
+        if(empty($fullname)){
+         $checked = 0;
+         $error["fullname"]["type_msg"] = "has-error";
+         $error["fullname"]["msg"] = "Thiếu tên bài viết";
+       }else{          
+        $alias=str_slug($fullname,'-');
+        $dataCategoryArticle=array();
+        $dataCategoryProduct=array();
+        $dataArticle=array();
+        $dataProduct=array();
+        $dataPage=array();
+        $dataProject=array();
+        $dataProjectArticle=array();
+        $dataProvince=array();
+        $dataDistrict=array();
+        $checked_trung_alias=0;                  
+        $dataCategoryArticle=CategoryArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        $dataCategoryProduct=CategoryProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        $dataProduct=ProductModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        $dataPage=PageModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        $dataProject=ProjectModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        $dataProjectArticle=ProjectArticleModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias,'UTF-8'))])->get()->toArray();
+        if (count($dataCategoryArticle) > 0) {
+          $checked_trung_alias=1;
         }
-        if ($checked == 1){
-          $info = array(
-            'type_msg'      => "has-success",
-            'msg'         => 'Lưu dữ liệu thành công',
-            "checked"       => 1,
-            "error"       => $error,
-            
-            "alias"       =>$alias
-          );
-        }else {
-          $info = array(
-            'type_msg'      => "has-error",
-            'msg'         => 'Nhập dữ liệu có sự cố',
-            "checked"       => 0,
-            "error"       => $error,
-            "alias"        => $alias
-          );
+        if (count($dataCategoryProduct) > 0) {
+          $checked_trung_alias=1;
+        }
+        if (count($dataArticle) > 0) {
+          $checked_trung_alias=1;
+        }
+        if (count($dataProduct) > 0) {
+          $checked_trung_alias=1;
         }    
-        return $info;
-      }  
+        if (count($dataPage) > 0) {
+          $checked_trung_alias=1;
+        }  
+        if (count($dataProject) > 0) {
+          $checked_trung_alias=1;
+        }  
+        if (count($dataProjectArticle) > 0) {
+          $checked_trung_alias=1;
+        }      
+        if (count($dataProvince) > 0) {
+          $checked_trung_alias=1;
+        } 
+        if (count($dataDistrict) > 0) {
+          $checked_trung_alias=1;
+        }
+        if((int)$checked_trung_alias == 1){
+          $code_alias=rand(1,999);
+          $alias=$alias.'-'.$code_alias;
+        }
+      }
+      if ($checked == 1){
+        $info = array(
+          'type_msg'      => "has-success",
+          'msg'         => 'Lưu dữ liệu thành công',
+          "checked"       => 1,
+          "error"       => $error,
+
+          "alias"       =>$alias
+        );
+      }else {
+        $info = array(
+          'type_msg'      => "has-error",
+          'msg'         => 'Nhập dữ liệu có sự cố',
+          "checked"       => 0,
+          "error"       => $error,
+          "alias"        => $alias
+        );
+      }    
+      return $info;
+    }  
+    public function filterDistrictByProvince(Request $request){
+      $province_id = trim(@$request->province_id);
+      $data=DistrictModel::whereRaw('province_id = ?',[(int)@$province_id])->select('id','fullname')->get()->toArray();
+      return $data;
+    }
 }
 ?>

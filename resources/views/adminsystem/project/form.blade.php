@@ -6,27 +6,28 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
-$inputFullName          =   '<input type="text" class="form-control" name="fullname"      onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
- 
+$linkFilterDistrictByProvince        =   route('adminsystem.district.filterDistrictByProvince');
+$inputFullName          =   '<input type="text" class="form-control" name="fullname"      onblur="createAlias();"   value="'.@$arrRowData['fullname'].'">';
 $inputAlias             =   '<input type="text" class="form-control" name="alias"      disabled      value="'.@$arrRowData['alias'].'">';
-$inputIntro             =   '<textarea  name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
-$inputOverview             =   '<textarea  name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
-$inputEquipment       =   '<textarea name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
-$inputPriceList       =   '<textarea name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
-$inputGoogleMapUrl       =   '<textarea   name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
-$inputMetakeyword             =   '<textarea   name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
-$inputMetadescription             =   '<textarea  name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
-$inputTotalCost             =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
-$inputUnit          =   '<input type="text" class="form-control" name="unit"  value="'.@$arrRowData['unit'].'">'; 
-$ddlProvince      =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
-$ddlDistrict      =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
-$inputStreet          =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
+$inputIntro             =   '<textarea      name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
+$inputOverview          =   '<textarea      name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
+$inputEquipment         =   '<textarea      name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
+$inputPriceList         =   '<textarea      name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
+$inputGoogleMapUrl      =   '<textarea      name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
+$inputMetakeyword       =   '<textarea      name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
+$inputMetadescription   =   '<textarea      name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
+$inputTotalCost         =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
+$inputUnit              =   '<input type="text" class="form-control" name="unit"  value="'.@$arrRowData['unit'].'">'; 
+$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
+$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
+$inputStreet            =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
+$inputDistrictID        =   '<input type="hidden" name="district_hidden_id"  value="'.@$arrRowData['district_id'].'" />'; 
 $picture                =   "";
 $strImage               =   "";
 $setting= getSettingSystem();
@@ -50,7 +51,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
            <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12">
-                    <button onclick="save()" class="btn purple">Lưu <i class="fa fa-floppy-o"></i></button> 
+                    <button onclick="save();" class="btn purple">Lưu <i class="fa fa-floppy-o"></i></button> 
                     <a href="<?php echo $linkCancel; ?>" class="btn green">Thoát <i class="fa fa-ban"></i></a>                    </div>                                                
                 </div>
             </div>    
@@ -60,7 +61,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         <form class="form-horizontal" name="frm" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <?php echo $inputPictureHidden; ?>                
-            <?php echo  $inputID; ?>                   
+            <?php echo  $inputID; ?>       
+            <?php echo $inputDistrictID; ?>            
             <div class="form-body">
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -239,16 +241,22 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
     function resetErrorStatus(){
         var id                   =   $('input[name="id"]');
         var fullname             =   $('input[name="fullname"]');
+        var province_id             =   $('select[name="province_id"]');
+        var district_id             =   $('select[name="district_id"]');
         var alias                =   $('input[name="alias"]');        
         var sort_order           =   $('input[name="sort_order"]');
         var status               =   $('select[name="status"]');
         
         $(fullname).closest('.form-group').removeClass("has-error");        
+        $(province_id).closest('.form-group').removeClass("has-error");   
+        $(district_id).closest('.form-group').removeClass("has-error");   
         $(alias).closest('.form-group').removeClass("has-error");        
         $(sort_order).closest('.form-group').removeClass("has-error");
         $(status).closest('.form-group').removeClass("has-error");        
 
-        $(fullname).closest('.form-group').find('span').empty().hide();        
+        $(fullname).closest('.form-group').find('span').empty().hide();  
+        $(province_id).closest('.form-group').find('span').empty().hide();  
+        $(district_id).closest('.form-group').find('span').empty().hide();        
         $(alias).closest('.form-group').find('span').empty().hide();       
         $(sort_order).closest('.form-group').find('span').empty().hide();
         $(status).closest('.form-group').find('span').empty().hide();        
@@ -340,7 +348,17 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                         $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
                         $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
                         $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }                    
+                    }             
+                    if(typeof data_error.province_id               != "undefined"){
+                        $('select[name="province_id"]').closest('.form-group').addClass(data_error.province_id.type_msg);
+                        $('select[name="province_id"]').closest('.form-group').find('span').text(data_error.province_id.msg);
+                        $('select[name="province_id"]').closest('.form-group').find('span').show();                        
+                    }     
+                    if(typeof data_error.district_id               != "undefined"){
+                        $('select[name="district_id"]').closest('.form-group').addClass(data_error.district_id.type_msg);
+                        $('select[name="district_id"]').closest('.form-group').find('span').text(data_error.district_id.msg);
+                        $('select[name="district_id"]').closest('.form-group').find('span').show();                        
+                    }          
                     if(typeof data_error.alias                  != "undefined"){
                         $('input[name="alias"]').closest('.form-group').addClass(data_error.alias.type_msg);
                         $('input[name="alias"]').closest('.form-group').find('span').text(data_error.alias.msg);
@@ -371,7 +389,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
     function createAlias(){
         var id=$('input[name="id"]').val();   
         var fullname    = $('input[name="fullname"]').val();
-        var token       = $('form[name="frm"] > input[name="_token"]').val();     
+        var token       = $('input[name="_token"]').val();     
         var dataItem={      
             "id":id,      
             "fullname":fullname,            
@@ -393,7 +411,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                         $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
                         $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
                         $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }                            
+                    }      
+                                     
                 }
                 spinner.hide();
             },
@@ -405,5 +424,68 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             },
         });
     }
+    $('select[name="province_id"]').on('click',function(){
+        var province_id = $('select[name="province_id"]').val();
+        var token       = $('input[name="_token"]').val();
+        var dataItem={      
+            "province_id":province_id,                  
+            "_token": token,
+        }; 
+        $.ajax({
+            url: '<?php echo $linkFilterDistrictByProvince; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {   
+                $('select[name="district_id"]').empty();      
+                $('select[name="district_id"]').append('<option >Vui lòng chọn quận huyện</option>');          
+                $.each(data,function(i,value){
+                    $('select[name="district_id"]').append('<option value="'+value.id+'">'+value.fullname+'</option>');
+                });
+            },
+            error : function (data){
+
+            },
+            beforeSend  : function(jqXHR,setting){
+
+            },
+        });
+    });
+    function filterDistrictByProvince(){
+        var province_id = $('select[name="province_id"]').val();
+        var district_id = $('input[name="district_hidden_id"]').val();
+        console.log(district_id);
+        var token       = $('input[name="_token"]').val();
+        var dataItem={      
+            "province_id":province_id,                  
+            "_token": token,
+        }; 
+        $.ajax({
+            url: '<?php echo $linkFilterDistrictByProvince; ?>',
+            type: 'POST',
+            data: dataItem,            
+            async: false,
+            success: function (data) {   
+                $('select[name="district_id"]').empty();      
+                $('select[name="district_id"]').append('<option >Vui lòng chọn quận huyện</option>');          
+                $.each(data,function(i,value){
+                    if(parseInt(value.id) == parseInt(district_hidden_id)){
+                        $('select[name="district_id"]').append('<option value="'+value.id+'" selected>'+value.fullname+'</option>');
+                    }else{
+                        $('select[name="district_id"]').append('<option value="'+value.id+'">'+value.fullname+'</option>');
+                    }
+                });
+            },
+            error : function (data){
+
+            },
+            beforeSend  : function(jqXHR,setting){
+
+            },
+        });
+    }   
+    $(document).ready(function(){
+        filterDistrictByProvince();
+    });
 </script>
 @endsection()            
