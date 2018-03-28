@@ -108,7 +108,10 @@ class CategoryArticleController extends Controller {
         $meta_keyword            =  trim($request->meta_keyword);
         $meta_description        =  trim($request->meta_description);
         $category_id	   =	trim($request->category_id);
-        $image                   =  trim($request->image);
+        $image_file           =   null;
+                if(isset($_FILES["image"])){
+                  $image_file         =   $_FILES["image"];
+                }
         $image_hidden            =  trim($request->image_hidden);
         $sort_order 			       =	trim($request->sort_order);
         $status 				         =  trim($request->status);
@@ -116,7 +119,7 @@ class CategoryArticleController extends Controller {
         $info 		               =  array();
         $error 		               =  array();
         $item		                 =  null;
-        $checked 	= 1;              
+        $checked 	= 1;                      
         if(empty($fullname)){
            $checked = 0;
            $error["fullname"]["type_msg"] = "has-error";
@@ -144,31 +147,36 @@ class CategoryArticleController extends Controller {
              $error["status"]["type_msg"] 		= "has-error";
              $error["status"]["msg"] 			= "Thiếu trạng thái";
         }
-        if ($checked == 1) {    
-             if(empty($id)){
-              $item 				= 	new CategoryArticleModel;       
-              $item->created_at 	=	date("Y-m-d H:i:s",time());        
-              if(!empty($image)){
-                $item->image    =   trim($image) ;  
-              }				
-        } else{
+        if ($checked == 1) {
+          $image_name='';
+          if($image_file != null){                     
+            $width=0;
+            $height=0;                            
+            $image_name=uploadImage($image_file['name'],$image_file['tmp_name'],$width,$height);        
+          }    
+          if(empty($id)){
+            $item 				= 	new CategoryArticleModel;       
+            $item->created_at 	=	date("Y-m-d H:i:s",time());        
+            if(!empty($image_name)){
+                  $item->image    =   trim($image_name) ;  
+                }
+          } else{
             $item				=	CategoryArticleModel::find((int)@$id);   
             $item->image=null;                       
             if(!empty($image_hidden)){
               $item->image =$image_hidden;          
             }
-            if(!empty($image))  {
-              $item->image=$image;                                                
-            }                   
-        }  
+            if(!empty($image_name))  {
+                  $item->image=$image_name;                                                
+                }                   
+          }  
         $item->fullname 		=	$fullname;
-        $item->alias 			  =	$alias;
-        
+        $item->alias 			  =	$alias;        
         $item->meta_keyword     = $meta_keyword;
         $item->meta_description = $meta_description;           
-        $item->parent_id 		=	(int)$category_id;            
-        $item->sort_order 	=	(int)$sort_order;
-        $item->status 			=	(int)$status;    
+        $item->parent_id 		=	(int)@$category_id;            
+        $item->sort_order 	=	(int)@$sort_order;
+        $item->status 			=	(int)@$status;    
         $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
         $item->save();  	
         $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();

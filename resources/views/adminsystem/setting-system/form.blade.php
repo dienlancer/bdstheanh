@@ -268,19 +268,24 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
         
         var google_site_verification=$('input[name="google_site_verification"]').val();
         var google_analytics=$('input[name="google_analytics"]').val();
-        
-     
-
-        var logo_frontend = $("input[type='file'][name='logo_frontend']").val();
-        if (logo_frontend != ''){
-            logo_frontend = logo_frontend.substr(logo_frontend.lastIndexOf('\\') + 1);       
-        }
+    
+        /* begin xử lý logo_frontend */
+        var logo_frontend_file=null;
+        var logo_frontend_ctrl=$("input[type='file'][name='logo_frontend']");         
+        var logo_frontend_files = $(logo_frontend_ctrl).get(0).files;        
+        if(logo_frontend_files.length > 0){            
+            logo_frontend_file  = logo_frontend_files[0];  
+        }        
+        /* end xử lý logo_frontend */
+        /* begin xử lý favicon */
+        var favicon_file=null;
+        var favicon_ctrl=$("input[type='file'][name='favicon']");         
+        var favicon_files = $(favicon_ctrl).get(0).files;        
+        if(favicon_files.length > 0){            
+            favicon_file  = favicon_files[0];  
+        }        
+        /* end xử lý favicon */
         var logo_frontend_hidden=$("input[type='hidden'][name='logo_frontend_hidden']").val();    
-
-        var favicon = $("input[type='file'][name='favicon']").val();
-        if (favicon != ''){
-            favicon = favicon.substr(favicon.lastIndexOf('\\') + 1);       
-        }
         var favicon_hidden=$("input[type='hidden'][name='favicon_hidden']").val();    
 
         var status=$('select[name="status"]').val();        
@@ -300,43 +305,37 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             };
             setting[i]=row;
         }        
-        resetErrorStatus();
-        var dataItem={
-            "id":id,
-            "fullname":fullname,            
-            "alias":alias,      
-            
-            "title":title,
-            "meta_keyword":meta_keyword,
-            "meta_description":meta_description,
-            "author":author,
-            "copyright":copyright,
-            
-            "google_site_verification":google_site_verification,
-            "google_analytics":google_analytics,
-            
-            
-            "logo_frontend":logo_frontend,
-            "favicon":favicon,            
-            "logo_frontend_hidden":logo_frontend_hidden,
-            "favicon_hidden":favicon_hidden,
-
-            "setting":JSON.stringify(setting),        
-            "status":status,        
-            "sort_order":sort_order,                      
-            "_token": token
-        };
+        resetErrorStatus();        
+        var dataItem = new FormData();
+        dataItem.append('id',id);
+        dataItem.append('fullname',fullname);
+        dataItem.append('alias',alias);
+        dataItem.append('title',title);        
+        dataItem.append('meta_keyword',meta_keyword);
+        dataItem.append('meta_description',meta_description);
+        dataItem.append('author',author);
+        dataItem.append('copyright',copyright);
+        dataItem.append('google_site_verification',google_site_verification);
+        dataItem.append('google_analytics',google_analytics);
+        if(logo_frontend_files.length > 0){
+            dataItem.append('logo_frontend',logo_frontend_file);
+        }
+        if(favicon_files.length > 0){
+            dataItem.append('favicon',favicon_file);
+        }        
+        dataItem.append('logo_frontend_hidden',logo_frontend_hidden);
+        dataItem.append('favicon_hidden',favicon_hidden);
+        dataItem.append('setting',JSON.stringify(setting));
+        dataItem.append('sort_order',sort_order); 
+        dataItem.append('status',status); 
+        dataItem.append('_token',token);        
         $.ajax({
             url: '<?php echo $linkSave; ?>',
             type: 'POST',
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==1){                    
-                    var ctrl_logo_frontend = $("input[type='file'][name='logo_frontend']");
-                    var ctrl_favicon = $("input[type='file'][name='favicon']");                    
-                    uploadFileImport($(ctrl_logo_frontend));    
-                    uploadFileImport($(ctrl_favicon));    
+                if(data.checked==1){                                        
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
@@ -370,19 +369,12 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             beforeSend  : function(jqXHR,setting){
                 spinner.show();
             },
+            cache: false,
+            contentType: false,
+            processData: false
         });
     }
-    function uploadFileImport(ctrl_image){    
-        var token = $('input[name="_token"]').val();               
-        var file_upload=$(ctrl_image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
-   
+    
     function deleteLogoFrontend(ctrl){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";

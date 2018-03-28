@@ -67,56 +67,58 @@ class UserController extends Controller {
           return view("adminsystem.no-access");
         }      
     }
-     public function save(Request $request){
-          $id 					        =		trim(@$request->id); 
-          $username             =   trim(@$request->username);       
-          $email 				        =		trim(@$request->email);
-          $password             =   (@$request->password);
-          $confirm_password     =   (@$request->confirm_password);
-          $status               =   trim(@$request->status);          
-          $fullname 					  = 	trim(@$request->fullname);    
-          $image                =   trim(@$request->image);
-          $image_hidden         =   trim(@$request->image_hidden);
-          $group_member_id      =   @$request->group_member_id;                      
-          $sort_order           =   trim(@$request->sort_order);                          
-          $data 		            =   array();
-          $info 		            =   array();
-          $error 		            =   array();
-          $item		              =   null;
-          $checked 	            =   1;    
-          
-          if(empty($fullname)){
+              public function save(Request $request){
+                $id 					        =		trim(@$request->id); 
+                $username             =   trim(@$request->username);       
+                $email 				        =		trim(@$request->email);
+                $password             =   (@$request->password);
+                $confirm_password     =   (@$request->confirm_password);
+                $status               =   trim(@$request->status);          
+                $fullname 					  = 	trim(@$request->fullname);    
+                $image_file           =   null;
+                if(isset($_FILES["image"])){
+                  $image_file         =   $_FILES["image"];
+                }
+                $image_hidden         =   trim(@$request->image_hidden);
+                $group_member_id      =   @$request->group_member_id;                      
+                $sort_order           =   trim(@$request->sort_order);                          
+                $data 		            =   array();
+                $info 		            =   array();
+                $error 		            =   array();
+                $item		              =   null;
+                $checked 	            =   1;                    
+                if(empty($fullname)){
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
                  $error["fullname"]["msg"] = "Thiếu tên người dùng";
-          }
-          if(empty($group_member_id)){
+               }
+               if(empty($group_member_id)){
                  $checked = 0;
                  $error["group_member_id"]["type_msg"] = "has-error";
                  $error["group_member_id"]["msg"] = "Thiếu nhóm người dùng";
-          }
-          if(empty($username)){
+               }
+               if(empty($username)){
                  $checked = 0;
                  $error["username"]["type_msg"] = "has-error";
                  $error["username"]["msg"] = "Thiếu username";
-          }else{
-              $data=array();
-              if (empty($id)) {
-                $data=User::whereRaw("trim(lower(username)) = ?",[trim(mb_strtolower($username,'UTF-8'))])->get()->toArray();           
-              }else{
-                $data=User::whereRaw("trim(lower(username)) = ? and id != ?",[trim(mb_strtolower($username,'UTF-8')),(int)@$id])->get()->toArray();   
-              }  
-              if (count($data) > 0) {
+               }else{
+                $data=array();
+                if (empty($id)) {
+                  $data=User::whereRaw("trim(lower(username)) = ?",[trim(mb_strtolower($username,'UTF-8'))])->get()->toArray();           
+                }else{
+                  $data=User::whereRaw("trim(lower(username)) = ? and id != ?",[trim(mb_strtolower($username,'UTF-8')),(int)@$id])->get()->toArray();   
+                }  
+                if (count($data) > 0) {
                   $checked = 0;
                   $error["username"]["type_msg"] = "has-error";
                   $error["username"]["msg"] = "Username đã tồn tại";
-              }       
-          }
-          if(empty($email)){
-                 $checked = 0;
-                 $error["email"]["type_msg"] = "has-error";
-                 $error["email"]["msg"] = "Thiếu email";
-          }else{
+                }       
+              }
+              if(empty($email)){
+               $checked = 0;
+               $error["email"]["type_msg"] = "has-error";
+               $error["email"]["msg"] = "Thiếu email";
+             }else{
               $data=array();
               if (empty($id)) {
                 $data=User::whereRaw("trim(lower(email)) = ?",[trim(mb_strtolower($email,'UTF-8'))])->get()->toArray();           
@@ -124,116 +126,121 @@ class UserController extends Controller {
                 $data=User::whereRaw("trim(lower(email)) = ? and id != ?",[trim(mb_strtolower($email,'UTF-8')),(int)@$id])->get()->toArray();   
               }  
               if (count($data) > 0) {
-                  $checked = 0;
-                  $error["email"]["type_msg"] = "has-error";
-                  $error["email"]["msg"] = "Email đã tồn tại";
+                $checked = 0;
+                $error["email"]["type_msg"] = "has-error";
+                $error["email"]["msg"] = "Email đã tồn tại";
               }       
-          }
-          
-          if(empty($id)){
+            }          
+            if(empty($id)){
               if(mb_strlen($password) < 6 ){
+                $checked = 0;
+                $error["password"]["type_msg"] = "has-error";
+                $error["password"]["msg"] = "Mật khẩu tối thiểu phải 6 ít tự";
+              }else{
+                if(strcmp($password, $confirm_password) !=0 ){
+                  $checked = 0;
+                  $error["password"]["type_msg"] = "has-error";
+                  $error["password"]["msg"] = "Xác nhận mật khẩu không trùng khớp";
+                }
+              }     
+            }else{
+              if(!empty($password) || !empty($confirm_password)){
+                if(mb_strlen($password) < 6 ){
                   $checked = 0;
                   $error["password"]["type_msg"] = "has-error";
                   $error["password"]["msg"] = "Mật khẩu tối thiểu phải 6 ít tự";
-              }else{
+                }else{
                   if(strcmp($password, $confirm_password) !=0 ){
                     $checked = 0;
                     $error["password"]["type_msg"] = "has-error";
                     $error["password"]["msg"] = "Xác nhận mật khẩu không trùng khớp";
                   }
+                }        
               }     
-          }else{
-              if(!empty($password) || !empty($confirm_password)){
-                  if(mb_strlen($password) < 6 ){
-                    $checked = 0;
-                    $error["password"]["type_msg"] = "has-error";
-                    $error["password"]["msg"] = "Mật khẩu tối thiểu phải 6 ít tự";
-                  }else{
-                      if(strcmp($password, $confirm_password) !=0 ){
-                        $checked = 0;
-                        $error["password"]["type_msg"] = "has-error";
-                        $error["password"]["msg"] = "Xác nhận mật khẩu không trùng khớp";
-                      }
-                  }        
-              }     
-          }
-          if(empty($sort_order)){
+            }
+            if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";
              $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
-          }
-          if((int)$status==-1){
+           }
+           if((int)$status==-1){
              $checked = 0;
              $error["status"]["type_msg"] 		= "has-error";
              $error["status"]["msg"] 			= "Thiếu trạng thái";
+           }
+           if ($checked == 1) {  
+            $image_name='';
+            if($image_file != null){                     
+              $width=0;
+              $height=0;                            
+              $image_name=uploadImage($image_file['name'],$image_file['tmp_name'],$width,$height);        
+            }    
+            $item=array();
+            if(empty($id)){
+              $item=Sentinel::registerAndActivate($request->all());                  
+            } else{
+              $item				=	User::find((int)@$id);        
+              $item->username         = $username;
+              $item->email            = $email;
+              if(!empty($password)){
+                $item->password         = Hash::make($password);
+              }                                
+              $item->status            = (int)$status;
+              $item->fullname         = $fullname;                          
+              $item->sort_order       = (int)@$sort_order;                
+              $item->updated_at       = date("Y-m-d H:i:s",time());               
+            }  
+            $item->image=null;                       
+            if(!empty($image_hidden)){
+              $item->image =$image_hidden;          
+            }
+            if(!empty($image_name))  {
+              $item->image=$image_name;                                                
+            }           
+            $item->save();       
+            if(count(@$group_member_id)>0){         
+              $source_group_member=explode(',', $group_member_id);                   
+              $arrUserGroupMember=UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->select("group_member_id")->get()->toArray();                      
+              $arrGroupMemberID=array();
+              foreach ($arrUserGroupMember as $key => $value) {
+                $arrGroupMemberID[]=$value["group_member_id"];
+              }
+              $selected=@$source_group_member;
+              sort($selected);
+              sort($arrGroupMemberID);         
+              $resultCompare=0;
+              if($selected == $arrGroupMemberID){
+                $resultCompare=1;       
+              }
+              if($resultCompare==0){
+                UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->delete();  
+                foreach ($selected as $key => $value) {
+                  $group_member_id=$value;
+                  $userGroupMember=new UserGroupMemberModel;
+                  $userGroupMember->user_id=(int)@$item->id;
+                  $userGroupMember->group_member_id=(int)@$group_member_id;            
+                  $userGroupMember->save();
+                }
+              }       
+            }                            
+            $info = array(
+              'type_msg' 			=> "has-success",
+              'msg' 				=> 'Lưu dữ liệu thành công',
+              "checked" 			=> 1,
+              "error" 			=> $error,
+              "id"    			=> $id
+            );
+          }else {
+            $info = array(
+              'type_msg' 			=> "has-error",
+              'msg' 				=> 'Dữ liệu nhập gặp sự cố',
+              "checked" 			=> 0,
+              "error" 			=> $error,
+              "id"				=> ""
+            );
+          }        		 			       
+          return $info;       
           }
-          if ($checked == 1) {   
-                $item=array();
-                if(empty($id)){
-                  $item=Sentinel::registerAndActivate($request->all());                  
-                } else{
-                    $item				=	User::find((int)@$id);        
-                    $item->username         = $username;
-                    $item->email            = $email;
-                    if(!empty($password)){
-                      $item->password         = Hash::make($password);
-                    }                                
-                    $item->status            = (int)$status;
-                    $item->fullname         = $fullname;   
-                    
-                    $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                       
-                    $item->sort_order       = (int)@$sort_order;                
-                    $item->updated_at       = date("Y-m-d H:i:s",time());               
-                    $item->save();                                                       		  		 
-                }  
-                if(count(@$group_member_id)>0){                            
-                      $arrUserGroupMember=UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->select("group_member_id")->get()->toArray();                      
-                      $arrGroupMemberID=array();
-                      foreach ($arrUserGroupMember as $key => $value) {
-                        $arrGroupMemberID[]=$value["group_member_id"];
-                      }
-                      $selected=@$group_member_id;
-                      sort($selected);
-                      sort($arrGroupMemberID);         
-                      $resultCompare=0;
-                      if($selected == $arrGroupMemberID){
-                        $resultCompare=1;       
-                      }
-                      if($resultCompare==0){
-                        UserGroupMemberModel::whereRaw("user_id = ?",[(int)@$item->id])->delete();  
-                        foreach ($selected as $key => $value) {
-                          $group_member_id=$value;
-                          $userGroupMember=new UserGroupMemberModel;
-                          $userGroupMember->user_id=(int)@$item->id;
-                          $userGroupMember->group_member_id=(int)@$group_member_id;            
-                          $userGroupMember->save();
-                        }
-                      }       
-                    }                            
-                $info = array(
-                  'type_msg' 			=> "has-success",
-                  'msg' 				=> 'Lưu dữ liệu thành công',
-                  "checked" 			=> 1,
-                  "error" 			=> $error,
-                  "id"    			=> $id
-                );
-            }else {
-                    $info = array(
-                      'type_msg' 			=> "has-error",
-                      'msg' 				=> 'Dữ liệu nhập gặp sự cố',
-                      "checked" 			=> 0,
-                      "error" 			=> $error,
-                      "id"				=> ""
-                    );
-            }        		 			       
-            return $info;       
-    }
           public function changeStatus(Request $request){
                   $id             =       (int)$request->id;     
                   $checked                =   1;

@@ -73,31 +73,36 @@ class ProjectArticleController extends Controller {
       return view("adminsystem.no-access");
     }        
   }
-     public function save(Request $request){
-          $id 					        =		trim($request->id);        
-          $fullname 				    =		trim($request->fullname);
-          
-          $alias 					      = 	trim($request->alias);          
-          $image                =   trim($request->image);
-          $image_hidden         =   trim($request->image_hidden);
-          $intro                =   trim($request->intro);
-          $content              =   trim($request->content);          
-          $description          =   trim($request->description);
-          $meta_keyword         =   trim($request->meta_keyword);
-          $meta_description     =   trim($request->meta_description);
-          $sort_order           =   trim($request->sort_order);
-          $status               =   trim($request->status);
-          $project_id	=		@$request->project_id;                 
-          $data 		            =   array();
-          $info 		            =   array();
-          $error 		            =   array();
-          $item		              =   null;
-          $checked 	            =   1;              
-          if(empty($fullname)){
-                 $checked = 0;
-                 $error["fullname"]["type_msg"] = "has-error";
-                 $error["fullname"]["msg"] = "Thiếu tên bài viết";
-          }else{
+            public function save(Request $request){
+              $id 					        =		trim($request->id);        
+              $fullname 				    =		trim($request->fullname);
+              $alias 					      = 	trim($request->alias);          
+              $image_file           =   null;
+              if(isset($_FILES["image"])){
+                $image_file         =   $_FILES["image"];
+              }
+              $image_hidden         =   trim($request->image_hidden);
+              $intro                =   trim($request->intro);
+              $content              =   trim($request->content);          
+              $description          =   trim($request->description);
+              $meta_keyword         =   trim($request->meta_keyword);
+              $meta_description     =   trim($request->meta_description);
+              $sort_order           =   trim($request->sort_order);
+              $status               =   trim($request->status);
+              $project_id	          =		@$request->project_id;                 
+              $data 		            =   array();
+              $info 		            =   array();
+              $error 		            =   array();
+              $item		              =   null;
+              $checked 	            =   1;    
+              $setting= getSettingSystem();
+              $width=$setting['article_width']['field_value'];
+              $height=$setting['article_height']['field_value'];                     
+              if(empty($fullname)){
+               $checked = 0;
+               $error["fullname"]["type_msg"] = "has-error";
+               $error["fullname"]["msg"] = "Thiếu tên bài viết";
+             }else{
               $data=array();
               if (empty($id)) {
                 $data=ProjectArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
@@ -105,75 +110,79 @@ class ProjectArticleController extends Controller {
                 $data=ProjectArticleModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
               }  
               if (count($data) > 0) {
-                  $checked = 0;
-                  $error["fullname"]["type_msg"] = "has-error";
-                  $error["fullname"]["msg"] = "Bài viết đã tồn tại";
+                $checked = 0;
+                $error["fullname"]["type_msg"] = "has-error";
+                $error["fullname"]["msg"] = "Bài viết đã tồn tại";
               }      	
-          }          
-          
-          if((int)@$project_id == 0){
+            }          
+
+            if((int)@$project_id == 0){
               $checked = 0;
               $error["project_id"]["type_msg"]   = "has-error";
               $error["project_id"]["msg"]      = "Thiếu danh mục";
-          }          
-          if(empty($sort_order)){
+            }          
+            if(empty($sort_order)){
              $checked = 0;
              $error["sort_order"]["type_msg"] 	= "has-error";
              $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
-          }
-          if((int)$status==-1){
+           }
+           if((int)$status==-1){
              $checked = 0;
              $error["status"]["type_msg"] 		= "has-error";
              $error["status"]["msg"] 			= "Thiếu trạng thái";
+           }
+           if ($checked == 1) { 
+            $image_name='';
+            if($image_file != null){                                          
+              $image_name=uploadImage($image_file['name'],$image_file['tmp_name'],$width,$height);        
+            }   
+            if(empty($id)){
+              $item 				= 	new ProjectArticleModel;       
+              $item->created_at 	=	date("Y-m-d H:i:s",time());        
+              if(!empty($image_name)){
+                $item->image    =   trim($image_name) ;  
+              }			
+            } else{
+              $item				=	ProjectArticleModel::find((int)@$id);   
+              $item->image=null;                       
+              if(!empty($image_hidden)){
+                $item->image =$image_hidden;          
+              }
+              if(!empty($image_name))  {
+                $item->image=$image_name;                                                
+              }                    
+            }  
+            $item->fullname 		    =	$fullname;
+
+            $item->alias 			      =	$alias;
+            $item->intro            = $intro;
+            $item->content          = $content;
+            $item->project_id       = (int)@$project_id;
+            $item->description      = $description;
+            $item->meta_keyword     = $meta_keyword;
+            $item->meta_description = $meta_description;           
+            $item->sort_order 		  =	(int)$sort_order;
+            $item->status 			    =	(int)$status;    
+            $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
+            $item->save();                  
+            $info = array(
+              'type_msg' 			=> "has-success",
+              'msg' 				=> 'Lưu dữ liệu thành công',
+              "checked" 			=> 1,
+              "error" 			=> $error,
+              "id"    			=> $id
+            );
+          }else {
+            $info = array(
+              'type_msg' 			=> "has-error",
+              'msg' 				=> 'Lưu dữ liệu thất bại',
+              "checked" 			=> 0,
+              "error" 			=> $error,
+              "id"				=> ""
+            );
+          }        		 			       
+          return $info;       
           }
-          if ($checked == 1) {    
-                if(empty($id)){
-                    $item 				= 	new ProjectArticleModel;       
-                    $item->created_at 	=	date("Y-m-d H:i:s",time());        
-                    if(!empty($image)){
-                      $item->image    =   trim($image) ;  
-                    }				
-                } else{
-                    $item				=	ProjectArticleModel::find((int)@$id);   
-                    $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                    
-                }  
-                $item->fullname 		    =	$fullname;
-                
-                $item->alias 			      =	$alias;
-                $item->intro            = $intro;
-                $item->content          = $content;
-                $item->project_id       = (int)@$project_id;
-                $item->description      = $description;
-                $item->meta_keyword     = $meta_keyword;
-                $item->meta_description = $meta_description;           
-                $item->sort_order 		  =	(int)$sort_order;
-                $item->status 			    =	(int)$status;    
-                $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
-                $item->save();                  
-                $info = array(
-                  'type_msg' 			=> "has-success",
-                  'msg' 				=> 'Lưu dữ liệu thành công',
-                  "checked" 			=> 1,
-                  "error" 			=> $error,
-                  "id"    			=> $id
-                );
-            }else {
-                    $info = array(
-                      'type_msg' 			=> "has-error",
-                      'msg' 				=> 'Lưu dữ liệu thất bại',
-                      "checked" 			=> 0,
-                      "error" 			=> $error,
-                      "id"				=> ""
-                    );
-            }        		 			       
-            return $info;       
-    }
           public function changeStatus(Request $request){
                   $id             =       (int)$request->id;     
                   $checked                =   1;

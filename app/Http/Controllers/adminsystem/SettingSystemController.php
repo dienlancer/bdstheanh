@@ -68,11 +68,16 @@ class SettingSystemController extends Controller {
           $author               =   trim($request->author);
           $copyright            =   trim($request->copyright);          
           $google_site_verification =   trim($request->google_site_verification);
-          $google_analytics     =   trim($request->google_analytics);          
-          
-          $logo_frontend        =   trim($request->logo_frontend);
-          $logo_frontend_hidden =   trim($request->logo_frontend_hidden);
-          $favicon              =   trim($request->favicon);          
+          $google_analytics     =   trim($request->google_analytics);                    
+          $logo_frontend_file           =   null;
+          if(isset($_FILES["logo_frontend"])){
+            $logo_frontend_file         =   $_FILES["logo_frontend"];
+          }
+          $favicon_file           =   null;
+          if(isset($_FILES["favicon"])){
+            $favicon_file         =   $_FILES["favicon"];
+          }          
+          $logo_frontend_hidden =   trim($request->logo_frontend_hidden);          
           $favicon_hidden       =   trim($request->favicon_hidden);          
           $setting              =   trim($request->setting);        
           $status               =   trim($request->status);        
@@ -93,11 +98,41 @@ class SettingSystemController extends Controller {
              $error["status"]["msg"]      = "Thiếu trạng thái";
           }                    
           if ($checked == 1) {    
+                $logo_frontend_name='';
+                $favicon_name='';
+                $width=0;
+                  $height=0;
+                if($logo_frontend_file != null){                                                                   
+                  $logo_frontend_name=uploadImage($logo_frontend_file['name'],$logo_frontend_file['tmp_name'],$width,$height);        
+                }                    
+                if($favicon_file != null){                                                                
+                  $favicon_name=uploadImage($favicon_file['name'],$favicon_file['tmp_name'],$width,$height);        
+                }   
                 if(empty($id)){
-                    $item         =   new SettingSystemModel;       
+                    $item         =   new SettingSystemModel;     
+                    if(!empty($logo_frontend_name)){
+                        $item->logo_frontend    =   trim($logo_frontend_name) ;  
+                    }  
+                    if(!empty($favicon_name)){
+                        $item->favicon    =   trim($favicon_name) ;  
+                    }
                     $item->created_at   = date("Y-m-d H:i:s",time());                             
                 } else{
-                    $item         = SettingSystemModel::find((int)@$id);                                           
+                  $item         = SettingSystemModel::find((int)@$id);   
+                  $item->logo_frontend=null;
+                  $item->favicon=null;                       
+                  if(!empty($logo_frontend_hidden)){
+                    $item->logo_frontend =$logo_frontend_hidden;          
+                  }
+                  if(!empty($favicon_hidden)){
+                    $item->favicon =$favicon_hidden;          
+                  }
+                  if(!empty($logo_frontend_name))  {
+                    $item->logo_frontend=$logo_frontend_name;                                                
+                  }                  
+                  if(!empty($favicon_name))  {
+                    $item->favicon=$favicon_name;                                                
+                  }                                                              
                 }        
                 $item->fullname                 =   @$fullname;                
                 $item->alias                    =   @$alias;        
@@ -107,22 +142,8 @@ class SettingSystemController extends Controller {
                 $item->author                   =   @$author;
                 $item->copyright                =   @$copyright;                
                 $item->google_site_verification =   @$google_site_verification;
-                $item->google_analytics         =   @$google_analytics;                
-                
-                $item->logo_frontend = null;                       
-                if(!empty($logo_frontend_hidden)){
-                  $item->logo_frontend = $logo_frontend_hidden;          
-                }
-                if(!empty($logo_frontend))  {
-                  $item->logo_frontend = $logo_frontend;                                                
-                }     
-                $item->favicon=null;                       
-                if(!empty($favicon_hidden)){
-                  $item->favicon =$favicon_hidden;          
-                }
-                if(!empty($favicon))  {
-                  $item->favicon=$favicon;                                                
-                }                   
+                $item->google_analytics         =   @$google_analytics;                                            
+
                 $item->setting                  =   @$setting ;                            
                 $item->sort_order               = (int)@$sort_order;
                 $item->status                   = (int)@$status;    

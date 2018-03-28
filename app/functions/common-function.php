@@ -7,20 +7,28 @@ use App\ProductModel;
 use App\ArticleModel;
 use App\CategoryProductModel;
 use App\CategoryArticleModel;
-function uploadImage($fileObj,$width,$height){        
-  require_once base_path("app".DS."scripts".DS."PhpThumb".DS."ThumbLib.inc.php") ;      
-  $fileName="";
-  $uploadDir = base_path("upload")  ; 
-  if($fileObj['tmp_name'] != null){                
-    $fileName   = $fileObj['name'];
-    $file_path=base_path("upload".DS.$fileName);
-    @copy($fileObj['tmp_name'], $file_path);       
-    $thumb = PhpThumbFactory::create($file_path);        
+function uploadImage($name,$tmp_name,$width,$height){        
+  $image_name=$name;                  
+  $image_tmp_name=$tmp_name;
+  $ext = pathinfo($image_name, PATHINFO_EXTENSION);                  
+  $image_slug=str_slug($image_name,'.');
+  $pattern_ext='#.png|.jpg|.gif#';
+  $pattern_dot='#\.#';
+  $image_slug=preg_replace($pattern_ext, '', $image_slug);                      
+  $image_slug=preg_replace($pattern_dot, '-', $image_slug);   
+  $code_alias=rand(1,9999);                 
+  $image_name=$image_slug. '-' . $code_alias .'.'.$ext;   
+  $image_path=base_path("upload".DS.$image_name);
+  @copy($image_tmp_name, $image_path);  
+  if((int)@$width > 0 && (int)@$height > 0){
+    require_once base_path("app".DS."scripts".DS."PhpThumb".DS."ThumbLib.inc.php") ;       
+    $thumb = PhpThumbFactory::create($image_path);        
     $thumb->adaptiveResize($width, $height);
-    $prefix = $width . 'x' . $height . '-';
-    $veston = $uploadDir . DS . $prefix  . $fileName;       
+    $prefix = $width . 'x' . $height ;
+    $veston =base_path('upload' . DS . $prefix . '-' . $image_name);       
     $thumb->save($veston);
-  }   
+  }  
+  return $image_name;
 }
 
 function get_product_thumbnail($value){

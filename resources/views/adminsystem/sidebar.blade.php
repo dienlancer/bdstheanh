@@ -221,50 +221,7 @@ switch ($controller) {
                 </a>                                                                      
             </li>                        
         </ul>
-    </li>
-    <li class="nav-item <?php echo $li_album_management; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-folder-open-o" ></i>
-            <span class="title">Thư viện hình ảnh</span>
-            <span class="arrow"></span>
-        </a>
-        <ul class="sub-menu">                                    
-            <li class="nav-item  <?php echo $li_album; ?>">
-                <a href="{!! route('adminsystem.album.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Album</span>                                            
-                </a>                                                                      
-            </li>  
-            <li class="nav-item  <?php echo $li_photo; ?>">
-                <a href="{!! route('adminsystem.photo.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Photo</span>                                            
-                </a>                                                                      
-            </li>                        
-        </ul>
-    </li>
-    <li class="nav-item <?php echo $li_video_management; ?>">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="fa fa-folder-open-o" ></i>
-            <span class="title">Thư viện video</span>
-            <span class="arrow"></span>
-        </a>
-        <ul class="sub-menu">                                    
-            <li class="nav-item  <?php echo $li_category_video; ?>">
-                <a href="{!! route('adminsystem.category-video.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Danh mục video</span>                                            
-                </a>                                                                      
-            </li>  
-            <li class="nav-item  <?php echo $li_video; ?>">
-                <a href="{!! route('adminsystem.video.getList') !!}" class="nav-link nav-toggle">
-                    <i class="icon-notebook"></i>
-                    <span class="title">Video</span>                                            
-                </a>                                                                      
-            </li>                        
-        </ul>
-    </li>
-    
+    </li>        
     <li class="nav-item  <?php echo $li_media; ?>">
         <a href="{!! route('adminsystem.media.getList') !!}" class="nav-link nav-toggle">
             <i class="icon-notebook"></i>

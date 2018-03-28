@@ -3,7 +3,6 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
 ?>
 <form class="form-horizontal" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
     {{ csrf_field() }}           
@@ -49,26 +48,44 @@ $linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
         </div>
     </div>
 </form>
-<script type="text/javascript" language="javascript">
-    function uploadFileImport(ctrl_image){    
-        var token = $('input[name="_token"]').val();               
-        var file_upload=$(ctrl_image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
+<script type="text/javascript" language="javascript">    
     function save(){
+        var dataItem = new FormData();
         var token = $('input[name="_token"]').val();   
         var tbody=$("table.setting-system > tbody")[0];
         var rows=tbody.rows;
-        for(var i=0;i<rows.length;i++){
-            var ctrl_media=$(rows[i].cells[0]).find('input[type="file"][name="media_file"]');            
-            uploadFileImport(ctrl_media);            
-        }
-        window.location.href = "<?php echo $linkCancel; ?>";
+        if(rows.length > 0){
+            for(var i=0;i<rows.length;i++){
+                var media_ctrl=$(rows[i].cells[0]).find('input[type="file"][name="media_file"]');            
+                var media_file=null;                  
+                if($(media_ctrl).length > 0){
+                    var media_files = $(media_ctrl).get(0).files;        
+                    if(media_files.length > 0){            
+                        media_file  = media_files[0];  
+                        dataItem.append("source_media_file[]", media_file);
+                    }
+                }           
+            }
+        }   
+        dataItem.append('_token',token);            
+        $.ajax({
+            url: '<?php echo $linkSave; ?>',
+            type: 'POST',
+            data: dataItem,
+            async: false,
+            success: function (data) {                                
+                window.location.href = "<?php echo $linkCancel; ?>";
+            },
+            error : function (data){
+                spinner.hide();
+            },
+            beforeSend  : function(jqXHR,setting){
+                spinner.show();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
     }
     function addRow() {
         var tbody=$("table.setting-system > tbody")[0];

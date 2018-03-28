@@ -82,147 +82,151 @@ class ArticleController extends Controller {
           return view("adminsystem.no-access");
         }        
     }
-     public function save(Request $request){
-          $id 					        =		trim($request->id);        
-          $fullname 				    =		trim($request->fullname);
-          
-          $alias 					      = 	trim($request->alias);
-          $alias_menu           =   trim($request->alias_menu);
-          $image                =   trim($request->image);
-          $image_hidden         =   trim($request->image_hidden);
-          $intro                =   trim($request->intro);
-          $content              =   trim($request->content);          
-          $description          =   trim($request->description);
-          $meta_keyword         =   trim($request->meta_keyword);
-          $meta_description     =   trim($request->meta_description);
-          $sort_order           =   trim($request->sort_order);
-          $status               =   trim($request->status);
-          $category_id	=		$request->category_id;                 
-          $data 		            =   array();
-          $info 		            =   array();
-          $error 		            =   array();
-          $item		              =   null;
-          $checked 	            =   1;              
-          if(empty($fullname)){
+              public function save(Request $request){
+                $id 					        =		trim($request->id);        
+                $fullname 				    =		trim($request->fullname);          
+                $alias 					      = 	trim($request->alias);
+                $alias_menu           =   trim($request->alias_menu); 
+                $image_file           =   null;
+                if(isset($_FILES["image"])){
+                  $image_file         =   $_FILES["image"];
+                }                   
+                $image_hidden         =   trim($request->image_hidden);
+                $intro                =   trim($request->intro);
+                $content              =   trim($request->content);          
+                $description          =   trim($request->description);
+                $meta_keyword         =   trim($request->meta_keyword);
+                $meta_description     =   trim($request->meta_description);
+                $sort_order           =   trim($request->sort_order);
+                $status               =   trim($request->status);
+                $category_id	        =		$request->category_id;             
+                $data 		            =   array();
+                $info 		            =   array();
+                $error 		            =   array();
+                $item		              =   null;                
+                $checked 	            =   1;   
+                $setting= getSettingSystem();
+                $width=$setting['article_width']['field_value'];
+                $height=$setting['article_height']['field_value'];            
+                if(empty($fullname)){
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
                  $error["fullname"]["msg"] = "Thiếu tên bài viết";
-          }else{
-              $data=array();
-              if (empty($id)) {
-                $data=ArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
-              }else{
-                $data=ArticleModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
-              }  
-              if (count($data) > 0) {
+               }else{
+                $data=array();
+                if (empty($id)) {
+                  $data=ArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
+                }else{
+                  $data=ArticleModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
+                }  
+                if (count($data) > 0) {
                   $checked = 0;
                   $error["fullname"]["type_msg"] = "has-error";
                   $error["fullname"]["msg"] = "Bài viết đã tồn tại";
-              }      	
-          }          
-          
-          if(count($category_id) == 0){
-              $checked = 0;
-              $error["category_id"]["type_msg"]   = "has-error";
-              $error["category_id"]["msg"]      = "Thiếu danh mục";
-          }
-          else{
-            if(empty($category_id[0])){
-              $checked = 0;
-              $error["category_id"]["type_msg"]   = "has-error";
-              $error["category_id"]["msg"]      = "Thiếu danh mục";
-            }
-          }
-          if(empty($sort_order)){
-             $checked = 0;
-             $error["sort_order"]["type_msg"] 	= "has-error";
-             $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
-          }
-          if((int)$status==-1){
-             $checked = 0;
-             $error["status"]["type_msg"] 		= "has-error";
-             $error["status"]["msg"] 			= "Thiếu trạng thái";
-          }
-          if ($checked == 1) {    
-                if(empty($id)){
-                    $item 				= 	new ArticleModel;       
-                    $item->created_at 	=	date("Y-m-d H:i:s",time());        
-                    if(!empty($image)){
-                      $item->image    =   trim($image) ;  
-                    }				
-                } else{
-                    $item				=	ArticleModel::find((int)@$id);   
-                    $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                    
-                }  
-                $item->fullname 		    =	$fullname;
-                
-                $item->alias 			      =	$alias;
-                $item->intro            = $intro;
-                $item->content          = $content;
-                
-                $item->description      = $description;
-                $item->meta_keyword     = $meta_keyword;
-                $item->meta_description = $meta_description;           
-                $item->sort_order 		  =	(int)$sort_order;
-                $item->status 			    =	(int)$status;    
-                $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
-                $item->save();  
-                $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
-          if(count($dataMenu) > 0){
-            foreach ($dataMenu as $key => $value) {                   
-              $menu_id=(int)$value['id'];
-              $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
-                DB::statement($sql);    
-            }          
-          } 
-                if(count(@$category_id)>0){                            
-                    $arrArticleCategory=ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->select("category_id")->get()->toArray();
-                    $arrCategoryArticleID=array();
-                    foreach ($arrArticleCategory as $key => $value) {
-                        $arrCategoryArticleID[]=$value["category_id"];
-                    }
-                    $selected=@$category_id;
-                    sort($selected);
-                    sort($arrCategoryArticleID);         
-                    $resultCompare=0;
-                    if($selected == $arrCategoryArticleID){
-                      $resultCompare=1;       
-                    }
-                    if($resultCompare==0){
-                          ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->delete();  
-                          foreach ($selected as $key => $value) {
-                            $category_id=$value;
-                            $articleCategory=new ArticleCategoryModel;
-                            $articleCategory->article_id=(int)@$item->id;
-                            $articleCategory->category_id=(int)@$category_id;            
-                            $articleCategory->save();
-                          }
-                    }       
+                }      	
+              }          
+
+              if(empty($category_id)){
+                $checked = 0;
+                $error["category_id"]["type_msg"]   = "has-error";
+                $error["category_id"]["msg"]      = "Thiếu danh mục";
+              }          
+              if(empty($sort_order)){
+               $checked = 0;
+               $error["sort_order"]["type_msg"] 	= "has-error";
+               $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
+             }
+             if((int)$status==-1){
+               $checked = 0;
+               $error["status"]["type_msg"] 		= "has-error";
+               $error["status"]["msg"] 			= "Thiếu trạng thái";
+             }
+             if ($checked == 1) {    
+              $image_name='';
+              if($image_file != null){     
+                                           
+                $image_name=uploadImage($image_file['name'],$image_file['tmp_name'],$width,$height);
+              }
+              if(empty($id)){
+                $item 				= 	new ArticleModel;       
+                $item->created_at 	=	date("Y-m-d H:i:s",time());        
+                if(!empty($image_name)){
+                  $item->image    =   trim($image_name) ;  
+                }				
+              } else{
+                $item				=	ArticleModel::find((int)@$id);   
+                $item->image=null;                       
+                if(!empty($image_hidden)){
+                  $item->image =$image_hidden;          
                 }
-                $info = array(
-                  'type_msg' 			=> "has-success",
-                  'msg' 				=> 'Lưu dữ liệu thành công',
-                  "checked" 			=> 1,
-                  "error" 			=> $error,
-                  "id"    			=> $id
-                );
+                if(!empty($image_name))  {
+                  $item->image=$image_name;                                                
+                }                    
+              }  
+              $item->fullname 		    =	$fullname;
+
+              $item->alias 			      =	$alias;
+              $item->intro            = $intro;
+              $item->content          = $content;
+
+              $item->description      = $description;
+              $item->meta_keyword     = $meta_keyword;
+              $item->meta_description = $meta_description;           
+              $item->sort_order 		  =	(int)$sort_order;
+              $item->status 			    =	(int)$status;    
+              $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
+              $item->save();  
+              $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
+              if(count($dataMenu) > 0){
+                foreach ($dataMenu as $key => $value) {                   
+                  $menu_id=(int)$value['id'];
+                  $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
+                  DB::statement($sql);    
+                }          
+              } 
+              if(!empty($category_id)){ 
+                $arr_category_id=explode(',', $category_id);                           
+                $arrArticleCategory=ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->select("category_id")->get()->toArray();
+                $arrCategoryArticleID=array();
+                foreach ($arrArticleCategory as $key => $value) {
+                  $arrCategoryArticleID[]=$value["category_id"];
+                }
+                $selected=@$arr_category_id;
+                sort($selected);
+                sort($arrCategoryArticleID);         
+                $resultCompare=0;
+                if($selected == $arrCategoryArticleID){
+                  $resultCompare=1;       
+                }
+                if($resultCompare==0){
+                  ArticleCategoryModel::whereRaw("article_id = ?",[(int)@$item->id])->delete();  
+                  foreach ($selected as $key => $value) {
+                    $category_id=$value;
+                    $articleCategory=new ArticleCategoryModel;
+                    $articleCategory->article_id=(int)@$item->id;
+                    $articleCategory->category_id=(int)@$category_id;            
+                    $articleCategory->save();
+                  }
+                }       
+              }
+              $info = array(
+                'type_msg' 			=> "has-success",
+                'msg' 				=> 'Lưu dữ liệu thành công',
+                "checked" 			=> 1,
+                "error" 			=> $error,
+                "id"    			=> $id
+              );
             }else {
-                    $info = array(
-                      'type_msg' 			=> "has-error",
-                      'msg' 				=> 'Lưu dữ liệu thất bại',
-                      "checked" 			=> 0,
-                      "error" 			=> $error,
-                      "id"				=> ""
-                    );
+              $info = array(
+                'type_msg' 			=> "has-error",
+                'msg' 				=> 'Lưu dữ liệu thất bại',
+                "checked" 			=> 0,
+                "error" 			=> $error,
+                "id"				=> ""
+              );
             }        		 			       
             return $info;       
-    }
+          }
           public function changeStatus(Request $request){
                   $id             =       (int)$request->id;     
                   $checked                =   1;

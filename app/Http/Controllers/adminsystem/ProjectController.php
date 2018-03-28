@@ -85,161 +85,164 @@ class ProjectController extends Controller {
           return view("adminsystem.no-access");
         }        
     }
-     public function save(Request $request){
-          $id 					        =		trim(@$request->id);        
-          $fullname 				    =		trim(@$request->fullname);
-          $alias                =   trim(@$request->alias);                    
-          $meta_keyword         =   trim(@$request->meta_keyword);
-          $meta_description     =   trim(@$request->meta_description);
-          $image                =   trim(@$request->image);
-          $image_hidden         =   trim(@$request->image_hidden);            
-          $total_cost           =   trim(@$request->total_cost);
-          $intro                =   trim(@$request->intro);    
-          $overview             =   trim(@$request->overview);          
-          $equipment            =   trim(@$request->equipment);          
-          $price_list           =   trim(@$request->price_list);
-          $googlemap_url        =   trim(@$request->googlemap_url);  
-          $province_id             =   trim(@$request->province_id);
-          $district_id             =   trim(@$request->district_id);
-          $category_param_id    =   ($request->category_param_id);  
-
-          $street               =   trim(@$request->street);                    
-          $sort_order           =   trim(@$request->sort_order);
-          $status               =   trim(@$request->status);          
-          $data 		            =   array();
-          $info 		            =   array();
-          $error 		            =   array();
-          $item		              =   null;
-          $checked 	            =   1;              
-          if(empty($fullname)){
+              public function save(Request $request){
+                $id 					        =		trim(@$request->id);        
+                $fullname 				    =		trim(@$request->fullname);
+                $alias                =   trim(@$request->alias);                    
+                $meta_keyword         =   trim(@$request->meta_keyword);
+                $meta_description     =   trim(@$request->meta_description);
+                $image_file           =   null;
+                if(isset($_FILES["image"])){
+                  $image_file         =   $_FILES["image"];
+                }
+                $image_hidden         =   trim(@$request->image_hidden);            
+                $total_cost           =   trim(@$request->total_cost);
+                $intro                =   trim(@$request->intro);    
+                $overview             =   trim(@$request->overview);          
+                $equipment            =   trim(@$request->equipment);          
+                $price_list           =   trim(@$request->price_list);
+                $googlemap_url        =   trim(@$request->googlemap_url);  
+                $province_id             =   trim(@$request->province_id);
+                $district_id             =   trim(@$request->district_id);
+                $category_param_id    =   ($request->category_param_id);  
+                $street               =   trim(@$request->street);                    
+                $sort_order           =   trim(@$request->sort_order);
+                $status               =   trim(@$request->status);          
+                $data 		            =   array();
+                $info 		            =   array();
+                $error 		            =   array();
+                $item		              =   null;
+                $checked 	            =   1;   
+                $setting= getSettingSystem();
+                $width=$setting['article_width']['field_value'];
+                $height=$setting['article_height']['field_value'];           
+                if(empty($fullname)){
                  $checked = 0;
                  $error["fullname"]["type_msg"] = "has-error";
                  $error["fullname"]["msg"] = "Thiếu tên bài viết";
-          }else{
-              $data=array();
-              if (empty($id)) {
-                $data=ProjectModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
-              }else{
-                $data=ProjectModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
-              }  
-              if (count($data) > 0) {
+               }else{
+                $data=array();
+                if (empty($id)) {
+                  $data=ProjectModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
+                }else{
+                  $data=ProjectModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
+                }  
+                if (count($data) > 0) {
                   $checked = 0;
                   $error["fullname"]["type_msg"] = "has-error";
                   $error["fullname"]["msg"] = "Bài viết đã tồn tại";
-              }      	
-          }      
-          if((int)@$province_id == 0){
-            $checked = 0;
-             $error["province_id"]["type_msg"]   = "has-error";
-             $error["province_id"]["msg"]    = "Vui lòng chọn tỉnh thành phố";
-          }
-          if((int)@$district_id == 0){
-            $checked = 0;
-             $error["district_id"]["type_msg"]   = "has-error";
-             $error["district_id"]["msg"]    = "Vui lòng chọn quận huyện";
-          }            
-          if(count($category_param_id) == 0){
-              $checked = 0;
-              $error["category_param_id"]["type_msg"]   = "has-error";
-              $error["category_param_id"]["msg"]      = "Thiếu đơn vị tính";
-          }
-          else{
-            if(empty($category_param_id[0])){
-              $checked = 0;
-              $error["category_param_id"]["type_msg"]   = "has-error";
-              $error["category_param_id"]["msg"]      = "Thiếu đơn vị tính";
-            }
-          }           
-          if(empty($sort_order)){
-             $checked = 0;
-             $error["sort_order"]["type_msg"] 	= "has-error";
-             $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
-          }
-          if((int)$status==-1){
-             $checked = 0;
-             $error["status"]["type_msg"] 		= "has-error";
-             $error["status"]["msg"] 			= "Thiếu trạng thái";
-          }
-          if ($checked == 1) {    
-                if(empty($id)){
-                    $item 				= 	new ProjectModel;       
-                    $item->created_at 	=	date("Y-m-d H:i:s",time());        
-                    if(!empty($image)){
-                      $item->image    =   trim($image) ;  
-                    }				
-                } else{
-                    $item				=	ProjectModel::find((int)@$id);   
-                    $item->image=null;                       
-                    if(!empty($image_hidden)){
-                      $item->image =$image_hidden;          
-                    }
-                    if(!empty($image))  {
-                      $item->image=$image;                                                
-                    }                    
-                }  
-                $item->fullname 		    =	$fullname;
-                $item->alias            = $alias;                       
-                $item->meta_keyword     = $meta_keyword;
-                $item->meta_description = $meta_description;                             
-                $item->total_cost       = $total_cost;
-                $item->intro            = $intro;
-                $item->overview         = $overview;
-                $item->equipment        = $equipment;
-                $item->price_list       = $price_list;
-                $item->googlemap_url    = $googlemap_url;
-                $item->province_id         = (int)@$province_id;
-                $item->district_id         = (int)@$district_id;                
-                $item->street           = $street;                                                   
-                $item->sort_order 		  =	(int)@$sort_order;
-                $item->status 			    =	(int)@$status;    
-                $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
-                $item->save();   
+                }      	
+              }      
+              if((int)@$province_id == 0){
+                $checked = 0;
+                $error["province_id"]["type_msg"]   = "has-error";
+                $error["province_id"]["msg"]    = "Vui lòng chọn tỉnh thành phố";
+              }
+              if((int)@$district_id == 0){
+                $checked = 0;
+                $error["district_id"]["type_msg"]   = "has-error";
+                $error["district_id"]["msg"]    = "Vui lòng chọn quận huyện";
+              }            
+              if(empty($category_param_id)){
+                $checked = 0;
+                $error["category_param_id"]["type_msg"]   = "has-error";
+                $error["category_param_id"]["msg"]      = "Thiếu đơn vị tính";
+              }                        
+              if(empty($sort_order)){
+               $checked = 0;
+               $error["sort_order"]["type_msg"] 	= "has-error";
+               $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
+             }
+             if((int)$status==-1){
+               $checked = 0;
+               $error["status"]["type_msg"] 		= "has-error";
+               $error["status"]["msg"] 			= "Thiếu trạng thái";
+             }
+             if ($checked == 1) { 
+              $image_name='';
+              if($image_file != null){                                          
+                $image_name=uploadImage($image_file['name'],$image_file['tmp_name'],$width,$height);        
+              }  
+              if(empty($id)){
+                $item 				= 	new ProjectModel;       
+                $item->created_at 	=	date("Y-m-d H:i:s",time());        
+                if(!empty($image_name)){
+                  $item->image    =   trim($image_name) ;  
+                }				
+              } else{
+                $item				=	ProjectModel::find((int)@$id);   
+                $item->image=null;                       
+                if(!empty($image_hidden)){
+                  $item->image =$image_hidden;          
+                }
+                if(!empty($image_name))  {
+                  $item->image=$image_name;                                                
+                }                      
+              }  
+              $item->fullname 		    =	$fullname;
+              $item->alias            = $alias;                       
+              $item->meta_keyword     = $meta_keyword;
+              $item->meta_description = $meta_description;                             
+              $item->total_cost       = $total_cost;
+              $item->intro            = $intro;
+              $item->overview         = $overview;
+              $item->equipment        = $equipment;
+              $item->price_list       = $price_list;
+              $item->googlemap_url    = $googlemap_url;
+              $item->province_id         = (int)@$province_id;
+              $item->district_id         = (int)@$district_id;                
+              $item->street           = $street;                                                   
+              $item->sort_order 		  =	(int)@$sort_order;
+              $item->status 			    =	(int)@$status;    
+              $item->updated_at 		  =	date("Y-m-d H:i:s",time());    	        	
+              $item->save();   
 
-                /* begin category param */
-                if(count(@$category_param_id)>0){  
-                  $arrPostParam=PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
-                  $arrCategoryParamID=array();
-                  foreach ($arrPostParam as $key => $value) {
-                    $arrCategoryParamID[]=$value["param_id"];
-                  }                  
-                  $selected=@$category_param_id;
-                  sort($selected);
-                  sort($arrCategoryParamID);                           
-                  $resultCompare=0;
-                  if($selected == $arrCategoryParamID){
-                    $resultCompare=1;       
+              /* begin category param */
+              if(!empty(@$category_param_id)){
+                $source_category_param_id=explode(',', @$category_param_id);  
+                $arrPostParam=PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->select("param_id")->get()->toArray();
+                $arrCategoryParamID=array();
+                foreach ($arrPostParam as $key => $value) {
+                  $arrCategoryParamID[]=$value["param_id"];
+                }                  
+                $selected=@$source_category_param_id;
+                sort($selected);
+                sort($arrCategoryParamID);                           
+                $resultCompare=0;
+                if($selected == $arrCategoryParamID){
+                  $resultCompare=1;       
+                }
+                if($resultCompare==0){
+                  PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->delete();  
+                  foreach ($selected as $key => $value) {
+                    $param_id=$value;
+                    $postParam=new PostParamModel;
+                    $postParam->post_id=(int)@$item->id;
+                    $postParam->param_id=(int)@$param_id;            
+                    $postParam->save();
                   }
-                  if($resultCompare==0){
-                    PostParamModel::whereRaw("post_id = ?",[(int)@$item->id])->delete();  
-                    foreach ($selected as $key => $value) {
-                      $param_id=$value;
-                      $postParam=new PostParamModel;
-                      $postParam->post_id=(int)@$item->id;
-                      $postParam->param_id=(int)@$param_id;            
-                      $postParam->save();
-                    }
-                  }       
-                }  
-                PostParamModel::whereRaw("param_id = ?",[0])->delete();
-                /* end category param */                                                          
-                $info = array(
-                  'type_msg' 			=> "has-success",
-                  'msg' 				=> 'Lưu dữ liệu thành công',
-                  "checked" 			=> 1,
-                  "error" 			=> $error,
-                  "id"    			=> $id
-                );
+                }       
+              }  
+              PostParamModel::whereRaw("param_id = ?",[0])->delete();
+              /* end category param */                                                          
+              $info = array(
+                'type_msg' 			=> "has-success",
+                'msg' 				=> 'Lưu dữ liệu thành công',
+                "checked" 			=> 1,
+                "error" 			=> $error,
+                "id"    			=> $id
+              );
             }else {
-                    $info = array(
-                      'type_msg' 			=> "has-error",
-                      'msg' 				=> 'Lưu dữ liệu thất bại',
-                      "checked" 			=> 0,
-                      "error" 			=> $error,
-                      "id"				=> ""
-                    );
+              $info = array(
+                'type_msg' 			=> "has-error",
+                'msg' 				=> 'Lưu dữ liệu thất bại',
+                "checked" 			=> 0,
+                "error" 			=> $error,
+                "id"				=> ""
+              );
             }        		 			       
             return $info;       
-    }
+          }
          
          public function changeStatus(Request $request){
                   $id             =       (int)$request->id;     

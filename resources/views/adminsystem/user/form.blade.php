@@ -162,18 +162,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         $(group_member_id).closest('.form-group').find('span').empty().hide();
         $(status).closest('.form-group').find('span').empty().hide();        
         $(sort_order).closest('.form-group').find('span').empty().hide();        
-    }
-    function uploadFileImport(){    
-        var token = $('input[name="_token"]').val();       
-        var image=$('input[name="image"]');        
-        var file_upload=$(image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
+    }   
     function deleteImage(){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";
@@ -194,37 +183,41 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         var confirm_password=$('input[name="confirm_password"]').val();
         var status=$('select[name="status"]').val();
         var fullname=$('input[name="fullname"]').val();
-        var image = $('input[name="image"]').val();
-        if (image != ''){
-            image = image.substr(image.lastIndexOf('\\') + 1);       
-        }
+        /* begin xử lý image */
+        var image_file=null;
+        var image_ctrl=$('input[name="image"]');         
+        var image_files = $(image_ctrl).get(0).files;        
+        if(image_files.length > 0){            
+            image_file  = image_files[0];  
+        }        
+        /* end xử lý image */
         var image_hidden=$('input[name="image_hidden"]').val(); 
         var group_member_id=$('select[name="group_member_id[]"]').val();        
         var sort_order=$('input[name="sort_order"]').val();        
         var token = $('input[name="_token"]').val();   
-        resetErrorStatus();
-        var dataItem={
-            "id":id,
-            "username":username,
-            "email":email,
-            "password":password,
-            "confirm_password":confirm_password,
-            "status":status,            
-            "fullname":fullname,
-            "image":image,
-            "image_hidden":image_hidden,
-            "group_member_id":group_member_id,                        
-            "sort_order":sort_order,            
-            "_token": token
-        };
+        resetErrorStatus();        
+        var dataItem = new FormData();
+        dataItem.append('id',id);
+        dataItem.append('username',username);
+        dataItem.append('email',email);
+        dataItem.append('password',password);        
+        dataItem.append('confirm_password',confirm_password);
+        dataItem.append('status',status); 
+        dataItem.append('fullname',fullname);         
+        if(image_files.length > 0){
+            dataItem.append('image',image_file);
+        }        
+        dataItem.append('image_hidden',image_hidden);
+        dataItem.append('group_member_id',group_member_id);
+        dataItem.append('sort_order',sort_order);         
+        dataItem.append('_token',token);      
         $.ajax({
             url: '<?php echo $linkSave; ?>',
             type: 'POST',
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==1){
-                    uploadFileImport();
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
@@ -272,6 +265,9 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             beforeSend  : function(jqXHR,setting){
                 spinner.show();
             },
+            cache: false,
+            contentType: false,
+            processData: false
         });
     }
 </script>

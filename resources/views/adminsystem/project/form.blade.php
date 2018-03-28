@@ -266,17 +266,6 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         $(status).closest('.form-group').find('span').empty().hide();        
     }
 
-    function uploadFileImport(){    
-        var token = $('input[name="_token"]').val();       
-        var image=$('input[name="image"]'); 
-        var file_upload=$(image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
     function deleteImage(){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";
@@ -296,10 +285,14 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
          
         var meta_keyword=$('textarea[name="meta_keyword"]').val();
         var meta_description=$('textarea[name="meta_description"]').val();
-        var image = $('input[name="image"]').val();
-        if (image != ''){
-            image = image.substr(image.lastIndexOf('\\') + 1);       
-        }
+        /* begin xử lý image */
+        var image_file=null;
+        var image_ctrl=$('input[name="image"]');         
+        var image_files = $(image_ctrl).get(0).files;        
+        if(image_files.length > 0){            
+            image_file  = image_files[0];  
+        }        
+        /* end xử lý image */
         var image_hidden=$('input[name="image_hidden"]').val();         
         var total_cost=$('input[name="total_cost"]').val();     
         var category_param_id=$('select[name="category_param_id[]"]').val();      
@@ -314,37 +307,37 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
-        resetErrorStatus();
-        var dataItem={
-            "id":id,
-            "fullname":fullname,
-            "alias":alias,                
-            "meta_keyword":meta_keyword,
-            "meta_description":meta_description,                   
-            "image":image,       
-            "image_hidden":image_hidden,
-            "total_cost":total_cost,     
-            "category_param_id":category_param_id,                
-            "intro":intro,
-            "overview":overview,
-            "equipment":equipment,
-            "price_list":price_list,
-            "googlemap_url":googlemap_url,
-            "street":street,     
-            "province_id":province_id,
-            "district_id":district_id,                            
-            "sort_order":sort_order,
-            "status":status,
-            "_token": token
-        };
+        resetErrorStatus();        
+        var dataItem = new FormData();
+        dataItem.append('id',id);
+        dataItem.append('fullname',fullname);
+        dataItem.append('alias',alias);        
+        dataItem.append('meta_keyword',meta_keyword);
+        dataItem.append('meta_description',meta_description);        
+        if(image_files.length > 0){
+            dataItem.append('image',image_file);
+        }        
+        dataItem.append('image_hidden',image_hidden);
+        dataItem.append('total_cost',total_cost);
+        dataItem.append('category_param_id',category_param_id);
+        dataItem.append('intro',intro);
+        dataItem.append('overview',overview);
+        dataItem.append('equipment',equipment);
+        dataItem.append('price_list',price_list);
+        dataItem.append('googlemap_url',googlemap_url);
+        dataItem.append('street',street);
+        dataItem.append('province_id',province_id);
+        dataItem.append('district_id',district_id);
+        dataItem.append('sort_order',sort_order); 
+        dataItem.append('status',status); 
+        dataItem.append('_token',token);        
         $.ajax({
             url: '<?php echo $linkSave; ?>',
             type: 'POST',
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==1){
-                    uploadFileImport();
+                if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;
@@ -393,6 +386,9 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             beforeSend  : function(jqXHR,setting){
                 spinner.show();
             },
+            cache: false,
+            contentType: false,
+            processData: false
         });
     }
     function createAlias(){

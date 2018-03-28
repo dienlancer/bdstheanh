@@ -33,15 +33,29 @@ class MediaController extends Controller {
 		$icon=$this->_icon; 				
 		return view("adminsystem.".$this->_controller.".form",compact("controller","task","title","icon"));
 	}
-	public function uploadFile(Request $request){                     
-        $fileObj=$_FILES["image"];          
-        $fileName="";
-        if($fileObj['tmp_name'] != null){                
-          $fileName   = $fileObj['name'];
-          $file_path=base_path("upload".DS.$fileName);
-          @copy($fileObj['tmp_name'],$file_path);                   
-        }   
-      }
+  public function save(Request $request){
+    $source_media_file=array();            
+    if(isset($_FILES['source_media_file'])){
+      $source_media_file=$_FILES['source_media_file'];
+    }                 
+    $media_item=null;
+    $width=0;
+    $height=0;        
+    if(count($source_media_file) > 0){
+      foreach ($source_media_file['name'] as $key => $value) {
+        $media_item=uploadImage($value,$source_media_file['tmp_name'][$key],$width,$height);
+      }      
+    }     
+    $info = array(
+      'type_msg'      => "has-success",
+      'msg'         => 'Save data successfully',
+      "checked"       => 1,
+      "error"       => null,
+      "id"          => 0
+    );
+    return $info;                       
+  }
+	
       public function trash(Request $request){
       	$strID                 =   $request->str_id;               
       	$checked                =   1;
