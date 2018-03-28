@@ -255,6 +255,6 @@ class BannerController extends Controller {
             );
             return $info;
       }
-     
+      
 }
 ?>

@@ -361,6 +361,6 @@ class UserController extends Controller {
             );
             return $info;
       }     
-    
+     
 }
 ?>

@@ -300,7 +300,7 @@ class PageController extends Controller {
             );
             return $info;
       }
-      
+     
       public function createAlias(Request $request){
         $id                =  trim($request->id)  ; 
         $fullname                =  trim($request->fullname)  ;        

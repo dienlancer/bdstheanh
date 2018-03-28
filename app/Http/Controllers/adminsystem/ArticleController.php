@@ -427,6 +427,6 @@ class ArticleController extends Controller {
         }    
         return $info;
       }
-     
+      
 }
 ?>
