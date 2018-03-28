@@ -3,7 +3,7 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
+
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"    onblur="createAlias()"     value="'.@$arrRowData['fullname'].'">';
@@ -289,17 +289,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
         $(status).closest('.form-group').find('span').empty().hide();        
     }
 
-    function uploadFileImport(ctrl_image){    
-        var token = $('input[name="_token"]').val();       
-        var image=ctrl_image;        
-        var file_upload=$(image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
+    
     function deleteImage(){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";
@@ -387,13 +377,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             async: false,
             success: function (data) {
                 if(data.checked==1){
-                    uploadFileImport($('input[name="image"]'));    
-                    var child_image_ctrl=$("table.table-image > tbody").find("input[type='file']");                
-                    if(child_image_ctrl.length > 0){
-                        for(var i=0;i<child_image_ctrl.length;i++){
-                            uploadFileImport(child_image_ctrl[i]);
-                        }
-                    }                    
+                           
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;                    

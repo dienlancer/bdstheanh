@@ -365,11 +365,6 @@ class OrganizationController extends Controller {
         }    
         return $info;
       }
-      public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $article_width=$setting['article_width']['field_value'];
-    $article_height=$setting['article_height']['field_value'];
-      uploadImage($_FILES["image"],$article_width,$article_height);
-    }
+  
 }
 ?>

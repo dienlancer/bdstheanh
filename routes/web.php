@@ -9,7 +9,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status/{status}",["as"=>"adminsystem.category-product.updateStatus","uses"=>"adminsystem\CategoryProductController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.category-product.changeStatus","uses"=>"adminsystem\CategoryProductController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.category-product.trash","uses"=>"adminsystem\CategoryProductController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.category-product.uploadFile","uses"=>"adminsystem\CategoryProductController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.category-product.createAlias","uses"=>"adminsystem\CategoryProductController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"banner"],function(){		
@@ -22,7 +22,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.banner.updateStatus","uses"=>"adminsystem\BannerController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.banner.changeStatus","uses"=>"adminsystem\BannerController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.banner.trash","uses"=>"adminsystem\BannerController@trash"]);		
-		Route::post("upload-file",["as"=>"adminsystem.banner.uploadFile","uses"=>"adminsystem\BannerController@uploadFile"]);
+		
 	});	
 	Route::group(["prefix"=>"payment-method"],function(){		
 		Route::get("list",["as"=>"adminsystem.payment-method.getList","uses"=>"adminsystem\PaymentMethodController@getList"]);
@@ -45,7 +45,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.setting-system.updateStatus","uses"=>"adminsystem\SettingSystemController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.setting-system.changeStatus","uses"=>"adminsystem\SettingSystemController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.setting-system.trash","uses"=>"adminsystem\SettingSystemController@trash"]);	
-		Route::post("upload-file",["as"=>"adminsystem.setting-system.uploadFile","uses"=>"adminsystem\SettingSystemController@uploadFile"]);	
+		
 		Route::post("create-alias",["as"=>"adminsystem.setting-system.createAlias","uses"=>"adminsystem\SettingSystemController@createAlias"]);
 	});
 	Route::group(["prefix"=>"product"],function(){		
@@ -58,7 +58,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.product.updateStatus","uses"=>"adminsystem\ProductController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.product.changeStatus","uses"=>"adminsystem\ProductController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.product.trash","uses"=>"adminsystem\ProductController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.product.uploadFile","uses"=>"adminsystem\ProductController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.product.createAlias","uses"=>"adminsystem\ProductController@createAlias"]);
 	});		
 	Route::group(["prefix"=>"privilege"],function(){		
@@ -80,7 +80,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.category-video.updateStatus","uses"=>"adminsystem\CategoryVideoController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.category-video.changeStatus","uses"=>"adminsystem\CategoryVideoController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.category-video.trash","uses"=>"adminsystem\CategoryVideoController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.category-video.uploadFile","uses"=>"adminsystem\CategoryVideoController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.category-video.createAlias","uses"=>"adminsystem\CategoryVideoController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"customer"],function(){		
@@ -115,7 +115,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.user.updateStatus","uses"=>"adminsystem\UserController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.user.changeStatus","uses"=>"adminsystem\UserController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.user.trash","uses"=>"adminsystem\UserController@trash"]);		
-		Route::post("upload-file",["as"=>"adminsystem.user.uploadFile","uses"=>"adminsystem\UserController@uploadFile"]);
+		
 	});
 	Route::group(["prefix"=>"category-article"],function(){		
 		Route::match(["get","post"],"list",["as"=>"adminsystem.category-article.getList","uses"=>"adminsystem\CategoryArticleController@getList"]);	
@@ -126,7 +126,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status/{status}",["as"=>"adminsystem.category-article.updateStatus","uses"=>"adminsystem\CategoryArticleController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.category-article.changeStatus","uses"=>"adminsystem\CategoryArticleController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.category-article.trash","uses"=>"adminsystem\CategoryArticleController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.category-article.uploadFile","uses"=>"adminsystem\CategoryArticleController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.category-article.createAlias","uses"=>"adminsystem\CategoryArticleController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"category-param"],function(){		
@@ -162,7 +162,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.video.updateStatus","uses"=>"adminsystem\VideoController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.video.changeStatus","uses"=>"adminsystem\VideoController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.video.trash","uses"=>"adminsystem\VideoController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.video.uploadFile","uses"=>"adminsystem\VideoController@uploadFile"]);		
+			
 	});	
 	Route::group(["prefix"=>"article"],function(){		
 		Route::get("list",["as"=>"adminsystem.article.getList","uses"=>"adminsystem\ArticleController@getList"]);
@@ -174,7 +174,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.article.updateStatus","uses"=>"adminsystem\ArticleController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.article.changeStatus","uses"=>"adminsystem\ArticleController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.article.trash","uses"=>"adminsystem\ArticleController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.article.uploadFile","uses"=>"adminsystem\ArticleController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.article.createAlias","uses"=>"adminsystem\ArticleController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"photo"],function(){		
@@ -198,7 +198,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.organization.updateStatus","uses"=>"adminsystem\OrganizationController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.organization.changeStatus","uses"=>"adminsystem\OrganizationController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.organization.trash","uses"=>"adminsystem\OrganizationController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.organization.uploadFile","uses"=>"adminsystem\OrganizationController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.organization.createAlias","uses"=>"adminsystem\OrganizationController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"province"],function(){		
@@ -236,7 +236,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.project-article.updateStatus","uses"=>"adminsystem\ProjectArticleController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.project-article.changeStatus","uses"=>"adminsystem\ProjectArticleController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.project-article.trash","uses"=>"adminsystem\ProjectArticleController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.project-article.uploadFile","uses"=>"adminsystem\ProjectArticleController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.project-article.createAlias","uses"=>"adminsystem\ProjectArticleController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"project"],function(){		
@@ -249,7 +249,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.project.updateStatus","uses"=>"adminsystem\ProjectController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.project.changeStatus","uses"=>"adminsystem\ProjectController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.project.trash","uses"=>"adminsystem\ProjectController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.project.uploadFile","uses"=>"adminsystem\ProjectController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.project.createAlias","uses"=>"adminsystem\ProjectController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"album"],function(){		
@@ -262,7 +262,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.album.updateStatus","uses"=>"adminsystem\AlbumController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.album.changeStatus","uses"=>"adminsystem\AlbumController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.album.trash","uses"=>"adminsystem\AlbumController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.album.uploadFile","uses"=>"adminsystem\AlbumController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.album.createAlias","uses"=>"adminsystem\AlbumController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"supporter"],function(){		
@@ -286,7 +286,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status",["as"=>"adminsystem.page.updateStatus","uses"=>"adminsystem\PageController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.page.changeStatus","uses"=>"adminsystem\PageController@changeStatus"]);
 		Route::post("trash",["as"=>"adminsystem.page.trash","uses"=>"adminsystem\PageController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.page.uploadFile","uses"=>"adminsystem\PageController@uploadFile"]);
+		
 		Route::post("create-alias",["as"=>"adminsystem.page.createAlias","uses"=>"adminsystem\PageController@createAlias"]);
 	});	
 	Route::group(["prefix"=>"menu"],function(){		
@@ -298,7 +298,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("update-status/{status}/{menu_type_id}",["as"=>"adminsystem.menu.updateStatus","uses"=>"adminsystem\MenuController@updateStatus"]);
 		Route::post("change-status",["as"=>"adminsystem.menu.changeStatus","uses"=>"adminsystem\MenuController@changeStatus"]);
 		Route::post("trash/{menu_type_id}",["as"=>"adminsystem.menu.trash","uses"=>"adminsystem\MenuController@trash"]);
-		Route::post("upload-file",["as"=>"adminsystem.menu.uploadFile","uses"=>"adminsystem\MenuController@uploadFile"]);
+		
 		Route::get("component/{menu_type_id}",["as"=>"adminsystem.menu.getComponentForm","uses"=>"adminsystem\MenuController@getComponentForm"]);
 		Route::get("category-article-component/{menu_type_id}",["as"=>"adminsystem.menu.getCategoryArticleComponent","uses"=>"adminsystem\MenuController@getCategoryArticleComponent"]);
 		Route::get("category-product-component/{menu_type_id}",["as"=>"adminsystem.menu.getCategoryProductComponent","uses"=>"adminsystem\MenuController@getCategoryProductComponent"]);
@@ -354,7 +354,7 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("save",["as"=>"adminsystem.media.save","uses"=>"adminsystem\MediaController@save"]);
 		Route::post("delete-item",["as"=>"adminsystem.media.deleteItem","uses"=>"adminsystem\MediaController@deleteItem"]);				
 		Route::post("trash",["as"=>"adminsystem.media.trash","uses"=>"adminsystem\MediaController@trash"]);		
-		Route::post("upload-file",["as"=>"adminsystem.media.uploadFile","uses"=>"adminsystem\MediaController@uploadFile"]);	
+		
 	});		
 	Route::group(["prefix"=>"group-member"],function(){		
 		Route::get("list",["as"=>"adminsystem.group-member.getList","uses"=>"adminsystem\GroupMemberController@getList"]);

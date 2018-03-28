@@ -4,7 +4,7 @@
 $setting= getSettingSystem();
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
+
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"     onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
  
@@ -138,17 +138,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         $(status).closest('.form-group').find('span').empty().hide();        
     }
 
-    function uploadFileImport(){    
-        var token = $('input[name="_token"]').val();       
-        var image=$('input[name="image"]'); 
-        var file_upload=$(image).get(0);
-        var files = file_upload.files;
-        var file  = files[0];    
-        var frmdata = new FormData();        
-        frmdata.append("image", file);
-        frmdata.append("_token", token);
-        $.ajax({ url: '<?php echo $linkUploadFile; ?>', method: 'post', data: frmdata, contentType: false, processData: false })
-    }
+    
     function deleteImage(){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";
@@ -203,7 +193,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             async: false,
             success: function (data) {
                 if(data.checked==1){
-                    uploadFileImport();
+                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

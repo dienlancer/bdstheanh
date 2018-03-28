@@ -376,12 +376,7 @@ class ProductController extends Controller {
             );
             return $info;
       }
-      public function uploadFile(Request $request){ 
-      $setting= getSettingSystem();
-      $product_width=$setting['product_width']['field_value'];
-    $product_height=$setting['product_height']['field_value'];
-      uploadImage($_FILES["image"],$product_width,$product_height);
-    }
+      
     public function createAlias(Request $request){
           $id                =  trim($request->id)  ; 
           $fullname                =  trim($request->fullname)  ;        

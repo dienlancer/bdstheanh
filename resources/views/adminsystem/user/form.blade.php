@@ -3,7 +3,7 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
+
 $str_disabled           =   "";
 if($task == "edit"){
     $str_disabled       =   "disabled";

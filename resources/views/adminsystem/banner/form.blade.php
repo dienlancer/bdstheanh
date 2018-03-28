@@ -4,7 +4,7 @@
 $setting= getSettingSystem();
 $linkCancel             =   route('adminsystem.'.$controller.'.getList',[@$category_id]);
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$linkUploadFile         =   route('adminsystem.'.$controller.'.uploadFile');
+
 
 $inputCaption           =   '<textarea name="caption" rows="2" cols="100" class="form-control" >'.@$arrRowData['caption'].'</textarea>'; 
 $inputAlt               =   '<textarea name="alt" rows="2" cols="100" class="form-control" >'.@$arrRowData['alt'].'</textarea>'; 

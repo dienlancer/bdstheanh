@@ -361,14 +361,6 @@ class UserController extends Controller {
             );
             return $info;
       }     
-      public function uploadFile(Request $request){                     
-        $fileObj=$_FILES["image"];          
-        $fileName="";
-        if($fileObj['tmp_name'] != null){                
-          $fileName   = $fileObj['name'];
-          $file_path=base_path("upload".DS.$fileName);
-          @copy($fileObj['tmp_name'],$file_path);                   
-        }   
-      }
+    
 }
 ?>
