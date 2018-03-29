@@ -1,30 +1,18 @@
-<?php 
-use App\ProjectModel;
-use App\ProjectArticleModel;
-use App\ProjectMemberModel;
-use App\ProvinceModel;
-use App\DistrictModel;
-?>
 <form method="post" class="frm margin-top-15" name="frm">
 	<input type="hidden" name="filter_page" value="1">         
 	{{ csrf_field() }}	
-	<?php 		
-	if(empty($breadcrumb)){
-		?>
-		<div class="tieu-de">
-			<?php echo $title; ?>		
-		</div>
-		<?php
-	}else{
-		?>
-		<div class="breadcrumb-title">
-			<?php echo $breadcrumb; ?>
-		</div>
-		<?php
-	}	
+	<?php 			
+	$seo=getSeo();
+	$seo_title=$seo["title"];
+	$seo_meta_keyword=$seo["meta_keyword"];
+	$seo_meta_description=$seo["meta_description"];	
+	$breadcrumb='<a href="'.url('/').'">Trang chủ</a><a href="javascript:void(0);">Dự án</a>';	
 	?>
-	<h1 style="display: none;"><?php echo @$title; ?></h1>
-	<h2 style="display: none;"><?php echo @$meta_description; ?></h2>
+	<h1 style="display: none;"><?php echo $seo_title; ?></h1>
+	<h2 style="display: none;"><?php echo $seo_meta_description; ?></h2>
+	<div class="breadcrumb-title">
+		<?php echo $breadcrumb; ?>
+	</div>	
 	<div>
 		<?php 			
 		if(count($items) > 0){
@@ -38,8 +26,8 @@ use App\DistrictModel;
 				$intro=substr($value['intro'],0,200).'...' ;
 				$count_view=(int)@$value['count_view'];
 				$count_view_text=number_format($count_view,0,",",".");		
-				$province=ProvinceModel::find((int)@$value['province_id'])->toArray();	
-				$district=DistrictModel::find((int)@$value['district_id'])->toArray();	
+				$province=App\ProvinceModel::find((int)@$value['province_id'])->toArray();	
+				$district=App\DistrictModel::find((int)@$value['district_id'])->toArray();	
 				$province_name=$province['fullname'];
 				$district_name=$district['fullname'];
 				$province_permalink=route('frontend.index.filterProjectByProvince',[$province['alias']]);
