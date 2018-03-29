@@ -47,8 +47,7 @@ if(isset($alias)){
                 case 'articles':
                 case 'category-article':
                 case 'article':
-                case 'page':
-                case 'search-project':       
+                case 'page':               
                 case 'projects':   
                 case 'project':      
                 case 'project-article':      
@@ -138,7 +137,7 @@ if(isset($alias)){
                 ?>@include("frontend.project-article")<?php
                 break;
                 case "projects":    
-                case "search-project":                                            
+                                                            
                 ?>@include("frontend.projects")<?php
                 break;
                 case "project":                                                

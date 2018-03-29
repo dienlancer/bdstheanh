@@ -158,7 +158,7 @@ class IndexController extends Controller {
     $setting=getSettingSystem();
     /* end standard */     
     $items=array();                            
-    $component='search-project';                 
+    $component='projects';                 
     $query=DB::table('project')    
     ->where('project.status',1);
     if(isset($request->q)){
