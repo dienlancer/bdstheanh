@@ -44,7 +44,7 @@ class DistrictController extends Controller {
                 ->select('district.id','district.fullname','province.fullname as province_name','district.sort_order','district.status','district.created_at','district.updated_at')                
                 ->where('district.fullname','like','%'.trim(mb_strtolower($filter_search,'UTF-8')).'%')                     
                 ->groupBy('district.id','district.fullname','province.fullname','district.sort_order','district.status','district.created_at','district.updated_at')   
-                ->orderBy('district.sort_order', 'asc')                
+                ->orderBy('district.fullname', 'asc')                
                 ->get()->toArray();              
         $data=convertToArray($data);    
         $data=districtConverter($data,$this->_controller);            

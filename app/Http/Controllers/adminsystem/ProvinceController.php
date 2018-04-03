@@ -42,7 +42,7 @@ class ProvinceController extends Controller {
                 ->select('province.id','province.fullname','province.sort_order','province.status','province.created_at','province.updated_at')                
                 ->where('province.fullname','like','%'.trim(mb_strtolower($filter_search,'UTF-8')).'%')                     
                 ->groupBy('province.id','province.fullname','province.sort_order','province.status','province.created_at','province.updated_at')   
-                ->orderBy('province.sort_order', 'asc')                
+                ->orderBy('province.fullname', 'asc')                
                 ->get()->toArray();              
         $data=convertToArray($data);    
         $data=provinceConverter($data,$this->_controller);            
