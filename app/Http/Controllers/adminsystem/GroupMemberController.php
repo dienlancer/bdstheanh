@@ -6,7 +6,7 @@ use App\GroupMemberModel;
 use App\GroupPrivilegeModel;
 use App\PrivilegeModel;
 use App\User;
-use App\UserGroupModel;
+use App\UserGroupMemberModel;
 use DB;
 class GroupMemberController extends Controller {
     	var $_controller="group-member";	
@@ -156,37 +156,26 @@ class GroupMemberController extends Controller {
       }        		 			       
       return $info;       
     }        
-      public function deleteItem(Request $request){
-            $id                     =   (int)$request->id;              
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                        
-            $data                   =   User::whereRaw("group_member_id = ?",[(int)@$id])->get()->toArray();    
-            if(count($data) > 0){
-                $checked     =   0;
-                $type_msg           =   "alert-warning";            
-                $msg                =   "Không thể xóa";            
-            }     
-            $data=User::whereRaw("group_member_id = ?",[(int)@$id])->select('id')->get()->toArray();
-            if(count($data) > 0){
-              $checked                =   0;
-              $type_msg               =   "alert-warning";            
-              $msg                    =   "Phần tử có dữ liệu con. Vui lòng không xoá";
-            }          
-            if($checked == 1){
-                $item = GroupMemberModel::find((int)@$id);
-                $item->delete();
-                GroupPrivilegeModel::whereRaw("group_member_id = ?",[(int)@$id])->delete();
-            }        
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
-      }
+    public function deleteItem(Request $request){
+      $id                     =   (int)$request->id;              
+      $checked                =   1;
+      $type_msg               =   "alert-success";
+      $msg                    =   "Xóa thành công";                                         
+      if($checked == 1){
+        $item = GroupMemberModel::find((int)@$id);
+        $item->delete();
+        GroupPrivilegeModel::whereRaw("group_member_id = ?",[(int)@$id])->delete();
+        UserGroupMemberModel::whereRaw('group_member_id = ?',[(int)@$id])->delete();
+      }        
+      $data                   =   $this->loadData($request);
+      $info = array(
+        'checked'           => $checked,
+        'type_msg'          => $type_msg,                
+        'msg'               => $msg,                
+        'data'              => $data
+      );
+      return $info;
+    }
    
       public function trash(Request $request){
             $strID                 =   $request->str_id;               
@@ -199,27 +188,12 @@ class GroupMemberController extends Controller {
               $checked     =   0;
               $type_msg           =   "alert-warning";            
               $msg                =   "Vui lòng chọn ít nhất 1 phần tử";
-            }else{
-              foreach ($arrID as $key => $value) {
-                if(!empty($value)){
-                  $data                   =   User::whereRaw("group_member_id = ?",[(int)@$value])->get()->toArray();                         
-                  if(count($data) > 0){
-                    $checked     =   0;
-                    $type_msg           =   "alert-warning";            
-                    $msg                =   "Không thể xóa";
-                  }                  
-                }                
-              }
             }
-            $data=DB::table('users')->whereIn('group_member_id',@$arrID)->select('id')->get()->toArray();             
-            if(count($data) > 0){
-              $checked                =   0;
-              $type_msg               =   "alert-warning";            
-              $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
-            }   
+            
             if($checked == 1){                              
               DB::table('group_member')->whereIn('id',@$arrID)->delete();   
-              DB::table('group_privilege')->whereIn('group_member_id',@$arrID)->delete();   
+              DB::table('group_privilege')->whereIn('group_member_id',@$arrID)->delete();  
+              DB::table('user_group_member')->whereIn('group_member_id',@$arrID)->delete();   
             }
             $data                   =   $this->loadData($request);
             $info = array(
