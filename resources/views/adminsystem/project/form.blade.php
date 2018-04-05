@@ -17,9 +17,9 @@ $inputGoogleMapUrl      =   '<textarea      name="googlemap_url" rows="2" cols="
 $inputMetakeyword       =   '<textarea      name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription   =   '<textarea      name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
 $inputTotalCost         =   '<input type="text" class="form-control" name="total_cost"       value="'.@$arrRowData['total_cost'].'">';
-$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"");
-$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"");
-$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrPostParam,"");
+$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,@$arrRowData['province_id'],"",'Chọn danh mục');
+$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,@$arrRowData['district_id'],"",'Chọn danh mục');
+$ddlCategoryParam        =cmsSelectboxCategoryParamMultiple("category_param_id[]", 'form-control', @$arrCategoryParamRecursive, @$arrPostParam,"",'Chọn danh mục');
 $inputStreet            =   '<input type="text" class="form-control" name="street"      value="'.@$arrRowData['street'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;

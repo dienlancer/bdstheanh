@@ -2,7 +2,7 @@
 @section("content")
 <?php 
 $linkGetArticleList		=	route('adminsystem.'.$controller.'.getArticleList');
-$ddlCategoryArticle     =   cmsSelectboxCategory('category_id', 'form-control', $arrCategoryArticleRecursive, 0,"");
+$ddlCategoryArticle     =   cmsSelectboxCategory('category_id', 'form-control', $arrCategoryArticleRecursive, 0,"",'Chọn danh mục');
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
 $inputMenuTypeId 		=	'<input type="hidden" class="form-control" id="menu_type_id" name="menu_type_id"          value="'.@$menu_type_id.'">';
 ?>

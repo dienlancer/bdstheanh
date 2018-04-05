@@ -31,7 +31,7 @@ class PrivilegeController extends Controller {
         }
         $data=$query->select('privilege.id','privilege.fullname','privilege.controller','privilege.action','privilege.sort_order','privilege.created_at','privilege.updated_at')
         ->groupBy('privilege.id','privilege.fullname','privilege.controller','privilege.action','privilege.sort_order','privilege.created_at','privilege.updated_at')
-        ->orderBy('privilege.sort_order', 'asc')->get()->toArray()     ;              
+        ->orderBy('privilege.fullname', 'asc')->get()->toArray()     ;          
         $data=convertToArray($data);    
         $data=privilegeConverter($data,$this->_controller);            
         return $data;

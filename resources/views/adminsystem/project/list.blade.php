@@ -11,8 +11,8 @@ $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 $linkFilterDistrictByProvince        =   route('adminsystem.district.filterDistrictByProvince');
 $inputFilterSearch 		=	'<input type="text" class="form-control" name="filter_search"          value="">';
-$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,0,"");
-$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,0,"");
+$ddlProvince            =   cmsSelectboxCategory("province_id","form-control",$arrProvince,0,"",'Chọn danh mục');
+$ddlDistrict            =   cmsSelectboxCategory("district_id","form-control",$arrDistrict,0,"",'Chọn danh mục');
 ?>
 <form class="form-horizontal" role="form" name="frm">	
 	{{ csrf_field() }}

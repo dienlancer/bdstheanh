@@ -19,7 +19,7 @@ $inputSortOrder         =   '<input type="text" class="form-control" name="sort_
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
-$ddlCategoryArticle        =cmsSelectboxCategoryArticleMultiple("category_id[]", 'form-control', @$arrCategoryArticleRecursive, @$arrArticleCategory,"");
+$ddlCategoryArticle        =cmsSelectboxCategoryArticleMultiple("category_id[]", 'form-control', @$arrCategoryArticleRecursive, @$arrArticleCategory,"",'Chọn danh mục');
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 $inputAliasMenu       =   '<input type="hidden" name="alias_menu" value="'.@$arrRowData['alias'].'" />'; 

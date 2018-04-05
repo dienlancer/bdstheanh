@@ -26,8 +26,8 @@ $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
 $parent_id              =   (count($arrRowData) > 0) ? @$arrRowData['parent_id'] : null ; 
-$ddlMenu                =   cmsSelectboxCategory('parent_id', 'form-control',$arrMenuRecursive,@$arrRowData['parent_id'],"");
-$ddlMenuType            =   cmsSelectboxCategory('menu_type_id', 'form-control',$arrMenuType,@$menu_type_id,"disabled");
+$ddlMenu                =   cmsSelectboxCategory('parent_id', 'form-control',$arrMenuRecursive,@$arrRowData['parent_id'],"",'Chọn danh mục');
+$ddlMenuType            =   cmsSelectboxCategory('menu_type_id', 'form-control',$arrMenuType,@$menu_type_id,"disabled",'Chọn danh mục');
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
 ?>

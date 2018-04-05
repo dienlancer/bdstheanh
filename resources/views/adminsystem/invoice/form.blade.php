@@ -16,7 +16,7 @@ $inputPhone             =   '<input type="text" class="form-control" name="phone
 $lblQuantity            =   number_format((int)@$arrRowData['quantity'],0,".",",");
 $lblTotalPrice          =   number_format((int)@$arrRowData['total_price'],0,".",",");
 
-$ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled');
+$ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled','Chọn danh mục');
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");

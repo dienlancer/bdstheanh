@@ -9,7 +9,7 @@ $linkDelete			=	route('adminsystem.'.$controller.'.deleteItem');
 $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
-$ddlProject     	=   cmsSelectboxCategory('project_id', 'form-control', $arrProject, 0,"");
+$ddlProject     	=   cmsSelectboxCategory('project_id', 'form-control', $arrProject, 0,"",'Chọn danh mục');
 $inputFilterSearch 	=	'<input type="text" class="form-control" name="filter_search"          value="">';
 ?>
 <form class="form-horizontal" role="form" name="frm">	

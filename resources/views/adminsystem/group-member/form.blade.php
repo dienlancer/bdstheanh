@@ -7,7 +7,7 @@ $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"    onblur="createAlias();"    value="'.@$arrRowData['fullname'].'">'; 
 $inputAlias             =   '<input type="text" class="form-control" name="alias"     disabled     value="'.@$arrRowData['alias'].'">';
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"     value="'.@$arrRowData['sort_order'].'">';
-$ddlGroupPrivilege      =   cmsSelectboxGroupPrivilegeMultiple("privilege_id[]", 'form-control', @$arrPrivilege, @$arrGroupPrivilege,"");
+$ddlGroupPrivilege      =   cmsSelectboxGroupPrivilegeMultiple("privilege_id[]", 'form-control', @$arrPrivilege, @$arrGroupPrivilege,"",'Chọn danh mục');
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 ?>

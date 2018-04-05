@@ -6,7 +6,7 @@ $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"    value="'.@$arrRowData['fullname'].'">'; 
 $inputNumberMoney          =   '<input type="text" class="form-control" name="number_money" onkeyup="PhanCachSoTien(this);"     value="'.convertToTextPrice(@$arrRowData['number_money']).'">'; 
-$ddlPaymentMethod      =   cmsSelectboxCategory("payment_method_id","form-control",@$arrPaymentMethod,@$arrRowData['payment_method_id'],"");
+$ddlPaymentMethod      =   cmsSelectboxCategory("payment_method_id","form-control",@$arrPaymentMethod,@$arrRowData['payment_method_id'],"",'Chọn danh mục');
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"    value="'.@$arrRowData['sort_order'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  

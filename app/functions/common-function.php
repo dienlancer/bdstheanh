@@ -16,7 +16,7 @@ function uploadImage($name,$tmp_name,$width,$height){
   $pattern_dot='#\.#';
   $image_slug=preg_replace($pattern_ext, '', $image_slug);                      
   $image_slug=preg_replace($pattern_dot, '-', $image_slug);   
-  $code_alias=rand(1,9999);                 
+  $code_alias=rand(1,999999999);    
   $image_name=$image_slug. '-' . $code_alias .'.'.$ext;   
   $image_path=base_path("upload".DS.$image_name);
   @copy($image_tmp_name, $image_path);  

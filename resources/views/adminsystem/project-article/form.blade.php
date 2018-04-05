@@ -19,7 +19,7 @@ $inputSortOrder         =   '<input type="text" class="form-control" name="sort_
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
-$ddlProjectArticle      =   cmsSelectboxCategory("project_id","form-control",$arrProject,@$arrRowData['project_id'],"");
+$ddlProjectArticle      =   cmsSelectboxCategory("project_id","form-control",$arrProject,@$arrRowData['project_id'],"",'Chọn danh mục');
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" />'; 
 $picture                =   "";

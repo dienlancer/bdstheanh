@@ -3,7 +3,7 @@
 <?php 
 $linkCancel             =   route('adminsystem.'.$controller.'.getList');
 $linkSave               =   route('adminsystem.'.$controller.'.save');
-$ddlAlbum               =   cmsSelectboxCategory("album_id","form-control",$arrAlbum,@$arrRowData['album_id'],"");
+$ddlAlbum               =   cmsSelectboxCategory("album_id","form-control",$arrAlbum,@$arrRowData['album_id'],"",'Chọn danh mục');
 ?>
 <form class="form-horizontal" method="post" action="{!! $linkSave !!}" role="form" enctype="multipart/form-data">
     {{ csrf_field() }}           
