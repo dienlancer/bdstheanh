@@ -357,7 +357,7 @@ class PageController extends Controller {
             $checked_trung_alias=1;
           }   
         if((int)$checked_trung_alias == 1){
-          $code_alias=rand(1,999);
+          $code_alias=rand(1,999999);
           $alias=$alias.'-'.$code_alias;
         }
       }
