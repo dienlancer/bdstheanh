@@ -73,7 +73,7 @@ class MenuController extends Controller {
           return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon",'data','pagination','filter_search','menu_type_id'));  
         }
         else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }
       } 	
       public function getForm($task,$menu_type_id="",$id="",$alias){   
@@ -123,7 +123,7 @@ class MenuController extends Controller {
 
         return view("adminsystem.".$this->_controller.".form",compact("arrMenuRecursive","arrMenuType","arrRowData","menu_type_id","controller","task","title","icon","alias","fullname"));      
       }else{
-        return view("adminsystem.no-access");
+        return view("adminsystem.no-access",compact('controller'));
       }               
     }
       public function save(Request $request){
@@ -233,7 +233,7 @@ class MenuController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList",[(int)@$menu_type_id])->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }               
       }
       public function updateStatus(Request $request,$status,$menu_type_id){        
@@ -258,7 +258,7 @@ class MenuController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList",[(int)@$menu_type_id])->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function trash(Request $request,$menu_type_id){        
@@ -292,7 +292,7 @@ class MenuController extends Controller {
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList",[(int)@$menu_type_id])->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         } else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }                           
       }
       public function sortOrder(Request $request,$menu_type_id=0){
@@ -318,7 +318,7 @@ class MenuController extends Controller {
           }    
           return redirect()->route("adminsystem.".$this->_controller.".getList",[(int)@$menu_type_id])->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function getComponentForm($menu_type_id = 0){  

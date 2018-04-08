@@ -73,7 +73,7 @@ class CategoryParamController extends Controller {
 			return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon",'data','pagination','filter_search'));
 		}
 		else{
-			return view("adminsystem.no-access");
+			return view("adminsystem.no-access",compact('controller'));
 		}
 	}	    	
       public function getForm($task,$id=""){		 
@@ -101,7 +101,7 @@ class CategoryParamController extends Controller {
       		categoryRecursiveForm($arrCategory ,0,"",$arrCategoryRecursive)  ;      
       		return view("adminsystem.".$this->_controller.".form",compact("arrCategoryRecursive","arrRowData","controller","task","title","icon")); 
       	} else{
-      		return view("adminsystem.no-access");
+      		return view("adminsystem.no-access",compact('controller'));
       	}                           
       }
     public function save(Request $request){
@@ -224,7 +224,7 @@ class CategoryParamController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }                               
       }
       public function updateStatus(Request $request,$status){        
@@ -249,7 +249,7 @@ class CategoryParamController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function trash(Request $request){            
@@ -288,7 +288,7 @@ class CategoryParamController extends Controller {
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function sortOrder(Request $request){
@@ -314,7 +314,7 @@ class CategoryParamController extends Controller {
           }    
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       

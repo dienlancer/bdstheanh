@@ -71,7 +71,7 @@ class CategoryArticleController extends Controller {
           return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon",'data','pagination','filter_search'));
         }
         else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }
       }	
     	
@@ -97,7 +97,7 @@ class CategoryArticleController extends Controller {
          categoryRecursiveForm($arrCategoryArticle ,0,"",$arrCategoryArticleRecursive)  ;      
          return view("adminsystem.".$this->_controller.".form",compact("arrCategoryArticleRecursive","arrRowData","controller","task","title","icon")); 
         } else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }                           
      }
     public function save(Request $request){
@@ -251,7 +251,7 @@ class CategoryArticleController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }                               
       }
       public function updateStatus(Request $request,$status){        
@@ -276,7 +276,7 @@ class CategoryArticleController extends Controller {
           }        
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function trash(Request $request){            
@@ -315,7 +315,7 @@ class CategoryArticleController extends Controller {
           }
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       public function sortOrder(Request $request){
@@ -341,7 +341,7 @@ class CategoryArticleController extends Controller {
           }    
           return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
       }
       

@@ -29,7 +29,7 @@ class ProductController extends Controller {
           return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon","arrCategoryProductRecursive")); 
         }
         else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }
   	}	
   	public function loadData(Request $request){      
@@ -75,7 +75,7 @@ class ProductController extends Controller {
         categoryRecursiveForm($arrCategoryProduct ,0,"",$arrCategoryProductRecursive)   ;      
         return view("adminsystem.".$this->_controller.".form",compact("arrCategoryProductRecursive","arrRowData","arrProductCategory","controller","task","title","icon"));
         }else{
-            return view("adminsystem.no-access");
+            return view("adminsystem.no-access",compact('controller'));
         }
         
     }

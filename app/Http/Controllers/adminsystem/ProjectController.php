@@ -33,7 +33,7 @@ class ProjectController extends Controller {
           return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon","arrProvince","arrDistrict")); 
         }
         else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }
   	}	    
   	public function loadData(Request $request){    		   
@@ -82,7 +82,7 @@ class ProjectController extends Controller {
         categoryRecursiveForm($arrCategoryParam ,0,"",$arrCategoryParamRecursive)   ;                   
         return view("adminsystem.".$this->_controller.".form",compact("arrRowData","arrProvince","arrDistrict","controller","task","title","icon","arrCategoryParamRecursive","arrPostParam"));
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
     }
               public function save(Request $request){

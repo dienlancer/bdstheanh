@@ -30,7 +30,7 @@ class PhotoController extends Controller {
           return view("adminsystem.".$this->_controller.".list",compact("controller","task","title","icon","arrAlbum")); 
         }
         else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }
   	}	    
   	public function loadData(Request $request){                 
@@ -66,7 +66,7 @@ class PhotoController extends Controller {
         $arrAlbum=AlbumModel::select("id","fullname")->orderBy("sort_order","asc")->get()->toArray();  
         return view("adminsystem.".$this->_controller.".form",compact("arrRowData","controller","task","title","icon","arrAlbum"));
         }else{
-          return view("adminsystem.no-access");
+          return view("adminsystem.no-access",compact('controller'));
         }        
     }
     public function save(Request $request){      
