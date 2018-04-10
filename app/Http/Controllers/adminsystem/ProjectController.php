@@ -120,7 +120,7 @@ public function save(Request $request){
   $height=$setting['article_height']['field_value'];           
   if(empty($fullname)){
    $checked = 0;                 
-   $error["fullname"] = "Thiếu tên bài viết";
+   $msg["fullname"] = "Thiếu tên bài viết";
  }else{
   $data=array();
   if (empty($id)) {
@@ -131,33 +131,33 @@ public function save(Request $request){
   if (count($data) > 0) {
     $checked = 0;
 
-    $error["fullname"] = "Bài viết đã tồn tại";
+    $msg["fullname"] = "Bài viết đã tồn tại";
   }      	
 }      
 if((int)@$province_id == 0){
   $checked = 0;
 
-  $error["province_id"]    = "Vui lòng chọn tỉnh thành phố";
+  $msg["province_id"]    = "Vui lòng chọn tỉnh thành phố";
 }
 if((int)@$district_id == 0){
   $checked = 0;
 
-  $error["district_id"]    = "Vui lòng chọn quận huyện";
+  $msg["district_id"]    = "Vui lòng chọn quận huyện";
 }            
 if(empty($category_param_id)){
   $checked = 0;
 
-  $error["category_param_id"]      = "Thiếu đơn vị tính";
+  $msg["category_param_id"]      = "Thiếu đơn vị tính";
 }                        
 if(empty($sort_order)){
  $checked = 0;
 
- $error["sort_order"] 		= "Thiếu sắp xếp";
+ $msg["sort_order"] 		= "Thiếu sắp xếp";
 }
 if((int)$status==-1){
  $checked = 0;
 
- $error["status"] 			= "Thiếu trạng thái";
+ $msg["status"] 			= "Thiếu trạng thái";
 }
 if ($checked == 1) { 
   $image_name='';
@@ -376,7 +376,7 @@ public function createAlias(Request $request){
   $alias='';                     
   if(empty($fullname)){
    $checked = 0;           
-   $error["fullname"] = "Thiếu tên bài viết";
+   $msg["fullname"] = "Thiếu tên bài viết";
  }else{
   $alias=str_slug($fullname,'-');
   $dataCategoryArticle=array();

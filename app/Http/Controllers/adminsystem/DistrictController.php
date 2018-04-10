@@ -89,17 +89,17 @@ class DistrictController extends Controller {
         if(empty($fullname)){
          $checked = 0;
 
-         $error["fullname"] = "Thiếu tên";
+         $msg["fullname"] = "Thiếu tên";
        }                      
        if(empty($sort_order)){
          $checked = 0;
 
-         $error["sort_order"] 		= "Thiếu sắp xếp";
+         $msg["sort_order"] 		= "Thiếu sắp xếp";
        }
        if((int)$status==-1){
          $checked = 0;
 
-         $error["status"] 			= "Thiếu trạng thái";
+         $msg["status"] 			= "Thiếu trạng thái";
        }
        if ($checked == 1) {    
         if(empty($id)){
@@ -267,7 +267,7 @@ class DistrictController extends Controller {
         $alias='';                     
         if(empty($fullname)){
          $checked = 0;        
-         $error["fullname"] = "Thiếu tên bài viết";
+         $msg["fullname"] = "Thiếu tên bài viết";
        }else{          
         $alias=str_slug($fullname,'-');
         $dataCategoryArticle=array();

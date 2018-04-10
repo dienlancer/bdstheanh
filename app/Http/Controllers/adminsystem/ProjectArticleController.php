@@ -101,7 +101,7 @@ class ProjectArticleController extends Controller {
               $height=$setting['article_height']['field_value'];                     
               if(empty($fullname)){
                $checked = 0;               
-               $error["fullname"] = "Thiếu tên bài viết";
+               $msg["fullname"] = "Thiếu tên bài viết";
              }else{
               $data=array();
               if (empty($id)) {
@@ -112,24 +112,24 @@ class ProjectArticleController extends Controller {
               if (count($data) > 0) {
                 $checked = 0;
                 
-                $error["fullname"] = "Bài viết đã tồn tại";
+                $msg["fullname"] = "Bài viết đã tồn tại";
               }      	
             }          
 
             if((int)@$project_id == 0){
               $checked = 0;
               
-              $error["project_id"]      = "Thiếu danh mục";
+              $msg["project_id"]      = "Thiếu danh mục";
             }          
             if(empty($sort_order)){
              $checked = 0;
              
-             $error["sort_order"] 		= "Thiếu sắp xếp";
+             $msg["sort_order"] 		= "Thiếu sắp xếp";
            }
            if((int)$status==-1){
              $checked = 0;
              
-             $error["status"] 			= "Thiếu trạng thái";
+             $msg["status"] 			= "Thiếu trạng thái";
            }
            if ($checked == 1) { 
             $image_name='';
@@ -305,7 +305,7 @@ class ProjectArticleController extends Controller {
           if(empty($fullname)){
            $checked = 0;
            
-           $error["fullname"] = "Thiếu tên bài viết";
+           $msg["fullname"] = "Thiếu tên bài viết";
          }else{
           $alias=str_slug($fullname,'-');
           $dataCategoryArticle=array();
