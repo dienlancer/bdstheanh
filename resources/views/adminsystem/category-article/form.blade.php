@@ -32,6 +32,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
+        <div class="note"  style="display: none;"></div>
         <div class="caption">
             <i class="{{$icon}}"></i>
             <span class="caption-subject font-dark sbold uppercase">{{$title}}</span>
@@ -131,27 +132,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
     </div>
 </div>
 <script type="text/javascript" language="javascript">
-    function resetErrorStatus(){
-        var id                   =   $('input[name="id"]');
-        var fullname             =   $('input[name="fullname"]');
-        var alias                =   $('input[name="alias"]');
-        var category_id  =   $('input[name="category_id"]');
-        var sort_order           =   $('input[name="sort_order"]');
-        var status               =   $('select[name="status"]');
-        
-        $(fullname).closest('.form-group').removeClass("has-error");
-        $(alias).closest('.form-group').removeClass("has-error");
-        $(category_id).closest('.form-group').removeClass("has-error");
-        $(sort_order).closest('.form-group').removeClass("has-error");
-        $(status).closest('.form-group').removeClass("has-error");        
-
-        $(fullname).closest('.form-group').find('span').empty().hide();
-        $(alias).closest('.form-group').find('span').empty().hide();
-        $(category_id).closest('.form-group').find('span').empty().hide();
-        $(sort_order).closest('.form-group').find('span').empty().hide();
-        $(status).closest('.form-group').find('span').empty().hide();        
-    }
-
+    
     function deleteImage(){
         var xac_nhan = 0;
         var msg="Bạn có muốn xóa ?";
@@ -186,8 +167,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         var image_hidden=$('input[name="image_hidden"]').val(); 
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
-        var token = $('input[name="_token"]').val();   
-        resetErrorStatus();
+        var token = $('input[name="_token"]').val();           
         var dataItem = new FormData();
         dataItem.append('id',id);
         dataItem.append('fullname',fullname);
@@ -212,29 +192,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                 if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.alias                  != "undefined"){
-                        $('input[name="alias"]').closest('.form-group').addClass(data_error.alias.type_msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').text(data_error.alias.msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').show();                       
-                    }
-                    
-                    if(typeof data_error.sort_order               != "undefined"){
-                        $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.status               != "undefined"){
-                        $('select[name="status"]').closest('.form-group').addClass(data_error.status.type_msg);
-                        $('select[name="status"]').closest('.form-group').find('span').text(data_error.status.msg);
-                        $('select[name="status"]').closest('.form-group').find('span').show();
-
-                    }                    
+                    showMsg('note',data);              
                 }
                 spinner.hide();
             },
@@ -258,8 +216,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             "fullname":fullname,            
             "_token": token
         };   
-        $('input[name="alias"]').val(''); 
-        resetErrorStatus();    
+        $('input[name="alias"]').val('');   
         $.ajax({
             url: '<?php echo $linkCreateAlias; ?>',
             type: 'POST',
@@ -269,12 +226,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                 if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }                            
+                    showMsg('note',data);                                 
                 }
                 spinner.hide();
             },

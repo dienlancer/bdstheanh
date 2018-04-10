@@ -76,78 +76,80 @@ class CategoryArticleController extends Controller {
       }	
     	
       public function getForm($task,$id=""){		 
-          $controller=$this->_controller;			
-          $title="";
-          $icon=$this->_icon; 
-          $arrRowData=array();   
-          $arrPrivilege=getArrPrivilege();
+        $controller=$this->_controller;			
+        $title="";
+        $icon=$this->_icon; 
+        $arrRowData=array();   
+        $arrPrivilege=getArrPrivilege();
         $requestControllerAction=$this->_controller."-form";    
         if(in_array($requestControllerAction, $arrPrivilege)){
-            switch ($task) {
+          switch ($task) {
             case 'edit':
-                $title=$this->_title . " : Update";
-                $arrRowData=CategoryArticleModel::find((int)@$id)->toArray();      
+            $title=$this->_title . " : Update";
+            $arrRowData=CategoryArticleModel::find((int)@$id)->toArray();      
             break;
             case 'add':
-                $title=$this->_title . " : Add new";
+            $title=$this->_title . " : Add new";
             break;      
-         }             
-         $arrCategoryArticle=CategoryArticleModel::whereRaw("id != ?",[(int)@$id])->select("id","fullname","parent_id")->orderBy("sort_order","asc")->get()->toArray();
-         $arrCategoryArticleRecursive=array();      
-         categoryRecursiveForm($arrCategoryArticle ,0,"",$arrCategoryArticleRecursive)  ;      
-         return view("adminsystem.".$this->_controller.".form",compact("arrCategoryArticleRecursive","arrRowData","controller","task","title","icon")); 
+          }             
+          $arrCategoryArticle=CategoryArticleModel::whereRaw("id != ?",[(int)@$id])->select("id","fullname","parent_id")->orderBy("sort_order","asc")->get()->toArray();
+          $arrCategoryArticleRecursive=array();      
+          categoryRecursiveForm($arrCategoryArticle ,0,"",$arrCategoryArticleRecursive)  ;      
+          return view("adminsystem.".$this->_controller.".form",compact("arrCategoryArticleRecursive","arrRowData","controller","task","title","icon")); 
         } else{
           return view("adminsystem.no-access",compact('controller'));
         }                           
-     }
-    public function save(Request $request){
-        $id 					           =	trim($request->id)	;        
-        $fullname 				       =	trim($request->fullname)	;
-        $alias 					         = 	trim($request->alias);
-        $alias_menu              =  trim($request->alias_menu);        
-        $meta_keyword            =  trim($request->meta_keyword);
-        $meta_description        =  trim($request->meta_description);
-        $category_id	   =	trim($request->category_id);
-        $image_file           =   null;
-                if(isset($_FILES["image"])){
-                  $image_file         =   $_FILES["image"];
-                }
-        $image_hidden            =  trim($request->image_hidden);
-        $sort_order 			       =	trim($request->sort_order);
-        $status 				         =  trim($request->status);
-        $data 		               =  array();
-        $info 		               =  array();
-        $error 		               =  array();
-        $item		                 =  null;
-        $checked 	= 1;                      
-        if(empty($fullname)){
-           $checked = 0;
-           $error["fullname"]["type_msg"] = "has-error";
-           $error["fullname"]["msg"] = "Thiếu chủ đề bài viết";
-        }else{
+      }
+          public function save(Request $request){
+            $id 					           =	trim($request->id)	;        
+            $fullname 				       =	trim($request->fullname)	;
+            $alias 					         = 	trim($request->alias);
+            $alias_menu              =  trim($request->alias_menu);        
+            $meta_keyword            =  trim($request->meta_keyword);
+            $meta_description        =  trim($request->meta_description);
+            $category_id	   =	trim($request->category_id);
+            $image_file           =   null;
+            if(isset($_FILES["image"])){
+              $image_file         =   $_FILES["image"];
+            }
+            $image_hidden            =  trim($request->image_hidden);
+            $sort_order 			       =	trim($request->sort_order);
+            $status 				         =  trim($request->status);
+            $data 		               =  array();
+            
+
+            $item		                 =  null;
+            $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+            if(empty($fullname)){
+             $checked = 0;
+
+             $msg["fullname"] = "Thiếu tên menu";
+           }else{
             $data=array();
-             if (empty($id)) {
-                $data=CategoryArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
+            if (empty($id)) {
+              $data=CategoryArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
             }else{
               $data=CategoryArticleModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
             }  
             if (count($data) > 0) {
               $checked = 0;
-              $error["fullname"]["type_msg"] = "has-error";
-              $error["fullname"]["msg"] = "Chủ đề bài viết đã tồn tại";
+
+              $msg["fullname"] = "Chủ đề bài viết đã tồn tại";
             }      	
-        }        
-        if(empty($sort_order)){
-             $checked = 0;
-             $error["sort_order"]["type_msg"] 	= "has-error";
-             $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
-        }
-        if((int)$status==-1){
-             $checked = 0;
-             $error["status"]["type_msg"] 		= "has-error";
-             $error["status"]["msg"] 			= "Thiếu trạng thái";
-        }
-        if ($checked == 1) {
+          }        
+          if(empty($sort_order)){
+           $checked = 0;
+
+           $msg["sort_order"] 		= "Thiếu sắp xếp";
+         }
+         if((int)$status==-1){
+           $checked = 0;
+
+           $msg["status"] 			= "Thiếu trạng thái";
+         }
+         if ($checked == 1) {
           $image_name='';
           if($image_file != null){                     
             $width=0;
@@ -158,8 +160,8 @@ class CategoryArticleController extends Controller {
             $item 				= 	new CategoryArticleModel;       
             $item->created_at 	=	date("Y-m-d H:i:s",time());        
             if(!empty($image_name)){
-                  $item->image    =   trim($image_name) ;  
-                }
+              $item->image    =   trim($image_name) ;  
+            }
           } else{
             $item				=	CategoryArticleModel::find((int)@$id);   
             $item->image=null;                       
@@ -167,44 +169,35 @@ class CategoryArticleController extends Controller {
               $item->image =$image_hidden;          
             }
             if(!empty($image_name))  {
-                  $item->image=$image_name;                                                
-                }                   
+              $item->image=$image_name;                                                
+            }                   
           }  
-        $item->fullname 		=	$fullname;
-        $item->alias 			  =	$alias;        
-        $item->meta_keyword     = $meta_keyword;
-        $item->meta_description = $meta_description;           
-        $item->parent_id 		=	(int)@$category_id;            
-        $item->sort_order 	=	(int)@$sort_order;
-        $item->status 			=	(int)@$status;    
-        $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
-        $item->save();  	
-        $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
+          $item->fullname 		=	$fullname;
+          $item->alias 			  =	$alias;        
+          $item->meta_keyword     = $meta_keyword;
+          $item->meta_description = $meta_description;           
+          $item->parent_id 		=	(int)@$category_id;            
+          $item->sort_order 	=	(int)@$sort_order;
+          $item->status 			=	(int)@$status;    
+          $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
+          $item->save();  	
+          $dataMenu=MenuModel::whereRaw("trim(lower(alias)) = ?",[trim(mb_strtolower($alias_menu,'UTF-8'))])->get()->toArray();
           if(count($dataMenu) > 0){
             foreach ($dataMenu as $key => $value) {                   
               $menu_id=(int)$value['id'];
               $sql = "update  `menu` set `alias` = '".$alias."' WHERE `id` = ".$menu_id;           
-                DB::statement($sql);    
+              DB::statement($sql);    
             }          
           } 
+          $msg['success']='Lưu thành công';
+        }      		 			       
         $info = array(
-          'type_msg' 			=> "has-success",
-          'msg' 				=> 'Lưu dữ liệu thành công',
-          "checked" 			=> 1,
-          "error" 			=> $error,
-          "id"    			=> $id
-        );
-      } else {
-            $info = array(
-              'type_msg' 			=> "has-error",
-              'msg' 				=> 'Nhập dữ liệu có sự cố',
-              "checked" 			=> 0,
-              "error" 			=> $error,
-              "id"				=> ""
-            );
-      }        		 			       
-      return $info;       
-    }
+          "checked"       => $checked,          
+        'msg'       => $msg,       
+          "id"            => (int)@$id
+        );                       
+        return $info;          
+      }
       public function changeStatus(Request $request){
             $id             =       (int)$request->id;  
             $status         =       (int)$request->status;
@@ -226,46 +219,43 @@ class CategoryArticleController extends Controller {
                     );
             return $result;   
       }      
-      public function deleteItem($id){                 
-        $checked                =   1;
-        $type_msg               =   "alert-success";
-        $msg                    =   "Xóa thành công";    
-        $arrPrivilege=getArrPrivilege();
-        $requestControllerAction=$this->_controller."-delete";      
-        if(in_array($requestControllerAction,$arrPrivilege)){
-          $data                   =   CategoryArticleModel::whereRaw("parent_id = ?",[(int)@$id])->get()->toArray();  
+      public function deleteItem($id){   
+        $info=array();       
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+        $data                   =   CategoryArticleModel::whereRaw("parent_id = ?",[(int)@$id])->get()->toArray();  
           if(count($data) > 0){
             $checked     =   0;
-            $type_msg           =   "alert-warning";            
-            $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+                    
+            $msg['cannotdelete']                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
           }
           $data                   =   ArticleCategoryModel::whereRaw("category_id = ?",[(int)@$id])->get()->toArray();              
           if(count($data) > 0){
             $checked     =   0;
-            $type_msg           =   "alert-warning";            
-            $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
+               
+            $msg['cannotdelete']                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
           }
           if($checked == 1){
             $item               =   CategoryArticleModel::find((int)@$id);
             $item->delete();            
-          }        
-          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
-        }else{
-          return view("adminsystem.no-access",compact('controller'));
-        }                               
+            $msg['success']='Xóa thành công';
+          }  
+          $info = array(
+              "checked"       => $checked,          
+        'msg'       => $msg,                    
+            );      
+          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>$info]);                             
       }
       public function updateStatus(Request $request,$status){        
         $arrID=$request->cid;
-        $type_msg               =   "alert-success";
-        $msg                    =   "Cập nhật thành công";    
-        $checked                =   1; 
-        $arrPrivilege=getArrPrivilege();
-        $requestControllerAction=$this->_controller."-status";  
-        if(in_array($requestControllerAction,$arrPrivilege)){
-          if(count($arrID)==0){
-            $checked                =   0;
-            $type_msg               =   "alert-warning";            
-            $msg                    =   "Vui lòng chọn ít nhất một phần tử";
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+        if(count($arrID)==0){
+            $checked     =   0;
+            
+            $msg['chooseone']                    =   "Vui lòng chọn ít nhất 1 phần tử";
           }
           if($checked==1){
             foreach ($arrID as $key => $value) {
@@ -273,91 +263,91 @@ class CategoryArticleController extends Controller {
               $item->status=$status;
               $item->save();    
             }
-          }        
-          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
-        }else{
-          return view("adminsystem.no-access",compact('controller'));
-        }        
+            $msg['success']='Cập nhật trạng thái thành công';
+          }   
+          $info = array(
+              "checked"       => $checked,          
+        'msg'       => $msg,                           
+            );        
+          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>$info]);       
       }
-      public function trash(Request $request){            
-        $arrID                 =   $request->cid;             
-        $checked                =   1;
-        $type_msg               =   "alert-success";
-        $msg                    =   "Xóa thành công";      
-        $arrID                 =   $request->cid;   
-        $arrPrivilege=getArrPrivilege();
-        $requestControllerAction=$this->_controller."-trash";   
-        if(in_array($requestControllerAction,$arrPrivilege)){
-          if(count($arrID)==0){
-            $checked     =   0;
-            $type_msg           =   "alert-warning";            
-            $msg                =   "Vui lòng chọn ít nhất một phần tử";
-          }else{
-            foreach ($arrID as $key => $value) {
-              if(!empty($value)){
-                $data                   =   CategoryArticleModel::whereRaw("parent_id = ?",[(int)@$value])->get()->toArray();                    
-                if(count($data) > 0){
-                  $checked     =   0;
-                  $type_msg           =   "alert-warning";            
-                  $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
-                }
-                $data                   =   ArticleCategoryModel::whereRaw("category_id = ?",[(int)@$value])->get()->toArray();                     
-                if(count($data) > 0){
-                  $checked     =   0;
-                  $type_msg           =   "alert-warning";            
-                  $msg                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
-                }
-              }                
-            }
-          }
-          if($checked == 1){                            
-            DB::table('category_article')->whereIn('id',@$arrID)->delete();   
-          }
-          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
+      public function trash(Request $request){                              
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+        $arrID                 =   $request->cid;           
+        if(count($arrID)==0){
+          $checked     =   0;
+          
+          $msg['chooseone']                    =   "Vui lòng chọn ít nhất 1 phần tử";
         }else{
-          return view("adminsystem.no-access",compact('controller'));
-        }        
+          foreach ($arrID as $key => $value) {
+            if(!empty($value)){
+              $data                   =   CategoryArticleModel::whereRaw("parent_id = ?",[(int)@$value])->get()->toArray();                    
+              if(count($data) > 0){
+                $checked     =   0;
+                
+                $msg['cannotdelete']                    =   "Phần tử đã có dữ liệu con vui lòng không xóa";
+              }
+              $data                   =   ArticleCategoryModel::whereRaw("category_id = ?",[(int)@$value])->get()->toArray();                     
+              if(count($data) > 0){
+                $checked     =   0;
+                 
+                $msg['cannotdelete']                    =   "Phần tử đã có dữ liệu con vui lòng không xóa";
+              }
+            }                
+          }
+        }
+        if($checked == 1){                            
+          DB::table('category_article')->whereIn('id',@$arrID)->delete();   
+          $msg['success']='Xóa thành công';
+        }
+        $info = array(
+              "checked"       => $checked,          
+        'msg'       => $msg,                           
+            );        
+        return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>$info]);       
       }
       public function sortOrder(Request $request){
-        $checked                =   1;
-        $type_msg               =   "alert-success";
-        $msg                    =   "Lưu dữ liệu thành công"; 
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
         $arrOrder=array();
-        $arrOrder=$request->sort_order;  
-        $arrPrivilege=getArrPrivilege();
-        $requestControllerAction=$this->_controller."-ordering";    
-        if(in_array($requestControllerAction,$arrPrivilege)){
-          if(count($arrOrder) == 0){
-            $checked     =   0;
-            $type_msg           =   "alert-warning";            
-            $msg                =   "Vui lòng chọn ít nhất một phần tử";
-          }
-          if($checked==1){        
-            foreach($arrOrder as $id => $value){                    
-              $item=CategoryArticleModel::find($id);
-              $item->sort_order=(int)$value;            
-              $item->save();            
-            }     
-          }    
-          return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>array("type_msg"=>$type_msg,"msg"=>$msg)]); 
-        }else{
-          return view("adminsystem.no-access",compact('controller'));
-        }        
+        $arrOrder=$request->sort_order;          
+        if(count($arrOrder) == 0){
+          $checked     =   0;
+          
+          $msg['chooseone']                    =   "Vui lòng chọn ít nhất 1 phần tử";
+        }
+        if($checked==1){        
+          foreach($arrOrder as $id => $value){                    
+            $item=CategoryArticleModel::find($id);
+            $item->sort_order=(int)$value;            
+            $item->save();            
+          }     
+          $msg['success']='Sắp xếp thành công';
+        }    
+        $info = array(
+         "checked"       => $checked,           
+        'msg'       => $msg,            
+        );        
+        return redirect()->route("adminsystem.".$this->_controller.".getList")->with(["message"=>$info]);
       }
       
       public function createAlias(Request $request){
         $id                =  trim($request->id)  ; 
         $fullname                =  trim($request->fullname)  ;        
         $data                    =  array();
-        $info                    =  array();
-        $error                   =  array();
+        
+        
         $item                    =  null;
-        $checked  = 1;   
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
         $alias='';                     
         if(empty($fullname)){
-         $checked = 0;
-         $error["fullname"]["type_msg"] = "has-error";
-         $error["fullname"]["msg"] = "Thiếu tên bài viết";
+         $checked = 0;         
+         $msg["fullname"] = "Thiếu tên";
        }else{
         $alias=str_slug($fullname,'-');
         $dataCategoryArticle=array();
@@ -406,24 +396,14 @@ class CategoryArticleController extends Controller {
         }
       }
       if ($checked == 1){
-        $info = array(
-          'type_msg'      => "has-success",
-          'msg'         => 'Lưu dữ liệu thành công',
-          "checked"       => 1,
-          "error"       => $error,
-
-          "alias"       =>$alias
-        );
-      }else {
-        $info = array(
-          'type_msg'      => "has-error",
-          'msg'         => 'Nhập dữ liệu có sự cố',
-          "checked"       => 0,
-          "error"       => $error,
-          "alias"        => $alias
-        );
-      }    
-      return $info;
+        $msg['success']='Lưu thành công';     
+      }   
+      $info = array(
+                "checked"       => $checked,          
+        'msg'       => $msg,             
+                "alias"            => $alias
+              );                       
+            return $info;
     }
 }
 ?>

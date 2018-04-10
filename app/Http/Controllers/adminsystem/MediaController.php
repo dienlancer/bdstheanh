@@ -34,6 +34,9 @@ class MediaController extends Controller {
 		return view("adminsystem.".$this->_controller.".form",compact("controller","task","title","icon"));
 	}
   public function save(Request $request){
+    $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
     $source_media_file=array();            
     if(isset($_FILES['source_media_file'])){
       $source_media_file=$_FILES['source_media_file'];
@@ -45,28 +48,27 @@ class MediaController extends Controller {
       foreach ($source_media_file['name'] as $key => $value) {
         $media_item=uploadImage($value,$source_media_file['tmp_name'][$key],$width,$height);
       }      
-    }     
+    }  
+    $msg['success']='Lưu thành công';     
     $info = array(
-      'type_msg'      => "has-success",
-      'msg'         => 'Save data successfully',
-      "checked"       => 1,
-      "error"       => null,
-      "id"          => 0
-    );
+                "checked"       => $checked,          
+        'msg'       => $msg,               
+                "id"            => 0
+              );             
     return $info;                       
   }
 	
       public function trash(Request $request){
       	$strID                 =   $request->str_id;               
-      	$checked                =   1;
-      	$type_msg               =   "alert-success";
-      	$msg                    =   "Xóa thành công";                  
+      	$info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
       	$strID=substr($strID, 0,strlen($strID) - 1);
       	$arrID=explode(',',$strID);                 
       	if(empty($strID)){
-      		$checked     =   0;
-      		$type_msg           =   "alert-warning";            
-      		$msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
+      		$checked            =   0;
+          
+          $msg['chooseone']            =   "Vui lòng chọn ít nhất một phần tử";
       	}
       	if($checked == 1){                                  			
       		foreach ($arrID as $key => $value) {
@@ -76,22 +78,22 @@ class MediaController extends Controller {
       					unlink($pathFile);
       				}	
       			}			 	
-      		}	            
+      		}
+          $msg['success']='Xóa thành công'; 	            
       	}
-      	$data                   =   $this->loadData($request);
-      	$info = array(
-      		'checked'           => $checked,
-      		'type_msg'          => $type_msg,                
-      		'msg'               => $msg,                
-      		'data'              => $data
-      	);
-      	return $info;
+      	$data                 =   $this->loadData($request);
+        $info = array(
+          "checked"       => $checked,          
+        'msg'       => $msg,           
+          'data'              => $data
+        );
+        return $info;
       }
 	public function deleteItem(Request $request){
 		$id                     =   $request->id;              
-		$checked                =   1;
-		$type_msg               =   "alert-success";
-		$msg                    =   "Xóa thành công";                    
+		$info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();    
 		$pathFile 				= 	base_path("upload/".$id);			
 		if(!file_exists($pathFile)){
 			$checked=0;
@@ -99,13 +101,13 @@ class MediaController extends Controller {
 		if($checked == 1){
 			unlink($pathFile);
 		}        
+    $msg['success']='Xóa thành công';     
 		$data                   =   $this->loadData($request);
 		$info = array(
-			'checked'           => $checked,
-			'type_msg'          => $type_msg,                
-			'msg'               => $msg,                
-			'data'              => $data
-		);
+              "checked"       => $checked,          
+        'msg'       => $msg,                     
+              'data'              => $data
+            );
 		return $info;
 	}
 	

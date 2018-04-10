@@ -8,6 +8,7 @@ $linkSave               =   route('adminsystem.'.$controller.'.save');
     {{ csrf_field() }}           
     <div class="portlet light bordered">
         <div class="portlet-title">
+            <div class="note"  style="display: none;"></div>
             <div class="caption">
                 <i class="{{$icon}}"></i>
                 <span class="caption-subject font-dark sbold uppercase">{{$title}}</span>

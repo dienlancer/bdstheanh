@@ -84,17 +84,18 @@ class PageController extends Controller {
           $sort_order           =   trim($request->sort_order);
           $status               =   trim($request->status);                        
           $data 		            =   array();
-          $info 		            =   array();
-          $error 		            =   array();
-          $item		              =   null;
-          $checked 	            =   1;   
+          
+          $msg 		            =   array();
+          $item		              =   null;          
+              $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
           $setting= getSettingSystem();
                 $width=$setting['article_width']['field_value'];
                 $height=$setting['article_height']['field_value'];         
           if(empty($fullname)){
-                 $checked = 0;
-                 $error["fullname"]["type_msg"] = "has-error";
-                 $error["fullname"]["msg"] = "Thiếu tên bài viết";
+                 $checked = 0;                 
+                 $msg["fullname"] = "Thiếu tên bài viết";
           }else{
               $data=array();
               if (empty($id)) {
@@ -103,22 +104,19 @@ class PageController extends Controller {
                 $data=PageModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
               }  
               if (count($data) > 0) {
-                  $checked = 0;
-                  $error["fullname"]["type_msg"] = "has-error";
-                  $error["fullname"]["msg"] = "Bài viết đã tồn tại";
+                  $checked = 0;                  
+                  $msg["fullname"] = "Bài viết đã tồn tại";
               }      	
           }          
           
           
           if(empty($sort_order)){
-             $checked = 0;
-             $error["sort_order"]["type_msg"] 	= "has-error";
-             $error["sort_order"]["msg"] 		= "Thiếu sắp xếp";
+             $checked = 0;             
+             $msg["sort_order"] 		= "Thiếu sắp xếp";
           }
           if((int)$status==-1){
-             $checked = 0;
-             $error["status"]["type_msg"] 		= "has-error";
-             $error["status"]["msg"] 			= "Thiếu trạng thái";
+             $checked = 0;             
+             $msg["status"] 			= "Thiếu trạng thái";
           }
           if ($checked == 1) {    
                 $image_name='';
@@ -164,73 +162,66 @@ class PageController extends Controller {
                 DB::statement($sql);    
             }          
           }               
-                $info = array(
-                  'type_msg' 			=> "has-success",
-                  'msg' 				=> 'Lưu dữ liệu thành công',
-                  "checked" 			=> 1,
-                  "error" 			=> $error,
-                  "id"    			=> $id
-                );
-            }else {
-                    $info = array(
-                      'type_msg' 			=> "has-error",
-                      'msg' 				=> 'Lưu dữ liệu thất bại',
-                      "checked" 			=> 0,
-                      "error" 			=> $error,
-                      "id"				=> ""
-                    );
-            }        		 			       
-            return $info;       
-    }
-          public function changeStatus(Request $request){
-                  $id             =       (int)$request->id;     
-                  $checked                =   1;
-                  $type_msg               =   "alert-success";
-                  $msg                    =   "Cập nhật thành công";              
-                  $status         =       (int)$request->status;
-                  $item           =       PageModel::find((int)@$id);        
-                  $item->status   =       $status;
-                  $item->save();
-                  $data                   =   $this->loadData($request);
-                  $info = array(
-                    'checked'           => $checked,
-                    'type_msg'          => $type_msg,                
-                    'msg'               => $msg,                
-                    'data'              => $data
-                  );
-                  return $info;
-          }
-        
-      public function deleteItem(Request $request){
-            $id                     =   (int)$request->id;              
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                    
-            if($checked == 1){
-              $item = PageModel::find((int)@$id);
-                $item->delete();                
-            }        
-            $data                   =   $this->loadData($request);
+                $msg['success']='Lưu thành công';
+            }      		 			       
             $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
-      }
+              "checked"       => $checked,          
+        'msg'       => $msg,                     
+              "id"            => (int)@$id
+            );                       
+            return $info;    
+    }
+    public function changeStatus(Request $request){
+      $id             =       (int)$request->id;     
+      $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array(); 
+      $status         =       (int)@$request->status;
+      $item           =       PageModel::find((int)@$id);        
+      $item->status   =       $status;
+      $item->save();
+      $msg['success']='Cập nhật thành công';          
+      $data                   =   $this->loadData($request);
+      $info = array(
+        "checked"       => $checked,          
+        'msg'       => $msg,                  
+        'data'              => $data
+      );
+      return $info;
+    }
+        
+    public function deleteItem(Request $request){
+      $id                     =   (int)$request->id;              
+      $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();  
+      if($checked == 1){
+        $item = PageModel::find((int)@$id);
+        $item->delete();     
+        $msg['success']='Xóa thành công';              
+      }        
+      $data                   =   $this->loadData($request);
+      $info = array(
+        "checked"       => $checked,          
+        'msg'       => $msg,              
+        'data'              => $data
+      );
+      return $info;
+    }
       public function updateStatus(Request $request){
         $strID                 =   $request->str_id;     
         $status                 =   $request->status;            
-        $checked                =   1;
-        $type_msg               =   "alert-success";
-        $msg                    =   "Cập nhật thành công";                  
+        
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+
         $strID=substr($strID, 0,strlen($strID) - 1);
         $arrID=explode(',',$strID);                 
         if(empty($strID)){
-          $checked                =   0;
-          $type_msg               =   "alert-warning";            
-          $msg                    =   "Vui lòng chọn ít nhất một phần tử để xóa";
+          $checked            =   0;
+                    
+          $msg['chooseone']            =   "Vui lòng chọn ít nhất một phần tử";
         }
         if($checked==1){
           foreach ($arrID as $key => $value) {
@@ -240,80 +231,81 @@ class PageController extends Controller {
               $item->save();      
             }            
           }
+          $msg['success']='Cập nhật thành công';       
         }                 
         $data                   =   $this->loadData($request);
         $info = array(
-          'checked'           => $checked,
-          'type_msg'          => $type_msg,                
-          'msg'               => $msg,                
+          "checked"       => $checked,          
+        'msg'       => $msg,                 
           'data'              => $data
         );
         return $info;
       }
       public function trash(Request $request){
         $strID                 =   $request->str_id;               
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Xóa thành công";                  
-            $strID=substr($strID, 0,strlen($strID) - 1);
-            $arrID=explode(',',$strID);                 
-            if(empty($strID)){
-          $checked     =   0;
-          $type_msg           =   "alert-warning";            
-          $msg                =   "Vui lòng chọn ít nhất một phần tử để xóa";
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();             
+        $strID=substr($strID, 0,strlen($strID) - 1);
+        $arrID=explode(',',$strID);                 
+        if(empty($strID)){
+          $checked            =   0;
+        
+          $msg['chooseone']            =   "Vui lòng chọn ít nhất một phần tử";
         }
         if($checked == 1){                
-        
-          DB::table('page')->whereIn('id',@$arrID)->delete();                  
+
+          DB::table('page')->whereIn('id',@$arrID)->delete();  
+          $msg['success']='Xóa thành công';                 
         }
         $data                   =   $this->loadData($request);
-        $info = array(
-          'checked'           => $checked,
-          'type_msg'          => $type_msg,                
-          'msg'               => $msg,                
+            $info = array(
+          "checked"       => $checked,          
+        'msg'       => $msg,                  
           'data'              => $data
         );
         return $info;
       }
       public function sortOrder(Request $request){
-            $sort_json              =   $request->sort_json;           
-            $data_order             =   json_decode($sort_json);       
-          
-            $checked                =   1;
-            $type_msg               =   "alert-success";
-            $msg                    =   "Cập nhật thành công";      
-            if(count($data_order) > 0){              
-              foreach($data_order as $key => $value){      
-                if(!empty($value)){
-                  $item=PageModel::find((int)@$value->id);                
-                $item->sort_order=(int)$value->sort_order;                         
-                $item->save();                      
-                }                                                  
-              }           
-            }        
-            $data                   =   $this->loadData($request);
-            $info = array(
-              'checked'           => $checked,
-              'type_msg'          => $type_msg,                
-              'msg'               => $msg,                
-              'data'              => $data
-            );
-            return $info;
+        $sort_json              =   $request->sort_json;           
+        $data_order             =   json_decode($sort_json);       
+
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
+        if(count($data_order) > 0){              
+          foreach($data_order as $key => $value){      
+            if(!empty($value)){
+              $item=PageModel::find((int)@$value->id);                
+              $item->sort_order=(int)$value->sort_order;                         
+              $item->save();                      
+            }                                                  
+          }           
+        }      
+        $msg['success']='Cập nhật thành công';  
+        $data                   =   $this->loadData($request);
+        $info = array(
+          "checked"       => $checked,          
+        'msg'       => $msg,                
+          'data'              => $data
+        );
+        return $info;
       }
      
       public function createAlias(Request $request){
         $id                =  trim($request->id)  ; 
         $fullname                =  trim($request->fullname)  ;        
         $data                    =  array();
-        $info                    =  array();
-        $error                   =  array();
+        
         $item                    =  null;
-        $checked  = 1;   
+        
         $alias='';                     
+        $info                 =   array();
+      $checked              =   1;                           
+      $msg                =   array();
         if(empty($fullname)){
-         $checked = 0;
-         $error["fullname"]["type_msg"] = "has-error";
-         $error["fullname"]["msg"] = "Thiếu tên bài viết";
+         $checked = 0;         
+         $msg["fullname"] = "Thiếu tên bài viết";
        }else{
         $alias=str_slug($fullname,'-');
         $dataCategoryArticle=array();
@@ -362,23 +354,13 @@ class PageController extends Controller {
         }
       }
       if ($checked == 1){
-        $info = array(
-          'type_msg'      => "has-success",
-          'msg'         => 'Lưu dữ liệu thành công',
-          "checked"       => 1,
-          "error"       => $error,
-
-          "alias"       =>$alias
-        );
-      }else {
-        $info = array(
-          'type_msg'      => "has-error",
-          'msg'         => 'Nhập dữ liệu có sự cố',
-          "checked"       => 0,
-          "error"       => $error,
-          "alias"        => $alias
-        );
-      }    
+        $msg['success']='Lưu thành công';
+      }  
+      $info = array(
+        "checked"       => $checked,          
+        'msg'       => $msg,                 
+        "alias"            => $alias
+      );                       
       return $info;
     }
 }

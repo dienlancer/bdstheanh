@@ -15,9 +15,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 	<input type="hidden" name="sort_json" id="sort_json" value="" />
 	<div class="portlet light bordered">
 		<div class="portlet-title">
-			<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+			<div class="note"  style="display: none;"></div>
 			<div class="caption font-dark">
 				<i class="{{$icon}}"></i>
 				<span class="caption-subject bold uppercase">{{$title}}</span>
@@ -112,7 +110,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vMenuTypeTable.clear().draw();
 				vMenuTypeTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -135,7 +133,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 			type: 'POST',     
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vMenuTypeTable.clear().draw();
 				vMenuTypeTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -165,7 +163,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vMenuTypeTable.clear().draw();
 				vMenuTypeTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -205,7 +203,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {
-				showMsg('alert',data.msg,data.type_msg);  
+				showMsg('note',data);  
 				vMenuTypeTable.clear().draw();
 				vMenuTypeTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -229,7 +227,7 @@ $linkUpdateStatus	=	route('adminsystem.'.$controller.'.updateStatus');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {   	
-				showMsg('alert',data.msg,data.type_msg);  
+				showMsg('note',data);  
 				vMenuTypeTable.clear().draw();
 				vMenuTypeTable.rows.add(data.data).draw();
 				spinner.hide();

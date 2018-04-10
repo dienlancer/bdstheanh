@@ -50,6 +50,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
+        <div class="note"  style="display: none;"></div>
         <div class="caption">
             <i class="{{$icon}}"></i>
             <span class="caption-subject font-dark sbold uppercase">Cấu hình chung</span>
@@ -239,23 +240,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
     </div>
 </div>
 <script type="text/javascript" language="javascript">
-    function resetErrorStatus(){
-        var id                   =   $("#id");
-        var fullname             =   $("#fullname");
-        var alias                =   $("#alias");                
-        var sort_order           =   $("#sort_order");
-        var status               =   $("#status");
-        
-        $(fullname).closest('.form-group').removeClass("has-error"); 
-        $(alias).closest('.form-group').removeClass("has-error");        
-        $(sort_order).closest('.form-group').removeClass("has-error");
-        $(status).closest('.form-group').removeClass("has-error");        
-
-        $(fullname).closest('.form-group').find('span').empty().hide();        
-        $(alias).closest('.form-group').find('span').empty().hide();        
-        $(sort_order).closest('.form-group').find('span').empty().hide();
-        $(status).closest('.form-group').find('span').empty().hide();        
-    }   
+    
     function save(){
         var id=$('input[name="id"]').val();        
         var fullname=$('input[name="fullname"]').val();
@@ -305,7 +290,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             };
             setting[i]=row;
         }        
-        resetErrorStatus();        
+                
         var dataItem = new FormData();
         dataItem.append('id',id);
         dataItem.append('fullname',fullname);
@@ -338,28 +323,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
                 if(data.checked==1){                                        
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }        
-                    if(typeof data_error.alias               != "undefined"){
-                        $('input[name="alias"]').closest('.form-group').addClass(data_error.alias.type_msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').text(data_error.alias.msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').show();                        
-                    }            
-                    if(typeof data_error.sort_order               != "undefined"){
-                        $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.status               != "undefined"){
-                        $('input[name="status"]').closest('.form-group').addClass(data_error.status.type_msg);
-                        $('input[name="status"]').closest('.form-group').find('span').text(data_error.status.msg);
-                        $('input[name="status"]').closest('.form-group').find('span').show();
-
-                    }                    
+                    showMsg('note',data);            
                 }
                 spinner.hide();
             },
@@ -438,7 +402,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             "_token": token
         };   
         $('input[name="alias"]').val(''); 
-        resetErrorStatus();    
+            
         $.ajax({
             url: '<?php echo $linkCreateAlias; ?>',
             type: 'POST',
@@ -448,12 +412,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
                 if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }                            
+                    showMsg('note',data);                             
                 }
                 spinner.hide();
             },

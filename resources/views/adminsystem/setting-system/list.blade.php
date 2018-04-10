@@ -13,9 +13,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 <form class="form-horizontal" role="form">	
 	<div class="portlet light bordered">
 		<div class="portlet-title">
-			<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+			<div class="note"  style="display: none;"></div>
 			<div class="caption font-dark">
 				<i class="{{$icon}}"></i>
 				<span class="caption-subject bold uppercase">{{$title}}</span>
@@ -99,7 +97,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 			type: 'POST',     
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vSettingSystemTable.clear().draw();
 				vSettingSystemTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -130,7 +128,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vSettingSystemTable.clear().draw();
 				vSettingSystemTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -162,7 +160,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {   							                              				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vSettingSystemTable.clear().draw();
 				vSettingSystemTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -201,7 +199,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {
-				showMsg('alert',data.msg,data.type_msg);  
+				showMsg('note',data);  
 				vSettingSystemTable.clear().draw();
 				vSettingSystemTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -225,7 +223,7 @@ $linkSortOrder		=	route('adminsystem.'.$controller.'.sortOrder');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {   	
-				showMsg('alert',data.msg,data.type_msg);  
+				showMsg('note',data);  
 				vSettingSystemTable.clear().draw();
 				vSettingSystemTable.rows.add(data.data).draw();
 				spinner.hide();

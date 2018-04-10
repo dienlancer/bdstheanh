@@ -11,9 +11,7 @@ $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 	{{ csrf_field() }}	
 	<div class="portlet light bordered">
 		<div class="portlet-title">
-			<div class="alert alert-success" id="alert" style="display: none">
-				<strong>Success!</strong> 
-			</div>
+			<div class="note"  style="display: none;"></div>
 			<div class="caption font-dark">
 				<i class="{{$icon}}"></i>
 				<span class="caption-subject bold uppercase">{{$title}}</span>
@@ -96,7 +94,7 @@ $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 			type: 'POST', 			
 			data: dataItem,
 			success: function (data, status, jqXHR) {  				
-				showMsg('alert',data.msg,data.type_msg);               		
+				showMsg('note',data);               		
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();
@@ -138,7 +136,7 @@ $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 			             
 			data: dataItem,
 			success: function (data, status, jqXHR) {
-				showMsg('alert',data.msg,data.type_msg);  
+				showMsg('note',data);  
 				vMediaTable.clear().draw();
 				vMediaTable.rows.add(data.data).draw();
 				spinner.hide();
