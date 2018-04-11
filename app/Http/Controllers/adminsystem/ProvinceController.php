@@ -14,8 +14,7 @@ use App\ArticleCategoryModel;
 use App\PaymentMethodModel;
 use App\SupporterModel;
 use App\ProvinceModel;
-use App\EmployerModel;
-use App\CandidateModel;
+use App\DistrictModel;
 use DB;
 class ProvinceController extends Controller {
   	var $_controller="province";	
@@ -148,13 +147,13 @@ class ProvinceController extends Controller {
             $info                 =   array();
       $checked              =   1;                           
       $msg                =   array();
-            $data                   =   EmployerModel::whereRaw("province_id = ?",[(int)@$id])->get()->toArray();  
+            $data                   =   DistrictModel::whereRaw("province_id = ?",[(int)@$id])->get()->toArray();  
             if(count($data) > 0){
               $checked            =   0;
          
           $msg['cannotdelete']            =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
             }
-            $data                   =   CandidateModel::whereRaw("province_id = ?",[(int)@$id])->get()->toArray();  
+            $data                   =   ProjectModel::whereRaw("province_id = ?",[(int)@$id])->get()->toArray();  
             if(count($data) > 0){
               $checked            =   0;
         
@@ -218,7 +217,7 @@ class ProvinceController extends Controller {
           $msg['chooseone']            =   "Vui lòng chọn ít nhất một phần tử";
         }
         foreach ($arrID as $key => $value){
-          $data                   =   EmployerModel::whereRaw("province_id = ?",[(int)@$value])->get()->toArray();  
+          $data                   =   DistrictModel::whereRaw("province_id = ?",[(int)@$value])->get()->toArray();  
             if(count($data) > 0){
               $checked            =   0;
          
@@ -226,7 +225,7 @@ class ProvinceController extends Controller {
             }
         } 
         foreach ($arrID as $key => $value){
-          $data                   =   CandidateModel::whereRaw("province_id = ?",[(int)@$value])->get()->toArray();  
+          $data                   =   ProjectModel::whereRaw("province_id = ?",[(int)@$value])->get()->toArray();  
             if(count($data) > 0){
               $checked            =   0;
       

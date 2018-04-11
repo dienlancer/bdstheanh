@@ -43,6 +43,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
+        <div class="note"  style="display: none;"></div>
         <div class="caption">
             <i class="{{$icon}}"></i>
             <span class="caption-subject font-dark sbold uppercase">{{$title}}</span>
@@ -239,32 +240,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
     </div>
 </div>
 <script type="text/javascript" language="javascript">
-    function resetErrorStatus(){
-        var id                   =   $('input[name="id"]');
-        var fullname             =   $('input[name="fullname"]');
-        var province_id             =   $('select[name="province_id"]');
-        var district_id             =   $('select[name="district_id"]');
-        var category_param_id  =   $('select[name="category_param_id[]"]');
-        var alias                =   $('input[name="alias"]');        
-        var sort_order           =   $('input[name="sort_order"]');
-        var status               =   $('select[name="status"]');
-        
-        $(fullname).closest('.form-group').removeClass("has-error");        
-        $(province_id).closest('.form-group').removeClass("has-error");   
-        $(district_id).closest('.form-group').removeClass("has-error");   
-        $(category_param_id).closest('.form-group').removeClass("has-error");   
-        $(alias).closest('.form-group').removeClass("has-error");        
-        $(sort_order).closest('.form-group').removeClass("has-error");
-        $(status).closest('.form-group').removeClass("has-error");        
-
-        $(fullname).closest('.form-group').find('span').empty().hide();  
-        $(province_id).closest('.form-group').find('span').empty().hide();  
-        $(district_id).closest('.form-group').find('span').empty().hide();        
-        $(category_param_id).closest('.form-group').find('span').empty().hide();        
-        $(alias).closest('.form-group').find('span').empty().hide();       
-        $(sort_order).closest('.form-group').find('span').empty().hide();
-        $(status).closest('.form-group').find('span').empty().hide();        
-    }
+    
 
     function deleteImage(){
         var xac_nhan = 0;
@@ -307,7 +283,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         var sort_order=$('input[name="sort_order"]').val();
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
-        resetErrorStatus();        
+                
         var dataItem = new FormData();
         dataItem.append('id',id);
         dataItem.append('fullname',fullname);
@@ -340,43 +316,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                 if(data.checked==1){                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }             
-                    if(typeof data_error.province_id               != "undefined"){
-                        $('select[name="province_id"]').closest('.form-group').addClass(data_error.province_id.type_msg);
-                        $('select[name="province_id"]').closest('.form-group').find('span').text(data_error.province_id.msg);
-                        $('select[name="province_id"]').closest('.form-group').find('span').show();                        
-                    }     
-                    if(typeof data_error.district_id               != "undefined"){
-                        $('select[name="district_id"]').closest('.form-group').addClass(data_error.district_id.type_msg);
-                        $('select[name="district_id"]').closest('.form-group').find('span').text(data_error.district_id.msg);
-                        $('select[name="district_id"]').closest('.form-group').find('span').show();                        
-                    }   
-                    if(typeof data_error.category_param_id               != "undefined"){
-                        $('select[name="category_param_id[]"]').closest('.form-group').addClass(data_error.category_param_id.type_msg);
-                        $('select[name="category_param_id[]"]').closest('.form-group').find('span').text(data_error.category_param_id.msg);
-                        $('select[name="category_param_id[]"]').closest('.form-group').find('span').show();                        
-                    }       
-                    if(typeof data_error.alias                  != "undefined"){
-                        $('input[name="alias"]').closest('.form-group').addClass(data_error.alias.type_msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').text(data_error.alias.msg);
-                        $('input[name="alias"]').closest('.form-group').find('span').show();                       
-                    }                    
-                    if(typeof data_error.sort_order               != "undefined"){
-                        $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.status               != "undefined"){
-                        $('select[name="status"]').closest('.form-group').addClass(data_error.status.type_msg);
-                        $('select[name="status"]').closest('.form-group').find('span').text(data_error.status.msg);
-                        $('select[name="status"]').closest('.form-group').find('span').show();
-
-                    }                    
+                    showMsg('note',data);         
                 }
                 spinner.hide();
             },
@@ -401,7 +341,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             "_token": token
         };   
         $('input[name="alias"]').val(''); 
-        resetErrorStatus();    
+            
         $.ajax({
             url: '<?php echo $linkCreateAlias; ?>',
             type: 'POST',
@@ -411,13 +351,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                 if(data.checked==1){
                     $('input[name="alias"]').val(data.alias); 
                 }else{                    
-                    var data_error=data.error;
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }      
-                                     
+                    showMsg('note',data);               
                 }
                 spinner.hide();
             },
