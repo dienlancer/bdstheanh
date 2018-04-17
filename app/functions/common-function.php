@@ -35,7 +35,28 @@ function uploadImage($name,$tmp_name,$width,$height){
   }  
   return $image_name;
 }
+function uploadAttachedFile($name,$tmp_name){        
+  $image_name=$name;                  
+  $image_tmp_name=$tmp_name;
+  $ext = pathinfo($image_name, PATHINFO_EXTENSION);                  
+  $image_slug=str_slug($image_name,'.');
+  $pattern_ext='#.doc|.docx|.xls|.xlsx|.pdf#';
+  $pattern_dot='#\.#';
+  $image_slug=preg_replace($pattern_ext, '', $image_slug);                      
+  $image_slug=preg_replace($pattern_dot, '-', $image_slug);   
+  
+  /* begin code_alias */
+  $source_character = array_merge(range('a','z'), range(0,9));
+  $code = implode($source_character, '');
+  $code = str_shuffle($code);
+  $code_alias   = substr($code, 0, 12);
+  /* end code_alias */
 
+  $image_name=$image_slug. '-' . $code_alias .'.'.$ext;   
+  $image_path=base_path("upload".DS.$image_name);
+  @copy($image_tmp_name, $image_path);    
+  return $image_name;
+}
 function get_product_thumbnail($value){
   $setting= getSettingSystem();
     $product_width=$setting['product_width']['field_value'];

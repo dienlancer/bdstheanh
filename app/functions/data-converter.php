@@ -1236,31 +1236,31 @@ function mediaConverter($data=array(),$controller){
                 /* end check if file image */
                 /* begin check if file ico */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.ico)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('upload/'.$data[$i]).'" ><img src="'.asset('upload/'.$data[$i]).'" /></a>';
                 }
                 /* end check if file ico */
                 /* begin check if file word */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/word.png').'"><img src="'.asset('public/adminsystem/images/word.png').'" /></a>';
                 }
                 /* end check if file word */
                 /* begin check if file excel */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/excel.png').'"><img src="'.asset('public/adminsystem/images/excel.png').'" /></a>';
                 }
                 /* end check if file excel */
                 /* begin check if file pdf */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/pdf.png').'"><img src="'.asset('public/adminsystem/images/pdf.png').'" /></a>';
                 }
                 /* end check if file pdf */
                 /* begin check if file pdf */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.zip|.rar)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/zip.png').'"><img src="'.asset('public/adminsystem/images/zip.png').'" /></a>';
                 }
                 /* end check if file pdf */
@@ -1293,31 +1293,31 @@ function media2Converter($data=array(),$controller,$directory){
                 /* end check if file image */
                 /* begin check if file ico */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.ico)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset($directory.'/'.$data[$i]).'" ><img src="'.asset($directory.'/'.$data[$i]).'" /></a>';
                 }
                 /* end check if file ico */
                 /* begin check if file word */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/word.png').'"><img src="'.asset('public/adminsystem/images/word.png').'" /></a>';
                 }
                 /* end check if file word */
                 /* begin check if file excel */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/excel.png').'"><img src="'.asset('public/adminsystem/images/excel.png').'" /></a>';
                 }
                 /* end check if file excel */
                 /* begin check if file pdf */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.pdf)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/pdf.png').'"><img src="'.asset('public/adminsystem/images/pdf.png').'" /></a>';
                 }
                 /* end check if file pdf */
                 /* begin check if file pdf */
                 $pattern = "#^([a-zA-Z0-9\s_\\.\-:])+(.zip|.rar)$#";
-                if(preg_match($pattern, $data[$i],$match)==true){
+                if(preg_match($pattern, $data[$i])==true){
                     $featured_file='<a data-fancybox="gallery" href="'.asset('public/adminsystem/images/zip.png').'"><img src="'.asset('public/adminsystem/images/zip.png').'" /></a>';
                 }
                 /* end check if file pdf */

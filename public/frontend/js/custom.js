@@ -73,6 +73,26 @@ function addToCart(product_id,ajaxurl){
 		}
 	});
 }
+function showMsg(ctrl,data){		
+	var ul='<ul>';	
+	$.each(data.msg,function(index,value){
+		ul+='<li>'+value+'</li>';
+	});                    
+	ul+='</ul>';
+	var type_msg = '';
+	if(data.checked == 1){
+		type_msg='note-success';
+	}else{
+		type_msg='note-danger';
+	}
+	$('.'+ctrl).empty();
+	$('.'+ctrl).removeClass('note-success');
+	$('.'+ctrl).removeClass('note-danger');
+	$('.'+ctrl).append(ul);	
+	$('.'+ctrl).addClass(type_msg);                    
+	$('.'+ctrl).show();     
+	setTimeout(hideMsg,10000,ctrl);		 
+}
 function hideMsg() {
 	$('.alert-system').fadeOut();
 } 
