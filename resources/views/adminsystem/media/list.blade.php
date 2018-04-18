@@ -29,7 +29,7 @@ $linkTrash			=	route('adminsystem.'.$controller.'.trash');
 			</div>                                 
 		</div>		
 		<div class="portlet-body">		
-			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-media">
+			<table class="table table-striped table-bordered table-hover table-checkable order-column" id="tbl-<?php echo $controller; ?>">
 				<thead>
 					<tr>
 						<th width="1%"><input type="checkbox" onclick="checkAllAgent(this)"  name="checkall-toggle"></th>                						
