@@ -115,4 +115,5 @@ $(document).ready(function(){
 			this.checked = checkStatus;
 		});
 	});	
+	setTimeout(hideMsg,60000,'note');	
 });
