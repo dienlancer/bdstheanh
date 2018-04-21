@@ -123,7 +123,7 @@ function showMsg(ctrl,data){
 	});                    
 	ul+='</ul>';
 	var type_msg = '';
-	if(data.checked == 1){
+	if(parseInt(data.checked) == 1){
 		type_msg='note-success';
 	}else{
 		type_msg='note-danger';
@@ -134,7 +134,7 @@ function showMsg(ctrl,data){
 	$('.'+ctrl).append(ul);	
 	$('.'+ctrl).addClass(type_msg);                    
 	$('.'+ctrl).show();     
-	setTimeout(hideMsg,10000,ctrl);		 
+	setTimeout(hideMsg,60000,ctrl);	 
 }
 function hideMsg(ctrl){
     $('.'+ctrl).fadeOut();
