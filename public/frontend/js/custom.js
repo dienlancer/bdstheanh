@@ -46,22 +46,7 @@ function changePage(page,ctrl){
 	$(frm)[0].submit();
 }
 function isNumberKey(evt){var hopLe=true;var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode<48||charCode>57))hopLe=false;return hopLe;}
-function checkRegister() {
-    var hopLe=true;
-    var strMsg="";
-    var fullname=document.getElementById("fullname").value;
-    var phone=document.getElementById("phone").value;
-    if(fullname=="") {
-        hopLe=false;
-        strMsg="Vui lòng điền tên";
-    }
-    if(phone=="") {
-        hopLe=false;
-        strMsg="Vui lòng điền điện thoại";
-    }
-    if(!hopLe)alert(strMsg);
-    return hopLe;
-}
+
 function addToCart(product_id,ajaxurl){
 	var id = product_id;		
 	var dataObj = {		
