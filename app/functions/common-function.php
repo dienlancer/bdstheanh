@@ -35,6 +35,20 @@ function uploadImage($name,$tmp_name,$width,$height){
   }  
   return $image_name;
 }
+function uploadMediaFile($name,$tmp_name){        
+  $image_name=$name;                  
+  $image_tmp_name=$tmp_name;
+  $ext = pathinfo($image_name, PATHINFO_EXTENSION);                  
+  $image_slug=str_slug($image_name,'.');
+  $pattern_ext='#.png|.jpg|.gif|.doc|.docx|.xls|.xlsx|.pdf#';
+  $pattern_dot='#\.#';
+  $image_slug=preg_replace($pattern_ext, '', $image_slug);                      
+  $image_slug=preg_replace($pattern_dot, '-', $image_slug);     
+  $image_name=$image_slug.'.'.$ext;   
+  $image_path=base_path("upload".DS.$image_name);
+  @copy($image_tmp_name, $image_path);    
+  return $image_name;
+}
 function uploadAttachedFile($name,$tmp_name){        
   $image_name=$name;                  
   $image_tmp_name=$tmp_name;

@@ -46,7 +46,7 @@ class MediaController extends Controller {
     $height=0;        
     if(count($source_media_file) > 0){
       foreach ($source_media_file['name'] as $key => $value) {
-        $media_item=uploadImage($value,$source_media_file['tmp_name'][$key],$width,$height);
+        $media_item=uploadMediaFile($value,$source_media_file['tmp_name'][$key]);
       }      
     }  
     $msg['success']='Lưu thành công';     
