@@ -38,8 +38,8 @@ class ArticleController extends Controller {
         $arrCategoryID[]=@$category_id;
         getStringCategoryID($category_id,$arrCategoryID,'category_article');     
       $query=DB::table('article')
-      ->join('article_category','article.id','=','article_category.article_id')
-      ->join('category_article','category_article.id','=','article_category.category_id')  ;      
+      ->leftJoin('article_category','article.id','=','article_category.article_id')
+      ->leftJoin('category_article','category_article.id','=','article_category.category_id')  ;      
       if(!empty(@$request->filter_search)){
         $query->where('article.fullname','like','%'.trim(@$request->filter_search).'%');
       }     
@@ -123,12 +123,16 @@ class ArticleController extends Controller {
     			$checked = 0;                  
     			$msg["fullname"] = "Bài viết đã tồn tại";
     		}      	
-    	}        
-
+    	}              
     	if( ($category_id) == null ){    		
     		$checked = 0;                
     		$msg["category_id"]      = "Thiếu danh mục";
-    	}          
+    	}else{
+        if((int)$category_id[0]==0){
+          $checked = 0;                
+          $msg["category_id"]      = "Thiếu danh mục";
+        }
+      }    
     	if(empty($sort_order)){
     		$checked = 0;               
     		$msg["sort_order"] 		= "Thiếu sắp xếp";
