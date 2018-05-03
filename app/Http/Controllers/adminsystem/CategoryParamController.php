@@ -13,7 +13,7 @@ use App\ProjectArticleModel;
 use App\MenuModel;
 use App\ArticleCategoryModel;
 use App\PaginationModel;
-use App\ProductParamModel;
+use App\PostParamModel;
 use DB;
 class CategoryParamController extends Controller {
 	var $_controller="category-param";	
@@ -201,7 +201,7 @@ public function deleteItem($id){
 
     $msg['cannotdelete']                    =   "Phần tử này có dữ liệu con. Vui lòng không xoá";
   }          
-  $data                   =   ProductParamModel::whereRaw("param_id = ?",[(int)@$id])->get()->toArray();              
+  $data                   =   PostParamModel::whereRaw("param_id = ?",[(int)@$id])->get()->toArray();              
   if(count($data) > 0){
     $checked     =   0;
 
@@ -260,7 +260,7 @@ public function trash(Request $request){
           $checked     =   0;
           $msg['cannotdelete']                    =   "Phần tử đã có dữ liệu con vui lòng không xóa";
         }    
-        $data                   =   ProductParamModel::whereRaw("param_id = ?",[(int)@$value])->get()->toArray();              
+        $data                   =   PostParamModel::whereRaw("param_id = ?",[(int)@$value])->get()->toArray();              
         if(count($data) > 0){
           $checked     =   0;
           $msg['cannotdelete']                    =   "Phần tử đã có dữ liệu con vui lòng không xóa";
