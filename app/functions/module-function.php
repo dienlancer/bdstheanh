@@ -208,9 +208,7 @@ function getBreadCrumbCategoryProduct($dataCategory){
   $data=array();
   $breadcrumb='<a href="'.url('/').'">Trang chủ</a>';
   getRecursiveCategoryProduct((int)@$dataCategory['parent_id'],$data);
-  $data[]=$dataCategory;
-  $data=get_field_data_array($data,'id');
-  ksort($data);
+  $data[]=$dataCategory;  
   if(count($data) > 0){
     foreach ($data as $key => $value) {
       $id=$value['id'];
@@ -236,8 +234,6 @@ function getBreadCrumbCategoryArticle($dataCategory){
   $breadcrumb='<a href="'.url('/').'">Trang chủ</a>';
   getRecursiveCategoryArticle((int)@$dataCategory['parent_id'],$data);
   $data[]=$dataCategory;
-  $data=get_field_data_array($data,'id');
-  ksort($data);
   if(count($data) > 0){
     foreach ($data as $key => $value) {
       $id=$value['id'];
