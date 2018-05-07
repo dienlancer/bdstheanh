@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 05, 2018 lúc 12:33 PM
+-- Thời gian đã tạo: Th5 07, 2018 lúc 09:50 AM
 -- Phiên bản máy phục vụ: 10.1.29-MariaDB
 -- Phiên bản PHP: 7.0.26
 
@@ -1129,7 +1129,9 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (422, 1, 'S3S7M1hDF0KwmC8BtxS2TY81xetV59ar', '2018-03-20 12:01:44', '2018-03-20 12:01:44'),
 (423, 1, 'hcJ220nYaZMQUvUnYdNuH0LKljWK6p6n', '2018-03-27 18:33:48', '2018-03-27 18:33:48'),
 (424, 1, 'BYyuAd8Qm3N4ftRLgSWagzEe8AjBJS8o', '2018-03-27 19:44:33', '2018-03-27 19:44:33'),
-(425, 1, 'nAkwh2CxXcmlrvCNkxmuEXD4peEDmYFW', '2018-03-28 19:18:05', '2018-03-28 19:18:05');
+(425, 1, 'nAkwh2CxXcmlrvCNkxmuEXD4peEDmYFW', '2018-03-28 19:18:05', '2018-03-28 19:18:05'),
+(426, 1, 'SKKB3PDT3Pyj9Pll9U70gkrq7tRjEH1c', '2018-04-10 00:53:50', '2018-04-10 00:53:50'),
+(427, 1, '6T7gXHWZTvR8GTpbVl2d4Ym2imjf55Nv', '2018-04-10 01:39:04', '2018-04-10 01:39:04');
 
 -- --------------------------------------------------------
 
@@ -2124,7 +2126,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$jeW7xaNuq9I3.Oerer8FE.ibP6fv00VDPHYevC1dGUio33xj0W1KK', NULL, '2018-03-28 19:18:05', 'Nguyễn Kim Điền', NULL, NULL, 'cang-bong-da-han-quoc-3-3585.jpg', 5, 1, '2017-11-12 07:23:56', '2018-03-28 19:18:05');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$jeW7xaNuq9I3.Oerer8FE.ibP6fv00VDPHYevC1dGUio33xj0W1KK', NULL, '2018-04-10 18:11:58', 'Nguyễn Kim Điền', NULL, NULL, 'cang-bong-da-han-quoc-3-3585.jpg', 5, 1, '2017-11-12 07:23:56', '2018-04-10 18:11:58');
 
 -- --------------------------------------------------------
 
@@ -2570,7 +2572,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT cho bảng `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=426;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
 
 --
 -- AUTO_INCREMENT cho bảng `photo`
