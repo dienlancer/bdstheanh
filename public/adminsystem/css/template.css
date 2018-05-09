@@ -142,3 +142,9 @@ h3.rio i{
 .calmoney{
     float: right;
 }
+.page-header.navbar.navbar-fixed-top, .page-header.navbar.navbar-static-top{
+    z-index: 3;
+}
+.modal-backdrop{
+    z-index: 2;
+}
