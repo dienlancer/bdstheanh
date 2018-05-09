@@ -116,13 +116,17 @@ License: You must have a valid license purchased only from themeforest(the above
         <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/js/jquery.fancybox.min.js')}}"                 ></script>
         <link href="{{asset('public/adminsystem/css/jquery.fancybox.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- end fancybox -->
-        <!-- BEGIN CUSTOM LIBRARY -->
-        <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/ckeditor/ckeditor.js')}}"                 ></script>
-        <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/ckfinder/ckfinder.js')}}"                 ></script>
+        <!-- begin summernote -->
+        <link href="{{asset('public/adminsystem/summernote/summernote.css')}}" rel="stylesheet" type="text/css" />
+        <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/summernote/summernote.js')}}"                 ></script>
+        <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/summernote/summernote-image-attributes.js')}}"                 ></script>
+        <!-- end summernote -->
+        <!-- BEGIN CUSTOM LIBRARY -->        
         <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/js/table-library.js')}}"                 ></script>
         <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/js/spinner.js')}}"                 ></script>
         <script language="javascript" type="text/javascript" src="{{asset('public/adminsystem/js/custom.js')}}"                 ></script>        
         <!-- END CUSTOM LIBRARY -->                
+
     </head>
     <!-- END HEAD -->
 
@@ -797,7 +801,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <!-- END FOOTER -->
         </div>
-         
+     
     </body>
 
 </html>

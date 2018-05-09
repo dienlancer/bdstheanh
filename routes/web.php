@@ -352,10 +352,11 @@ Route::group(["prefix"=>"adminsystem","middleware"=>"TestLogin"],function(){
 		Route::post("load-data",["as"=>"adminsystem.media.loadData","uses"=>"adminsystem\MediaController@loadData"]);		
 		Route::get("form/{task}/{id?}",["as"=>"adminsystem.media.getForm","uses"=>"adminsystem\MediaController@getForm"]);
 		Route::post("save",["as"=>"adminsystem.media.save","uses"=>"adminsystem\MediaController@save"]);
+		Route::post("saveSummerFile",["as"=>"adminsystem.media.saveSummerFile","uses"=>"adminsystem\MediaController@saveSummerFile"]);
 		Route::post("delete-item",["as"=>"adminsystem.media.deleteItem","uses"=>"adminsystem\MediaController@deleteItem"]);				
 		Route::post("trash",["as"=>"adminsystem.media.trash","uses"=>"adminsystem\MediaController@trash"]);		
 		
-	});		
+	});			
 	Route::group(["prefix"=>"group-member"],function(){		
 		Route::get("list",["as"=>"adminsystem.group-member.getList","uses"=>"adminsystem\GroupMemberController@getList"]);
 		Route::post("load-data",["as"=>"adminsystem.group-member.loadData","uses"=>"adminsystem\GroupMemberController@loadData"]);		

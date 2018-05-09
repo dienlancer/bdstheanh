@@ -10,9 +10,9 @@ $linkFilterDistrictByProvince        =   route('adminsystem.district.filterDistr
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"      onblur="createAlias();"   value="'.@$arrRowData['fullname'].'">';
 $inputAlias             =   '<input type="text" class="form-control" name="alias"      disabled      value="'.@$arrRowData['alias'].'">';
 $inputIntro             =   '<textarea      name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
-$inputOverview          =   '<textarea      name="overview" rows="5" cols="100" class="form-control" >'.@$arrRowData['overview'].'</textarea>'; 
-$inputEquipment         =   '<textarea      name="equipment" rows="2" cols="100" class="form-control" >'.@$arrRowData['equipment'].'</textarea>'; 
-$inputPriceList         =   '<textarea      name="price_list" rows="2" cols="100" class="form-control" >'.@$arrRowData['price_list'].'</textarea>'; 
+$inputOverview          =   '<textarea      name="overview" rows="5" cols="100" class="form-control summer-editor" >'.@$arrRowData['overview'].'</textarea>'; 
+$inputEquipment         =   '<textarea      name="equipment" rows="2" cols="100" class="form-control summer-editor" >'.@$arrRowData['equipment'].'</textarea>'; 
+$inputPriceList         =   '<textarea      name="price_list" rows="2" cols="100" class="form-control summer-editor" >'.@$arrRowData['price_list'].'</textarea>'; 
 $inputGoogleMapUrl      =   '<textarea      name="googlemap_url" rows="2" cols="100" class="form-control" >'.@$arrRowData['googlemap_url'].'</textarea>'; 
 $inputMetakeyword       =   '<textarea      name="meta_keyword" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_keyword'].'</textarea>'; 
 $inputMetadescription   =   '<textarea      name="meta_description" rows="2" cols="100" class="form-control" >'.@$arrRowData['meta_description'].'</textarea>'; 
@@ -40,6 +40,7 @@ if(count(@$arrRowData)>0){
     }        
 } 
 $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
+$inputCallback='<input type="hidden" name="callback_url"  value="'.route('adminsystem.media.saveSummerFile').'" />';
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
@@ -63,7 +64,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             {{ csrf_field() }}
             <?php echo $inputPictureHidden; ?>                
             <?php echo  $inputID; ?>       
-            <?php echo $inputDistrictID; ?>            
+            <?php echo $inputDistrictID; ?>   
+            <?php echo $inputCallback; ?>                      
             <div class="form-body">
                 <div class="row">
                     <div class="form-group col-md-12">
@@ -171,12 +173,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                         <label class="col-md-2 control-label"><b>Tổng quan</b></label>
                         <div class="col-md-10">                            
                             <?php echo $inputOverview; ?>
-                            <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('overview',{
-                                   height:300
-                               });
-                           </script>                           
+                            <span class="help-block"></span>                                    
                        </div>
                    </div>                       
                 </div>   
@@ -186,11 +183,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                         <div class="col-md-10">                            
                             <?php echo $inputEquipment; ?>
                             <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('equipment',{
-                                   height:300
-                               });
-                           </script>    
+                            
                         </div>
                     </div>    
                 </div>
@@ -200,11 +193,7 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
                         <div class="col-md-10">                            
                             <?php echo $inputPriceList; ?>
                             <span class="help-block"></span>
-                            <script type="text/javascript" language="javascript">
-                                CKEDITOR.replace('price_list',{
-                                   height:300
-                               });
-                           </script>    
+                            
                         </div>
                     </div>    
                 </div>    
@@ -273,9 +262,9 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
         var total_cost=$('input[name="total_cost"]').val();     
         var category_param_id=$('select[name="category_param_id[]"]').val();      
         var intro=$('textarea[name="intro"]').val();        
-        var overview=CKEDITOR.instances['overview'].getData();    
-        var equipment=CKEDITOR.instances['equipment'].getData();    
-        var price_list=CKEDITOR.instances['price_list'].getData();    
+        var overview=$('textarea[name="overview"]').summernote('code');    
+        var equipment=$('textarea[name="equipment"]').summernote('code');    
+        var price_list=$('textarea[name="price_list"]').summernote('code');    
         var googlemap_url=$('textarea[name="googlemap_url"]').val();   
         var province_id=$('select[name="province_id"]').val();     
         var district_id=$('select[name="district_id"]').val();         

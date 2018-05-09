@@ -57,6 +57,28 @@ class MediaController extends Controller {
               );             
     return $info;                       
   }
+  public function saveSummerFile(Request $request){
+    $info                 =   array();
+    $checked              =   1;                           
+    $msg                =   array();
+    $summer_file           =   null;
+    if(isset($_FILES["summer_file"])){
+      $summer_file         =   $_FILES["summer_file"];
+    }   
+    $summer_name='';
+    if($summer_file != null){                                                
+      $summer_name=uploadMediaFile($summer_file['name'],$summer_file['tmp_name']);
+    }
+    $summer_url='/upload/'.$summer_name;
+
+    $msg['success']='Lưu thành công';     
+    $info = array(
+      "checked"       => $checked,          
+      'msg'       => $msg,               
+      "summer_url"            => $summer_url
+    );             
+    return $info;                       
+  }
 	
       public function trash(Request $request){
       	$strID                 =   $request->str_id;               
