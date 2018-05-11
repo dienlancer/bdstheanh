@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 07, 2018 lúc 09:50 AM
--- Phiên bản máy phục vụ: 10.1.29-MariaDB
--- Phiên bản PHP: 7.0.26
+-- Host: 127.0.0.1
+-- Generation Time: May 11, 2018 at 11:27 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `bdstheanh`
+-- Database: `bdstheanh`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `activations`
+-- Table structure for table `activations`
 --
 
 DROP TABLE IF EXISTS `activations`;
@@ -40,7 +40,7 @@ CREATE TABLE `activations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `activations`
+-- Dumping data for table `activations`
 --
 
 INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`, `created_at`, `updated_at`) VALUES
@@ -54,7 +54,7 @@ INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `album`
+-- Table structure for table `album`
 --
 
 DROP TABLE IF EXISTS `album`;
@@ -72,7 +72,7 @@ CREATE TABLE `album` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `album`
+-- Dumping data for table `album`
 --
 
 INSERT INTO `album` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_description`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `album` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_descriptio
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `article`
+-- Table structure for table `article`
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -104,7 +104,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `article`
+-- Dumping data for table `article`
 --
 
 INSERT INTO `article` (`id`, `fullname`, `alias`, `image`, `intro`, `content`, `description`, `meta_keyword`, `meta_description`, `count_view`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -121,7 +121,7 @@ INSERT INTO `article` (`id`, `fullname`, `alias`, `image`, `intro`, `content`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `article_category`
+-- Table structure for table `article_category`
 --
 
 DROP TABLE IF EXISTS `article_category`;
@@ -134,7 +134,7 @@ CREATE TABLE `article_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `article_category`
+-- Dumping data for table `article_category`
 --
 
 INSERT INTO `article_category` (`id`, `article_id`, `category_id`, `created_at`, `updated_at`) VALUES
@@ -151,7 +151,7 @@ INSERT INTO `article_category` (`id`, `article_id`, `category_id`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `banner`
+-- Table structure for table `banner`
 --
 
 DROP TABLE IF EXISTS `banner`;
@@ -169,7 +169,7 @@ CREATE TABLE `banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `banner`
+-- Dumping data for table `banner`
 --
 
 INSERT INTO `banner` (`id`, `category_id`, `caption`, `alt`, `image`, `page_url`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -203,7 +203,7 @@ INSERT INTO `banner` (`id`, `category_id`, `caption`, `alt`, `image`, `page_url`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category_article`
+-- Table structure for table `category_article`
 --
 
 DROP TABLE IF EXISTS `category_article`;
@@ -222,7 +222,7 @@ CREATE TABLE `category_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category_article`
+-- Dumping data for table `category_article`
 --
 
 INSERT INTO `category_article` (`id`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `parent_id`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -234,7 +234,7 @@ INSERT INTO `category_article` (`id`, `fullname`, `meta_keyword`, `meta_descript
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category_banner`
+-- Table structure for table `category_banner`
 --
 
 DROP TABLE IF EXISTS `category_banner`;
@@ -249,7 +249,7 @@ CREATE TABLE `category_banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category_banner`
+-- Dumping data for table `category_banner`
 --
 
 INSERT INTO `category_banner` (`id`, `fullname`, `theme_location`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
@@ -261,7 +261,7 @@ INSERT INTO `category_banner` (`id`, `fullname`, `theme_location`, `status`, `so
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category_param`
+-- Table structure for table `category_param`
 --
 
 DROP TABLE IF EXISTS `category_param`;
@@ -278,7 +278,7 @@ CREATE TABLE `category_param` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category_param`
+-- Dumping data for table `category_param`
 --
 
 INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_value`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -289,7 +289,7 @@ INSERT INTO `category_param` (`id`, `fullname`, `alias`, `parent_id`, `param_val
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category_product`
+-- Table structure for table `category_product`
 --
 
 DROP TABLE IF EXISTS `category_product`;
@@ -310,7 +310,7 @@ CREATE TABLE `category_product` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `category_video`
+-- Table structure for table `category_video`
 --
 
 DROP TABLE IF EXISTS `category_video`;
@@ -329,7 +329,7 @@ CREATE TABLE `category_video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `category_video`
+-- Dumping data for table `category_video`
 --
 
 INSERT INTO `category_video` (`id`, `fullname`, `meta_keyword`, `meta_description`, `alias`, `parent_id`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -338,7 +338,7 @@ INSERT INTO `category_video` (`id`, `fullname`, `meta_keyword`, `meta_descriptio
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `district`
+-- Table structure for table `district`
 --
 
 DROP TABLE IF EXISTS `district`;
@@ -356,7 +356,7 @@ CREATE TABLE `district` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group_member`
+-- Table structure for table `group_member`
 --
 
 DROP TABLE IF EXISTS `group_member`;
@@ -370,7 +370,7 @@ CREATE TABLE `group_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `group_member`
+-- Dumping data for table `group_member`
 --
 
 INSERT INTO `group_member` (`id`, `fullname`, `alias`, `sort_order`, `created_at`, `updated_at`) VALUES
@@ -380,7 +380,7 @@ INSERT INTO `group_member` (`id`, `fullname`, `alias`, `sort_order`, `created_at
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group_privilege`
+-- Table structure for table `group_privilege`
 --
 
 DROP TABLE IF EXISTS `group_privilege`;
@@ -393,7 +393,7 @@ CREATE TABLE `group_privilege` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `group_privilege`
+-- Dumping data for table `group_privilege`
 --
 
 INSERT INTO `group_privilege` (`id`, `group_member_id`, `privilege_id`, `created_at`, `updated_at`) VALUES
@@ -543,7 +543,7 @@ INSERT INTO `group_privilege` (`id`, `group_member_id`, `privilege_id`, `created
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `invoice`
+-- Table structure for table `invoice`
 --
 
 DROP TABLE IF EXISTS `invoice`;
@@ -570,7 +570,7 @@ CREATE TABLE `invoice` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `invoice_detail`
+-- Table structure for table `invoice_detail`
 --
 
 DROP TABLE IF EXISTS `invoice_detail`;
@@ -591,7 +591,7 @@ CREATE TABLE `invoice_detail` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `menu`
+-- Table structure for table `menu`
 --
 
 DROP TABLE IF EXISTS `menu`;
@@ -610,7 +610,7 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `menu`
+-- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`id`, `fullname`, `alias`, `parent_id`, `menu_type_id`, `menu_class`, `level`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -680,7 +680,7 @@ INSERT INTO `menu` (`id`, `fullname`, `alias`, `parent_id`, `menu_type_id`, `men
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `menu_type`
+-- Table structure for table `menu_type`
 --
 
 DROP TABLE IF EXISTS `menu_type`;
@@ -695,7 +695,7 @@ CREATE TABLE `menu_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `menu_type`
+-- Dumping data for table `menu_type`
 --
 
 INSERT INTO `menu_type` (`id`, `fullname`, `theme_location`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
@@ -707,7 +707,7 @@ INSERT INTO `menu_type` (`id`, `fullname`, `theme_location`, `status`, `sort_ord
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -718,7 +718,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -728,7 +728,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `module_item`
+-- Table structure for table `module_item`
 --
 
 DROP TABLE IF EXISTS `module_item`;
@@ -746,7 +746,7 @@ CREATE TABLE `module_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `module_item`
+-- Dumping data for table `module_item`
 --
 
 INSERT INTO `module_item` (`id`, `fullname`, `item_id`, `position`, `component`, `setting`, `status`, `sort_order`, `created_at`, `updated_at`) VALUES
@@ -755,7 +755,7 @@ INSERT INTO `module_item` (`id`, `fullname`, `item_id`, `position`, `component`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `organization`
+-- Table structure for table `organization`
 --
 
 DROP TABLE IF EXISTS `organization`;
@@ -782,7 +782,7 @@ CREATE TABLE `organization` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `page`
+-- Table structure for table `page`
 --
 
 DROP TABLE IF EXISTS `page`;
@@ -805,7 +805,7 @@ CREATE TABLE `page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `page`
+-- Dumping data for table `page`
 --
 
 INSERT INTO `page` (`id`, `fullname`, `alias`, `theme_location`, `image`, `intro`, `content`, `description`, `meta_keyword`, `meta_description`, `count_view`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -825,7 +825,7 @@ INSERT INTO `page` (`id`, `fullname`, `alias`, `theme_location`, `image`, `intro
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `password_resets`
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -838,7 +838,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payment_method`
+-- Table structure for table `payment_method`
 --
 
 DROP TABLE IF EXISTS `payment_method`;
@@ -854,7 +854,7 @@ CREATE TABLE `payment_method` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `payment_method`
+-- Dumping data for table `payment_method`
 --
 
 INSERT INTO `payment_method` (`id`, `fullname`, `alias`, `content`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -864,7 +864,7 @@ INSERT INTO `payment_method` (`id`, `fullname`, `alias`, `content`, `sort_order`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `persistences`
+-- Table structure for table `persistences`
 --
 
 DROP TABLE IF EXISTS `persistences`;
@@ -877,7 +877,7 @@ CREATE TABLE `persistences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `persistences`
+-- Dumping data for table `persistences`
 --
 
 INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`) VALUES
@@ -1131,12 +1131,13 @@ INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`)
 (424, 1, 'BYyuAd8Qm3N4ftRLgSWagzEe8AjBJS8o', '2018-03-27 19:44:33', '2018-03-27 19:44:33'),
 (425, 1, 'nAkwh2CxXcmlrvCNkxmuEXD4peEDmYFW', '2018-03-28 19:18:05', '2018-03-28 19:18:05'),
 (426, 1, 'SKKB3PDT3Pyj9Pll9U70gkrq7tRjEH1c', '2018-04-10 00:53:50', '2018-04-10 00:53:50'),
-(427, 1, '6T7gXHWZTvR8GTpbVl2d4Ym2imjf55Nv', '2018-04-10 01:39:04', '2018-04-10 01:39:04');
+(427, 1, '6T7gXHWZTvR8GTpbVl2d4Ym2imjf55Nv', '2018-04-10 01:39:04', '2018-04-10 01:39:04'),
+(428, 1, 'Px2f4XaWTfoKQ7VWJoX44SGSprdg833G', '2018-05-11 01:54:49', '2018-05-11 01:54:49');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `photo`
+-- Table structure for table `photo`
 --
 
 DROP TABLE IF EXISTS `photo`;
@@ -1151,7 +1152,7 @@ CREATE TABLE `photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 --
--- Đang đổ dữ liệu cho bảng `photo`
+-- Dumping data for table `photo`
 --
 
 INSERT INTO `photo` (`id`, `album_id`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1175,7 +1176,7 @@ INSERT INTO `photo` (`id`, `album_id`, `image`, `sort_order`, `status`, `created
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post_param`
+-- Table structure for table `post_param`
 --
 
 DROP TABLE IF EXISTS `post_param`;
@@ -1188,7 +1189,7 @@ CREATE TABLE `post_param` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `post_param`
+-- Dumping data for table `post_param`
 --
 
 INSERT INTO `post_param` (`id`, `post_id`, `param_id`, `created_at`, `updated_at`) VALUES
@@ -1199,7 +1200,7 @@ INSERT INTO `post_param` (`id`, `post_id`, `param_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `privilege`
+-- Table structure for table `privilege`
 --
 
 DROP TABLE IF EXISTS `privilege`;
@@ -1214,7 +1215,7 @@ CREATE TABLE `privilege` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `privilege`
+-- Dumping data for table `privilege`
 --
 
 INSERT INTO `privilege` (`id`, `fullname`, `controller`, `action`, `sort_order`, `created_at`, `updated_at`) VALUES
@@ -1297,7 +1298,7 @@ INSERT INTO `privilege` (`id`, `fullname`, `controller`, `action`, `sort_order`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `product`
 --
 
 DROP TABLE IF EXISTS `product`;
@@ -1325,7 +1326,7 @@ CREATE TABLE `product` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `project`
+-- Table structure for table `project`
 --
 
 DROP TABLE IF EXISTS `project`;
@@ -1353,7 +1354,7 @@ CREATE TABLE `project` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `project`
+-- Dumping data for table `project`
 --
 
 INSERT INTO `project` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_description`, `image`, `count_view`, `total_cost`, `intro`, `overview`, `equipment`, `price_list`, `googlemap_url`, `province_id`, `district_id`, `street`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1377,7 +1378,7 @@ INSERT INTO `project` (`id`, `fullname`, `alias`, `meta_keyword`, `meta_descript
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `project_article`
+-- Table structure for table `project_article`
 --
 
 DROP TABLE IF EXISTS `project_article`;
@@ -1400,7 +1401,7 @@ CREATE TABLE `project_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `project_article`
+-- Dumping data for table `project_article`
 --
 
 INSERT INTO `project_article` (`id`, `fullname`, `alias`, `image`, `intro`, `content`, `description`, `meta_keyword`, `meta_description`, `count_view`, `project_id`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1414,7 +1415,7 @@ INSERT INTO `project_article` (`id`, `fullname`, `alias`, `image`, `intro`, `con
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `project_member`
+-- Table structure for table `project_member`
 --
 
 DROP TABLE IF EXISTS `project_member`;
@@ -1427,7 +1428,7 @@ CREATE TABLE `project_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `project_member`
+-- Dumping data for table `project_member`
 --
 
 INSERT INTO `project_member` (`id`, `project_id`, `member_id`, `created_at`, `updated_at`) VALUES
@@ -1436,7 +1437,7 @@ INSERT INTO `project_member` (`id`, `project_id`, `member_id`, `created_at`, `up
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `province`
+-- Table structure for table `province`
 --
 
 DROP TABLE IF EXISTS `province`;
@@ -1451,7 +1452,7 @@ CREATE TABLE `province` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `province`
+-- Dumping data for table `province`
 --
 
 INSERT INTO `province` (`id`, `fullname`, `alias`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1521,7 +1522,7 @@ INSERT INTO `province` (`id`, `fullname`, `alias`, `sort_order`, `status`, `crea
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `reminders`
+-- Table structure for table `reminders`
 --
 
 DROP TABLE IF EXISTS `reminders`;
@@ -1538,7 +1539,7 @@ CREATE TABLE `reminders` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `roles`
+-- Table structure for table `roles`
 --
 
 DROP TABLE IF EXISTS `roles`;
@@ -1554,7 +1555,7 @@ CREATE TABLE `roles` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role_users`
+-- Table structure for table `role_users`
 --
 
 DROP TABLE IF EXISTS `role_users`;
@@ -1568,7 +1569,7 @@ CREATE TABLE `role_users` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `setting_system`
+-- Table structure for table `setting_system`
 --
 
 DROP TABLE IF EXISTS `setting_system`;
@@ -1593,7 +1594,7 @@ CREATE TABLE `setting_system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `setting_system`
+-- Dumping data for table `setting_system`
 --
 
 INSERT INTO `setting_system` (`id`, `fullname`, `alias`, `title`, `meta_keyword`, `meta_description`, `author`, `copyright`, `google_site_verification`, `google_analytics`, `logo_frontend`, `favicon`, `setting`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1602,7 +1603,7 @@ INSERT INTO `setting_system` (`id`, `fullname`, `alias`, `title`, `meta_keyword`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `supporter`
+-- Table structure for table `supporter`
 --
 
 DROP TABLE IF EXISTS `supporter`;
@@ -1618,7 +1619,7 @@ CREATE TABLE `supporter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `supporter`
+-- Dumping data for table `supporter`
 --
 
 INSERT INTO `supporter` (`id`, `fullname`, `number_money`, `payment_method_id`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -1631,7 +1632,7 @@ INSERT INTO `supporter` (`id`, `fullname`, `number_money`, `payment_method_id`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `throttle`
+-- Table structure for table `throttle`
 --
 
 DROP TABLE IF EXISTS `throttle`;
@@ -1645,7 +1646,7 @@ CREATE TABLE `throttle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `throttle`
+-- Dumping data for table `throttle`
 --
 
 INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at`) VALUES
@@ -2100,7 +2101,7 @@ INSERT INTO `throttle` (`id`, `user_id`, `type`, `ip`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -2122,16 +2123,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `permissions`, `last_login`, `fullname`, `address`, `phone`, `image`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'diennk@dienkim.com', '$2y$10$jeW7xaNuq9I3.Oerer8FE.ibP6fv00VDPHYevC1dGUio33xj0W1KK', NULL, '2018-04-10 18:11:58', 'Nguyễn Kim Điền', NULL, NULL, 'cang-bong-da-han-quoc-3-3585.jpg', 5, 1, '2017-11-12 07:23:56', '2018-04-10 18:11:58');
+(1, 'admin', 'diennk@dienkim.com', '$2y$10$jeW7xaNuq9I3.Oerer8FE.ibP6fv00VDPHYevC1dGUio33xj0W1KK', NULL, '2018-05-11 01:54:49', 'Nguyễn Kim Điền', NULL, NULL, 'cang-bong-da-han-quoc-3-3585.jpg', 5, 1, '2017-11-12 07:23:56', '2018-05-11 01:54:49');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user_group_member`
+-- Table structure for table `user_group_member`
 --
 
 DROP TABLE IF EXISTS `user_group_member`;
@@ -2144,7 +2145,7 @@ CREATE TABLE `user_group_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user_group_member`
+-- Dumping data for table `user_group_member`
 --
 
 INSERT INTO `user_group_member` (`id`, `group_member_id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -2159,7 +2160,7 @@ INSERT INTO `user_group_member` (`id`, `group_member_id`, `user_id`, `created_at
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `video`
+-- Table structure for table `video`
 --
 
 DROP TABLE IF EXISTS `video`;
@@ -2176,7 +2177,7 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 --
--- Đang đổ dữ liệu cho bảng `video`
+-- Dumping data for table `video`
 --
 
 INSERT INTO `video` (`id`, `fullname`, `category_id`, `image`, `video_url`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
@@ -2190,236 +2191,236 @@ INSERT INTO `video` (`id`, `fullname`, `category_id`, `image`, `video_url`, `sor
 (11, 'Đi tham quan núi Bà Đen 8', 1, 'thuvienhinh-8.png', 'yGvSEhQXu4g', 8, 1, '2018-01-09 11:06:08', '2018-01-09 11:50:20');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `activations`
+-- Indexes for table `activations`
 --
 ALTER TABLE `activations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `album`
+-- Indexes for table `album`
 --
 ALTER TABLE `album`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `article`
+-- Indexes for table `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `article_category`
+-- Indexes for table `article_category`
 --
 ALTER TABLE `article_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `banner`
+-- Indexes for table `banner`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category_article`
+-- Indexes for table `category_article`
 --
 ALTER TABLE `category_article`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category_banner`
+-- Indexes for table `category_banner`
 --
 ALTER TABLE `category_banner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category_param`
+-- Indexes for table `category_param`
 --
 ALTER TABLE `category_param`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category_product`
+-- Indexes for table `category_product`
 --
 ALTER TABLE `category_product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `category_video`
+-- Indexes for table `category_video`
 --
 ALTER TABLE `category_video`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `district`
+-- Indexes for table `district`
 --
 ALTER TABLE `district`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `group_member`
+-- Indexes for table `group_member`
 --
 ALTER TABLE `group_member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `group_privilege`
+-- Indexes for table `group_privilege`
 --
 ALTER TABLE `group_privilege`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `invoice`
+-- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `invoice_detail`
+-- Indexes for table `invoice_detail`
 --
 ALTER TABLE `invoice_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `menu`
+-- Indexes for table `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `menu_type`
+-- Indexes for table `menu_type`
 --
 ALTER TABLE `menu_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `module_item`
+-- Indexes for table `module_item`
 --
 ALTER TABLE `module_item`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `organization`
+-- Indexes for table `organization`
 --
 ALTER TABLE `organization`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `page`
+-- Indexes for table `page`
 --
 ALTER TABLE `page`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `payment_method`
+-- Indexes for table `payment_method`
 --
 ALTER TABLE `payment_method`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `persistences`
+-- Indexes for table `persistences`
 --
 ALTER TABLE `persistences`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `persistences_code_unique` (`code`);
 
 --
--- Chỉ mục cho bảng `photo`
+-- Indexes for table `photo`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `post_param`
+-- Indexes for table `post_param`
 --
 ALTER TABLE `post_param`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `privilege`
+-- Indexes for table `privilege`
 --
 ALTER TABLE `privilege`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `project`
+-- Indexes for table `project`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `project_article`
+-- Indexes for table `project_article`
 --
 ALTER TABLE `project_article`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `project_member`
+-- Indexes for table `project_member`
 --
 ALTER TABLE `project_member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `province`
+-- Indexes for table `province`
 --
 ALTER TABLE `province`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `reminders`
+-- Indexes for table `reminders`
 --
 ALTER TABLE `reminders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_slug_unique` (`slug`);
 
 --
--- Chỉ mục cho bảng `role_users`
+-- Indexes for table `role_users`
 --
 ALTER TABLE `role_users`
   ADD PRIMARY KEY (`user_id`,`role_id`);
 
 --
--- Chỉ mục cho bảng `setting_system`
+-- Indexes for table `setting_system`
 --
 ALTER TABLE `setting_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `supporter`
+-- Indexes for table `supporter`
 --
 ALTER TABLE `supporter`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `throttle`
+-- Indexes for table `throttle`
 --
 ALTER TABLE `throttle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `throttle_user_id_index` (`user_id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -2427,245 +2428,245 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Chỉ mục cho bảng `user_group_member`
+-- Indexes for table `user_group_member`
 --
 ALTER TABLE `user_group_member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `video`
+-- Indexes for table `video`
 --
 ALTER TABLE `video`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `activations`
+-- AUTO_INCREMENT for table `activations`
 --
 ALTER TABLE `activations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `album`
+-- AUTO_INCREMENT for table `album`
 --
 ALTER TABLE `album`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `article`
+-- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng `article_category`
+-- AUTO_INCREMENT for table `article_category`
 --
 ALTER TABLE `article_category`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT cho bảng `banner`
+-- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT cho bảng `category_article`
+-- AUTO_INCREMENT for table `category_article`
 --
 ALTER TABLE `category_article`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `category_banner`
+-- AUTO_INCREMENT for table `category_banner`
 --
 ALTER TABLE `category_banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `category_param`
+-- AUTO_INCREMENT for table `category_param`
 --
 ALTER TABLE `category_param`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `category_product`
+-- AUTO_INCREMENT for table `category_product`
 --
 ALTER TABLE `category_product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `category_video`
+-- AUTO_INCREMENT for table `category_video`
 --
 ALTER TABLE `category_video`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `district`
+-- AUTO_INCREMENT for table `district`
 --
 ALTER TABLE `district`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `group_member`
+-- AUTO_INCREMENT for table `group_member`
 --
 ALTER TABLE `group_member`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `group_privilege`
+-- AUTO_INCREMENT for table `group_privilege`
 --
 ALTER TABLE `group_privilege`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3182;
 
 --
--- AUTO_INCREMENT cho bảng `invoice`
+-- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `invoice_detail`
+-- AUTO_INCREMENT for table `invoice_detail`
 --
 ALTER TABLE `invoice_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `menu`
+-- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
--- AUTO_INCREMENT cho bảng `menu_type`
+-- AUTO_INCREMENT for table `menu_type`
 --
 ALTER TABLE `menu_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `module_item`
+-- AUTO_INCREMENT for table `module_item`
 --
 ALTER TABLE `module_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT cho bảng `page`
+-- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `payment_method`
+-- AUTO_INCREMENT for table `payment_method`
 --
 ALTER TABLE `payment_method`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `persistences`
+-- AUTO_INCREMENT for table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=429;
 
 --
--- AUTO_INCREMENT cho bảng `photo`
+-- AUTO_INCREMENT for table `photo`
 --
 ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT cho bảng `post_param`
+-- AUTO_INCREMENT for table `post_param`
 --
 ALTER TABLE `post_param`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT cho bảng `privilege`
+-- AUTO_INCREMENT for table `privilege`
 --
 ALTER TABLE `privilege`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
--- AUTO_INCREMENT cho bảng `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `project`
+-- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
   MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT cho bảng `project_article`
+-- AUTO_INCREMENT for table `project_article`
 --
 ALTER TABLE `project_article`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `project_member`
+-- AUTO_INCREMENT for table `project_member`
 --
 ALTER TABLE `project_member`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `province`
+-- AUTO_INCREMENT for table `province`
 --
 ALTER TABLE `province`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT cho bảng `reminders`
+-- AUTO_INCREMENT for table `reminders`
 --
 ALTER TABLE `reminders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `setting_system`
+-- AUTO_INCREMENT for table `setting_system`
 --
 ALTER TABLE `setting_system`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `supporter`
+-- AUTO_INCREMENT for table `supporter`
 --
 ALTER TABLE `supporter`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `throttle`
+-- AUTO_INCREMENT for table `throttle`
 --
 ALTER TABLE `throttle`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=448;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `user_group_member`
+-- AUTO_INCREMENT for table `user_group_member`
 --
 ALTER TABLE `user_group_member`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT cho bảng `video`
+-- AUTO_INCREMENT for table `video`
 --
 ALTER TABLE `video`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
