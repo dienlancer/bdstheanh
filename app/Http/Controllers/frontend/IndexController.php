@@ -1101,7 +1101,7 @@ class IndexController extends Controller {
                   }                                    
                   if($checked==1){                    
                       $item = new InvoiceModel;
-                      $item->code=randomString(20);
+                      $item->code=randomCodeNumber();
                       $item->customer_id  =$id;
                       $item->username  =$data["username"];
                       $item->email=@$request->email;

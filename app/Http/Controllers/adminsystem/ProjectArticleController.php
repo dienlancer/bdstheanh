@@ -120,7 +120,17 @@ class ProjectArticleController extends Controller {
               $checked = 0;
               
               $msg["project_id"]      = "Thiếu danh mục";
-            }          
+            }      
+            /* begin checkfilesize */      
+      $file_size=0;
+      if($image_file != null){        
+        $file_size=((int)@$image_file['size'])/1024/1024;
+        if($file_size > (int)max_size_upload ){
+          $checked = 0;               
+          $msg["status"]      = "Vui lòng nhập hình ảnh dưới 2MB";
+        }
+      }
+      /* end checkfilesize */    
             if(empty($sort_order)){
              $checked = 0;
              

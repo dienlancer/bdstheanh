@@ -58,107 +58,127 @@ class SettingSystemController extends Controller {
         }     
         
     }
-              public function save(Request $request){
-                $id                   =   trim($request->id);        
-                $fullname             =   trim($request->fullname);
-                $alias                =   trim($request->alias);  
-                $title                =   trim($request->title);
-                $meta_keyword         =   trim($request->meta_keyword);
-                $meta_description     =   trim($request->meta_description);
-                $author               =   trim($request->author);
-                $copyright            =   trim($request->copyright);          
-                $google_site_verification =   trim($request->google_site_verification);
-                $google_analytics     =   trim($request->google_analytics);                    
-                $logo_frontend_file           =   null;
-                if(isset($_FILES["logo_frontend"])){
-                  $logo_frontend_file         =   $_FILES["logo_frontend"];
-                }
-                $favicon_file           =   null;
-                if(isset($_FILES["favicon"])){
-                  $favicon_file         =   $_FILES["favicon"];
-                }          
-                $logo_frontend_hidden =   trim($request->logo_frontend_hidden);          
-                $favicon_hidden       =   trim($request->favicon_hidden);          
-                $setting              =   trim($request->setting);        
-                $status               =   trim($request->status);        
-                $sort_order           =   trim($request->sort_order);                  
-                $data                 =   array();
+    public function save(Request $request){
+      $id                   =   trim($request->id);        
+      $fullname             =   trim($request->fullname);
+      $alias                =   trim($request->alias);  
+      $title                =   trim($request->title);
+      $meta_keyword         =   trim($request->meta_keyword);
+      $meta_description     =   trim($request->meta_description);
+      $author               =   trim($request->author);
+      $copyright            =   trim($request->copyright);          
+      $google_site_verification =   trim($request->google_site_verification);
+      $google_analytics     =   trim($request->google_analytics);                    
+      $logo_frontend_file           =   null;
+      if(isset($_FILES["logo_frontend"])){
+        $logo_frontend_file         =   $_FILES["logo_frontend"];
+      }
+      $favicon_file           =   null;
+      if(isset($_FILES["favicon"])){
+        $favicon_file         =   $_FILES["favicon"];
+      }          
+      $logo_frontend_hidden =   trim($request->logo_frontend_hidden);          
+      $favicon_hidden       =   trim($request->favicon_hidden);          
+      $setting              =   trim($request->setting);        
+      $status               =   trim($request->status);        
+      $sort_order           =   trim($request->sort_order);                  
+      $data                 =   array();
 
-                $item                 =   null;
-                $info                 =   array();
+      $item                 =   null;
+      $info                 =   array();
       $checked              =   1;                           
       $msg                =   array();
-                if(empty($sort_order)){
-                 $checked = 0;
+      /* begin checkfilesize */
+      $file_size=0;
+      if($logo_frontend_file != null){        
+        $file_size=((int)@$logo_frontend_file['size'])/1024/1024;
+        if($file_size > (int)max_size_upload ){
+          $checked = 0;               
+          $msg["status"]      = "Vui lòng nhập hình ảnh dưới 2MB";
+        }
+      }
+      /* end checkfilesize */
+      /* begin checkfilesize */
+      $file_size=0;
+      if($favicon_file != null){        
+        $file_size=((int)@$favicon_file['size'])/1024/1024;
+        if($file_size > (int)max_size_upload ){
+          $checked = 0;               
+          $msg["status"]      = "Vui lòng nhập hình ảnh dưới 2MB";
+        }
+      }
+      /* end checkfilesize */
+      if(empty($sort_order)){
+       $checked = 0;
 
-                 $msg["sort_order"]    = "Thiếu sắp xếp";
-               }
-               if((int)$status==-1){
-                 $checked = 0;
+       $msg["sort_order"]    = "Thiếu sắp xếp";
+     }
+     if((int)$status==-1){
+       $checked = 0;
 
-                 $msg["status"]      = "Thiếu trạng thái";
-               }                    
-               if ($checked == 1) {    
-                $logo_frontend_name='';
-                $favicon_name='';
-                $width=0;
-                $height=0;
-                if($logo_frontend_file != null){                                                                   
-                  $logo_frontend_name=uploadImage($logo_frontend_file['name'],$logo_frontend_file['tmp_name'],$width,$height);        
-                }                    
-                if($favicon_file != null){                                                                
-                  $favicon_name=uploadImage($favicon_file['name'],$favicon_file['tmp_name'],$width,$height);        
-                }   
-                if(empty($id)){
-                  $item         =   new SettingSystemModel;     
-                  if(!empty($logo_frontend_name)){
-                    $item->logo_frontend    =   trim($logo_frontend_name) ;  
-                  }  
-                  if(!empty($favicon_name)){
-                    $item->favicon    =   trim($favicon_name) ;  
-                  }
-                  $item->created_at   = date("Y-m-d H:i:s",time());                             
-                } else{
-                  $item         = SettingSystemModel::find((int)@$id);   
-                  $item->logo_frontend=null;
-                  $item->favicon=null;                       
-                  if(!empty($logo_frontend_hidden)){
-                    $item->logo_frontend =$logo_frontend_hidden;          
-                  }
-                  if(!empty($favicon_hidden)){
-                    $item->favicon =$favicon_hidden;          
-                  }
-                  if(!empty($logo_frontend_name))  {
-                    $item->logo_frontend=$logo_frontend_name;                                                
-                  }                  
-                  if(!empty($favicon_name))  {
-                    $item->favicon=$favicon_name;                                                
-                  }                                                              
-                }        
-                $item->fullname                 =   @$fullname;                
-                $item->alias                    =   @$alias;        
-                $item->title                    =   @$title;
-                $item->meta_keyword             =   @$meta_keyword;
-                $item->meta_description         =   @$meta_description;
-                $item->author                   =   @$author;
-                $item->copyright                =   @$copyright;                
-                $item->google_site_verification =   @$google_site_verification;
-                $item->google_analytics         =   @$google_analytics;                                            
+       $msg["status"]      = "Thiếu trạng thái";
+     }                    
+     if ($checked == 1) {    
+      $logo_frontend_name='';
+      $favicon_name='';
+      $width=0;
+      $height=0;
+      if($logo_frontend_file != null){                                                                   
+        $logo_frontend_name=uploadImage($logo_frontend_file['name'],$logo_frontend_file['tmp_name'],$width,$height);        
+      }                    
+      if($favicon_file != null){                                                                
+        $favicon_name=uploadImage($favicon_file['name'],$favicon_file['tmp_name'],$width,$height);        
+      }   
+      if(empty($id)){
+        $item         =   new SettingSystemModel;     
+        if(!empty($logo_frontend_name)){
+          $item->logo_frontend    =   trim($logo_frontend_name) ;  
+        }  
+        if(!empty($favicon_name)){
+          $item->favicon    =   trim($favicon_name) ;  
+        }
+        $item->created_at   = date("Y-m-d H:i:s",time());                             
+      } else{
+        $item         = SettingSystemModel::find((int)@$id);   
+        $item->logo_frontend=null;
+        $item->favicon=null;                       
+        if(!empty($logo_frontend_hidden)){
+          $item->logo_frontend =$logo_frontend_hidden;          
+        }
+        if(!empty($favicon_hidden)){
+          $item->favicon =$favicon_hidden;          
+        }
+        if(!empty($logo_frontend_name))  {
+          $item->logo_frontend=$logo_frontend_name;                                                
+        }                  
+        if(!empty($favicon_name))  {
+          $item->favicon=$favicon_name;                                                
+        }                                                              
+      }        
+      $item->fullname                 =   @$fullname;                
+      $item->alias                    =   @$alias;        
+      $item->title                    =   @$title;
+      $item->meta_keyword             =   @$meta_keyword;
+      $item->meta_description         =   @$meta_description;
+      $item->author                   =   @$author;
+      $item->copyright                =   @$copyright;                
+      $item->google_site_verification =   @$google_site_verification;
+      $item->google_analytics         =   @$google_analytics;                                            
 
-                $item->setting                  =   @$setting ;                            
-                $item->sort_order               = (int)@$sort_order;
-                $item->status                   = (int)@$status;    
-                $item->updated_at               = date("Y-m-d H:i:s",time());               
-                $item->save();                    
-                $msg['success']='Lưu thành công';  
-              }          
-             $info = array(
-              "checked"       => $checked,          
-        'msg'       => $msg,                      
-              "id"            => (int)@$id
-            );             
-             return $info;       
-           }
+      $item->setting                  =   @$setting ;                            
+      $item->sort_order               = (int)@$sort_order;
+      $item->status                   = (int)@$status;    
+      $item->updated_at               = date("Y-m-d H:i:s",time());               
+      $item->save();                    
+      $msg['success']='Lưu thành công';  
+    }          
+    $info = array(
+      "checked"       => $checked,          
+      'msg'       => $msg,                      
+      "id"            => (int)@$id
+    );             
+    return $info;       
+  }
            public function changeStatus(Request $request){
             $id             =       (int)$request->id;     
             $info                 =   array();

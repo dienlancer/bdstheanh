@@ -148,3 +148,6 @@ h3.rio i{
 .modal-backdrop{
     z-index: 2;
 }
+.box-logo,.recommend{
+    display: flex;
+}

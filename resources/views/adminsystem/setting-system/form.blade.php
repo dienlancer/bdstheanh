@@ -179,7 +179,10 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-label"><b>Logo trang chủ</b></label>
                         <div class="col-md-9">
-                            <input type="file" name="logo_frontend"  />   
+                            <div class="box-logo">
+                                <div><input type="file" name="logo_frontend"  />   </div>
+                                <div><font color="red"><b>Kích thước ảnh không được vượt quá <?php echo (int)max_size_upload; ?>MB</b></font></div>
+                            </div> 
                             <div class="picture-area"><?php echo $pictureLogoFrontend; ?>                      </div>
                         </div>
                     </div>     
@@ -188,7 +191,10 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
                     <div class="form-group col-md-12">
                         <label class="col-md-3 control-label"><b>Favicon</b></label>
                         <div class="col-md-9">
-                            <input type="file" name="favicon"  />   
+                            <div class="box-logo">
+                                <div><input type="file" name="favicon"  />   </div>
+                                <div><font color="red"><b>Kích thước ảnh không được vượt quá <?php echo (int)max_size_upload; ?>MB</b></font></div>
+                            </div> 
                             <div class="picture-area"><?php echo $pictureFavicon; ?>                      </div>
                         </div>
                     </div>     

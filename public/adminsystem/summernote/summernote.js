@@ -6109,7 +6109,7 @@ var ImageDialog = /** @class */ (function () {
         }
         var body = [
             '<div class="form-group note-form-group note-group-select-from-files">',
-            '<label class="note-form-label">' + this.lang.image.selectFromFiles + '</label>',
+            '<label class="note-form-label"><font color="red"><b>Vui lòng cập nhật ảnh dưới 2MB</b></font></label>',
             '<input class="note-image-input note-form-control note-input" ',
             ' type="file" name="files" accept="image/*" multiple="multiple" />',
             imageLimitation,

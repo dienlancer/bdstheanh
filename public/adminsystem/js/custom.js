@@ -51,6 +51,7 @@ function loadSummerNote(){
     		['table'],		
     		['picture'],
     		['link'],
+    		['custom',['removeLinkPlugin']],
     		['video'],			
     		['hr'],
     		['undo'],

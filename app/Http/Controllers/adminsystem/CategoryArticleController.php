@@ -132,13 +132,23 @@ class CategoryArticleController extends Controller {
               $data=CategoryArticleModel::whereRaw("trim(lower(fullname)) = ?",[trim(mb_strtolower($fullname,'UTF-8'))])->get()->toArray();	        	
             }else{
               $data=CategoryArticleModel::whereRaw("trim(lower(fullname)) = ? and id != ?",[trim(mb_strtolower($fullname,'UTF-8')),(int)@$id])->get()->toArray();		
-            }  
+            }              
             if (count($data) > 0) {
               $checked = 0;
 
               $msg["fullname"] = "Chủ đề bài viết đã tồn tại";
             }      	
-          }        
+          }    
+          /* begin checkfilesize */
+      $file_size=0;
+      if($image_file != null){        
+        $file_size=((int)@$image_file['size'])/1024/1024;
+        if($file_size > (int)max_size_upload ){
+          $checked = 0;               
+          $msg["status"]      = "Vui lòng nhập hình ảnh dưới 2MB";
+        }
+      }
+      /* end checkfilesize */    
           if(empty($sort_order)){
            $checked = 0;
 
