@@ -137,7 +137,14 @@ function trashForm(url){
 	}
 	return xac_nhan;    
 }
-
+function xacnhanxoa(){
+	var msg="Bạn chắc chắn có muốn xóa ?";
+    var xac_nhan=false;
+	if(window.confirm(msg)){
+		xac_nhan=true;
+	}
+	return xac_nhan;
+}
 
 function changePage(page,ctrl){
 	$('input[name=filter_page]').val(page);
