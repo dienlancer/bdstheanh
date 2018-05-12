@@ -9,13 +9,13 @@
 		type: 'POST',
 		data: dataItem,
 		async: false,
-		success: function (data) {			
+		success: function (data) {						
 			if(data.checked==1){
 				$(ctrl).summernote('editor.insertImage', data.summer_url,function(summer_img){										
 					$(summer_img).css('width','100%');
 				});
 			}else{                    
-				showMsg('note',data);                         
+				alert(data.msg.status);                         
 			}
 		},
 		error : function (data){
