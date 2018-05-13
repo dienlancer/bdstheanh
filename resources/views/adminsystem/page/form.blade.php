@@ -233,7 +233,7 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
             async: false,
             success: function (data) {
                 if(data.checked==1){                    
-                    window.location.href = "<?php echo $linkCancel; ?>";
+                    window.location.href = data.link_edit;
                 }else{
                     showMsg('note',data);        
                 }

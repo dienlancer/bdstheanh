@@ -95,7 +95,7 @@ $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'
             async: false,
             success: function (data) {
                 if(data.checked==1){                    
-                    window.location.href = "<?php echo $linkCancel; ?>";
+                    window.location.href = data.link_edit;
                 }else{
                     showMsg('note',data);                         
                 }

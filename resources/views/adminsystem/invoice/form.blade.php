@@ -11,16 +11,16 @@ $inputEmail             =   '<input type="text" class="form-control" name="email
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"                value="'.@$arrRowData['fullname'].'">';  
 $inputAddress           =   '<input type="text" class="form-control" name="address"                  value="'.@$arrRowData['address'].'">'; 
 $inputPhone             =   '<input type="text" class="form-control" name="phone"                      value="'.@$arrRowData['phone'].'">';  
-
+$inputNote              =   '<textarea  name="note" rows="2" cols="100" class="form-control" >'.@$arrRowData['note'].'</textarea>'; 
 
 $lblQuantity            =   number_format((int)@$arrRowData['quantity'],0,".",",");
 $lblTotalPrice          =   number_format((int)@$arrRowData['total_price'],0,".",",");
 
-$ddlPaymentMethod       = cmsSelectboxCategory("payment_method_id", "form-control", $dataPaymentMethod, (int)@$arrRowData['payment_method_id'],'disabled','Chọn danh mục');
+
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
-$inputSortOrder         =   '<input type="text" class="form-control" name="sort_order" id="sort_order"     value="'.@$arrRowData['sort_order'].'">';
+
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id" value="'.@$id.'" />'; 
 $setting= getSettingSystem();
@@ -29,16 +29,17 @@ $product_height = $setting['product_height']['field_value'];
 ?>
 <div class="portlet light bordered">
     <div class="portlet-title">
+        <div class="note"  style="display: none;"></div>
         <div class="caption">
             <i class="{{$icon}}"></i>
             <span class="caption-subject font-dark sbold uppercase">{{$title}}</span>
         </div>
         <div class="actions">
-         <div class="table-toolbar">
+           <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12">
                     <button onclick="save()" class="btn purple">Save new <i class="fa fa-floppy-o"></i></button> 
-                    <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a>                    </div>                                                
+                    <a href="<?php echo $linkCancel; ?>" class="btn green">Cancel <i class="fa fa-ban"></i></a></div>                                                
                 </div>
             </div>    
         </div>
@@ -50,9 +51,9 @@ $product_height = $setting['product_height']['field_value'];
             <div class="form-body">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Username</b></label>
+                        <label class="col-md-3 control-label"><b>Tên khách hàng</b></label>
                         <div class="col-md-9">
-                            <?php echo $inputUsername; ?>
+                            <?php echo $inputFullName; ?>
                             <span class="help-block"></span>
                         </div>
                     </div>   
@@ -66,12 +67,12 @@ $product_height = $setting['product_height']['field_value'];
                 </div>      
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Tên khách hàng</b></label>
+                        <label class="col-md-3 control-label"><b>Phone</b></label>
                         <div class="col-md-9">
-                            <?php echo $inputFullName; ?>
+                            <?php echo $inputPhone; ?>
                             <span class="help-block"></span>
                         </div>
-                    </div>   
+                    </div>  
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label"><b>Địa chỉ</b></label>
                         <div class="col-md-9">
@@ -82,9 +83,9 @@ $product_height = $setting['product_height']['field_value'];
                 </div>       
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Phone</b></label>
+                        <label class="col-md-3 control-label"><b>Mã đơn hàng</b></label>
                         <div class="col-md-9">
-                            <?php echo $inputPhone; ?>
+                            <?php echo $inputCode; ?>
                             <span class="help-block"></span>
                         </div>
                     </div>   
@@ -95,36 +96,19 @@ $product_height = $setting['product_height']['field_value'];
                             <span class="help-block"></span>
                         </div>
                     </div>     
-                </div>                     
+                </div>   
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Phương thức thanh toán</b></label>
-                        <div class="col-md-9">
-                            <?php echo $ddlPaymentMethod; ?>
-                            <span class="help-block"></span>
-                        </div>
-                        
-                        
-                    </div>   
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Mã đơn hàng</b></label>
-                        <div class="col-md-9">
-                            <?php echo $inputCode; ?>
-                            <span class="help-block"></span>
-                        </div>
-                    </div>       
-                </div>  
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label"><b>Sắp xếp</b></label>
-                        <div class="col-md-9">
-                            <?php echo $inputSortOrder; ?>
+                        <label class="col-md-3 control-label"><b>Ghi chú</b></label>
+                        <div class="col-md-9">                            
+                            <?php echo $inputNote; ?>
                             <span class="help-block"></span>
                         </div>
                     </div>   
-                    <div class="form-group col-md-6">                        
-                    </div>       
-                </div>  
+                    <div class="form-group col-md-6">
+                        
+                    </div>     
+                </div>                                                
                 <div class="row">
                     <div class="col-md-12">
                         <table width="100%" class="com_product16">
@@ -172,56 +156,27 @@ $product_height = $setting['product_height']['field_value'];
                 </div>                                                                    
             </div>                         
         </form>
-        
     </div>
 </div>
 <script type="text/javascript" language="javascript">
-    function resetErrorStatus(){
-        var id              =   $('input[name="id"]');        
-        var fullname        =   $('input[name="fullname"]');
-        var address         =   $('input[name="address"]');
-        var phone           =   $('input[name="phone"]');
-        var mobilephone     =   $('input[name="mobilephone"]');
-        var fax             =   $('input[name="fax"]');
-        var sort_order      =   $('input[name="sort_order"]');
-        var status          =   $('select[name="status"]');
-        
-        $(fullname).closest('.form-group').removeClass("has-error");
-        $(address).closest('.form-group').removeClass("has-error");        
-        $(phone).closest('.form-group').removeClass("has-error");
-        $(mobilephone).closest('.form-group').removeClass("has-error");        
-        $(fax).closest('.form-group').removeClass("has-error");        
-        $(sort_order).closest('.form-group').removeClass("has-error");        
-        $(status).closest('.form-group').removeClass("has-error");        
-        
-        $(fullname).closest('.form-group').find('span').empty().hide();
-        $(address).closest('.form-group').find('span').empty().hide();        
-        $(phone).closest('.form-group').find('span').empty().hide();
-        $(mobilephone).closest('.form-group').find('span').empty().hide();        
-        $(fax).closest('.form-group').find('span').empty().hide();
-        $(sort_order).closest('.form-group').find('span').empty().hide();        
-        $(status).closest('.form-group').find('span').empty().hide();        
-    }
+    
 
     function save(){
         var id=$('input[name="id"]').val();                
         var fullname=$('input[name="fullname"]').val();
         var address=$('input[name="address"]').val();
-        var phone=$('input[name="phone"]').val();
-        var mobilephone=$('input[name="mobilephone"]').val();
-        var fax=$('input[name="fax"]').val();
-        var sort_order=$('input[name="sort_order"]').val();
+        var phone=$('input[name="phone"]').val();                
         var status=$('select[name="status"]').val();     
         var token = $('input[name="_token"]').val();   
-        resetErrorStatus();
+        
         var dataItem={
             "id":id,        
             "fullname":fullname,
             "address":address,
             "phone":phone,
-            "mobilephone":mobilephone,
-            "fax":fax,                
-            "sort_order":sort_order,
+
+
+            
             "status":status,
             "_token": token
         };
@@ -232,44 +187,9 @@ $product_height = $setting['product_height']['field_value'];
             async: false,
             success: function (data) {
                 if(data.checked==1){                    
-                    window.location.href = "<?php echo $linkCancel; ?>";
+                    window.location.href = data.link_edit;
                 }else{
-                    var data_error=data.error;   
-                    if(typeof data_error.fullname               != "undefined"){
-                        $('input[name="fullname"]').closest('.form-group').addClass(data_error.fullname.type_msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').text(data_error.fullname.msg);
-                        $('input[name="fullname"]').closest('.form-group').find('span').show();                        
-                    }        
-                    if(typeof data_error.address               != "undefined"){
-                        $('input[name="address"]').closest('.form-group').addClass(data_error.address.type_msg);
-                        $('input[name="address"]').closest('.form-group').find('span').text(data_error.address.msg);
-                        $('input[name="address"]').closest('.form-group').find('span').show();                        
-                    }         
-                    if(typeof data_error.phone               != "undefined"){
-                        $('input[name="phone"]').closest('.form-group').addClass(data_error.phone.type_msg);
-                        $('input[name="phone"]').closest('.form-group').find('span').text(data_error.phone.msg);
-                        $('input[name="phone"]').closest('.form-group').find('span').show();                        
-                    }     
-                    if(typeof data_error.mobilephone               != "undefined"){
-                        $('input[name="mobilephone"]').closest('.form-group').addClass(data_error.mobilephone.type_msg);
-                        $('input[name="mobilephone"]').closest('.form-group').find('span').text(data_error.mobilephone.msg);
-                        $('input[name="mobilephone"]').closest('.form-group').find('span').show();                        
-                    } 
-                    if(typeof data_error.fax               != "undefined"){
-                        $('input[name="fax"]').closest('.form-group').addClass(data_error.fax.type_msg);
-                        $('input[name="fax"]').closest('.form-group').find('span').text(data_error.fax.msg);
-                        $('input[name="fax"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.sort_order               != "undefined"){
-                        $('input[name="sort_order"]').closest('.form-group').addClass(data_error.sort_order.type_msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').text(data_error.sort_order.msg);
-                        $('input[name="sort_order"]').closest('.form-group').find('span').show();                        
-                    }
-                    if(typeof data_error.status               != "undefined"){
-                        $('select[name="status"]').closest('.form-group').addClass(data_error.status.type_msg);
-                        $('select[name="status"]').closest('.form-group').find('span').text(data_error.status.msg);
-                        $('select[name="status"]').closest('.form-group').find('span').show();
-                    }                    
+                    showMsg('note',data);    
                 }
                 spinner.hide();
             },
