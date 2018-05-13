@@ -175,10 +175,10 @@ class PageController extends Controller {
                 $msg['success']='Lưu thành công';
             }      		 			       
             $info = array(
-              "checked"       => $checked,          
-        'msg'       => $msg,                     
-              "id"            => (int)@$id
-            );                       
+        "checked"       => $checked,          
+        'msg'       => $msg,      
+        'link_edit'=>route('adminsystem.'.$this->_controller.'.getForm',['edit',@$item->id])
+      );                       
             return $info;    
     }
     public function changeStatus(Request $request){

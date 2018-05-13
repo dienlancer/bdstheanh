@@ -134,10 +134,10 @@ public function save(Request $request){
   $msg['success']='Lưu thành công';
 }      		 			       
 $info = array(
-  "checked"       => $checked,          
-  'msg'       => $msg,        
-  "id"            => (int)@$id
-);                       
+        "checked"       => $checked,          
+        'msg'       => $msg,      
+        'link_edit'=>route('adminsystem.'.$this->_controller.'.getForm',['edit',@$category_id,@$item->id])
+      );                       
 return $info;      
 }
 public function changeStatus(Request $request){

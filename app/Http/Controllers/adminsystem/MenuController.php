@@ -181,10 +181,10 @@ class MenuController extends Controller {
                 $msg['success']='Lưu thành công';
             }    
             $info = array(
-          "checked"       => $checked,          
-        'msg'       => $msg,                
-          "id"            => (int)@$id
-        );         		 			       
+        "checked"       => $checked,          
+        'msg'       => $msg,      
+        'link_edit'=>route('adminsystem.'.$this->_controller.'.getForm',['edit',@$menu_type_id,@$item->id,@$alias])
+      );    		 			       
             return $info;       
       }
       public function changeStatus(Request $request){
