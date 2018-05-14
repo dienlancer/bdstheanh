@@ -112,7 +112,7 @@ function convertToTextPrice($value){
     $strCurrency= number_format($value,0,",",".") ;
     break;
     case "en_US":
-    $strCurrency='$'.number_format($value,0,".",",");
+    $strCurrency=number_format($value,0,".",",");
     break;
   }
   return $strCurrency;
