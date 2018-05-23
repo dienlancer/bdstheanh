@@ -126,67 +126,70 @@ class MenuController extends Controller {
         return view("adminsystem.no-access",compact('controller'));
       }               
     }
-      public function save(Request $request){
-            $id 					       =	  trim($request->id)	;        
-            $fullname 				   =	  trim($request->fullname)	;
-            $alias               =    trim($request->alias);          
-            $parent_id	         =		trim($request->parent_id);
-            $menu_type_id        =    trim($request->menu_type_id);  
-            $menu_class          =    trim($request->menu_class);    
-            $sort_order 			   =		trim($request->sort_order);
-            $status 				     =		trim($request->status);          
-            $data 		           =    array();
-            
-            $item		             =    null;
-            $info                 =   array();
+    public function save(Request $request){
+      $id 					       =	  trim($request->id)	;        
+      $fullname 				   =	  trim($request->fullname)	;
+      $alias               =    trim($request->alias);          
+      $parent_id	         =		trim($request->parent_id);
+      $menu_type_id        =    trim($request->menu_type_id);  
+      $menu_class          =    trim($request->menu_class);    
+      $sort_order 			   =		trim($request->sort_order);
+      $status 				     =		trim($request->status);          
+      $data 		           =    array();
+
+      $item		             =    null;
+      $info                 =   array();
       $checked              =   1;                           
       $msg                =   array();
-                if(empty($fullname)){
-             $checked = 0;
+      if(empty($fullname)){
+       $checked = 0;
 
-             $msg["fullname"] = "Thiếu chủ đề bài viết";
-           }
-            if(empty($sort_order)){
-                 $checked = 0;
-                 
-                 $msg["sort_order"] 		= "Thiếu sắp xếp";
-            }
-            if((int)$status==-1){
-                 $checked = 0;
-                 
-                 $msg["status"] 			= "Thiếu trạng thái";
-            }
-            if ($checked == 1) {    
-                if(empty($id)){
-                    $item 				      = 	new MenuModel;       
-                    $item->created_at 	=	date("Y-m-d H:i:s",time());                          
-                } else{
-                    $item				         =	MenuModel::find((int)@$id);                     	  		 
-                }  
-                $item->fullname 		     = $fullname;
-                $item->alias             = $alias;                             
-                $item->parent_id 		     = (int)$parent_id;
-                $item->menu_type_id      = (int)$menu_type_id;
-                $level                   = 0;              
-                $parent=MenuModel::find($parent_id); 
-                if(count($parent) > 0){
-                    $level=(int)$parent->toArray()["level"]+1;                
-                }                     
-                $item->level             =  (int)$level; 
-                $item->menu_class        = @$menu_class;           
-                $item->sort_order 	     =	(int)$sort_order;
-                $item->status 			     =  (int)$status;    
-                $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
-                $item->save();  	
-                $msg['success']='Lưu thành công';
-            }    
-            $info = array(
-        "checked"       => $checked,          
-        'msg'       => $msg,      
-        'link_edit'=>route('adminsystem.'.$this->_controller.'.getForm',['edit',@$menu_type_id,@$item->id,@$alias])
-      );    		 			       
-            return $info;       
-      }
+       $msg["fullname"] = "Thiếu chủ đề bài viết";
+     }
+     if(empty($sort_order)){
+       $checked = 0;
+
+       $msg["sort_order"] 		= "Thiếu sắp xếp";
+     }
+     if((int)$status==-1){
+       $checked = 0;
+
+       $msg["status"] 			= "Thiếu trạng thái";
+     }
+     if ($checked == 1) {    
+      if(empty($id)){
+        $item 				      = 	new MenuModel;       
+        $item->created_at 	=	date("Y-m-d H:i:s",time());                          
+      } else{
+        $item				         =	MenuModel::find((int)@$id);                     	  		 
+      }  
+      $item->fullname 		     = $fullname;
+      $item->alias             = $alias;                             
+      $item->parent_id 		     = (int)$parent_id;
+      $item->menu_type_id      = (int)$menu_type_id;
+      $level                   = 0;              
+      $parent=MenuModel::find($parent_id); 
+      if(count($parent) > 0){
+        $level=(int)$parent->toArray()["level"]+1;                
+      }                     
+      $item->level             =  (int)$level; 
+      $item->menu_class        = @$menu_class;           
+      $item->sort_order 	     =	(int)$sort_order;
+      $item->status 			     =  (int)$status;    
+      $item->updated_at 	=	date("Y-m-d H:i:s",time());    	        	
+      $item->save();  	
+      $msg['success']='Lưu thành công';
+    }    
+    if(empty($alias)){
+      $alias='no-alias';
+    }
+    $info = array(
+      "checked"       => $checked,          
+      'msg'       => $msg,      
+      'link_edit'=>route('adminsystem.'.$this->_controller.'.getForm',['edit',@$menu_type_id,@$item->id,@$alias])
+    );    		 			       
+    return $info;       
+  }
       public function changeStatus(Request $request){
         $id             =       (int)$request->id;  
         $status         =       (int)$request->status;
