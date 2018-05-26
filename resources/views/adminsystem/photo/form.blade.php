@@ -88,7 +88,7 @@ $ddlAlbum               =   cmsSelectboxCategory("album_id","form-control",$arrA
             contentType: false, 
             processData: false,
             success: function (data) {
-                
+                alert(data.msg.success);      
             },
             error : function (data){
                 

@@ -120,6 +120,7 @@ $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />
             async: false,
             success: function (data) {
                 if(data.checked==1){
+                    alert(data.msg.success);      
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

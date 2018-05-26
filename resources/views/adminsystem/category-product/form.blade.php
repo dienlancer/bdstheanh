@@ -207,7 +207,8 @@ $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.
             
             async: false,
             success: function (data) {
-                if(data.checked==1){                    
+                if(data.checked==1){      
+                alert(data.msg.success);                    
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;

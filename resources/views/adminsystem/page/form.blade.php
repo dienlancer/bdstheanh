@@ -232,7 +232,8 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==1){                    
+                if(data.checked==1){   
+                alert(data.msg.success);                       
                     window.location.href = data.link_edit;
                 }else{
                     showMsg('note',data);        

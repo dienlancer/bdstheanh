@@ -511,6 +511,7 @@ $inputSortJson          =   '<input type="hidden" name="sort_json" id=value=\''.
             async: false,
             success: function (data) {
                 if(data.checked==1){
+                    alert(data.msg.success);      
                     window.location.href = data.link_edit;
                 }else{
                     showMsg('note',data);                

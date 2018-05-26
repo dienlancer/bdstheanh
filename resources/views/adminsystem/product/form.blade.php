@@ -377,7 +377,7 @@ $inputChildPictureHidden     =   '<input type="hidden" name="image_child_hidden"
             async: false,
             success: function (data) {
                 if(data.checked==1){
-                           
+                           alert(data.msg.success);      
                     window.location.href = "<?php echo $linkCancel; ?>";
                 }else{
                     var data_error=data.error;                    
