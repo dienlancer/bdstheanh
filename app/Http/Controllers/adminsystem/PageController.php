@@ -75,6 +75,7 @@ class PageController extends Controller {
                   $image_file         =   $_FILES["image"];
                 }
           $image_hidden         =   trim($request->image_hidden);
+          $alt_image                =   trim($request->alt_image);
           $intro                =   trim($request->intro);
           $content              =   trim($request->content);
           
@@ -156,7 +157,7 @@ class PageController extends Controller {
                 $item->theme_location            = $theme_location;
                 $item->intro            = $intro;
                 $item->content          = $content;
-                
+                $item->alt_image          = $alt_image;
                 $item->description      = $description;
                 $item->meta_keyword     = $meta_keyword;
                 $item->meta_description = $meta_description;           

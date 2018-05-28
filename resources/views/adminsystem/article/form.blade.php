@@ -8,7 +8,7 @@ $linkSave               =   route('adminsystem.'.$controller.'.save');
 $linkCreateAlias        =   route('adminsystem.'.$controller.'.createAlias');
 $inputFullName          =   '<input type="text" class="form-control" name="fullname"      onblur="createAlias()"   value="'.@$arrRowData['fullname'].'">'; 
  
-$inputAlias             =   '<input type="text" class="form-control" name="alias"     disabled     value="'.@$arrRowData['alias'].'">';
+$inputAlias             =   '<input type="text" class="form-control" name="alias"    value="'.@$arrRowData['alias'].'">';
 $inputIntro             =   '<textarea name="intro" rows="5" cols="100" class="form-control" >'.@$arrRowData['intro'].'</textarea>'; 
 $inputContent           =   '<textarea  name="content" rows="2" cols="100" class="form-control summer-editor" >'.@$arrRowData['content'].'</textarea>'; 
 
@@ -35,6 +35,7 @@ if(count(@$arrRowData)>0){
     }        
 } 
 $inputPictureHidden     =   '<input type="hidden" name="image_hidden"  value="'.@$strImage.'" />';
+$inputAltImage             =   '<input type="text" class="form-control" name="alt_image"    value="'.@$arrRowData['alt_image'].'">';
 $inputCallback='<input type="hidden" name="callback_url"  value="'.route('adminsystem.media.saveSummerFile').'" />';
 ?>
 <div class="portlet light bordered">
@@ -102,7 +103,16 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
                             <div class="picture-area"><?php echo $picture; ?>                      </div>
                         </div>
                     </div>     
-                </div>                    
+                </div>  
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-label"><b>SEO Alt ảnh đại diện</b></label>
+                        <div class="col-md-10">                            
+                            <?php echo $inputAltImage; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>    
+                </div>                       
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="col-md-2 control-label"><b>Giới thiệu</b></label>
@@ -199,6 +209,7 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
         }             
         /* end xử lý image */
         var image_hidden=$('input[name="image_hidden"]').val(); 
+        var alt_image=$('input[name="alt_image"]').val(); 
         var intro=$('textarea[name="intro"]').val();        
         var content=$('textarea[name="content"]').summernote('code');        
         var description=$('textarea[name="description"]').val();
@@ -222,6 +233,7 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
         dataItem.append('meta_description',meta_description);
         dataItem.append('category_id',category_id);
         dataItem.append('image_hidden',image_hidden);
+        dataItem.append('alt_image',alt_image);
         dataItem.append('sort_order',sort_order); 
         dataItem.append('status',status); 
         dataItem.append('_token',token);
@@ -232,8 +244,8 @@ $inputCallback='<input type="hidden" name="callback_url"  value="'.route('admins
             async: false,
             success: function (data) {
                 console.log(data);
-               if(data.checked==1){      
-               alert(data.msg.success);                    
+               if(data.checked==1){    
+               alert(data.msg.success);                      
                     window.location.href = data.link_edit;                    
                 }else{
                     showMsg('note',data);    

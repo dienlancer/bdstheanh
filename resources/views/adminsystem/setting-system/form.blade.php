@@ -41,6 +41,7 @@ if(count(@$arrRowData) > 0){
         $data = convertToArray($data);
     }
 }
+$inputAltLogo             =   '<input type="text" class="form-control" name="alt_logo"    value="'.@$arrRowData['alt_logo'].'">';
 $status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
 $ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
@@ -189,6 +190,15 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
                 </div>   
                 <div class="row">
                     <div class="form-group col-md-12">
+                        <label class="col-md-3 control-label"><b>SEO Alt ảnh đại diện</b></label>
+                        <div class="col-md-9">                            
+                            <?php echo $inputAltLogo; ?>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>    
+                </div>   
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label class="col-md-3 control-label"><b>Favicon</b></label>
                         <div class="col-md-9">
                             <div class="box-logo">
@@ -268,6 +278,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             logo_frontend_file  = logo_frontend_files[0];  
         }        
         /* end xử lý logo_frontend */
+        var alt_logo=$('input[name="alt_logo"]').val(); 
         /* begin xử lý favicon */
         var favicon_file=null;
         var favicon_ctrl=$("input[type='file'][name='favicon']");         
@@ -316,6 +327,7 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
         }        
         dataItem.append('logo_frontend_hidden',logo_frontend_hidden);
         dataItem.append('favicon_hidden',favicon_hidden);
+        dataItem.append('alt_logo',alt_logo);
         dataItem.append('setting',JSON.stringify(setting));
         dataItem.append('sort_order',sort_order); 
         dataItem.append('status',status); 
@@ -326,8 +338,8 @@ $inputID                =   '<input type="hidden" name="id"   value="'.@$id.'" /
             data: dataItem,
             async: false,
             success: function (data) {
-                if(data.checked==1){      
-                alert(data.msg.success);                                        
+                if(data.checked==1){         
+                alert(data.msg.success);                                     
                     window.location.href = data.link_edit;
                 }else{
                     showMsg('note',data);            

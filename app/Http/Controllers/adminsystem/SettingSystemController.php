@@ -79,6 +79,7 @@ class SettingSystemController extends Controller {
       }          
       $logo_frontend_hidden =   trim($request->logo_frontend_hidden);          
       $favicon_hidden       =   trim($request->favicon_hidden);          
+      $alt_logo                =   trim($request->alt_logo);
       $setting              =   trim($request->setting);        
       $status               =   trim($request->status);        
       $sort_order           =   trim($request->sort_order);                  
@@ -164,7 +165,7 @@ class SettingSystemController extends Controller {
       $item->copyright                =   @$copyright;                
       $item->google_site_verification =   @$google_site_verification;
       $item->google_analytics         =   @$google_analytics;                                            
-
+      $item->alt_logo          = $alt_logo;
       $item->setting                  =   @$setting ;                            
       $item->sort_order               = (int)@$sort_order;
       $item->status                   = (int)@$status;    
