@@ -10,9 +10,9 @@ $inputCaption           =   '<textarea name="caption" rows="2" cols="100" class=
 $inputAlt               =   '<textarea name="alt" rows="2" cols="100" class="form-control" >'.@$arrRowData['alt'].'</textarea>'; 
 $inputPageurl           =   '<input type="text" class="form-control" name="page_url"     value="'.@$arrRowData['page_url'].'">'; 
 $inputSortOrder         =   '<input type="text" class="form-control" name="sort_order"   value="'.@$arrRowData['sort_order'].'">';
-$status                 =   (count($arrRowData) > 0) ? @$arrRowData['status'] : 1 ;
+
 $arrStatus              =   array(-1 => '- Select status -', 1 => 'Publish', 0 => 'Unpublish');  
-$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,$status,"");
+$ddlStatus              =   cmsSelectbox("status","form-control",$arrStatus,(int)@$arrRowData['status'],"");
 $ddlCategory            =   cmsSelectboxCategory('category_id', 'form-control',$arrCategoryBanner,@$category_id,"disabled",'Chọn danh mục');
 $id                     =   (count($arrRowData) > 0) ? @$arrRowData['id'] : "" ;
 $inputID                =   '<input type="hidden" name="id"  value="'.@$id.'" />'; 
