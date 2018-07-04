@@ -21,7 +21,7 @@ function uploadImage($name,$tmp_name,$width,$height){
   $source_character = array_merge(range('a','z'), range(0,9));
   $code = implode($source_character, '');
   $code = str_shuffle($code);
-  $code_alias   = substr($code, 0, 12);
+  $code_alias   = substr($code, 0, 20);
   /* end code_alias */
   $image_name=$image_slug. '-' . $code_alias .'.'.$ext;     
   $image_path=base_path("upload".DS.$image_name);  
@@ -64,7 +64,7 @@ function uploadAttachedFile($name,$tmp_name){
   $source_character = array_merge(range('a','z'), range(0,9));
   $code = implode($source_character, '');
   $code = str_shuffle($code);
-  $code_alias   = substr($code, 0, 12);
+  $code_alias   = substr($code, 0, 20);
   /* end code_alias */
 
   $image_name=$image_slug. '-' . $code_alias .'.'.$ext;   
