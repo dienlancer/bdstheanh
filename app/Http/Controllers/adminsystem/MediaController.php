@@ -85,7 +85,7 @@ class MediaController extends Controller {
     if((int)@$checked == 1){
       $summer_name='';
       if($summer_file != null){                                                
-        $summer_name=uploadMediaFile($summer_file['name'],$summer_file['tmp_name']);
+        $summer_name=uploadImage($summer_file['name'],$summer_file['tmp_name'],0,0);
       }
       $summer_url='/upload/'.$summer_name;
       $msg['success']='Lưu thành công';     
